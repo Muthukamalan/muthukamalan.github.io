@@ -24,6 +24,18 @@ At point of time GitHub stars are,
 
 Googling led me to [PEP 518](https://peps.python.org/pep-0518/), which I found somewhat challenging. Fortunately, I came across a thread in Stack Overflow [🧵](https://stackoverflow.com/questions/62983756/what-is-pyproject-toml-file-for) that offered a more digestible explanation, making it easier to understand the purpose and usage of the pyproject.toml file
 
+
+Before [PEP-621](https://peps.python.org/pep-0621/), there were a large number of config files that could wind up in a given Python project:
+- requirements.txt
+- setup.py and setup.cfg
+- MANIFESTin
+- tox.ini
+- Pipfile and Pipfile.lock
+- .pylintrc
+- environment.yml
+- .condarc
+
+
 I'm exploring `pyproject.toml` as potential standard(Community) approach like in Rust🦀 uses `Cargo.toml` and JavaScript uses `package.json`
 
 <h1 align='center'>Ubuntu Linux 🐧</h1>
@@ -52,6 +64,8 @@ pip3 install --upgrade pip #[optional]
 pyenv lets you easily switch between multiple versions of Python by adjusting/shimming Python executables
 
 `Note:` PATH is an environment variable that specifies an ordered list of folders where executables are saved.
+
+It's handy while experimenting, not for production environment. Usally go with `Docker`+`requirements.txt`/`poetry.toml` to make Hassle-free
 
 ### Installation
 ```sh
@@ -126,6 +140,11 @@ python -V
 ## Setup poetry (Package Management Tool)
 Poetry help you with managing and freezing the dependencies, installing the project, adding metadata and many more.
 *mostly i leverage poetry to manage dependencies not for packaging and publish (not in near future)*
+
+
+In PEP 621, consolidate everything into a `pyproject.toml` file. It can manage Virtual Env which can exists within or outside of your project. Generated `poetry.lock` are multi-platform lock files ( extremely large ).
+
+The dependency resolver in `poetry` is actually still written in Python as a `depth-first search algorithm`
 
 ### Installation
 
@@ -281,73 +300,52 @@ poetry env remove --all
 - It uses the now standardized pyproject.toml
 - Poetry also helps you build your project and publish it on PyPI or a private repository.
 
+### More about:
+- [Version Constraints](https://iscinumpy.dev/post/bound-version-constraints/)
+- There are Other tools yet to explore `hatch`, `pdm`
 
 
+<h2 align='center'>on Docker 🐋</h2>
 
-<h2 align='center'>on Dockerfile 🐋  👷⚒️</h2>
+`Note`: It's playground image for pyenv+poetry preinstalled.
 
-<!-- # Dockerfile
+`Build Image:` docker build -t img .
+`Run Image:`   docker run -it img
+
 ```Dockerfile
-FROM ubuntu:22.04
+# Base Image
+FROM debian:buster-slim
 
-ARG DEBIAN_FRONTEND=noninteractive
+# Necessary Packages
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
-# Installing necessary libraries
-RUN apt-get update && apt-get install -y \
-    python3.10 \
-    python3-pip \
-    curl git python3-dev libpq-dev \
-    make build-essential libssl-dev \
-    zlib1g-dev libbz2-dev libreadline-dev \
-    libsqlite3-dev wget curl llvm libncursesw5-dev \
-    xz-utils tk-dev libxml2-dev libxmlsec1-dev \
-    libffi-dev liblzma-dev
+ENV HOME="/root"
+WORKDIR ${HOME}
 
 
-# Installing pyenv for python installation management
-RUN curl https://pyenv.run | bash
-RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc &&\
-    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc &&\
-    echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-
-# Installing Poetry for Python package management
-RUN curl -sSL https://install.python-poetry.org | python3 -
-RUN echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc 
-
-RUN bash -c "source ${HOME}/.bashrc"
-
-###########################################
-FROM FROM python:3.9-slim-buster
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-RUN apt-get update -y \
-    && apt install -y --no-install-recommends git make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev\
-    && pip install --no-cache-dir -U pip \
-    && apt-get autoremove -y &&  \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-ENV PYENV_ROOT="/root/.pyenv"
-ENV PATH="${PYENV_ROOT}/bin:${PATH}"
-
-
+# pyenv Installation
+RUN apt-get install -y git
+RUN git clone --depth=1 https://github.com/pyenv/pyenv.git .pyenv
 RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc && \
-    echo '[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc && \
+    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc && \
     echo 'eval "$(pyenv init --path)"' >> ~/.bash_profile && \
     echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+ENV PYENV_ROOT="${HOME}/.pyenv"
+ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
+ENV PYTHON_VERSION=3.8.6
 
-RUN /bin/bash -c "source ~/.bashrc"
-RUN /bin/bash -c "exec $SHELL"
+RUN pyenv install ${PYTHON_VERSION}
+RUN pyenv global ${PYTHON_VERSION}
 
-ARG PYTHON_VERSION=3.8.10
-RUN pyenv install ${PYTHON_VERSION} && pyenv global ${PYTHON_VERSION}
 
-RUN pip install --no-cache-dir  poetry==1.1.13
-RUN poetry config virtualenvs.prefer-active-python true
-RUN poetry config virtualenvs.in-project true 
+# Poetry Installation
+RUN curl -sSL https://install.python-poetry.org | python -
+ENV PATH="$PATH:/root/.local/bin"
 
-ENTRYPOINT ['/bin/bash']
-CMD ['/bin/bash']
-``` -->
+# # Configure Poetry to use the active Python interpreter
+RUN /bin/bash -c "source ~/.bashrc && poetry config virtualenvs.prefer-active-python true"
+
+# 
+ENTRYPOINT [ "/bin/bash"]
+```
