@@ -309,8 +309,17 @@ poetry env remove --all
 
 `Note`: It's playground image for pyenv+poetry preinstalled.
 
-`Build Image:` docker build -t img .
-`Run Image:`   docker run -it img
+`Build Image:` 
+
+```sh
+docker build -t img .
+```
+
+`Run Image:`   
+
+```sh
+docker run -it img
+```
 
 ```Dockerfile
 # Base Image
