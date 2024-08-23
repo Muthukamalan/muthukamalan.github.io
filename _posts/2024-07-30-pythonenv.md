@@ -303,6 +303,7 @@ poetry env remove --all
 ### More about:
 - [Version Constraints](https://iscinumpy.dev/post/bound-version-constraints/)
 - There are Other tools yet to explore `hatch`, `pdm`
+- [storing project metadata in pyproject.toml](https://peps.python.org/pep-0621/)
 
 
 <h2 align='center'>on Docker 🐋</h2>
