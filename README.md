@@ -9,7 +9,7 @@ sudo bundle install
 sudo bundle exec jekyll s
 ```
 
-after git push and run workflow
+after git push run workflow on Actions
 
 <!-- 
 # install
