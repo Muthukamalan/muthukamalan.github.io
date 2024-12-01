@@ -9,6 +9,8 @@ sudo bundle install
 sudo bundle exec jekyll s
 ```
 
+after git push and run workflow
+
 <!-- 
 # install
 - $ bundle install
