@@ -1,4 +1,19 @@
 # Muthu's Blog
+Jekyll works with [kramdown](https://kramdown.gettalong.org/index.html)
+
+
+```bash 
+## make sure docker up and running
+## open in dev container
+sudo bundle install
+sudo bundle exec jekyll s
+```
+
+<!-- 
+# install
+- $ bundle install
+- $ bundle exec jekyll s
+ -->
 
 <!-- 
 # Chirpy Starter
