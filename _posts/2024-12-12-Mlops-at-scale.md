@@ -34,9 +34,13 @@ I deployed Stable Diffusion model using 3$
 # Setup
 
 Over the past few weeks, I tackled these challenges head-on while deploying Stable Diffusion—a state-of-the-art generative AI model—into production. Here's the setup:
-- clone the repo **https://github.com/Muthukamalan/MLOps-at-GenAI** and do `docker compose up --build -d`   BANG!!!💥
+- clone the repo **https://github.com/Muthukamalan/MLOps-at-GenAI** and do docker  !!!BANG!!!💥 That's the power of reproducibility.
+```
+docker compose up --build -d
+```  
+Yup, with AWS keys inplace.
 
-
+---
 1. Model Deployment
 TorchServe: Stable Diffusion was deployed using TorchServe, a scalable model-serving framework. This ensured the model was ready to handle production-scale requests.
 - use, spot instance `g4dn.2xlarge`  "Linux Spot Average Cost - $0.2484 hourly"
@@ -45,16 +49,16 @@ TorchServe: Stable Diffusion was deployed using TorchServe, a scalable model-ser
 - Artifact Storage: The model artifacts were stored on Amazon S3, enabling seamless accessibility and automated updates.
 - visit [instances-repo](https://instances.vantage.sh/?region=ap-south-1&selected=g4dn.2xlarge) and give a star if you like it.
 
-2. Async API Wrapping
+1. Async API Wrapping
 - Using FastAPI, I wrapped TorchServe APIs with asynchronous functionality, making the endpoints ultra-responsive and capable of handling concurrent requests like a champ. So It won't hung up my main thread HOMEPAGE
 
-3. Frontend Integration
+1. Frontend Integration
 - Built an interactive frontend using Next.js, which dynamically pulled generated images from S3. This made the experience visually engaging and accessible for end-users.
 
-4. System Observability
+1. System Observability
 - Integrated Prometheus and Grafana for monitoring system health. Real-time dashboards ensured transparency, stability, and actionable insights at every step.
 
-5. Reproducibility Simplified
+1. Reproducibility Simplified
 - The entire stack was containerized with Docker Compose, ensuring anyone could reproduce the pipeline effortlessly, irrespective of their environment.
 
 
@@ -123,6 +127,8 @@ metrics_mode=prometheus
 job_queue_size=50
 ```
 
+For this experiment I loaded the [small-diffusion-Model](https://huggingface.co/OFA-Sys/small-stable-diffusion-v0) from HF.co/ with `bfloat16`
+
 TorchServe plays a crucial role in the production deployment of PyTorch models:
 
 *Model Packaging*: Models are packaged into TorchServe-friendly formats, including .mar (Model Archive) files, which contain both the model artifacts and associated metadata.
@@ -181,9 +187,15 @@ s3_client.generate_presigned_url(
 
 ## Reproducibility:
 - The entire setup is containerized using Docker Compose for easy replication across environments.
+![DockerImages](assets/img/mlops-at-genai/docker-images.png)
 
+## Frontend
 
+In Industrial practise we won't do much everything, web developers can take care from here.
 
+I took boilerplate code from [nextjs-repo](https://github.com/satyajitghana/sdxl-ui)
+
+![Nextjs](assets/img/mlops-at-genai/SDNextjs.png)
 
 # DEMO
 
