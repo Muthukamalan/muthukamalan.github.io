@@ -3,7 +3,7 @@ title: "MLOps at GenAI"
 date: 2024-12-12 00:00:00
 categories: ["Python","MlOpS"]
 tags: ["MLOps","GenAI"]
-pin: false
+pin: true
 comments: true
 ---
 
