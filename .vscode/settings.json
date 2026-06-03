@@ -1,23 +1,23 @@
 {
-    "github.copilot.enable":{"*":false},
-    "chat.disableAIFeatures": true,
-    "chat.agent.enabled": false,
-    "terminal.integrated.defaultProfile.linux": "bash (2)",
-    "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/.DS_Store": true,
-        "**/Thumbs.db": true
-    },
-    "files.readonlyInclude": {
-        "**/.git/hooks/pre-commit": true,
-    },
-    	"[yaml]":{
-		"editor.autoIndent": "advanced"
-	},
-	"dockercompose":{
-		"editor/autoIndent": "advanced"
-	},
-	"yaml.format.singleQuote": true
+  "github.copilot.enable": { "*": false },
+  "chat.disableAIFeatures": true,
+  "chat.agent.enabled": false,
+  "terminal.integrated.defaultProfile.linux": "bash (2)",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+  },
+  "files.readonlyInclude": {
+    "**/.git/hooks/pre-commit": true,
+  },
+  "[yaml]": {
+    "editor.autoIndent": "advanced",
+  },
+  "dockercompose": {
+    "editor/autoIndent": "advanced",
+  },
+  "yaml.format.singleQuote": true,
 }

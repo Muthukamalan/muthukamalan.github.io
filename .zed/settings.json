@@ -1,0 +1,25 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "disable_ai": true,
+  "languages": {
+    "Python": {
+      "preferred_line_length": 120,
+      "soft_wrap": "prefer_line",
+      "colorize_brackets": true,
+    },
+  },
+
+  "show_edit_predictions": false,
+  "edit_predictions": {
+    "provider": "zed",
+    "mode": "subtle",
+    "allow_data_collection": "no",
+  },
+}
