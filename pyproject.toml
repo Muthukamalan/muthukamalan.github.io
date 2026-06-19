@@ -1,5 +1,0 @@
-[project]
-name="blog"
-requires-python=">=3.13"
-version = "1.0.0"
-
