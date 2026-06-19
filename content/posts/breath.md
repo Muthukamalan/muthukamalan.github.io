@@ -8,7 +8,7 @@ description = "Be Calm, Period"
 tags = ["relax", "rest"]
 
 [extra]
-image = "/images/post-8.jpg"
+image = "/images/post/poems/be-calm.jpg"
 +++
 
 

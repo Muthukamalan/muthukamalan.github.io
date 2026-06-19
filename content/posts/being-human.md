@@ -7,7 +7,7 @@ description = "Are humans are prone to errors?"
 tags = ["poem", "kind"]
 
 [extra]
-image = '/images/post-6.jpg'
+image = '/images/post/poems/poem.jpg'
 +++
 
 அடிக்கடி தவறு செய்பவன் அப்பாவி 🥺<br>

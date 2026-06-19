@@ -3,7 +3,7 @@ date = "2018-11-12 12:01:35"
 title = "Secrets Of Life"
 description = "As long as I live, there are infinite chances!"
 [extra]
-image = "/images/evolution.jpg"
+image = ""
 +++
 
 எங்கோ ஒரு மோட்டு வளர்ந்து மலர்ந்து படர்ந்து பரந்து <br>

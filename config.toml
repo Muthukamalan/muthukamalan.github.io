@@ -64,11 +64,11 @@ newsletter_description = ""
 
 [[extra.content_blocks]]
 block = "hero"
-title = "Hi there, I am Vanessa Marley"
-description_html = "<strong>Photographer</strong> and Visual Content Strategist from Albany. I work as a lifestyle, product, and landscape photographer, creating images for a diverse range of requests, from online media to printed artwork."
+title = "Hi there, I am Muthu"
+description_html = ""
 image = "/images/01.jpg"
-image_alt = "Vanessa Marley's picture"
-cta_button_link = "#contact"
+image_alt = "Muthu's picture"
+cta_button_link = "#about"
 cta_button = "Get in touch"
 works_button_link = "#projects"
 works_button = "See my works"
@@ -89,13 +89,13 @@ show_projects = true
 # description_html = ""
 # show_testimonials = true
 
-[[extra.content_blocks]]
-block = "contact-form"
-form_title = "Get in touch"
-form_description = "Vonge comes with a built-in contact form."
-form_success_page = ''
-form_submission_email = "site@example.com"
-form_button_text = "Send now"
+# [[extra.content_blocks]]
+# block = "contact-form"
+# form_title = "Get in touch"
+# form_description = "Vonge comes with a built-in contact form."
+# form_success_page = ''
+# form_submission_email = "site@example.com"
+# form_button_text = "Send now"
 
 
 [[extra.content_blocks]]

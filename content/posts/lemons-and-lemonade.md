@@ -5,7 +5,7 @@ description = "When life gives you lemon, make lemonade"
 [taxonomies]
 tags = ["poem", "maturity"]
 [extra]
-image = "/images/evolution.jpg"
+image = "/images/post/poems/evolution.jpg"
 +++
 
 

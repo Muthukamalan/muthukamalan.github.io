@@ -7,7 +7,7 @@ description = "Finding you won't just complete me"
 tags = ["poem", "love"]
 
 [extra]
-image = '/images/post-6.jpg'
+image = ''
 +++
 
 
