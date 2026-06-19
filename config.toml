@@ -1,0 +1,110 @@
+base_url  = "https://muthukamalan.github.io/"
+
+title="Muthu"
+author = "Muthu Kamalan"
+description = ""
+
+
+theme = "vonge"
+taxonomies = [
+    { name = "tags", feed = true},
+]
+
+default_language = "en"
+output_dir = "public"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# When set to "true", the generated HTML files are minified.
+minify_html = false
+
+[markdown]
+
+[markdown.highlighting]
+theme = "catppuccin-mocha"
+
+
+
+[extra]
+
+
+logo_image = "/notebook.ico"
+social_media_share_image = "/images/01.jpg"
+author_image = '/images/01.jpg'
+disqus_identifier = ""
+google_analytics = ""
+twitter_handle = ""
+
+
+
+
+navigation = [
+    { url = "$BASE_URL", title = "Home" },
+    { url = "$BASE_URL/projects", title = "Projects" },
+    { url = "$BASE_URL/posts", title = "Blog" },
+    { url = "$BASE_URL/about", title = "About" },
+]
+
+social_icons = [
+    { url = "https://github.com/Muthukamalan", icon = "GitHub" },
+    { url = "https://www.linkedin.com/in/muthukamalan-m/", icon = "Linkedin"},
+]
+
+date_format = "%d %b %Y"
+language_direction = "auto"
+keywords = ["Machine Learning Engineer"]
+
+[extra.newsletter]
+newsletter_title = ""
+newsletter_identifier = ""
+newsletter_button = ""
+newsletter_description = ""
+
+
+[[extra.content_blocks]]
+block = "hero"
+title = "Hi there, I am Vanessa Marley"
+description_html = "<strong>Photographer</strong> and Visual Content Strategist from Albany. I work as a lifestyle, product, and landscape photographer, creating images for a diverse range of requests, from online media to printed artwork."
+image = "/images/01.jpg"
+image_alt = "Vanessa Marley's picture"
+cta_button_link = "#contact"
+cta_button = "Get in touch"
+works_button_link = "#projects"
+works_button = "See my works"
+
+
+[[extra.content_blocks]]
+block = "projects-section"
+title = "Latest Works"
+description_html = """
+    <p>I show only my best works built completely with passion, simplicity,
+    and creativity!</p>"""
+link_url = "/projects"
+show_projects = true
+
+# [[extra.content_blocks]]
+# block = "testimonials-section"
+# title = "Happy Clients"
+# description_html = ""
+# show_testimonials = true
+
+[[extra.content_blocks]]
+block = "contact-form"
+form_title = "Get in touch"
+form_description = "Vonge comes with a built-in contact form."
+form_success_page = ''
+form_submission_email = "site@example.com"
+form_button_text = "Send now"
+
+
+[[extra.content_blocks]]
+block = "blog-section"
+title = "Recent Posts"
+description_html = """
+    <p>Vonge blog features productivity, tips, inspiration and strategies for
+    massive profits. Find out how to set up a successful blog or how to make
+    yours even better!</p>"""
+link_url = "/posts"
+show_posts = true
+
