@@ -1,29 +1,19 @@
 {
-  "name": "blog",
-  "image": "ghcr.io/astral-sh/uv:debian-slim",
-  "postCreateCommand": "uv self version && uv tool install pre-commit commitizen",
+  "image": "alpine:latest",
+  "name": "Profile",
+  "features": {},
   "runArgs": [
-    "--add-host=host.docker.internal:host-gateway"
+    "--add-host=host.docker.internal:host-gateway",
+    "--rm"
   ],
   "customizations": {
     "vscode": {
-      "extensions": [],
-      "settings": {}
+      "extensions": [
+        "tamasfe.even-better-toml",
+        "GitHub.vscode-github-actions"
+      ]
     }
   },
-//   "features": {
-//     "ghcr.io/devcontainers/features/go:1": {},
-//     "ghcr.io/devcontainers/feature-starter/hello:1": {
-//       "greeting": "Hello"
-//     },
-//     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
-//       "version": "latest",
-//       "enableNonRootDocker": "true",
-//       "moby": "false",
-//       "dockerDashCompose": "true"
-//     }
-//   },
-  "onCreateCommand": "echo OnCreateCmd",
-  "postStartCommand": "echo postStartCmd",
-  "remoteUser": "root"
+  "onCreateCommand": "apk add zola git make",
+  "postCreateCommand": "zola --version"
 }
