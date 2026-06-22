@@ -14,7 +14,7 @@ image = '/images/post/git/thumbnail.png'
 ## Introduction
 Distributed version control systems combine the capabilities of local and remote systems. Developers can store the entire codebase locally, allowing independent work and offline changes. Developers then synchronize their local changes to a central server for other collaborators to consume.
 
-where as, GitHub is a cloud-based service that hosts Git repositories ( Centralized Platform )
+where as, GitHub is a cloud-based service that hosts Git repositories (Centralized Platform)
 
 ---
 ### Installation
@@ -55,7 +55,7 @@ config file loaded fron `~/.gitconfig` or `~/.config/git/` dir
 
 ---
 ### Global/Local Namespace 
-`--global adding config in global space`
+`--global adding config in global space` <br>
 `--local adding config in local git-space level`
 
 ```sh
@@ -201,11 +201,17 @@ git push --tags  # push only tags
 git push origin tag-no # push only that tag
 git tag tag-no commit-hash
 git tag -d tag-noo
+
+git tag -a v1.0.0 -m 'Release 1.0.0' # RECOMMENDED WAY
+
+
+git push origin v1.0.0 # push specific tag
+git push origin --tags # push all tags 
+git push origin --delete v1.0.0 # delete remote tag
 ```
 
 ---
 ### Merge
-
 conflict markers
 
 ```md
@@ -239,7 +245,9 @@ git merge origin/main   # git rebase origin/main
 ---
 ### stash
 
-When you are in the middle of something, your boss comes in and demands that you fix something immediately. Traditionally, you would make a commit to a temporary branch to store your changes away, and return to your original branch to make the emergency fix, like this:
+When you are in the middle of something, your boss comes in and demands that you fix something immediately. 
+Traditionally, you would make a commit to a temporary branch to store your changes away, and 
+return to your original branch to make the emergency fix, like this:
 
 ```
 - ... hack hack hack ...
@@ -272,7 +280,8 @@ git stash clear # clear all
 
 ---
 ### Revert
-creates a **new commit** that undoes a previous one — safe for shared/remote branches since it doesn't rewrite history
+creates a **new commit** that undoes a previous one — safe for shared/remote branches 
+since it doesn't rewrite history
 ```sh
 git revert <commit-hash>          # undo a specific commit (opens editor)
 git revert <commit-hash> --no-edit  # skip the editor, use default message
@@ -450,6 +459,15 @@ git cherry-pick <commit1>..<commit2>
 ### Reflog
 it records every movement of HEAD, even across resets, rebases, and deleted branches. Entries expire after 90 days by default.
 
+
+---
+### Bisect
+Helps to find the exact commit that introduced a bug
+
+---
+### Submodules
+Include another repository inside your project using git submodule or git subtree. 
+
 ---
 ### Advance commands
 ```sh
@@ -467,4 +485,93 @@ git clean -i # Interactive clean
 ```
 
 ---
-#### Exercises:
+
+##### NOTES::
+
+1. git reset --hard deleted uncommitted work
+```md
+`git reset --hard` discards both staged and unstaged changes permanently — no undo. :(
+
+1. `git fsck --lost-found --full --no-reflogs --unreachable`
+2. cd `.git/lost-found/`
+
+Checking object directories: 100% (256/256), done.
+- unreachable blob `4413d81d94e76ea9a7f7741786f63426d71d297a`
+- unreachable blob `e613e50292dd773b7e829f598d58e6d419301ec1`
+- unreachable tree 4b825dc642cb6eb9a060e54bf8d69288fbee4904
+
+git show --stat `4413d81d94e76ea9a7f7741786f63426d71d297a` > recovery-file-a.txt
+git show --stat `e613e50292dd773b7e829f598d58e6d419301ec1` > recovery-file-a.txt
+```
+
+2. 
+```md
+Running `git checkout <commit-hash>` moves HEAD directly to a commit instead of a branch, 
+so any new commits won't belong to any branch.
+
+before-leaving  `git checkout -b new-branch-name`, to keep work done in detached HEAD
+```
+
+3. Pushed .env file to sensitive data
+```md
+revoke and rotate exposed credentials
+`git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch .env' HEAD`
+
+clean the history`git push origin --force --all`
+```
+
+4. Push rejected — non-fast-forward
+```md
+Never do `git push --force` overrites others work. Use `--force-with-lease` at minimum.
+
+1. pull `git pull origin main`
+2. resolve `merge conflict`
+3. push `git push origin main`
+
+1. rebase it `git pull --rebase origin main`
+
+To globally configure use, `git config --global pull.rebase true`
+```
+
+5. Wrong commit message
+```md
+1. `git commit --amend -m 'Correct message here'`
+2. if already pushed then do `git push --force-with-lease`
+```
+
+6. Accidentally delete branch
+```md
+look in `git reflog` for the last commit msg on the deleted branch and recreate using `git checkout -b recovered-branch <sha>`
+```
+
+7. Forget to add file in the last commit message
+```md
+`git add forgetten-file` and do `git commit --amend --no-edit`.
+
+If it's pushed then `git push --force-with-lease`
+```
+
+8. Need to undo a commit that's already been pushed and shared
+```md
+No reset, do revert.
+```
+
+9. Identify the large Object
+```sh
+git rev-list --objects --all | sort -k2 | tail -20
+```
+
+10. Wrong files are being tracked
+```sh
+git rm -r --cached node_modules/
+```
+
+11. Empty commit
+```sh
+git commit --allow-empty -m "chore: retrigger CI build"
+```
+
+12. Skip CI
+```sh
+git commit --no-verify #Git hook bypass 
+```
