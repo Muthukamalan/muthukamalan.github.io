@@ -2,4 +2,5 @@
   "github.copilot.enable": { "*": false },
   "chat.disableAIFeatures": true,
   "chat.agent.enabled": false,  
+  "editor.rulers": [90]
 }
