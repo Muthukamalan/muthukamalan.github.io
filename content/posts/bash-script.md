@@ -10,9 +10,6 @@ tags = ["bash", "linux"]
 image = '/images/post/bash/bash.png'
 +++
 
-
-
-
 # Bash - the REPL Shell
 
 Bash is REPL: [*R*ead *E*val *P*rint *L*oop] <br>
@@ -624,8 +621,8 @@ cat /etc/passwd | awk -F: ' $1=="root" { printf("name: %s\n",$1 ); }'
 
 cat /etc/passwd | awk -F: '{ printf("%s\n",$1 ); }' | sort | uniq | wc -l
 
-wc -l # list
-wc -w # word
+wc -l # lines
+wc -w # words
 wc -c
 ```
 
@@ -648,6 +645,7 @@ declare -p shells
 
 ## Finding  Files
 
+`Note:` Use find with -exec for bulk operations
 ```bash
 find location -type f # check only file
 find location -type f -name '*.md' # check only file
@@ -711,6 +709,7 @@ sys   # how much time it waits in sys space
 ## Sourcing File
 
 ```bash
+#  Create and populate into a file
 cat <<EOF > /tmp/greeetings.sh
 #!/bin/usr/bash
 greet(){
@@ -897,6 +896,19 @@ printf '%(%Y-%m-%d %H:%M:%S)T  name=%2s\n' -1 muthu  # -1 represent last word
 
 ---
 
+## SSH Hardening
+```sh
+# Edit SSH config
+sudo vim /etc/ssh/sshd_config
+# Set: PermitRootLogin no, Port 2222
+sudo systemctl reload sshd
+
+# Key-based auth
+ssh-keygen -t rsa -b 4096
+ssh-copy-id devops@server
+```
+---
+
 ## Trap Signals
 
 ```bash
@@ -970,7 +982,7 @@ free -g
 lshw                    # List Hardware
 
 du -lsh filename        # size of the file
-
+du -sh /var/*  # disk usage
 ```
 
 ## File compression
@@ -990,6 +1002,14 @@ tar -zcf file.tar f1 f2 f3  # compress tarball to reduce size
 systemctl --help
 systemctl list-units --all --type= # service, socket path
 systemctl list-dependencies
+
+if systemctl is-active --quiet nginx; then echo "Nginx is running"; fi
+
+
+# Service logs
+dmesg | tail  # Kernel messages
+journalctl -xb  # Boot logs
+journalctl u nginx
 journalctl #  use journalctl to view and follow the system's journald log entries, which resides in /run/log/journal.
 
 
@@ -1002,6 +1022,18 @@ systemctl get-default  # graphical.target
 # runlevel 4 -> multi-user.target
 # runlevel 5 -> graphical.target
 # runlevel 6 -> reboot.target
+
+
+# Run a process in background
+nohup python3 app.py 
+./script.sh &
+
+
+# Kill process
+kill 1234         # By PID
+killall python3   # By name
+pkill -f "app.py" # By pattern
+
 ```
 
 ---
@@ -1019,11 +1051,19 @@ info ip
 ss -tulp
 netstat -tunpl
 lsof
+lsof -i :80 # find process y port
 lspci # list all pci cards like ethernet card, video cards (peripheral component interconnect)
 
 
 lsblk # list all physical disks space <sda> and partitions are sda1,sda2,sda3..
 
+# Trace route
+traceroute google.com
+mtr --report google.com  # Real-time
+
+# View network interfaces
+ip addr show
+ip link show
 ```
 
 ---
@@ -1032,7 +1072,8 @@ lsblk # list all physical disks space <sda> and partitions are sda1,sda2,sda3..
 
 ```bash
 # List the current active process with their statuses, numbers, resource usage, etc.
-ps auxc
+ps auxc   #  # All processes
+ps -ef | grep nginx # Filter By Name
 fg
 jobs
 bg #%id
@@ -1050,6 +1091,7 @@ crontab -e
 
 # Alternative systemd.timers
 ```
+---
 
 ## Service management with SYSTEMD
 
@@ -1096,6 +1138,7 @@ WantedBy graphical.target   #systemctl get-default
 # reload services `systemctl daemon-reload`
 
 ```
+---
 
 ## Storage in Linux
 
@@ -1104,10 +1147,88 @@ WantedBy graphical.target   #systemctl get-default
 lsblk
 fdisk -l /dev/sda
 
+df -h # check disk usage 
+
 # Parition Types:- Primary, Extended and Logical
 # Parition Schema:- MBR(old), GPT(new:: unlimited partition, no-max size)
 # gdisk /dev/diskname
 ```
+
+```sh
+# LOG ROTATE
+sudo vim /etc/logrotate.d/myapp
+# Add:
+/var/log/myapp/*.log {
+    daily
+    rotate 7
+    compress
+}
+```
+
+
+```sh
+# Create partition
+sudo parted /dev/sdb mklabel gpt
+sudo parted /dev/sdb mkpart primary ext4 0% 100%
+
+# Create filesystem
+sudo mkfs.ext4 -L Data /dev/sdb1
+
+# Mount filesystem
+sudo mkdir /data
+sudo mount /dev/sdb1 /data
+echo "UUID=$(sudo blkid -s UUID -o value /dev/sdb1) /data ext4 defaults 0 2" | sudo tee -a /etc/fstab
+
+# Create LVM
+sudo pvcreate /dev/sdb1
+sudo vgcreate vg_data /dev/sdb1
+sudo lvcreate -L 10G -n lv_web vg_data
+sudo mkfs.ext4 /dev/vg_data/lv_web
+sudo mount /dev/vg_data/lv_web /var/www
+
+# Create RAID
+sudo mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sdb1 /dev/sdc1
+sudo mkfs.ext4 /dev/md0
+sudo mount /dev/md0 /mnt/raid
+```
+---
+## Create and Managing Users
+
+```bash
+# create user
+sudo useradd -m -s /bin/bash devops  # With home dir and shell
+sudo passwd devops  # Set password
+
+# Create group
+sudo groupadd developers
+
+# Add user to group
+sudo usermod -aG developers devops
+
+# Modify user
+sudo usermod -L devops  # Lock account
+sudo usermod -U devops  # Unlock account
+sudo usermod -c "DevOps User" devops  # Set comment
+
+# Delete user
+sudo userdel -r devops  # Remove user and home dir
+
+
+#####
+# Set sudo privileges
+sudo visudo
+# Add: devops ALL=(ALL) NOPASSWD:ALL  # Passwordless sudo
+
+# View users and groups
+id `user`  # User and group info
+getent passwd  # List all users
+getent group    # Group all members  `getent group devlops` -> developers group 
+
+
+sudo cp .bashrc /etc/skel/.bashrc  # customize new user home dir
+```
+
+---
 
 ## Credits
 
