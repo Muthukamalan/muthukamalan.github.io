@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+<head>
+    
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<title>Bash Scriting - Intermediate</title>
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤗</text></svg>">
+
+
+
+
+<link rel="icon" href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;favicon.ico" type="image/x-icon">
+
+
+
+
+<meta name="keywords" content="Machine Learning Engineer">
+
+
+
+<meta name="description" content="Let&#x27;s Bash it">
+<meta property="og:description" content="Let&#x27;s Bash it" />
+
+
+
+<link rel="canonical" href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;posts&#x2F;bash-script&#x2F;">
+
+
+
+<meta name="author" content="Muthu Kamalan">
+
+
+<!-- Featured Image -->
+
+<meta name="og:image" content="&#x2F;images&#x2F;post&#x2F;bash&#x2F;bash.png" />
+<meta name="twitter:image" content="&#x2F;images&#x2F;post&#x2F;bash&#x2F;bash.png" />
+
+
+<!-- Twitter Handle -->
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bash Scriting - Intermediate">
+
+<meta name="twitter:description" content="Let&#x27;s Bash it">
+
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Bash Scriting - Intermediate">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://muthukamalan.github.io/css/global.css">
+<link rel="stylesheet" href="https://muthukamalan.github.io/css/tag.css">
+
+
+
+
+
+
+
+    
+</head>
+<body>
+    
+
+    
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;">
+            <img class="logo__image" src="https://muthukamalan.github.io/notebook.ico" alt="Muthu">
+          
+          </a>
+        </div>
+
+        
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+            <ul class="nav__list list-reset">
+            
+            
+            
+
+              
+
+              <li class="nav__item">
+                <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;" class="nav__link ">Home</a>
+              </li>
+              
+
+              
+            
+            
+
+              
+
+              <li class="nav__item">
+                <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;projects" class="nav__link ">Projects</a>
+              </li>
+              
+
+              
+            
+            
+
+              
+
+              <li class="nav__item">
+                <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;posts" class="nav__link ">Blog</a>
+              </li>
+              
+
+              
+            
+            
+
+              
+
+              <li class="nav__item">
+                <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;about" class="nav__link ">About</a>
+              </li>
+              
+
+              
+            </ul>
+          </div>
+        
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https:&#x2F;&#x2F;github.com&#x2F;Muthukamalan" target="_blank" rel="noopener"
+        aria-label="GitHub icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;muthukamalan-m&#x2F;" target="_blank" rel="noopener"
+        aria-label="Linkedin icon"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+    
+    
+    <a href="mailto:muthukamalan98@gmail.com" class="social__link">muthukamalan98@gmail.com<br>+91-9486872592</a>
+  </ul>
+  
+  
+</div>
+
+
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+        
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    
+    <main class="main">
+        
+<div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="https://muthukamalan.github.io/images/post/bash/bash.png" alt="Bash Scriting - Intermediate">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+              
+              
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;tags&#x2F;bash&#x2F;" class="post-tags__tag">bash</a>
+              
+              
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;tags&#x2F;linux&#x2F;" class="post-tags__tag">linux</a>
+              
+          </div>
+          
+
+
+          <h1 class="post__title">Bash Scriting - Intermediate</h1>
+
+          
+          
+          
+          
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="https://muthukamalan.github.io/images/01.jpg" alt="Muthu Kamalan">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Muthu Kamalan</div>
+              
+              
+              <time class="post__date" datetime="2026-05-01 15:01:35 +0000">01 May 2026</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h1 id="bash-the-repl-shell">Bash - the REPL Shell</h1>
+<p>Bash is REPL: [<em>R</em>ead <em>E</em>val <em>P</em>rint <em>L</em>oop] <br>
+You type text, Bash reads it, evaluates it as code, prints the result, then waits for more. This tiny loop quietly runs half the modern internet.</p>
+<hr />
+<h2 id="terminal-basics">Terminal Basics</h2>
+<blockquote>
+<p>The terminal is your cmd to the operating system. These commands let you look around, move through directories, and create, inspect, or modify files without a GUI. Mastering these primitives turns the shell from a typing exercise into a precise navigation and file-manipulation tool</p>
+</blockquote>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ls</span><span style="color: #A6E3A1;"> -lah</span><span style="color: #9399B2;font-style: italic;">                         # list all files and dir in current folder</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">pwd</span><span style="color: #9399B2;font-style: italic;">                             # write pathfile of current folder</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">touch</span><span style="color: #A6E3A1;"> filename.extension</span><span style="color: #9399B2;font-style: italic;">        # create file</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">rm</span><span style="color: #A6E3A1;"> -i file</span><span style="color: #9399B2;font-style: italic;">                      # interactively remove from system. os.Remove(file)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">mkdir</span><span style="color: #A6E3A1;"> -pv dirname</span><span style="color: #9399B2;font-style: italic;">               # make folder</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">rmdir</span><span style="color: #A6E3A1;"> -pv dirnam</span><span style="color: #9399B2;font-style: italic;">                # remove folder</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">cd</span><span style="color: #A6E3A1;"> destination_place</span><span style="color: #9399B2;font-style: italic;">            # change current directory =&gt; destination_place</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #A6E3A1;"> -n filename</span><span style="color: #9399B2;font-style: italic;">                 # print it in console</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">head</span><span style="color: #A6E3A1;"> -n num_of_lines filename</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">tail</span><span style="color: #A6E3A1;"> -n num_of_lines filename</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> hello world</span><span style="color: #94E2D5;"> &gt;</span><span style="color: #A6E3A1;"> file.txt</span><span style="color: #9399B2;font-style: italic;">     # redirect/overwrite in the file</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;bye&quot;</span><span style="color: #94E2D5;"> &gt;&gt;</span><span style="color: #A6E3A1;"> file.txt</span><span style="color: #9399B2;font-style: italic;">          # append file</span></span></code></pre>
+<hr />
+<h2 id="searching-text-with-grep">Searching Text with <code>grep</code></h2>
+<blockquote>
+<p><code>grep</code> searches text using patterns, not just plain words. It scans line by line and prints only the lines that match. This makes it one of the most powerful tools for exploring logs, configs, and source code—especially when combined with regular expressions</p>
+</blockquote>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">grep</span><span style="color: #A6E3A1;"> -A1 pattern file</span><span style="color: #9399B2;font-style: italic;">               # 1 line after</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">grep</span><span style="color: #A6E3A1;"> -B1 pattern file</span><span style="color: #9399B2;font-style: italic;">               # 1 line before</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">grep</span><span style="color: #A6E3A1;"> -C2 pattern file</span><span style="color: #9399B2;font-style: italic;">               # Context ( 2 Line )</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">grep</span><span style="color: #A6E3A1;"> -i pattern file</span><span style="color: #9399B2;font-style: italic;">                # ignore case-sensitive</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">grep</span><span style="color: #A6E3A1;"> -o &#39;^.&#39; file</span><span style="color: #9399B2;font-style: italic;">                   # starts with single line</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">grep</span><span style="color: #A6E3A1;"> &#39;^starts_with&#39; file</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">grep</span><span style="color: #A6E3A1;"> &#39;ends_with$&#39; file</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">grep</span><span style="color: #A6E3A1;"> &#39;regex-pattern&#39; filename</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">grep</span><span style="color: #A6E3A1;"> -o &#39;^dog&#39; filename</span><span style="color: #9399B2;font-style: italic;">              # first starts with ^cat of each line</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #A6E3A1;"> README.md</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> grep</span><span style="color: #A6E3A1;"> -i &quot;pattern&quot;</span></span></code></pre>
+<hr />
+<h2 id="paging-the-file">paging the file</h2>
+<blockquote>
+<p>Paging tools let you view large files one screen at a time instead of dumping everything into the terminal at once. They’re essential when reading logs, manuals, or command output that doesn’t fit on a single screen.</p>
+</blockquote>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">less</span><span style="color: #A6E3A1;"> filename</span><span style="color: #9399B2;font-style: italic;">   # less is more :)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">more</span><span style="color: #A6E3A1;"> filename</span></span></code></pre>
+<hr />
+<h2 id="command-introspection">Command Introspection</h2>
+<blockquote>
+<p>Command introspection helps you answer a deceptively important question: what exactly is Bash running when you type a command?
+A name might resolve to a builtin, an alias, a keyword, or an external binary—and knowing which one you’re invoking prevents subtle surprises.</p>
+</blockquote>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">compgen</span><span style="color: #A6E3A1;"> -b</span><span style="color: #94E2D5;"> &gt;</span><span style="color: #A6E3A1;"> builtins_cmd.txt</span><span style="color: #9399B2;font-style: italic;">  # list all building commands</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">compgen</span><span style="color: #A6E3A1;"> -a</span><span style="color: #9399B2;font-style: italic;">                     # alias</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">compgen</span><span style="color: #A6E3A1;"> -k</span><span style="color: #9399B2;font-style: italic;">                     # bash keywords</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">which</span><span style="color: #A6E3A1;"> cmd</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">type</span><span style="color: #A6E3A1;"> -a cmd</span><span style="color: #9399B2;font-style: italic;">  # shows builtin/alias/hashed/bin-address</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">file</span><span> *</span></span></code></pre>
+<hr />
+<h2 id="environment-identity">Environment &amp; Identity</h2>
+<blockquote>
+<p>The shell runs inside a context</p>
+</blockquote>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># environment path</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span> $PATH</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> tr</span><span style="color: #A6E3A1;"> : &#39;\n&#39;</span><span style="color: #9399B2;font-style: italic;">  # translate old new</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span> $PWD</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span> $MACHTYPE</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> -n</span><span> $HOSTNAME</span><span style="color: #9399B2;font-style: italic;">       # no new-line at end</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">whoami</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">uname</span><span style="color: #A6E3A1;"> -a</span></span></code></pre>
+<hr />
+<h2 id="variable-command-subsitutions">Variable &amp; Command Subsitutions</h2>
+<blockquote>
+<p>Variables store text values, and command substitution lets you capture the output of a command as a value.</p>
+</blockquote>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># init variable</span></span>
+<span class="giallo-l"><span>AWS_S3</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&quot;sk-12345&quot;</span><span style="color: #9399B2;font-style: italic;">  # Always DOUBLE QUOTE the variable</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$AWS_S3</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>AWS_USER</span><span style="color: #94E2D5;">=`</span><span style="color: #89B4FA;font-style: italic;">uname</span><span style="color: #A6E3A1;"> -a</span><span style="color: #94E2D5;">`</span><span style="color: #9399B2;font-style: italic;">        # Old School way of command substitution</span></span>
+<span class="giallo-l"><span>AWS_USER</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">uname</span><span style="color: #A6E3A1;"> -m</span><span style="color: #9399B2;">)</span><span style="color: #9399B2;font-style: italic;">       # Best Pratice of command substitution/ preferred</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$AWS_USER</span><span style="color: #A6E3A1;">, and password </span><span>$AWS_S3</span><span style="color: #A6E3A1;">&quot;</span></span></code></pre>
+<hr />
+<h2 id="file-permission">File Permission</h2>
+<blockquote>
+<p>Every file in Unix has an access contract: who can read it, who can modify it, and who can execute it. File permissions enforce that contract, and the shell gives you direct control over it.</p>
+</blockquote>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># File Permission</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># permission ? owned-by group file-size modified-date dir/file</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">file</span><span style="color: #A6E3A1;"> filename</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">chmod</span><span style="color: #A6E3A1;"> +x file</span><span style="color: #9399B2;font-style: italic;">  # change permission of the file to executable mode.</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">chmod</span><span style="color: #FAB387;"> 755</span><span style="color: #A6E3A1;"> file</span></span></code></pre>
+<hr />
+<h2 id="shebang-exit-code">Shebang &amp; Exit Code</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span> $?</span><span style="color: #9399B2;font-style: italic;">                # check any error in the last cmd run</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="make"><span class="giallo-l"><span>SHELL</span><span style="color: #94E2D5;">        =</span><span> /usr/bin/bash</span></span>
+<span class="giallo-l"><span>.SHELLFLAGS</span><span style="color: #94E2D5;"> :=</span><span> -eu -o pipefail -c</span></span>
+<span class="giallo-l"><span>PYTHON</span><span style="color: #94E2D5;">      ?=</span><span> $(</span><span style="color: #89B4FA;font-style: italic;">shell</span><span style="color: #A6E3A1;"> command -v python3 || command -v python</span><span>)</span></span>
+<span class="giallo-l"><span>PIP</span><span style="color: #94E2D5;">          =</span><span> $(PYTHON) -m pip</span></span></code></pre>
+<hr />
+<h2 id="input">Input</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">read</span><span style="color: #A6E3A1;"> first_name last_name</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">&gt;</span><span> Linux love bash</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">read</span><span style="color: #A6E3A1;"> -r variable_address</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">&gt;</span><span> voc nagar</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">read</span><span style="color: #A6E3A1;"> -rp &quot;Enter your linux OS: &quot; name</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">&gt;</span><span> Arch</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">read</span><span style="color: #A6E3A1;"> -rsp &quot;Password: &quot; os_password</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">&gt; *****</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$first_name</span><span style="color: #A6E3A1;">, </span><span>$last_name</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">  # Linux, love bash</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$variable_address</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">        # voc nagar</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$name</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">                    # Arch</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$os_password</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">             # *****</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Postional Params as Input</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># $0   # Script name</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># $1   # first args</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># $2   # seconda arg</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># $@   # all args (safe)</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># $*   # all args (unsafe)</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># $#   # args count</span></span></code></pre>
+<hr />
+<h2 id="conditional">Conditional</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">if</span><span style="color: #9399B2;"> [[</span><span style="color: #94E2D5;"> -n</span><span style="color: #EBA0AC;font-style: italic;"> $1</span><span style="color: #9399B2;"> ]];</span><span style="color: #CBA6F7;"> then</span><span style="color: #9399B2;font-style: italic;">        #help &#39;[[&#39;      #$1   &lt;Second argment while calling script&gt;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;Hi, </span><span style="color: #EBA0AC;font-style: italic;">$1</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">else</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    # read only one line</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    read</span><span style="color: #A6E3A1;"> -rp &quot;Enter your name: &quot; stdin</span><span style="color: #9399B2;font-style: italic;">        # -r means raw-string; -p prompt</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;hello, </span><span>$stdin</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">fi</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">help</span><span style="color: #A6E3A1;"> &#39;[&#39;</span><span style="color: #9399B2;font-style: italic;">   # test</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">help</span><span style="color: #A6E3A1;"> &#39;[[&#39;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">help</span><span style="color: #A6E3A1;"> let</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ -a ]]                      True if file exists</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ -d FILE ]]                 True if file is a directory.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ -e FILE ]]                 True if file exists.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ -f FILE ]]                 True if file exists and is a regular file.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ FILE1 -nt FILE2 ]]         True if file1 is newer than file2 (according to modification date).</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ FILE1 -ot FILE2 ]]         True if file1 is older than file2</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ -z STRING ]]               True if string is empty.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ -n STRING ]]               True if string is not empty.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[  STRING1 = STRING2 ]]      True if the strings are equal.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ STRING1 != STRING2 ]]      True if the strings are not equal.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ STRING1 &lt; STRING2 ]]       True if STRING1 sorts before STRING2 lexicographically.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ STRING1 &gt; STRING2 ]]       True if STRING1 sorts after STRING2 lexicographically.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ ! EXPR ]]                  True if expr is false.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ EXPR1 -a EXPR2 ]]          True if both expr1 AND expr2 are true.</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># [[ EXPR1 -o EXPR2 ]]          True if either expr1 OR expr2 is true.</span></span></code></pre>
+<hr />
+<h2 id="tests-comparisons">Tests &amp; Comparisons</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/bin/bash</span></span>
+<span class="giallo-l"><span>a</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">2</span></span>
+<span class="giallo-l"><span>b</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">2</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">if</span><span style="color: #9399B2;"> [[</span><span> $a</span><span style="color: #94E2D5;"> ==</span><span> $b</span><span style="color: #9399B2;"> ]];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &#39;a and b are same&#39;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">fi</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>c</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">3</span></span>
+<span class="giallo-l"><span>d</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">4</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">if</span><span style="color: #9399B2;"> [[</span><span> $c</span><span style="color: #94E2D5;"> !=</span><span> $d</span><span style="color: #9399B2;"> ]];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &#39;c and d are not same&#39;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">fi</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">if</span><span style="color: #94E2D5;"> !</span><span style="color: #9399B2;"> [[</span><span> $c</span><span style="color: #94E2D5;"> ==</span><span>$d</span><span style="color: #9399B2;"> ]];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &#39;C and D are not same&#39;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">fi</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">if</span><span style="color: #9399B2;"> [[</span><span style="color: #94E2D5;"> -f</span><span> file.txt </span><span style="color: #9399B2;">]];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;file.txt exists and is a file&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">else</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;file.txt not exists&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">fi</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">true</span><span style="color: #9399B2;font-style: italic;">   # $? =&gt; 0</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">false</span><span style="color: #9399B2;font-style: italic;">  # $? =&gt; 1</span></span></code></pre>
+<hr />
+<h2 id="case-statement">Case statement</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span>s</span><span style="color: #94E2D5;">=</span><span style="color: #EBA0AC;font-style: italic;">$1</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">case</span><span style="color: #A6E3A1;"> &quot;</span><span>$s</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #CBA6F7;"> in</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    girl</span><span style="color: #94E2D5;">)</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">        echo</span><span style="color: #A6E3A1;"> Hello, Girl</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        ;;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    boy</span><span style="color: #94E2D5;">)</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">        echo</span><span style="color: #A6E3A1;">  Hello, boy</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        ;;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    kamal</span><span style="color: #9399B2;">* |</span><span style="color: #A6E3A1;"> rev</span><span style="color: #9399B2;">*</span><span style="color: #94E2D5;">)</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">        echo</span><span style="color: #A6E3A1;"> there, you are</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        ;;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    lo</span><span style="color: #9399B2;">*</span><span style="color: #94E2D5;">)</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">        echo</span><span style="color: #A6E3A1;"> anything starts with love</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        ;&amp;</span><span style="color: #9399B2;font-style: italic;">                                  # fall-through</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    love</span><span>)</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">        echo</span><span style="color: #A6E3A1;"> love is all</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        ;;</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">    *)</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">        echo</span><span style="color: #A6E3A1;"> &quot;Hello </span><span style="color: #EBA0AC;font-style: italic;">$1</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">        ;;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">esac</span></span></code></pre>
+<hr />
+<h2 id="control-flow-loops">Control Flow &amp; Loops</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">for</span><span> i</span><span style="color: #CBA6F7;"> in</span><span style="color: #A6E3A1;"> &quot;0&quot;, &quot;muthu&quot;, kamalan</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> do</span><span style="color: #9399B2;font-style: italic;">   # For loop</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;i: </span><span>$i</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">for</span><span> i</span><span style="color: #CBA6F7;"> in</span><span style="color: #A6E3A1;"> &quot;</span><span style="color: #EBA0AC;font-style: italic;">$1</span><span style="color: #A6E3A1;">&quot;,&quot;</span><span style="color: #EBA0AC;font-style: italic;">$2</span><span style="color: #A6E3A1;">&quot;,&quot;</span><span style="color: #EBA0AC;font-style: italic;">$3</span><span style="color: #A6E3A1;">&quot;,&quot;</span><span style="color: #EBA0AC;font-style: italic;">$@</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> do</span><span style="color: #9399B2;font-style: italic;">   # For loop</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;i: </span><span>$i</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">while</span><span style="color: #9399B2;"> [[</span><span style="color: #94E2D5;"> -f</span><span> file.txt </span><span style="color: #9399B2;">]];</span><span style="color: #CBA6F7;"> do</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;file.txt exists&quot;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    sleep</span><span style="color: #FAB387;"> 1</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">for</span><span> i</span><span style="color: #CBA6F7;"> in</span><span> {</span><span style="color: #89B4FA;font-style: italic;">a..f}</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;">do</span><span style="color: #9399B2;font-style: italic;">           # [a,b,c,d,e,f]</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;count, </span><span>$i</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">for</span><span> i</span><span style="color: #CBA6F7;"> in</span><span> {</span><span style="color: #89B4FA;font-style: italic;">1..5}</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;">do</span><span style="color: #9399B2;font-style: italic;">           # [1,2,3,4,5]</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;count, </span><span>$i</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>max</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">5</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">for</span><span style="color: #9399B2;"> ((</span><span>i</span><span style="color: #94E2D5;">=</span><span style="color: #FAB387;">0</span><span style="color: #9399B2;">;</span><span>i</span><span style="color: #94E2D5;">&lt;</span><span>max</span><span style="color: #9399B2;">;</span><span> i</span><span style="color: #94E2D5;">++</span><span style="color: #9399B2;">));</span><span style="color: #CBA6F7;"> do</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;count, </span><span>$i</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span></code></pre>
+<hr />
+<h2 id="function-scope">Function &amp; Scope</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">greet</span><span style="color: #9399B2;">(){</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    local</span><span> name</span><span style="color: #94E2D5;">=</span><span style="color: #EBA0AC;font-style: italic;">$1</span><span style="color: #9399B2;font-style: italic;">              # by-default, global variable</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;hello, </span><span>$name</span><span style="color: #A6E3A1;"> from function&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">for</span><span> name</span><span style="color: #CBA6F7;"> in</span><span style="color: #A6E3A1;"> &quot;</span><span style="color: #EBA0AC;font-style: italic;">$@</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> do</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    greet</span><span style="color: #A6E3A1;"> &quot;</span><span>$name</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">hello</span><span style="color: #9399B2;">(){</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    local</span><span> s</span><span style="color: #94E2D5;">=</span><span style="color: #EBA0AC;font-style: italic;">$1</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;hello, </span><span>$s</span><span style="color: #A6E3A1;">!&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    return</span><span style="color: #FAB387;"> 0</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">goodbye</span><span style="color: #9399B2;">(){</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    local</span><span> s</span><span style="color: #94E2D5;">=</span><span style="color: #EBA0AC;font-style: italic;">$1</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;goodbye, </span><span>$s</span><span style="color: #A6E3A1;">!&quot;</span><span style="color: #94E2D5;"> &gt;</span><span style="color: #9399B2;"> &amp;</span><span style="color: #89B4FA;font-style: italic;">1</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># IO Redirections:: stdin,stdout, stderr</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #A6E3A1;"> missingfile</span><span style="color: #94E2D5;"> 2&gt;</span><span style="color: #A6E3A1;"> error.txt</span><span style="color: #9399B2;font-style: italic;">  # to redirect error msg</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #A6E3A1;"> missingfile</span><span style="color: #94E2D5;"> 2&gt;</span><span style="color: #A6E3A1;">  /dev/null</span><span style="color: #9399B2;font-style: italic;"> #  throw to black whole</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># help &#39;((&#39;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># $# tells number of args</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># &amp;0  stdin</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># &amp;1  stdout</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># &amp;2  stderr</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">if</span><span style="color: #9399B2;"> ((</span><span>$#</span><span style="color: #94E2D5;">==</span><span style="color: #FAB387;">0</span><span style="color: #9399B2;">));</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &#39;name required! &gt;&amp;2&#39;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    exit</span><span style="color: #FAB387;"> 1</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">fi</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">for</span><span> name</span><span style="color: #CBA6F7;"> in</span><span style="color: #A6E3A1;"> &quot;</span><span style="color: #EBA0AC;font-style: italic;">$@</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> do</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    if</span><span style="color: #9399B2;">  [[</span><span> $name</span><span style="color: #94E2D5;"> ==</span><span> m</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;"> ]];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">        hello</span><span style="color: #A6E3A1;"> &quot;</span><span>$name</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    elif</span><span style="color: #9399B2;"> [[</span><span> $name</span><span style="color: #94E2D5;"> ==</span><span> k</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;"> ]];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">        hello</span><span style="color: #A6E3A1;"> &quot;</span><span>$name</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    else</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">        goodbye</span><span style="color: #A6E3A1;"> &quot;</span><span>$name</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    fi</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span></code></pre>
+<hr />
+<h2 id="reading-files-safely">Reading Files Safely</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">read</span><span style="color: #A6E3A1;"> -rp &quot;Enter your name: &quot; word</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;single word: </span><span>$word</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># sometime use `echo -n ???` new line won&#39;t populate so we use `[[ -n $line ]]`</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">while</span><span style="color: #A6E3A1;"> read -r line</span><span style="color: #94E2D5;"> ||</span><span style="color: #9399B2;"> [[</span><span style="color: #94E2D5;"> -n</span><span> $line</span><span style="color: #9399B2;"> ]];</span><span style="color: #CBA6F7;"> do</span><span style="color: #9399B2;font-style: italic;">         # read from file line by line</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    :</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">help</span><span style="color: #A6E3A1;"> :</span><span style="color: #9399B2;font-style: italic;"> # Null command</span></span></code></pre>
+<hr />
+<h2 id="indexed-array">Indexed Array</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">declare</span><span style="color: #A6E3A1;"> -a</span><span> array</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">(</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    muthu</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    revathi</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;voc nagar&quot;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    kovilpatti</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${array</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">0</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${array</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">1</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${array</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">2</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${array</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">-1</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${array</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">-2</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${array</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">2000000</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">  # returns &quot;\n&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>idx</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">2</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;idx: </span><span>${array</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">idx</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">      # valid</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;idx: </span><span>${array</span><span style="color: #9399B2;">[</span><span>$idx</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;using *: </span><span>${array</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">    # stringfy</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;using @ : </span><span>${array</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">for</span><span> item</span><span style="color: #CBA6F7;"> in</span><span style="color: #A6E3A1;"> &quot;</span><span>${array</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> do</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;item in * is: </span><span>$item</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">for</span><span> item</span><span style="color: #CBA6F7;"> in</span><span style="color: #A6E3A1;"> &quot;</span><span>${array</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> do</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;item in @ is: </span><span>$item</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>members</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&quot;</span><span>${array</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">  # stringfy and copy it  # WRONG WAY to do it</span></span>
+<span class="giallo-l"><span>family</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;"> &quot;</span><span>${array</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot; mariappan lakshmi</span><span style="color: #9399B2;"> )</span></span>
+<span class="giallo-l"><span>family</span><span style="color: #94E2D5;">+=</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">rajapaul priya</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">for</span><span> m</span><span style="color: #CBA6F7;"> in</span><span style="color: #A6E3A1;"> &quot;</span><span>${family</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> do</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;item is: </span><span>$m</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">declare</span><span style="color: #A6E3A1;"> -p</span><span> family</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>alliswell</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">([</span><span style="color: #F9E2AF;">0</span><span style="color: #9399B2;">]=</span><span style="color: #A6E3A1;">&quot;atom&quot;</span><span style="color: #9399B2;"> [</span><span style="color: #F9E2AF;">27</span><span style="color: #9399B2;">]=</span><span style="color: #A6E3A1;">&quot;muthu&quot;</span><span style="color: #9399B2;"> [</span><span style="color: #F9E2AF;">24</span><span style="color: #9399B2;">]=</span><span style="color: #A6E3A1;">&quot;revathi&quot;</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${alliswell</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${</span><span style="color: #94E2D5;">#</span><span>alliswell</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">  # length of an array</span></span></code></pre>
+<hr />
+<h2 id="associative-array">Associative Array <HashMap></h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">if</span><span style="color: #94E2D5;"> !</span><span style="color: #CBA6F7;"> declare</span><span style="color: #A6E3A1;"> -A</span><span> fam</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;not able to make it&quot;</span><span style="color: #94E2D5;"> &gt;&amp;2</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    exit</span><span style="color: #FAB387;"> 1</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">fi</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">declare</span><span style="color: #A6E3A1;"> -A</span><span> fam</span></span>
+<span class="giallo-l"><span>fam</span><span style="color: #9399B2;">[</span><span>husband</span><span style="color: #9399B2;">]</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&quot;kamalan&quot;</span></span>
+<span class="giallo-l"><span>fam</span><span style="color: #9399B2;">[</span><span>wife</span><span style="color: #9399B2;">]</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&quot;revathi&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">husband</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">wife</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;values: </span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;keys: </span><span>${</span><span style="color: #94E2D5;">!</span><span>fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;stringfy: </span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;length: </span><span>${</span><span style="color: #94E2D5;">#</span><span>fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">for</span><span> key</span><span style="color: #CBA6F7;"> in</span><span style="color: #A6E3A1;"> &quot;</span><span>${</span><span style="color: #94E2D5;">!</span><span>fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> do</span></span>
+<span class="giallo-l"><span>    val</span><span style="color: #94E2D5;">=</span><span>${fam</span><span style="color: #9399B2;">[</span><span>$key</span><span style="color: #9399B2;">]</span><span>}</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;key, </span><span>$key</span><span style="color: #A6E3A1;"> got value </span><span>$val</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span></code></pre>
+<hr />
+<h2 id="ifs-variable">IFS variable</h2>
+<blockquote>
+<p>Internal Field Separator, and it tells Bash how to split text into pieces.</p>
+</blockquote>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">declare</span><span style="color: #A6E3A1;"> -a</span><span> fam</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">(</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;kamalan&quot;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;revathi&quot;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    &quot;voc nagar&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;stringfy: </span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span>IFS</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">,</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;stringfy with &quot;,&quot;: </span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">(</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    # sub shell / local scope</span></span>
+<span class="giallo-l"><span>    IFS</span><span style="color: #94E2D5;">=</span><span style="color: #F5C2E7;">\&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;stringfy with </span><span style="color: #F5C2E7;">\&quot;</span><span style="color: #A6E3A1;">: </span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">(</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    # sub shell / locl scope</span></span>
+<span class="giallo-l"><span>    IFS</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">!</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;stringfy with !: </span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;stringfy: </span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span></code></pre>
+<hr />
+<h2 id="command-subsitituion-vs-same-shell">command subsitituion vs Same Shell</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/bin/bash</span></span>
+<span class="giallo-l"><span>i</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">100</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">say_hi</span><span style="color: #9399B2;">(){</span></span>
+<span class="giallo-l"><span>    i</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">6</span><span style="color: #9399B2;font-style: italic;"> # local scope</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;hi, max-score </span><span>$i</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span>
+<span class="giallo-l"><span>hello</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">say_hi</span><span style="color: #9399B2;">)</span><span style="color: #9399B2;font-style: italic;">                # runs in sub-shell</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;Greeting and </span><span>$hello</span><span style="color: #A6E3A1;">, there&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;i is </span><span>$i</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">                 # global scope</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/bin/bash</span></span>
+<span class="giallo-l"><span>i</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">100</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">say_hi</span><span style="color: #9399B2;">(){</span></span>
+<span class="giallo-l"><span>    i</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">6</span><span style="color: #9399B2;font-style: italic;"> # local scope</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;hi, max-score </span><span>$i</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">say_hi</span><span style="color: #9399B2;font-style: italic;">                         # runs in same-shell</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;Greeting and </span><span>$hello</span><span style="color: #A6E3A1;">, there&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;i is </span><span>$i</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">                 # global scope</span></span></code></pre>
+<hr />
+<h2 id="arithmetic-expression">Arithmetic expression</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span>a</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">100000</span></span>
+<span class="giallo-l"><span>b</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">100</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #9399B2;"> $((</span><span> $a</span><span style="color: #A6E3A1;">*</span><span>$a</span><span style="color: #9399B2;"> ))</span><span style="color: #9399B2;font-style: italic;">  # EXPRESSION</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">((</span><span> max</span><span style="color: #94E2D5;"> =</span><span> a</span><span style="color: #94E2D5;"> &gt;</span><span> b</span><span style="color: #94E2D5;"> ?</span><span> a</span><span style="color: #94E2D5;"> :</span><span> b</span><span style="color: #9399B2;"> ))</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$max</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span style="color: #9399B2;">$((</span><span style="color: #89B4FA;font-style: italic;"> &quot;word&quot;*2</span><span style="color: #9399B2;"> ))</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;"> # =&gt; 0</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">help</span><span style="color: #A6E3A1;"> let</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>a</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">010</span><span style="color: #9399B2;font-style: italic;">  #Octa</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$a</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #9399B2;"> $((</span><span style="color: #89B4FA;font-style: italic;"> 10#$a</span><span style="color: #9399B2;"> ))</span></span></code></pre>
+<hr />
+<h2 id="process-subsitution">process subsitution</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span>i</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">0</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">while</span><span style="color: #F38BA8;font-style: italic;"> read</span><span style="color: #A6E3A1;"> -r word</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> do</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$word</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">    ((</span><span>i</span><span style="color: #94E2D5;">++</span><span style="color: #9399B2;">))</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;"> &lt;(</span><span style="color: #89B4FA;font-style: italic;">grep</span><span style="color: #A6E3A1;"> d /usr/file.txt)</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">(</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># NOTE: `&lt;(grep d /usr/file.txt)` is a file</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># NOTE: `read` #read it in streaming mode</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># File descriptor: A file descriptor in Linux (or Unix-like systems) is a small non-negative integer that a process uses as a handle to access an open file or I/O resource.  :: &lt;()</span></span></code></pre><h3 id="file-descriptor-in-c-program">file descriptor in C program</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="c"><span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F9E2AF;">#include</span><span style="color: #A6E3A1;"> &lt;unistd.h&gt;</span><span style="color: #9399B2;font-style: italic;">   // read, close</span></span>
+<span class="giallo-l"><span style="color: #F9E2AF;">#include</span><span style="color: #A6E3A1;"> &lt;fcntl.h&gt;</span><span style="color: #9399B2;font-style: italic;">    // open</span></span>
+<span class="giallo-l"><span style="color: #F9E2AF;">#include</span><span style="color: #A6E3A1;"> &lt;stdio.h&gt;</span><span style="color: #9399B2;font-style: italic;">    // perror</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">int</span><span style="color: #89B4FA;font-style: italic;"> main</span><span style="color: #9399B2;">() {</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    char</span><span> buffer</span><span style="color: #9399B2;">[</span><span style="color: #FAB387;">10</span><span style="color: #9399B2;">];</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    int</span><span> fd </span><span style="color: #94E2D5;">=</span><span style="color: #89B4FA;font-style: italic;"> open</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;LICENsSE&quot;</span><span style="color: #9399B2;">,</span><span> O_RDONLY</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    printf</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;File descriptor returned by open(): %d</span><span style="color: #F5C2E7;">\n</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">,</span><span> fd</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    if</span><span style="color: #9399B2;"> (</span><span>fd </span><span style="color: #94E2D5;">&lt;</span><span style="color: #FAB387;"> 0</span><span style="color: #9399B2;">) {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">        perror</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;open&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">        return</span><span style="color: #FAB387;"> 1</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">    }</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    int</span><span> bytes_read </span><span style="color: #94E2D5;">=</span><span style="color: #89B4FA;font-style: italic;"> read</span><span style="color: #9399B2;">(</span><span>fd</span><span style="color: #9399B2;">,</span><span> buffer</span><span style="color: #9399B2;">,</span><span style="color: #94E2D5;"> sizeof</span><span style="color: #9399B2;">(</span><span>buffer</span><span style="color: #9399B2;">));</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    if</span><span style="color: #9399B2;"> (</span><span>bytes_read </span><span style="color: #94E2D5;">&lt;</span><span style="color: #FAB387;"> 0</span><span style="color: #9399B2;">) {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">        perror</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;">&quot;read&quot;</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">        close</span><span style="color: #9399B2;">(</span><span>fd</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">        return</span><span style="color: #FAB387;"> 1</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">    }</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    write</span><span style="color: #9399B2;">(</span><span style="color: #FAB387;">1</span><span style="color: #9399B2;">,</span><span> buffer</span><span style="color: #9399B2;">,</span><span> bytes_read</span><span style="color: #9399B2;">);</span><span style="color: #9399B2;font-style: italic;">  // write to stdout (fd 1)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    close</span><span style="color: #9399B2;">(</span><span>fd</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    write</span><span style="color: #9399B2;">(</span><span style="color: #FAB387;">1</span><span style="color: #9399B2;">,</span><span style="color: #A6E3A1;"> &quot;</span><span style="color: #F5C2E7;">\n</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">,</span><span style="color: #FAB387;"> 1</span><span style="color: #9399B2;">);</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    return</span><span style="color: #FAB387;"> 0</span><span style="color: #9399B2;">;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># NOTE:</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">shift</span><span style="color: #9399B2;font-style: italic;"> # means move 2nd argument to 1st   $2-&gt;$1</span></span></code></pre>
+<hr />
+<h2 id="text-processing-cut-tr-awk-sed">Text Processing: cut, tr, awk, sed</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #94E2D5;"> &lt;&lt;</span><span style="color: #A6E3A1;">EOF</span><span style="color: #94E2D5;"> &gt;</span><span style="color: #A6E3A1;"> file.csv</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">name,age,city,capital</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">kamalan,27,kvp,chennai</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">revathi,24,cvp,&quot;chennai, TN&quot;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">EOF</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #A6E3A1;"> file.csv</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> tr</span><span style="color: #A6E3A1;"> , &quot;\t&quot;</span><span style="color: #9399B2;font-style: italic;">       # translate , =&gt; \t</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #A6E3A1;"> file.csv</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> cut</span><span style="color: #A6E3A1;"> -d , -f 1-2,4-</span><span style="color: #9399B2;font-style: italic;">  # cut it by delimeter , and get field of column 1   &lt;index by 1&gt;</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">man</span><span style="color: #FAB387;"> 5</span><span style="color: #A6E3A1;"> passwd</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">#        •   login name</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">#        •   optional encrypted password</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">#        •   numerical user ID</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">#        •   numerical group ID</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">#        •   user name or comment field</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">#        •   user home directory</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">#        •   optional user command interpreter</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #A6E3A1;"> /etc/passwd</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> cut</span><span style="color: #A6E3A1;"> -d : -f 1,3,4</span><span style="color: #9399B2;font-style: italic;"> # print only login name</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># TODO</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #A6E3A1;"> /etc/passwd</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> awk</span><span style="color: #A6E3A1;"> -F: &#39;{ print $1, $7 }&#39;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #A6E3A1;"> /etc/passwd</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> awk</span><span style="color: #A6E3A1;"> -F: &#39;{ printf(&quot;name: %s\n&quot;,$1 ); }&#39;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #A6E3A1;"> /etc/passwd</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> awk</span><span style="color: #A6E3A1;"> -F: &#39; $1==&quot;root&quot; { printf(&quot;name: %s\n&quot;,$1 ); }&#39;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #A6E3A1;"> /etc/passwd</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> awk</span><span style="color: #A6E3A1;"> -F: &#39;{ printf(&quot;%s\n&quot;,$1 ); }&#39;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> sort</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> uniq</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> wc</span><span style="color: #A6E3A1;"> -l</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">wc</span><span style="color: #A6E3A1;"> -l</span><span style="color: #9399B2;font-style: italic;"> # lines</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">wc</span><span style="color: #A6E3A1;"> -w</span><span style="color: #9399B2;font-style: italic;"> # words</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">wc</span><span style="color: #A6E3A1;"> -c</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">declare</span><span style="color: #A6E3A1;"> -A</span><span> shells</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">while</span><span> IFS</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">:</span><span style="color: #F38BA8;font-style: italic;"> read</span><span style="color: #A6E3A1;"> -r name pass uid gid gecos home shell</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> do</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">    #</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    if</span><span style="color: #9399B2;"> [[</span><span> $name</span><span style="color: #94E2D5;"> ==</span><span style="color: #A6E3A1;"> &#39;#&#39;</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;"> ]];</span><span style="color: #CBA6F7;"> then</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">        continue</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">    fi</span></span>
+<span class="giallo-l"><span>    shells</span><span style="color: #9399B2;">[</span><span>$name</span><span style="color: #9399B2;">]</span><span style="color: #94E2D5;">=</span><span>$shell</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$name</span><span style="color: #A6E3A1;"> has the shell: </span><span>${shells</span><span style="color: #9399B2;">[</span><span>$name</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span><span style="color: #94E2D5;"> &lt;</span><span> /etc/passwd</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">declare</span><span style="color: #A6E3A1;"> -p</span><span> shells</span></span></code></pre>
+<hr />
+<h2 id="finding-files">Finding  Files</h2>
+<p><code>Note:</code> Use find with -exec for bulk operations</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">find</span><span style="color: #A6E3A1;"> location -type f</span><span style="color: #9399B2;font-style: italic;"> # check only file</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">find</span><span style="color: #A6E3A1;"> location -type f -name &#39;*.md&#39;</span><span style="color: #9399B2;font-style: italic;"> # check only file</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">find</span><span style="color: #A6E3A1;"> location -type d</span><span style="color: #9399B2;font-style: italic;"> # check only file</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">find</span><span style="color: #A6E3A1;"> location -type l</span><span style="color: #9399B2;font-style: italic;"> # check only symlinks</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">find</span><span style="color: #A6E3A1;"> location -type f -name &#39;*.md&#39;  -exec echo I found a file {}</span><span style="color: #F5C2E7;"> \;</span><span style="color: #9399B2;font-style: italic;">   # execute will run cmd on streaming/one-by-one</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">find</span><span style="color: #A6E3A1;"> location -type f -name &#39;*.md&#39;  -exec echo I found a file {} &#39;;&#39;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">find</span><span style="color: #A6E3A1;"> location -type f -name &#39;*.md&#39;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> xargs</span><span style="color: #9399B2;font-style: italic;">                             # batch it</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">find</span><span style="color: #A6E3A1;"> location -type f -name &#39;*.md&#39; -print0</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> xargs</span><span style="color: #A6E3A1;"> -0</span><span style="color: #9399B2;font-style: italic;">                 # separate null to new lines</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">locate</span><span style="color: #A6E3A1;"> --help</span></span></code></pre>
+<hr />
+<h2 id="debug-mode">Debug mode</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span>PS4</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&#39;[debug]: &#39;</span><span style="color: #89B4FA;font-style: italic;"> bash</span><span style="color: #A6E3A1;"> -x script.sh</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bash</span><span style="color: #A6E3A1;"> -n script.sh</span><span style="color: #9399B2;font-style: italic;">                      # syntax check</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bash</span><span style="color: #A6E3A1;"> -u script.sh</span><span style="color: #9399B2;font-style: italic;">                      # check for undefined variable</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sellcheck</span><span style="color: #A6E3A1;"> script.sh</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">set</span><span style="color: #A6E3A1;"> -x</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">....</span><span style="color: #9399B2;font-style: italic;">                   # part of the section runs on debug mode</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">....</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">set</span><span style="color: #A6E3A1;"> +x</span></span></code></pre>
+<hr />
+<h2 id="pipestatus">Pipestatus</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #A6E3A1;"> file_not_exists.txt</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> tr</span><span style="color: #A6E3A1;"> , &quot;\t&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${PIPESTATUS</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">true</span><span style="color: #94E2D5;">|</span><span style="color: #F38BA8;font-style: italic;"> false</span><span style="color: #94E2D5;"> |</span><span style="color: #F38BA8;font-style: italic;"> true</span><span style="color: #94E2D5;">|</span><span style="color: #F38BA8;font-style: italic;"> false</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${PIPESTATUS</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Each command in a pipeline gets its own exit code.</span></span></code></pre>
+<hr />
+<h2 id="timing-command">Timing command</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #CBA6F7;">time</span><span style="color: #94E2D5;"> &lt;</span><span>---</span><span style="color: #94E2D5;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">real</span><span style="color: #9399B2;font-style: italic;">  # wall clock</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">user</span><span style="color: #9399B2;font-style: italic;">  # how much time it waits in user space</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sys</span><span style="color: #9399B2;font-style: italic;">   # how much time it waits in sys space</span></span></code></pre>
+<hr />
+<h2 id="sourcing-file">Sourcing File</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;">#  Create and populate into a file</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #94E2D5;"> &lt;&lt;</span><span style="color: #A6E3A1;">EOF</span><span style="color: #94E2D5;"> &gt;</span><span style="color: #A6E3A1;"> /tmp/greeetings.sh</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">#!/bin/usr/bash</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">greet(){</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    # run in local so don&#39;t mess with global scope</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    local name=</span><span style="color: #EBA0AC;font-style: italic;">$1</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    echo &quot;hi, </span><span>$name</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">bye()(</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    # runs in sub-shell</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    name=</span><span style="color: #EBA0AC;font-style: italic;">$1</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    echo &quot;bye, </span><span>$name</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">if ! (return 2&gt;/dev/null); then</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    # we are being called directly similar to if __name__==&quot;__main__&quot;:</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    greet test1</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">    bye test2</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">EOF</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cat</span><span style="color: #94E2D5;"> &lt;&lt;</span><span style="color: #A6E3A1;">EOF</span><span style="color: #94E2D5;"> &gt;</span><span style="color: #A6E3A1;"> /tmp/test.sh</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">source /tmp/greeetings.sh || exit 1</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">greet muthukamalan</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">bye revathi</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">EOF</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">chmod</span><span style="color: #A6E3A1;"> +x /tmp/greeetings.sh</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">chmod</span><span style="color: #A6E3A1;"> +x /tmp/test.sh</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">bash</span><span style="color: #A6E3A1;"> /tmp/test.sh</span></span></code></pre>
+<hr />
+<h2 id="params-expansion">params expansion</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span>name</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&quot;mutHu kamaLan&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$name</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;name: </span><span>${name}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;substring: </span><span>${name</span><span style="color: #94E2D5;">:</span><span>0</span><span style="color: #94E2D5;">:</span><span> -3}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;"> # :- will take precedence as default value subsitution</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;name with capital letter: </span><span>${name</span><span style="color: #A6E3A1;">^</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;name with caps all: </span><span>${name</span><span style="color: #A6E3A1;">^^</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;name with caps all: </span><span>${name</span><span style="color: #94E2D5;">@</span><span>U}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;name with cap 1st A: </span><span>${name</span><span style="color: #A6E3A1;">^</span><span>a}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;name with cap all A:</span><span>${name</span><span style="color: #A6E3A1;">^^</span><span>a}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;name with cap all M,K: </span><span>${name</span><span style="color: #A6E3A1;">^^</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">mk</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${name</span><span style="color: #A6E3A1;">,</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${name</span><span style="color: #A6E3A1;">,,</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">mk</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;replace a with u: </span><span>${name</span><span style="color: #94E2D5;">/</span><span>u</span><span style="color: #94E2D5;">/</span><span>a}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;replace a with u: </span><span>${name</span><span style="color: #94E2D5;">//</span><span>u</span><span style="color: #94E2D5;">/</span><span>a}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;replace a with uh: </span><span>${name</span><span style="color: #94E2D5;">//</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">uh</span><span style="color: #9399B2;">]</span><span style="color: #94E2D5;">/</span><span>a}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;replace with ____ </span><span>${name</span><span style="color: #94E2D5;">//</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">uh</span><span style="color: #9399B2;">]</span><span style="color: #94E2D5;">/</span><span>__</span><span style="color: #A6E3A1;">&amp;</span><span>__}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;replace with &amp; </span><span>${name</span><span style="color: #94E2D5;">//</span><span style="color: #9399B2;">[</span><span style="color: #A6E3A1;">uh</span><span style="color: #9399B2;">]</span><span style="color: #94E2D5;">/</span><span>__</span><span style="color: #F5C2E7;">\&amp;</span><span>__}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>path</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">$(</span><span style="color: #F38BA8;font-style: italic;">pwd</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">dirname</span><span> $path</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">basename</span><span> $path</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${path}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${path</span><span style="color: #94E2D5;">#*/</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">      # from the beginning</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${path</span><span style="color: #94E2D5;">##*/</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">     # from the beginning but find last occurance</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${path</span><span style="color: #94E2D5;">%/*</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">      # from the end pick 1st / occurance &lt;print &quot;starting to /&quot;&gt;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${path</span><span style="color: #94E2D5;">%/*</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span>name</span><span style="color: #94E2D5;">=</span><span style="color: #EBA0AC;font-style: italic;">${1</span><span style="color: #94E2D5;">:-</span><span>default_val</span><span style="color: #EBA0AC;font-style: italic;">}</span><span style="color: #9399B2;font-style: italic;">       # default value</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;name: </span><span>${name}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> -e &quot;hello,\t</span><span>${name}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> -e &quot;hello,\v</span><span>${name}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> -e &quot;hello,\b</span><span>${name}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>useros</span><span style="color: #94E2D5;">=</span><span style="color: #EBA0AC;font-style: italic;">${1</span><span style="color: #94E2D5;">:-</span><span>$USER</span><span style="color: #EBA0AC;font-style: italic;">}</span><span style="color: #9399B2;font-style: italic;">     # default assing if not passing</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;hello, </span><span>$useros</span><span style="color: #A6E3A1;">!&quot;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>useros</span><span style="color: #94E2D5;">=</span><span style="color: #EBA0AC;font-style: italic;">${1</span><span style="color: #94E2D5;">:?</span><span style="color: #A6E3A1;">&#39;You must pass name&#39;</span><span style="color: #EBA0AC;font-style: italic;">}</span><span style="color: #9399B2;font-style: italic;">         # show error if not passing</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;hello, </span><span>$useros</span><span style="color: #A6E3A1;">!&quot;</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span>s</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&quot;muthukamalan&quot;</span></span>
+<span class="giallo-l"><span>len</span><span style="color: #94E2D5;">=</span><span>${</span><span style="color: #94E2D5;">#</span><span>s}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">for</span><span style="color: #9399B2;"> ((</span><span>i</span><span style="color: #94E2D5;">=</span><span style="color: #FAB387;">0</span><span style="color: #9399B2;">;</span><span>i</span><span style="color: #94E2D5;">&lt;</span><span>len</span><span style="color: #9399B2;">;</span><span>i</span><span style="color: #94E2D5;">++</span><span style="color: #9399B2;">));</span><span style="color: #CBA6F7;"> do</span></span>
+<span class="giallo-l"><span>    c</span><span style="color: #94E2D5;">=</span><span>${s</span><span style="color: #94E2D5;">:</span><span>i</span><span style="color: #94E2D5;">:</span><span>1}</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$c</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span></code></pre>
+<hr />
+<h2 id="array-expansion">Array Expansion</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span>fam</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;"> kamalan revathi &quot;voc nagar&quot;</span><span style="color: #9399B2;"> )</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%s\n&#39; &quot;</span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%s\n&#39; &quot;</span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span style="color: #94E2D5;">:</span><span>2}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%s\n&#39; &quot;</span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>1</span><span style="color: #94E2D5;">:</span><span>2}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%s\n&#39; &quot;</span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span style="color: #94E2D5;">//</span><span style="color: #A6E3A1;">&#39;voc&#39;</span><span style="color: #94E2D5;">/</span><span style="color: #A6E3A1;">&#39;cvp&#39;</span><span>}</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">(</span><span>IFS</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">,</span><span style="color: #9399B2;">;</span><span style="color: #F38BA8;font-style: italic;"> echo</span><span style="color: #A6E3A1;"> &quot;</span><span>${fam</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">*</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">)</span></span></code></pre>
+<hr />
+<h2 id="globbing">Globbing</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ls</span><span style="color: #A6E3A1;"> -1 ./</span><span>*</span><span style="color: #A6E3A1;">.md</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ls</span><span style="color: #A6E3A1;"> -1 ./</span><span>*</span><span style="color: #A6E3A1;">.??</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">shopt</span><span style="color: #A6E3A1;"> extglob</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">shopt</span><span style="color: #A6E3A1;"> -s extglob</span><span style="color: #9399B2;font-style: italic;">  # turn on</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">shopt</span><span style="color: #A6E3A1;"> -u extglob</span><span style="color: #9399B2;font-style: italic;">  # turn off</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ls</span><span style="color: #A6E3A1;"> -1 ./!</span><span style="color: #9399B2;">(</span><span style="color: #94E2D5;">*</span><span>.md</span><span style="color: #9399B2;">)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ls</span><span style="color: #A6E3A1;"> -1 ./</span><span>*</span><span style="color: #A6E3A1;">.+</span><span style="color: #9399B2;">(</span><span style="color: #89B4FA;font-style: italic;">yml</span><span style="color: #94E2D5;">|</span><span style="color: #89B4FA;font-style: italic;">md</span><span style="color: #9399B2;">)</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;">#/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;"> touch</span><span style="color: #A6E3A1;"> {foo,bar,baz}.{jpg,txt}</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &quot;&lt;%s&gt;\n&quot;</span><span> **</span><span style="color: #A6E3A1;">/</span><span>*</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> {100..50..2}</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">seq</span><span style="color: #FAB387;"> 1 20</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">seq</span><span style="color: #FAB387;"> 10</span></span></code></pre>
+<hr />
+<h2 id="brace-expansion">brace Expansion</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;">#/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%s\n&#39; {cvp,tn,india}</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%s\n&#39; &quot;{cvp,tn,india}&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%s\n&#39; tmp/files/{cvp,tn,india}.{jpg,txt}</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%s\n&#39; tmp/files/</span><span>*</span><span style="color: #A6E3A1;">.{jpg,txt}</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>fname</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&quot;pl-&quot;</span></span>
+<span class="giallo-l"><span>place</span><span style="color: #94E2D5;">=</span><span style="color: #9399B2;">(</span><span style="color: #A6E3A1;"> &quot;</span><span>$fname</span><span style="color: #A6E3A1;">.&quot;{txt,jpg,mov}</span><span style="color: #9399B2;"> )</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">for</span><span> i</span><span style="color: #CBA6F7;"> in</span><span style="color: #A6E3A1;"> &quot;</span><span>${place</span><span style="color: #9399B2;">[</span><span style="color: #94E2D5;">@</span><span style="color: #9399B2;">]</span><span>}</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> do</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;</span><span>$i</span><span style="color: #A6E3A1;">&quot;</span></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">done</span></span></code></pre>
+<hr />
+<h2 id="printf">printf</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># printf supports  csndiouxXeEfFgGaA</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;&lt;%-5s&gt; %10s\n&#39; hello, world</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%*s  %5s\n&#39;</span><span style="color: #FAB387;"> 100</span><span style="color: #A6E3A1;"> hello, world</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%d\n&#39;</span><span style="color: #FAB387;"> 100</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%05d\n&#39;</span><span style="color: #FAB387;"> 100</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%05d\n&#39; error</span><span style="color: #9399B2;font-style: italic;"> #=&gt; error</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> -v x &#39;hello, %s&#39; world!</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span> $x</span><span style="color: #9399B2;font-style: italic;">  # &quot;hello, world!&quot;</span></span></code></pre>
+<hr />
+<h2 id="date">Date</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">date</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">date</span><span style="color: #A6E3A1;"> +%s</span><span style="color: #9399B2;font-style: italic;">  # strftime</span></span>
+<span class="giallo-l"><span>datefmt</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">&#39;%Y-%m-%d %H:%M:%S&#39;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%(%Y-%m-%d %H:%M:%S)T\n&#39;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">printf</span><span style="color: #A6E3A1;"> &#39;%(%Y-%m-%d %H:%M:%S)T  name=%2s\n&#39; -1 muthu</span><span style="color: #9399B2;font-style: italic;">  # -1 represent last word</span></span></code></pre>
+<hr />
+<h2 id="ssh-hardening">SSH Hardening</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Edit SSH config</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> vim /etc/ssh/sshd_config</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Set: PermitRootLogin no, Port 2222</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> systemctl reload sshd</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Key-based auth</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ssh-keygen</span><span style="color: #A6E3A1;"> -t rsa -b</span><span style="color: #FAB387;"> 4096</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ssh-copy-id</span><span style="color: #A6E3A1;"> devops@server</span></span></code></pre>
+<hr />
+<h2 id="trap-signals">Trap Signals</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">trap</span><span style="color: #A6E3A1;"> -l</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">cleanup</span><span style="color: #9399B2;">(){</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> cleanup function running</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    exit</span><span style="color: #FAB387;"> 0</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">trap</span><span style="color: #A6E3A1;"> cleanup exit</span><span style="color: #9399B2;font-style: italic;">           # On exit signal, cleanup fn will  run  similar to defer()</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> script starting....</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> ....</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> script done!</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">debuggs</span><span style="color: #9399B2;">(){</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    echo</span><span style="color: #A6E3A1;"> &quot;[debug] running: </span><span>$BASH_COMMAND</span><span style="color: #A6E3A1;">&quot;</span><span style="color: #9399B2;font-style: italic;">   # similar to &quot;bash -x script&quot;</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">    exit</span><span style="color: #FAB387;"> 0</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">}</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">trap</span><span style="color: #A6E3A1;"> debuggs debug</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> script starting....</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> ....</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> script done!</span></span></code></pre>
+<hr />
+<h2 id="permissions">Permissions</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F5C2E7;font-style: italic;">#!/usr/bin/bash</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">**********</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># * d/-  # directory or file</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># ***  read write execute rwx  # owner</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># *** # group</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># *** # everyone</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span>LC_COLLATE</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">C</span><span style="color: #89B4FA;font-style: italic;"> ls</span><span style="color: #A6E3A1;"> -alh --group-directories-first --color=auto</span><span style="color: #9399B2;font-style: italic;"> #list all in the current dir. LC_COLLATE=C set of rule recognizing only the US English alphabet — &quot;a-z&quot; and &quot;A-Z&quot; — as &quot;letters&quot;, and sorting by byte value</span></span></code></pre>
+<hr />
+<h2 id="logs-monitoring-and-troubleshooting">Logs, Monitoring and Troubleshooting</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">top</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">htop</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">uptime</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">w</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">lscpu</span><span style="color: #9399B2;font-style: italic;"> # system&#39;s CPU in use</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Architecture:             x86_64</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Socket(s):                1      sockets are physical slots on motherboard where we can insert physical cpu. Socket enables communication between two process</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Core(s) per socket:       8      each socket will have 8 cores</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Thread(s) per core:       2      each core will run 2 threads at the same time</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># So, Total number of virtual CPU = Sockets x Cores x Threads</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># CPU(s):                    16</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">lsmem</span><span style="color: #A6E3A1;"> --summary</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">free</span><span style="color: #A6E3A1;"> -g</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">lshw</span><span style="color: #9399B2;font-style: italic;">                    # List Hardware</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">du</span><span style="color: #A6E3A1;"> -lsh filename</span><span style="color: #9399B2;font-style: italic;">        # size of the file</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">du</span><span style="color: #A6E3A1;"> -sh /var/</span><span>*</span><span style="color: #9399B2;font-style: italic;">  # disk usage</span></span></code></pre><h2 id="file-compression">File compression</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">tar</span><span style="color: #A6E3A1;"> -cf file.tar f1 f2 f3</span><span style="color: #9399B2;font-style: italic;">   # *.tar called as tarballs  -c:create -f:name-of-file</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">tar</span><span style="color: #A6E3A1;"> -tf file.tar</span><span style="color: #9399B2;font-style: italic;">            # see content of tarball</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">tar</span><span style="color: #A6E3A1;"> -xf file.tar</span><span style="color: #9399B2;font-style: italic;">            # extract content</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">tar</span><span style="color: #A6E3A1;"> -zcf file.tar f1 f2 f3</span><span style="color: #9399B2;font-style: italic;">  # compress tarball to reduce size</span></span></code></pre>
+<hr />
+<h2 id="check-service-and-manage-daemin">Check Service and manage daemin</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">systemctl</span><span style="color: #A6E3A1;"> --help</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">systemctl</span><span style="color: #A6E3A1;"> list-units --all --type=</span><span style="color: #9399B2;font-style: italic;"> # service, socket path</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">systemctl</span><span style="color: #A6E3A1;"> list-dependencies</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #CBA6F7;">if</span><span style="color: #89B4FA;font-style: italic;"> systemctl</span><span style="color: #A6E3A1;"> is-active --quiet nginx</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> then</span><span style="color: #F38BA8;font-style: italic;"> echo</span><span style="color: #A6E3A1;"> &quot;Nginx is running&quot;</span><span style="color: #9399B2;">;</span><span style="color: #CBA6F7;"> fi</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Service logs</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">dmesg</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> tail</span><span style="color: #9399B2;font-style: italic;">  # Kernel messages</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">journalctl</span><span style="color: #A6E3A1;"> -xb</span><span style="color: #9399B2;font-style: italic;">  # Boot logs</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">journalctl</span><span style="color: #A6E3A1;"> u nginx</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">journalctl</span><span style="color: #9399B2;font-style: italic;"> #  use journalctl to view and follow the system&#39;s journald log entries, which resides in /run/log/journal.</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">runlevel</span><span style="color: #9399B2;font-style: italic;"> # 5:: Boots into graphical interface and 3:: No-GUI</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">systemctl</span><span style="color: #A6E3A1;"> get-default</span><span style="color: #9399B2;font-style: italic;">  # graphical.target</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># runlevel 0 -&gt; poweroff.target</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># runlevel 1 -&gt; rescue.target</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># runlevel 2 -&gt; multi-user.target</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># runlevel 3 -&gt; multi-user.target</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># runlevel 4 -&gt; multi-user.target</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># runlevel 5 -&gt; graphical.target</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># runlevel 6 -&gt; reboot.target</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Run a process in background</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">nohup</span><span style="color: #A6E3A1;"> python3 app.py</span><span> </span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">./script.sh</span><span style="color: #9399B2;"> &amp;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Kill process</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">kill</span><span style="color: #FAB387;"> 1234</span><span style="color: #9399B2;font-style: italic;">         # By PID</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">killall</span><span style="color: #A6E3A1;"> python3</span><span style="color: #9399B2;font-style: italic;">   # By name</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">pkill</span><span style="color: #A6E3A1;"> -f &quot;app.py&quot;</span><span style="color: #9399B2;font-style: italic;"> # By pattern</span></span>
+<span class="giallo-l"></span></code></pre>
+<hr />
+<h2 id="network-essentials">Network Essentials</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">hostname</span><span style="color: #9399B2;font-style: italic;">        # managed under /etc/hostname</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">hostnamectl</span><span style="color: #9399B2;font-style: italic;">     # /etc/hosts</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ping</span><span style="color: #A6E3A1;"> -c4 google.com</span><span style="color: #9399B2;font-style: italic;">  # ping utility helps for connectivity checking</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ip</span><span style="color: #A6E3A1;"> route</span><span style="color: #9399B2;font-style: italic;"> #</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">info</span><span style="color: #A6E3A1;"> ip</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ss</span><span style="color: #A6E3A1;"> -tulp</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">netstat</span><span style="color: #A6E3A1;"> -tunpl</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">lsof</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">lsof</span><span style="color: #A6E3A1;"> -i :80</span><span style="color: #9399B2;font-style: italic;"> # find process y port</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">lspci</span><span style="color: #9399B2;font-style: italic;"> # list all pci cards like ethernet card, video cards (peripheral component interconnect)</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">lsblk</span><span style="color: #9399B2;font-style: italic;"> # list all physical disks space &lt;sda&gt; and partitions are sda1,sda2,sda3..</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Trace route</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">traceroute</span><span style="color: #A6E3A1;"> google.com</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">mtr</span><span style="color: #A6E3A1;"> --report google.com</span><span style="color: #9399B2;font-style: italic;">  # Real-time</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># View network interfaces</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ip</span><span style="color: #A6E3A1;"> addr show</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ip</span><span style="color: #A6E3A1;"> link show</span></span></code></pre>
+<hr />
+<h2 id="processes">Processes</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># List the current active process with their statuses, numbers, resource usage, etc.</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ps</span><span style="color: #A6E3A1;"> auxc</span><span style="color: #9399B2;font-style: italic;">   #  # All processes</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">ps</span><span style="color: #A6E3A1;"> -ef</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> grep</span><span style="color: #A6E3A1;"> nginx</span><span style="color: #9399B2;font-style: italic;"> # Filter By Name</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">fg</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">jobs</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">bg</span><span style="color: #9399B2;font-style: italic;"> #%id</span></span></code></pre>
+<hr />
+<h2 id="cron">CRON</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">crontab</span><span style="color: #A6E3A1;"> -l</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">crontab</span><span style="color: #A6E3A1;"> -e</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># *seconds(0-59) *min(0-59) *hour(0-23) *day-of-month(1-31) *month(1-12) *day-of-week(0-7:: sunday=0 or 7) *year[optional]  *cmd</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># 0 5 * * * /usr/bin/backup.sh</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Alternative systemd.timers</span></span></code></pre>
+<hr />
+<h2 id="service-management-with-systemd">Service management with SYSTEMD</h2>
+<p>Systemd Tools</p>
+<ul>
+<li>Systemctl</li>
+<li>journelctl</li>
+</ul>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Systemctl</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">-</span><span style="color: #A6E3A1;"> Mange system state</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">-</span><span style="color: #A6E3A1;"> start/stop/restart/reload</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">-</span><span style="color: #A6E3A1;"> enable/disable</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">-</span><span style="color: #A6E3A1;"> list and manage units</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">-</span><span style="color: #A6E3A1;"> list and update targets</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">journalctl</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">journalctl</span><span style="color: #A6E3A1;"> -b</span><span style="color: #9399B2;font-style: italic;"> # logs for current boot</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">journalctl</span><span style="color: #A6E3A1;"> -u UNIT</span><span style="color: #9399B2;font-style: italic;"> # particular unit</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># It should created in /etc/systemd/system/servicename.service</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;">[</span><span>Unit</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span>Description</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">Postgresql</span><span style="color: #89B4FA;font-style: italic;"> for</span><span style="color: #A6E3A1;"> Py3</span></span>
+<span class="giallo-l"><span>Documentation</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">http://github.com/muthu/postgresql</span></span>
+<span class="giallo-l"><span>After</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">postgresql.service</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;">[</span><span>Service</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span>ExecStart</span><span style="color: #94E2D5;">=</span><span style="color: #89B4FA;font-style: italic;"> /bin/bash</span><span style="color: #A6E3A1;"> /usr/bin/filename.sh</span></span>
+<span class="giallo-l"><span>User</span><span style="color: #94E2D5;">=</span></span>
+<span class="giallo-l"><span>Restart</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">on-failure</span></span>
+<span class="giallo-l"><span>RestartSec</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;">10</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;">[</span><span>Install</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">WantedBy</span><span style="color: #A6E3A1;"> graphical.target</span><span style="color: #9399B2;font-style: italic;">   #systemctl get-default</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># starts with following `systemctl start servicename.service`</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># check the status `systemctl status servicename.service`</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Stop the service `systemctl stop servicename.service`</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># reload services `systemctl daemon-reload`</span></span>
+<span class="giallo-l"></span></code></pre>
+<hr />
+<h2 id="storage-in-linux">Storage in Linux</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># - Disk partitions</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">lsblk</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">fdisk</span><span style="color: #A6E3A1;"> -l /dev/sda</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">df</span><span style="color: #A6E3A1;"> -h</span><span style="color: #9399B2;font-style: italic;"> # check disk usage </span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Parition Types:- Primary, Extended and Logical</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Parition Schema:- MBR(old), GPT(new:: unlimited partition, no-max size)</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># gdisk /dev/diskname</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># LOG ROTATE</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> vim /etc/logrotate.d/myapp</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Add:</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">/var/log/myapp/*.log</span><span style="color: #A6E3A1;"> {</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    daily</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    rotate</span><span style="color: #FAB387;"> 7</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    compress</span></span>
+<span class="giallo-l"><span>}</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Create partition</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> parted /dev/sdb mklabel gpt</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> parted /dev/sdb mkpart primary ext4 0% 100%</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Create filesystem</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> mkfs.ext4 -L Data /dev/sdb1</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Mount filesystem</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> mkdir /data</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> mount /dev/sdb1 /data</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;font-style: italic;">echo</span><span style="color: #A6E3A1;"> &quot;UUID=</span><span style="color: #9399B2;">$(</span><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> blkid -s UUID -o value /dev/sdb1</span><span style="color: #9399B2;">)</span><span style="color: #A6E3A1;"> /data ext4 defaults 0 2&quot;</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> sudo</span><span style="color: #A6E3A1;"> tee -a /etc/fstab</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Create LVM</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> pvcreate /dev/sdb1</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> vgcreate vg_data /dev/sdb1</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> lvcreate -L 10G -n lv_web vg_data</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> mkfs.ext4 /dev/vg_data/lv_web</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> mount /dev/vg_data/lv_web /var/www</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Create RAID</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sdb1 /dev/sdc1</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> mkfs.ext4 /dev/md0</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> mount /dev/md0 /mnt/raid</span></span></code></pre>
+<hr />
+<h2 id="create-and-managing-users">Create and Managing Users</h2>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># create user</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> useradd -m -s /bin/bash devops</span><span style="color: #9399B2;font-style: italic;">  # With home dir and shell</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> passwd devops</span><span style="color: #9399B2;font-style: italic;">  # Set password</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Create group</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> groupadd developers</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Add user to group</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> usermod -aG developers devops</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Modify user</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> usermod -L devops</span><span style="color: #9399B2;font-style: italic;">  # Lock account</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> usermod -U devops</span><span style="color: #9399B2;font-style: italic;">  # Unlock account</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> usermod -c &quot;DevOps User&quot; devops</span><span style="color: #9399B2;font-style: italic;">  # Set comment</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Delete user</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> userdel -r devops</span><span style="color: #9399B2;font-style: italic;">  # Remove user and home dir</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">#####</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Set sudo privileges</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> visudo</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Add: devops ALL=(ALL) NOPASSWD:ALL  # Passwordless sudo</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># View users and groups</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">id</span><span style="color: #94E2D5;"> `</span><span style="color: #89B4FA;font-style: italic;">user</span><span style="color: #94E2D5;">`</span><span style="color: #9399B2;font-style: italic;">  # User and group info</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">getent</span><span style="color: #A6E3A1;"> passwd</span><span style="color: #9399B2;font-style: italic;">  # List all users</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">getent</span><span style="color: #A6E3A1;"> group</span><span style="color: #9399B2;font-style: italic;">    # Group all members  `getent group devlops` -&gt; developers group </span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> cp .bashrc /etc/skel/.bashrc</span><span style="color: #9399B2;font-style: italic;">  # customize new user home dir</span></span></code></pre>
+<hr />
+<h2 id="credits">Credits</h2>
+<ul>
+<li><a rel="external" href="https://youtu.be/Sx9zG7wa4FA?si=x1vScUxJjwoskcRQ">Bash Scripting: yash.sh</a></li>
+<li><a rel="external" href="https://mywiki.wooledge.org/BashPitfalls">Bash Pitfalls</a></li>
+<li><a rel="external" href="https://youtu.be/v392lEyM29A?si=uBwu1bNfbcjYhcoX">Learn Linux: boot.dev</a></li>
+<li><a rel="external" href="https://www.coursera.org/">Linux for beginners with Hands-on Labs</a></li>
+</ul>
+
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter" href="https://twitter.com/intent/tweet?text=Bash Scriting - Intermediate&url=https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;posts&#x2F;bash-script&#x2F;" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+
+    <li class="share__item">
+      <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;posts&#x2F;bash-script&#x2F;"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+
+    
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;posts&#x2F;bash-script&#x2F;&amp;media=&#x2F;images&#x2F;post&#x2F;bash&#x2F;bash.png&amp;description=Bash Scriting - Intermediate"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" aria-label="Share on Pinterest"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    
+
+    <li class="share__item">
+      <a class="share__link share__linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;posts&#x2F;bash-script&#x2F;&title=Bash Scriting - Intermediate&summary=Let&#x27;s Bash it&source=Bash Scriting - Intermediate"
+      onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      
+<div class="post__navigation animate">
+
+  
+  <a class="post__prev" href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;posts&#x2F;git-github&#x2F;">
+    
+    <div class="prev__image">
+      <img loading="lazy" src="https://muthukamalan.github.io/images/post/git/thumbnail.png" alt="Git in Practical - Intermediate">
+    </div>
+    
+    <div class="prev__box">
+      <span class="post__nav post__nav__prev">Prev post</span>
+      <h2 class="post__nav__title">Git in Practical - Intermediate</h2>
+    </div>
+  </a>
+  
+
+  
+  <a class="post__next" href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;posts&#x2F;lemons-and-lemonade&#x2F;">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">Beauty Of Life</h2>
+    </div>
+    
+    <div class="next__image">
+      <img loading="lazy" src="https://muthukamalan.github.io/images/post/poems/evolution.jpg" alt="Beauty Of Life">
+    </div>
+    
+  </a>
+  
+
+</div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              
+              
+                <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;tags&#x2F;bash&#x2F;" class="section__link related-tag">See all<span> bash</span> <i class="ion ion-md-arrow-forward"></i></a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+<!-- begin subscribe -->
+<section class="c-subscribe section">
+  <div class="container">
+    <!-- <div class="row">
+      <div class="col col-12">
+
+        <div class="c-subscribe__inner">
+          <div class="c-subscribe__info">
+            <h3 class="c-subscribe__title"></h3>
+            <div class="c-subscribe__subtitle">
+              <span id="ityped"></span>
+            </div>
+          </div>
+
+          <form class="c-subscribe__form validate" action="//"
+            method="POST" id="membedded-subscribe-form" name="membedded-subscribe-form" target="_blank" novalidate>
+            <label class="screen-reader-text" for="mce-EMAIL">Email address</label>
+            <input class="c-subscribe__form-email required email" id="mce-EMAIL" type="text" name="EMAIL" placeholder="Your email address">
+            <button class="c-button c-button--primary c-button--large" id="membedded-subscribe" type="submit" name="subscribe"></button>
+          </form>
+
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>
+<!-- end subscribe -->
+
+<script>
+  var itype_text = [''];
+</script>
+
+
+    </main>
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+      <!---
+        
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https:&#x2F;&#x2F;github.com&#x2F;Muthukamalan" target="_blank" rel="noopener"
+        aria-label="GitHub icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;muthukamalan-m&#x2F;" target="_blank" rel="noopener"
+        aria-label="Linkedin icon"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+    
+    
+    <a href="mailto:muthukamalan98@gmail.com" class="social__link">muthukamalan98@gmail.com<br>+91-9486872592</a>
+  </ul>
+  
+  
+</div>
+
+
+
+        <ul class="footer_nav list-reset">
+          
+          
+            <li class="footer_nav__item">
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;"
+                class="footer_nav__link">Home</a>
+            </li>
+          
+          
+            <li class="footer_nav__item">
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;projects&#x2F;"
+                class="footer_nav__link">Projects</a>
+            </li>
+          
+          
+            <li class="footer_nav__item">
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;elements&#x2F;"
+                class="footer_nav__link">Elements</a>
+            </li>
+          
+          
+            <li class="footer_nav__item">
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;about&#x2F;"
+                class="footer_nav__link">About</a>
+            </li>
+          
+          
+            <li class="footer_nav__item">
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;posts&#x2F;"
+                class="footer_nav__link">Blog</a>
+            </li>
+          
+        </ul>
+
+        
+        <div class="copyright">&copy; 2026 <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;">Muthu Kamalan</a></div>
+        
+
+      --->
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    
+
+    <script src="https://muthukamalan.github.io/js/scripts.js"></script>
+    <script src="https://muthukamalan.github.io/js/common.js"></script>
+</body>
+</html>

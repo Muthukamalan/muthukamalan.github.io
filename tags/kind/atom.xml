@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Muthu - kind</title>
+    <link rel="self" type="application/atom+xml" href="https://muthukamalan.github.io/tags/kind/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://muthukamalan.github.io/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-11-05T15:01:35+00:00</updated>
+    <id>https://muthukamalan.github.io/tags/kind/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Being Human</title>
+        <published>2018-11-05T15:01:35+00:00</published>
+        <updated>2018-11-05T15:01:35+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Muthu Kamalan
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://muthukamalan.github.io/posts/being-human/"/>
+        <id>https://muthukamalan.github.io/posts/being-human/</id>
+        
+        <content type="html" xml:base="https://muthukamalan.github.io/posts/being-human/">&lt;p&gt;அடிக்கடி தவறு செய்பவன் அப்பாவி 🥺&lt;br&gt;
+ஒரே தவறை திரும்பத் திரும்பச் செய்பவன் முட்டாள் 🤪&lt;br&gt;
+ஒரு தவறுமே செய்யாதவன் மரக்கட்டை 🪵 &lt;br&gt;
+தன்னை அறியாமல் தவறு செய்து பின் தன்னையறிந்து
+திருத்தி கொள்பவன் மனிதன் 🤗&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+<head>
+    
+    <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<title>Git in Practical - Intermediate</title>
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤗</text></svg>">
+
+
+
+
+<link rel="icon" href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;favicon.ico" type="image/x-icon">
+
+
+
+
+<meta name="keywords" content="Machine Learning Engineer">
+
+
+
+<meta name="description" content="Let&#x27;s commit it">
+<meta property="og:description" content="Let&#x27;s commit it" />
+
+
+
+<link rel="canonical" href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;posts&#x2F;git-github&#x2F;">
+
+
+
+<meta name="author" content="Muthu Kamalan">
+
+
+<!-- Featured Image -->
+
+<meta name="og:image" content="&#x2F;images&#x2F;post&#x2F;git&#x2F;thumbnail.png" />
+<meta name="twitter:image" content="&#x2F;images&#x2F;post&#x2F;git&#x2F;thumbnail.png" />
+
+
+<!-- Twitter Handle -->
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Git in Practical - Intermediate">
+
+<meta name="twitter:description" content="Let&#x27;s commit it">
+
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Git in Practical - Intermediate">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://muthukamalan.github.io/css/global.css">
+<link rel="stylesheet" href="https://muthukamalan.github.io/css/tag.css">
+
+
+
+
+
+
+
+    
+</head>
+<body>
+    
+
+    
+    <!-- begin header -->
+<header class="c-header">
+  <div class="container">
+    <div class="row">
+      <div class="c-header__inner">
+
+        <div class="logo">
+          <a class="logo__link" href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;">
+            <img class="logo__image" src="https://muthukamalan.github.io/notebook.ico" alt="Muthu">
+          
+          </a>
+        </div>
+
+        
+        <nav class="main-nav">
+          <div class="main-nav__box">
+
+            <div class="nav__icon-close">
+              <i class="ion ion-md-close"></i>
+            </div>
+
+            <div class="nav__title">Menu</div>
+
+            <ul class="nav__list list-reset">
+            
+            
+            
+
+              
+
+              <li class="nav__item">
+                <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;" class="nav__link ">Home</a>
+              </li>
+              
+
+              
+            
+            
+
+              
+
+              <li class="nav__item">
+                <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;projects" class="nav__link ">Projects</a>
+              </li>
+              
+
+              
+            
+            
+
+              
+
+              <li class="nav__item">
+                <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;posts" class="nav__link ">Blog</a>
+              </li>
+              
+
+              
+            
+            
+
+              
+
+              <li class="nav__item">
+                <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;about" class="nav__link ">About</a>
+              </li>
+              
+
+              
+            </ul>
+          </div>
+        
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https:&#x2F;&#x2F;github.com&#x2F;Muthukamalan" target="_blank" rel="noopener"
+        aria-label="GitHub icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;muthukamalan-m&#x2F;" target="_blank" rel="noopener"
+        aria-label="Linkedin icon"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+    
+    
+    <a href="mailto:muthukamalan98@gmail.com" class="social__link">muthukamalan98@gmail.com<br>+91-9486872592</a>
+  </ul>
+  
+  
+</div>
+
+
+        </nav>
+
+        <div class="nav-button">
+          <i class="nav__icon nav__icon-menu ion ion-md-menu"></i>
+        </div>
+        
+
+      </div>
+    </div>
+  </div>
+</header>
+<!-- end header -->
+
+    
+    <main class="main">
+        
+<div class="post-top">
+  <div class="container">
+    <div class="row">
+
+      
+      <div class="col col-6 col-d-12">
+        <div class="post-image">
+          <img loading="lazy" src="https://muthukamalan.github.io/images/post/git/thumbnail.png" alt="Git in Practical - Intermediate">
+        </div>
+      </div>
+      
+
+      <div class="col col-6 col-d-12">
+        <div class="post__info">
+
+          
+          <div class="post-tags">
+              
+              
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;tags&#x2F;bash&#x2F;" class="post-tags__tag">bash</a>
+              
+              
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;tags&#x2F;linux&#x2F;" class="post-tags__tag">linux</a>
+              
+              
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;tags&#x2F;git&#x2F;" class="post-tags__tag">git</a>
+              
+          </div>
+          
+
+
+          <h1 class="post__title">Git in Practical - Intermediate</h1>
+
+          
+          
+          
+          
+          <div class="post__meta">
+            <div class="post__author-image">
+              <img loading="lazy" src="https://muthukamalan.github.io/images/01.jpg" alt="Muthu Kamalan">
+            </div>
+
+            <div class="post__meta-bottom">
+              <div class="post__author">Muthu Kamalan</div>
+              
+              
+              <time class="post__date" datetime="2026-06-22 21:01:35 +0000">22 Jun 2026</time>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- begin post -->
+<div class="container animate">
+
+  <article class="post">
+
+    <div class="post__content">
+      <h2 id="introduction">Introduction</h2>
+<p>Distributed version control systems combine the capabilities of local and remote systems. Developers can store the entire codebase locally, allowing independent work and offline changes. Developers then synchronize their local changes to a central server for other collaborators to consume.</p>
+<p>where as, GitHub is a cloud-based service that hosts Git repositories (Centralized Platform)</p>
+<hr />
+<h3 id="installation">Installation</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># GIT</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> apt update</span><span style="color: #9399B2;"> &amp;&amp;</span><span style="color: #89B4FA;font-style: italic;"> sudo</span><span style="color: #A6E3A1;"> apt install git</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> --version</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># GIT LFS</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">sudo</span><span style="color: #A6E3A1;"> apt-get install git-lfs</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> lfs install</span></span></code></pre>
+<hr />
+<h3 id="configuration">Configuration</h3>
+<p>config file loaded fron <code>~/.gitconfig</code> or <code>~/.config/git/</code> dir</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="toml"><span class="giallo-l"><span style="color: #9399B2;">[</span><span>user</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span>        name</span><span style="color: #94E2D5;"> =</span><span> USER_NAME</span></span>
+<span class="giallo-l"><span>        email</span><span style="color: #94E2D5;"> =</span><span> USER_MAIL</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">[</span><span>core</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span>        editor</span><span style="color: #94E2D5;"> =</span><span> code --wait</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">[</span><span>init</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span>        defaultbranch</span><span style="color: #94E2D5;"> =</span><span> main</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">[</span><span>log</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span>        decorate</span><span style="color: #94E2D5;"> =</span><span> full</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">[</span><span>rerere</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span>        enabled</span><span style="color: #94E2D5;"> =</span><span style="color: #FAB387;"> false</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">[</span><span>advice</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span>        forcedeletebranch</span><span style="color: #94E2D5;"> =</span><span style="color: #FAB387;"> true</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">[</span><span>alias</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span>    lol</span><span style="color: #94E2D5;">=</span><span style="color: #A6E3A1;"> &quot;!git --no-pager log --oneline --decorate --graph --parents&quot;</span></span>
+<span class="giallo-l"><span>    wdiff</span><span style="color: #94E2D5;"> =</span><span> diff -w --word-diff</span><span style="color: #94E2D5;">=</span><span>color --ignore-space-at-eol</span></span>
+<span class="giallo-l"><span>    ss</span><span style="color: #94E2D5;"> =</span><span> status -bsv</span></span>
+<span class="giallo-l"><span style="color: #9399B2;">[</span><span>commit</span><span style="color: #9399B2;">]</span></span>
+<span class="giallo-l"><span>    verbose</span><span style="color: #94E2D5;">=</span><span style="color: #FAB387;">true</span></span></code></pre>
+<hr />
+<h3 id="global-local-namespace">Global/Local Namespace</h3>
+<p><code>--global adding config in global space</code> <br>
+<code>--local adding config in local git-space level</code></p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> config --global user.name &quot;Your name&quot;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> config --global user.email &quot;email@domain.com&quot;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> config --global core.editor &quot;code --wait&quot;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> config --global init.defaultbranch main</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> config --global log.decorate full</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> config --global rerere.enabled</span><span style="color: #FAB387;"> false</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> config --global advice.forcedeletebranch</span><span style="color: #FAB387;"> true</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># set </span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> config --add --local webflyx.tone Black</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> config --add --local webflyx.status Married</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> config --add --local webflyx.status FamilyMan</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># unset</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> config --unset --local webflyx.tone</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># unset-all</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> config --unset-all --local webflyx.status</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># remove section</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> config --remove-section webflyx</span></span></code></pre>
+<hr />
+<h4 id="git-tracks-content">Git Tracks content</h4>
+<p><img src="https://git-scm.com/book/en/v2/images/lifecycle.png" alt="stage of git" /></p>
+<p>Git is a <code>content tracking system</code>.  The Git Object store is based on the <code>hashed</code> computation of the <code>content</code> of its object not on the file or dir names
+Example,</p>
+<ul>
+<li>If two seperate file located in 2 different dir have exactly the same content, Git stores a sole copy of that content as blob within the object store</li>
+<li>It stores every version of every file - not the differences.</li>
+</ul>
+<table><thead><tr><th>System</th><th>Index  Mechanism</th><th>Data Store</th></tr></thead><tbody>
+<tr><td>Data Base</td><td>Indexed Sequential Access Method</td><td>Data Records</td></tr>
+<tr><td>Git</td><td><code>.git/objects/hash</code>, <code>tree object contents</code></td><td>Blob Objects, tree objects</td></tr>
+</tbody></table>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">.git/</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">├──</span><span style="color: #A6E3A1;"> branches</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">├──</span><span style="color: #A6E3A1;"> config</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">├──</span><span style="color: #A6E3A1;"> description</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">├──</span><span style="color: #A6E3A1;"> HEAD</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">├──</span><span style="color: #A6E3A1;"> hooks</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── applypatch-msg.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── commit-msg.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── fsmonitor-watchman.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── post-update.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── pre-applypatch.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── pre-commit.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── pre-merge-commit.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── prepare-commit-msg.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── pre-push.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── pre-rebase.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── pre-receive.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── push-to-checkout.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── sendemail-validate.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> └── update.sample</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">├──</span><span style="color: #A6E3A1;"> info</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> └── exclude</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">├──</span><span style="color: #A6E3A1;"> objects</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> ├── info</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">│__</span><span style="color: #A6E3A1;"> └── pack</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">└──</span><span style="color: #A6E3A1;"> refs</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    ├──</span><span style="color: #A6E3A1;"> heads</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">    └──</span><span style="color: #A6E3A1;"> tags</span></span></code></pre>
+<hr />
+<h3 id="initalize">initalize</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> init</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">touch</span><span style="color: #A6E3A1;"> README.md</span><span style="color: #9399B2;"> &amp;&amp;</span><span style="color: #89B4FA;font-style: italic;"> git</span><span style="color: #A6E3A1;"> add .</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> commit -m &#39;Initial commit&#39;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> clone</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">ur</span><span>l</span><span style="color: #94E2D5;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> clone -b --single-branch rbranch</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">ur</span><span>l</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">   # git branch -a &amp;&amp; git checkout &lt;remote-branch&gt;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> clone</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">ur</span><span>l</span><span style="color: #94E2D5;">&gt; &lt;</span><span style="color: #A6E3A1;">di</span><span>r</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">   # Clone particular folder in the Repo</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> clone --depth=1</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">ur</span><span>l</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;"> # bring only one commit</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> clone --mirror</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">repository-ur</span><span>l</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">  # mirror</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Adding to repo</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> remote add origin</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">ur</span><span>l</span><span style="color: #94E2D5;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> remote -v</span><span style="color: #9399B2;font-style: italic;"> # details about push/pull</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> remote set-url origin</span><span style="color: #94E2D5;">  &lt;</span><span style="color: #A6E3A1;">new-ur</span><span>l</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">   # origin sets upto new url</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> push -u</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">origin/REMOTE-NAM</span><span>E</span><span style="color: #94E2D5;">&gt; &lt;</span><span style="color: #A6E3A1;">local-branch-nam</span><span>e</span><span style="color: #94E2D5;">&gt;</span><span style="color: #A6E3A1;">:</span><span style="color: #94E2D5;">&lt;</span><span style="color: #A6E3A1;">remote/origi</span><span>n</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">      # -u make it upstream</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> push -d</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">branc</span><span>h</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;"> # delete the branch</span></span></code></pre>
+<hr />
+<h3 id="log">Log</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> --no-pager log --oneline --decorate --graph --parents --all</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> show</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">commit-has</span><span>h</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">  # Examine commit</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> show HEAD</span></span></code></pre>
+<hr />
+<h3 id="branching">branching</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> switch</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">existing-branc</span><span>h</span><span style="color: #94E2D5;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> switch -c</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">new-branc</span><span>h</span><span style="color: #94E2D5;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> branch</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> branch -a</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> branch -r</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> branch -d</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">branch-nam</span><span>e</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">  # keep git history</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> branch -D</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">branch-nam</span><span>e</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">  # remove git history</span></span></code></pre>
+<hr />
+<h3 id="update-only-the-latest-commit">update only the latest commit</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> commit --amend -m &#39;Updated commit message&#39;</span><span style="color: #9399B2;font-style: italic;"> # update only the message</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Forget file in the commit</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> add</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">file</span><span style="color: #9399B2;">(</span><span style="color: #89B4FA;font-style: italic;">s</span><span style="color: #9399B2;">)</span><span style="color: #94E2D5;">&gt;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> commit --amend --no-edit</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Undo the Last commit</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> reset --soft HEAD~1</span><span style="color: #9399B2;font-style: italic;">  # --soft option is useful if u want to go back to prev commit, but keep all of your changes. Committed changes will be uncommited and staged, while uncommitted changes will remain staged or unstaged as before.</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> reset --hard HEAD~1</span><span style="color: #9399B2;font-style: italic;"> # delete it from the staging area as well.</span></span></code></pre>
+<hr />
+<h3 id="tag">Tag</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> tag</span><span style="color: #9399B2;font-style: italic;"> # list all tags</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> show tag-no.</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> tag -a tag-no</span><span style="color: #9399B2;font-style: italic;"> # with annotated-message</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> push --tags</span><span style="color: #9399B2;font-style: italic;">  # push only tags</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> push origin tag-no</span><span style="color: #9399B2;font-style: italic;"> # push only that tag</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> tag tag-no commit-hash</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> tag -d tag-noo</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> tag -a v1.0.0 -m &#39;Release 1.0.0&#39;</span><span style="color: #9399B2;font-style: italic;"> # RECOMMENDED WAY</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> push origin v1.0.0</span><span style="color: #9399B2;font-style: italic;"> # push specific tag</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> push origin --tags</span><span style="color: #9399B2;font-style: italic;"> # push all tags </span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> push origin --delete v1.0.0</span><span style="color: #9399B2;font-style: italic;"> # delete remote tag</span></span></code></pre>
+<hr />
+<h3 id="merge">Merge</h3>
+<p>conflict markers</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="markdown"><span class="giallo-l"><span>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span></span>
+<span class="giallo-l"><span>  Changes introduced by the main branch</span></span>
+<span class="giallo-l"><span style="color: #F38BA8;">======</span></span>
+<span class="giallo-l"><span>  Changes introduced by the widgets branch</span></span>
+<span class="giallo-l"><span style="color: #F5C2E7;">&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> merge --abort</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> switch</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">mai</span><span>n</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;"> &amp;&amp;</span><span style="color: #89B4FA;font-style: italic;"> git</span><span style="color: #A6E3A1;"> merge branch</span><span style="color: #9399B2;font-style: italic;"> # --ff --no-ff --ff-only</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> merge --squash/--no-squash</span><span style="color: #9399B2;font-style: italic;">    # in the branch do squash and merge</span></span></code></pre>
+<hr />
+<h3 id="fetch">Fetch</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># git push uploads commits from a local repository to a remote repository, while git fetch downloads commits.</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># git pull = git fetch + merge</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> fetch origin main -v</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> switch main</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> merge origin/main</span><span style="color: #9399B2;font-style: italic;">   # git rebase origin/main</span></span></code></pre>
+<hr />
+<h3 id="stash">stash</h3>
+<p>When you are in the middle of something, your boss comes in and demands that you fix something immediately.
+Traditionally, you would make a commit to a temporary branch to store your changes away, and
+return to your original branch to make the emergency fix, like this:</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="plain"><span class="giallo-l"><span>- ... hack hack hack ...</span></span>
+<span class="giallo-l"><span>- $ git switch -c my_wip</span></span>
+<span class="giallo-l"><span>- $ git commit -a -m &quot;WIP&quot;</span></span>
+<span class="giallo-l"><span>- $ git switch master</span></span>
+<span class="giallo-l"><span>- $ edit emergency fix</span></span>
+<span class="giallo-l"><span>- $ git commit -a -m &quot;Fix in a hurry&quot;</span></span>
+<span class="giallo-l"><span>- $ git switch my_wip</span></span>
+<span class="giallo-l"><span>- $ git reset --soft HEAD^</span></span>
+<span class="giallo-l"><span>- ... continue hacking ...</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="plain"><span class="giallo-l"><span>- ... hack hack hack ...</span></span>
+<span class="giallo-l"><span>- $ git stash</span></span>
+<span class="giallo-l"><span>- $ edit emergency fix</span></span>
+<span class="giallo-l"><span>- $ git commit -a -m &quot;Fix in a hurry&quot;</span></span>
+<span class="giallo-l"><span>- $ git stash pop</span></span>
+<span class="giallo-l"><span>- ... continue hacking ...</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> stash -u</span><span style="color: #9399B2;font-style: italic;">   # stash untracked file as well   -m &quot;&quot;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> stash show</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> stash pop</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> stash apply stash@{</span><span style="color: #FAB387;">2</span><span style="color: #A6E3A1;">}</span><span style="color: #9399B2;font-style: italic;">   # git stash pop --index 2</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> stash drop stash@{</span><span style="color: #FAB387;">2</span><span style="color: #A6E3A1;">}</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> stash clear</span><span style="color: #9399B2;font-style: italic;"> # clear all</span></span></code></pre>
+<hr />
+<h3 id="revert">Revert</h3>
+<p>creates a <strong>new commit</strong> that undoes a previous one — safe for shared/remote branches
+since it doesn't rewrite history</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> revert</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">commit-has</span><span>h</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">          # undo a specific commit (opens editor)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> revert</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">commit-has</span><span>h</span><span style="color: #94E2D5;">&gt;</span><span style="color: #A6E3A1;"> --no-edit</span><span style="color: #9399B2;font-style: italic;">  # skip the editor, use default message</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> revert HEAD</span><span style="color: #9399B2;font-style: italic;">                   # undo the last commit</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> revert HEAD~3..HEAD</span><span style="color: #9399B2;font-style: italic;">           # revert a range (newest to oldest)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> revert -n</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">commit-has</span><span>h</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">       # stage the revert without committing (--no-commit)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> revert --continue</span><span style="color: #9399B2;font-style: italic;">             # after resolving revert conflicts</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> revert --abort</span><span style="color: #9399B2;font-style: italic;">                # abandon the revert mid-way</span></span></code></pre>
+<p><code>Note: If you pushed changed been revert, no merge conflict will happen</code>
+<img src="/images/post/git/git-revert-vs-reset.svg" alt="revert vs reset" /></p>
+<hr />
+<h3 id="reset">Reset</h3>
+<p>Reset current HEAD to the specified state
+<code>Note: Never use git reset on commits already pushed</code></p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> reset --hard COMMISH</span><span style="color: #9399B2;font-style: italic;">   # clears the mess from the index file and the working tree.</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> reset --soft COMMISH</span><span style="color: #9399B2;font-style: italic;">   # leaves all your changed files</span></span></code></pre>
+<hr />
+<h3 id="restore">Restore</h3>
+<p>git restore is a focused command for discarding working tree changes or unstaging files</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Discard working directory changes (unstaged)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> restore</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">fil</span><span>e</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">                        # restore file to last commit state;;  Git will retrieve the state of these file(s) from the HEAD commit, and revert them back to that version</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> restore .</span><span style="color: #9399B2;font-style: italic;">                             # restore all modified files</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Unstage a file (move from index back to working tree)</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> restore --staged</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">fil</span><span>e</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">               #  you accidentally add file to stage then wanna remove;; equivalent to: git reset HEAD &lt;file&gt;</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> restore --staged .</span><span style="color: #9399B2;font-style: italic;">                    # unstage everything</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Restore from a specific source</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> restore --source</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">commit-has</span><span>h</span><span style="color: #94E2D5;">&gt; &lt;</span><span style="color: #A6E3A1;">fil</span><span>e</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;"> # restore file from any commit</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> restore --source HEAD~2 config.yaml</span><span style="color: #9399B2;font-style: italic;">   # example: go back 2 commits for a file</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> restore --source origin/main</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">fil</span><span>e</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">   # restore to remote state</span></span></code></pre>
+<hr />
+<h3 id="rebase">Rebase</h3>
+<p>Rebase replays commits on top of another base — producing a linear history. Preferred over merge in feature-branch workflows.</p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="log"><span class="giallo-l"></span>
+<span class="giallo-l"><span>                                       H---I---J topicB</span></span>
+<span class="giallo-l"><span>                                      /</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">                             E</span><span>---F---G  topicA</span></span>
+<span class="giallo-l"><span>                            /</span></span>
+<span class="giallo-l"><span>               A---B---C---D  master</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>git rebase --onto master topicA topicB</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>                            H&#39;--I&#39;--J&#39;  topicB</span></span>
+<span class="giallo-l"><span>                           /</span></span>
+<span class="giallo-l"><span>                           | E---F---G  topicA</span></span>
+<span class="giallo-l"><span>                           |/</span></span>
+<span class="giallo-l"><span>               A---B---C---D  master</span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> rebase --onto</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">source-branc</span><span>h</span><span style="color: #94E2D5;">&gt; &lt;</span><span style="color: #A6E3A1;">topic-branc</span><span>h</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;">   # play topic commit one-by-one onto source</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># remove conflicts</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> rebase --continue</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> rebase --abort</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;">### Interactive</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> rebase -i HEAD~3</span><span style="color: #9399B2;font-style: italic;">  # range of HEAD</span></span></code></pre><h3 id="reorder">Reorder</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> rebase -i HEAD~2</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># reorder as you need &amp; Be careful when performing this step. Accidentally deleting a `commit line` will cause Git to destroy the commit.</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># line order only changes below</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #A6E3A1;"> 7f9d4bf Updated README</span><span>            -</span><span style="color: #94E2D5;">&gt;</span><span style="color: #A6E3A1;">  pick 3f8e810 Accessibility fix</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #A6E3A1;"> 3f8e810 Accessibility fix</span><span>         -</span><span style="color: #94E2D5;">&gt;</span><span style="color: #A6E3A1;">  pick 7f9d4bf Updated README</span></span></code></pre><h3 id="pick">Pick</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># p, pick &lt;commit&gt; = use commit</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># nothing changes</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;"> 7f9d4bf</span><span style="color: #A6E3A1;"> E:Accessibility fix</span><span>       -</span><span style="color: #94E2D5;">&gt; `</span><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;"> 7f9d4bf</span><span style="color: #A6E3A1;">    E:Accessibility fix</span><span> </span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;"> 3f8e810</span><span style="color: #A6E3A1;"> F:Updated screenreader</span><span>    -</span><span style="color: #94E2D5;">&gt; `</span><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;"> 3f8e810</span><span style="color: #A6E3A1;">  F:Updated screenreader</span></span></code></pre><h3 id="squash">Squash</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># s, squash &lt;commit&gt; = use commit, but meld into previous commit</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #A6E3A1;"> 7f9d4bf E:Accessibility fix</span><span>       -</span><span style="color: #94E2D5;">&gt;</span><span style="color: #A6E3A1;"> pick 7f9d4bf    E:Accessibility fix</span><span> </span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;"> 3f8e810</span><span style="color: #A6E3A1;"> F:Updated screenreader</span><span>  -</span><span style="color: #94E2D5;">&gt; `</span><span style="color: #89B4FA;font-style: italic;">squash</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;"> 3f8e810</span><span style="color: #A6E3A1;">  F:Updated screenreader</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;"> ec48d74</span><span style="color: #A6E3A1;"> G:Added comments</span><span>        -</span><span style="color: #94E2D5;">&gt; `</span><span style="color: #89B4FA;font-style: italic;">squash</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;"> ec48d74</span><span style="color: #A6E3A1;">  G:Added comments</span><span> </span></span></code></pre><pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="log"><span class="giallo-l"><span>A &lt;- B &lt;- C &lt;- D &lt;- E &lt;- F &lt;- G</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>git rebase -i HEAD~</span><span style="color: #F38BA8;">3</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>A &lt;- B &lt;- C &lt;- D</span></span>
+<span class="giallo-l"><span>               ^-- E={E+F+G}</span></span></code></pre><h3 id="split">Split</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># splitting</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># use commit, but stop for amending</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #A6E3A1;"> 7f9d4bf E:Accessibility fix</span><span>         -</span><span style="color: #94E2D5;">&gt;</span><span style="color: #A6E3A1;"> pick 7f9d4bf    E:Accessibility fix</span><span> </span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;"> 3f8e810</span><span style="color: #A6E3A1;"> F:Updated screenreader</span><span>    -</span><span style="color: #94E2D5;">&gt; `</span><span style="color: #89B4FA;font-style: italic;">edit</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;"> 3f8e810</span><span style="color: #A6E3A1;">  F:Updated screenreader</span><span> </span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;"> ec48d74</span><span style="color: #A6E3A1;"> G:Added comments</span><span>          -</span><span style="color: #94E2D5;">&gt; `</span><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #94E2D5;">`</span><span style="color: #89B4FA;font-style: italic;"> ec48d74</span><span style="color: #A6E3A1;">  G:Added comments</span><span> </span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">Stopped</span><span style="color: #A6E3A1;"> at 3f8e810...  F:Updated screenreader</span><span> </span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># OUR Untracked File</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># untrack1.cs untrack5.cs untrack4.cs untrack3.cs untrack2.cs</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> add untrack1.cs untrack2.cs untrack3.cs untrack4.cs</span><span style="color: #9399B2;"> &amp;&amp;</span><span style="color: #89B4FA;font-style: italic;"> git</span><span style="color: #A6E3A1;"> commit -m &quot;Added untrack-files&quot;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> add untrack5.cs</span><span style="color: #9399B2;"> &amp;&amp;</span><span style="color: #89B4FA;font-style: italic;"> git</span><span style="color: #A6E3A1;"> commit -m &quot;Fixed bug untrack-files&quot;</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> rebase --continue</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">$</span><span style="color: #A6E3A1;"> git log --oneline --no-pager</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">A</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">- B</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">- C</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">- D</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">- E</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">- F</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">- &quot;Added untrack-files&quot;</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">- &quot;Fixed bug untrack-files&quot;</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">- &quot;G&quot;</span></span>
+<span class="giallo-l"></span></code></pre><h3 id="reword">Reword</h3>
+<p><code>Note: # most recent commit's message use --amend</code></p>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> rebase -i HEAD~2</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #A6E3A1;"> 7f9d4bf Frontpag bug fiz</span><span>   -</span><span style="color: #94E2D5;">&gt;</span><span style="color: #A6E3A1;"> reword 7f9d4bf Frontpag bug fix</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #A6E3A1;"> 3f8e810 Refactored navbar</span><span>  -</span><span style="color: #94E2D5;">&gt;</span><span style="color: #A6E3A1;"> pick 3f8e810 Refactored navbar</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Commit message</span></span></code></pre><h3 id="delete">Delete</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># d, drop &lt;commit&gt; = remove commit</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> rebase -i HEAD~3</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># delete it</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #A6E3A1;"> 2f8e823 Refactored</span><span>                         -</span><span style="color: #94E2D5;">&gt;</span><span style="color: #A6E3A1;"> pick 2f8e823 Refactored</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #A6E3A1;"> 7f9d4bf Updated README</span><span>                     -</span><span style="color: #94E2D5;">&gt;</span><span style="color: #A6E3A1;"> drop 7f9d4bf Updated README</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">pick</span><span style="color: #A6E3A1;"> 3f8e810 Accessibility fix</span><span>                  -</span><span style="color: #94E2D5;">&gt;</span><span style="color: #A6E3A1;"> drop 3f8e810 Accessibility fix</span></span></code></pre>
+<hr />
+<h3 id="cherry-pick">Cherry pick</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> cherry-pick -e</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">commit-has</span><span>h</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;"> # Cherry-pick and edit commit message</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> cherry-pick</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">commit-has</span><span>h</span><span style="color: #94E2D5;">&gt;</span><span style="color: #9399B2;font-style: italic;"> # Cherry-pick single commit</span></span>
+<span class="giallo-l"><span style="color: #9399B2;font-style: italic;"># Cherry-pick multiple commits</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> cherry-pick</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">commit</span><span style="color: #94E2D5;">1&gt; &lt;</span><span style="color: #A6E3A1;">commit</span><span style="color: #94E2D5;">2&gt;</span><span> </span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> cherry-pick</span><span style="color: #94E2D5;"> &lt;</span><span style="color: #A6E3A1;">commit</span><span style="color: #94E2D5;">1&gt;</span><span style="color: #A6E3A1;">..</span><span style="color: #94E2D5;">&lt;</span><span style="color: #A6E3A1;">commit</span><span style="color: #94E2D5;">2&gt;</span><span> </span></span></code></pre>
+<hr />
+<h3 id="reflog">Reflog</h3>
+<p>it records every movement of HEAD, even across resets, rebases, and deleted branches. Entries expire after 90 days by default.</p>
+<hr />
+<h3 id="bisect">Bisect</h3>
+<p>Helps to find the exact commit that introduced a bug</p>
+<hr />
+<h3 id="submodules">Submodules</h3>
+<p>Include another repository inside your project using git submodule or git subtree.</p>
+<hr />
+<h3 id="advance-commands">Advance commands</h3>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> gc</span><span style="color: #9399B2;font-style: italic;"> # Garbage collection</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> fsck</span><span style="color: #9399B2;font-style: italic;"> # Verify repository integrity</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> repack -ad</span><span style="color: #9399B2;font-style: italic;">  # Optimize repository</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> prune</span><span style="color: #9399B2;font-style: italic;">  # Prune unreachable objects</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> count-objects -vH</span><span style="color: #9399B2;font-style: italic;"> # Show repository size</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> blame file.txt</span><span style="color: #9399B2;font-style: italic;">  # Show who changed each line of file</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> clean -n</span><span style="color: #9399B2;font-style: italic;"> # Show what would be removed</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> clean -f</span><span style="color: #9399B2;font-style: italic;"> # Remove untracked files</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> clean -fd</span><span style="color: #9399B2;font-style: italic;"> # Remove untracked files and directories</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> clean -fdx</span><span style="color: #9399B2;font-style: italic;"> # Remove ignored files as well</span></span>
+<span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> clean -i</span><span style="color: #9399B2;font-style: italic;"> # Interactive clean</span></span></code></pre>
+<hr />
+<h5 id="notes">NOTES::</h5>
+<ol>
+<li>git reset --hard deleted uncommitted work</li>
+</ol>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="markdown"><span class="giallo-l"><span style="color: #A6E3A1;">`git reset --hard`</span><span> discards both staged and unstaged changes permanently — no undo. :(</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #94E2D5;">1.</span><span style="color: #A6E3A1;"> `git fsck --lost-found --full --no-reflogs --unreachable`</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">2.</span><span> cd </span><span style="color: #A6E3A1;">`.git/lost-found/`</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>Checking object directories: 100% (256/256), done.</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">-</span><span> unreachable blob </span><span style="color: #A6E3A1;">`4413d81d94e76ea9a7f7741786f63426d71d297a`</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">-</span><span> unreachable blob </span><span style="color: #A6E3A1;">`e613e50292dd773b7e829f598d58e6d419301ec1`</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">-</span><span> unreachable tree 4b825dc642cb6eb9a060e54bf8d69288fbee4904</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>git show --stat </span><span style="color: #A6E3A1;">`4413d81d94e76ea9a7f7741786f63426d71d297a`</span><span> &gt; recovery-file-a.txt</span></span>
+<span class="giallo-l"><span>git show --stat </span><span style="color: #A6E3A1;">`e613e50292dd773b7e829f598d58e6d419301ec1`</span><span> &gt; recovery-file-a.txt</span></span></code></pre>
+<ol start="2">
+<li></li>
+</ol>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="markdown"><span class="giallo-l"><span>Running </span><span style="color: #A6E3A1;">`git checkout &lt;commit-hash&gt;`</span><span> moves HEAD directly to a commit instead of a branch, </span></span>
+<span class="giallo-l"><span>so any new commits won&#39;t belong to any branch.</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>before-leaving  </span><span style="color: #A6E3A1;">`git checkout -b new-branch-name`</span><span>, to keep work done in detached HEAD</span></span></code></pre>
+<ol start="3">
+<li>Pushed .env file to sensitive data</li>
+</ol>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="markdown"><span class="giallo-l"><span>revoke and rotate exposed credentials</span></span>
+<span class="giallo-l"><span style="color: #A6E3A1;">`git filter-branch --force --index-filter &#39;git rm --cached --ignore-unmatch .env&#39; HEAD`</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>clean the history</span><span style="color: #A6E3A1;">`git push origin --force --all`</span></span></code></pre>
+<ol start="4">
+<li>Push rejected — non-fast-forward</li>
+</ol>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="markdown"><span class="giallo-l"><span>Never do </span><span style="color: #A6E3A1;">`git push --force`</span><span> overrites others work. Use </span><span style="color: #A6E3A1;">`--force-with-lease`</span><span> at minimum.</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #94E2D5;">1.</span><span> pull </span><span style="color: #A6E3A1;">`git pull origin main`</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">2.</span><span> resolve </span><span style="color: #A6E3A1;">`merge conflict`</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">3.</span><span> push </span><span style="color: #A6E3A1;">`git push origin main`</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #94E2D5;">1.</span><span> rebase it </span><span style="color: #A6E3A1;">`git pull --rebase origin main`</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>To globally configure use, </span><span style="color: #A6E3A1;">`git config --global pull.rebase true`</span></span></code></pre>
+<ol start="5">
+<li>Wrong commit message</li>
+</ol>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="markdown"><span class="giallo-l"><span style="color: #94E2D5;">1.</span><span style="color: #A6E3A1;"> `git commit --amend -m &#39;Correct message here&#39;`</span></span>
+<span class="giallo-l"><span style="color: #94E2D5;">2.</span><span> if already pushed then do </span><span style="color: #A6E3A1;">`git push --force-with-lease`</span></span></code></pre>
+<ol start="6">
+<li>Accidentally delete branch</li>
+</ol>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="markdown"><span class="giallo-l"><span>look in </span><span style="color: #A6E3A1;">`git reflog`</span><span> for the last commit msg on the deleted branch and recreate using </span><span style="color: #A6E3A1;">`git checkout -b recovered-branch &lt;sha&gt;`</span></span></code></pre>
+<ol start="7">
+<li>Forget to add file in the last commit message</li>
+</ol>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="markdown"><span class="giallo-l"><span style="color: #A6E3A1;">`git add forgetten-file`</span><span> and do </span><span style="color: #A6E3A1;">`git commit --amend --no-edit`</span><span>.</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span>If it&#39;s pushed then </span><span style="color: #A6E3A1;">`git push --force-with-lease`</span></span></code></pre>
+<ol start="8">
+<li>Need to undo a commit that's already been pushed and shared</li>
+</ol>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="markdown"><span class="giallo-l"><span>No reset, do revert.</span></span></code></pre>
+<ol start="9">
+<li>Identify the large Object</li>
+</ol>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> rev-list --objects --all</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> sort</span><span style="color: #A6E3A1;"> -k2</span><span style="color: #94E2D5;"> |</span><span style="color: #89B4FA;font-style: italic;"> tail</span><span style="color: #A6E3A1;"> -20</span></span></code></pre>
+<ol start="10">
+<li>Wrong files are being tracked</li>
+</ol>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> rm -r --cached node_modules/</span></span></code></pre>
+<ol start="11">
+<li>Empty commit</li>
+</ol>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> commit --allow-empty -m &quot;chore: retrigger CI build&quot;</span></span></code></pre>
+<ol start="12">
+<li>Skip CI</li>
+</ol>
+<pre class="giallo" style="color: #CDD6F4; background-color: #1E1E2E;"><code data-lang="shellscript"><span class="giallo-l"><span style="color: #89B4FA;font-style: italic;">git</span><span style="color: #A6E3A1;"> commit --no-verify</span><span style="color: #9399B2;font-style: italic;"> #Git hook bypass </span></span></code></pre>
+    </div>
+
+    <div class="post__share">
+  <div class="share__head">
+    <div class="share__title">Share this Post</div>
+  </div>
+  <ul class="share__list list-reset">
+    <li class="share__item">
+      <a class="share__link share__twitter" href="https://twitter.com/intent/tweet?text=Git in Practical - Intermediate&url=https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;posts&#x2F;git-github&#x2F;" onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter" rel="nofollow"><i class="ion ion-logo-twitter"></i></a>
+    </li>
+
+    <li class="share__item">
+      <a class="share__link share__facebook" href="https://www.facebook.com/sharer/sharer.php?u=https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;posts&#x2F;git-github&#x2F;"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Facebook" rel="nofollow"><i class="ion ion-logo-facebook"></i></a>
+    </li>
+
+    
+    <li class="share__item">
+      <a class="share__link share__pinterest"
+        href="http://pinterest.com/pin/create/button/?url=https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;posts&#x2F;git-github&#x2F;&amp;media=&#x2F;images&#x2F;post&#x2F;git&#x2F;thumbnail.png&amp;description=Git in Practical - Intermediate"
+        onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;"
+        title="Share on Pinterest" aria-label="Share on Pinterest"><i class="ion ion-logo-pinterest"></i></a>
+    </li>
+    
+
+    <li class="share__item">
+      <a class="share__link share__linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;posts&#x2F;git-github&#x2F;&title=Git in Practical - Intermediate&summary=Let&#x27;s commit it&source=Git in Practical - Intermediate"
+      onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn" rel="nofollow"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+
+  </article>
+</div>
+<!-- end post -->
+
+<div class="container">
+  <div class="row">
+    <div class="col col-10 col-d-12 push-d-0 push-1">
+      
+<div class="post__navigation animate">
+
+  
+
+  
+  <a class="post__next" href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;posts&#x2F;bash-script&#x2F;">
+    <div class="next__box">
+      <span class="post__nav post__nav__next">Next post</span>
+      <h2 class="post__nav__title">Bash Scriting - Intermediate</h2>
+    </div>
+    
+    <div class="next__image">
+      <img loading="lazy" src="https://muthukamalan.github.io/images/post/bash/bash.png" alt="Bash Scriting - Intermediate">
+    </div>
+    
+  </a>
+  
+
+</div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- begin related posts -->
+<div class="container">
+  <section class="related-posts animate">
+    <div class="row">
+      <div class="col col-12">
+        <div class="container__inner">
+          <div class="section__info">
+            <div class="section__head">
+              <h2 class="section__title">You may also like</h2>
+              
+              
+                <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;tags&#x2F;bash&#x2F;" class="section__link related-tag">See all<span> bash</span> <i class="ion ion-md-arrow-forward"></i></a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- end related posts -->
+
+
+
+
+
+<!-- begin subscribe -->
+<section class="c-subscribe section">
+  <div class="container">
+    <!-- <div class="row">
+      <div class="col col-12">
+
+        <div class="c-subscribe__inner">
+          <div class="c-subscribe__info">
+            <h3 class="c-subscribe__title"></h3>
+            <div class="c-subscribe__subtitle">
+              <span id="ityped"></span>
+            </div>
+          </div>
+
+          <form class="c-subscribe__form validate" action="//"
+            method="POST" id="membedded-subscribe-form" name="membedded-subscribe-form" target="_blank" novalidate>
+            <label class="screen-reader-text" for="mce-EMAIL">Email address</label>
+            <input class="c-subscribe__form-email required email" id="mce-EMAIL" type="text" name="EMAIL" placeholder="Your email address">
+            <button class="c-button c-button--primary c-button--large" id="membedded-subscribe" type="submit" name="subscribe"></button>
+          </form>
+
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>
+<!-- end subscribe -->
+
+<script>
+  var itype_text = [''];
+</script>
+
+
+    </main>
+
+    <div class="top" title="Top"><i class="ion ion-ios-arrow-up"></i></div>
+
+    
+    <!-- begin footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+      <!---
+        
+<div class="social">
+  <ul class="social__list list-reset">
+    
+    <li class="social__item">
+      <a class="social__link" href="https:&#x2F;&#x2F;github.com&#x2F;Muthukamalan" target="_blank" rel="noopener"
+        aria-label="GitHub icon"><i class="ion ion-logo-github"></i></a>
+    </li>
+    
+    <li class="social__item">
+      <a class="social__link" href="https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;muthukamalan-m&#x2F;" target="_blank" rel="noopener"
+        aria-label="Linkedin icon"><i class="ion ion-logo-linkedin"></i></a>
+    </li>
+    
+    
+    <a href="mailto:muthukamalan98@gmail.com" class="social__link">muthukamalan98@gmail.com<br>+91-9486872592</a>
+  </ul>
+  
+  
+</div>
+
+
+
+        <ul class="footer_nav list-reset">
+          
+          
+            <li class="footer_nav__item">
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;"
+                class="footer_nav__link">Home</a>
+            </li>
+          
+          
+            <li class="footer_nav__item">
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;projects&#x2F;"
+                class="footer_nav__link">Projects</a>
+            </li>
+          
+          
+            <li class="footer_nav__item">
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;elements&#x2F;"
+                class="footer_nav__link">Elements</a>
+            </li>
+          
+          
+            <li class="footer_nav__item">
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;about&#x2F;"
+                class="footer_nav__link">About</a>
+            </li>
+          
+          
+            <li class="footer_nav__item">
+              <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;&#x2F;posts&#x2F;"
+                class="footer_nav__link">Blog</a>
+            </li>
+          
+        </ul>
+
+        
+        <div class="copyright">&copy; 2026 <a href="https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;">Muthu Kamalan</a></div>
+        
+
+      --->
+
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+
+    
+
+    <script src="https://muthukamalan.github.io/js/scripts.js"></script>
+    <script src="https://muthukamalan.github.io/js/common.js"></script>
+</body>
+</html>
