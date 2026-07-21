@@ -1,0 +1,25 @@
+{
+  "image": "alpine:latest",
+  "name": "Profile",
+  "features": {},
+  "runArgs": [
+    "--add-host=host.docker.internal:host-gateway",
+    "--rm",
+    "--name","zola-alpine"
+  ],
+  "customizations": {
+    "zed":{
+      "extensions":["toml"]
+    },
+    "vscode": {
+      "extensions": [
+        "tamasfe.even-better-toml",
+        "GitHub.vscode-github-actions",
+        "wholroyd.jinja"
+      ]
+    }
+  },
+  "onCreateCommand": "apk add zola make git",
+  "postCreateCommand": "zola --version",
+  "remoteUser": "root"
+}

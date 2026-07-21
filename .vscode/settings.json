@@ -1,0 +1,12 @@
+{
+  "github.copilot.enable": { "*": false },
+  "chat.disableAIFeatures": true,
+  "chat.agent.enabled": false,  
+  "editor.rulers": [90],
+  "files.exclude": {
+    "**/dist": true,
+    "**/node_modules": true,
+    "**/.git": true,
+    "themes":true
+}
+}
