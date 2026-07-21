@@ -7,6 +7,12 @@
     "**/dist": true,
     "**/node_modules": true,
     "**/.git": true,
-    "themes":true
+    // "themes":true,
+    "content/archive":true,
+    "static/img":true,
+    "favicon.ico": true,
+    "templates": true,
+    "gitignore":true,
+    ".gitmodules":true
 }
 }
