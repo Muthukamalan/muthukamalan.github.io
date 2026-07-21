@@ -7,12 +7,21 @@
     "**/dist": true,
     "**/node_modules": true,
     "**/.git": true,
-    // "themes":true,
+    "themes":true,
     "content/archive":true,
     "static/img":true,
     "favicon.ico": true,
     "templates": true,
     "gitignore":true,
-    ".gitmodules":true
+    ".gitmodules":true,
+    "LICENSE":true,
+    "README":true,
+    ".gitignore":true,
+    ".devcontainer":true,
+    ".github":true,
+    "config.toml":true,
+    ".vscode":true,
+    "scripts/*":true
+    
 }
 }
