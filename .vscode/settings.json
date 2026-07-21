@@ -21,7 +21,7 @@
     ".github":true,
     "config.toml":true,
     ".vscode":true,
-    "scripts/*":true
+    "scripts":true
     
 }
 }
