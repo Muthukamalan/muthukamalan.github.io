@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="https://muthukamalan.github.io/feed_style.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
+        <tabi:base_url>https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;</tabi:base_url>
+        <tabi:separator>
+            •
+        </tabi:separator>
+        <tabi:about_feeds>This is a web feed, also known as an Atom feed. Subscribe by copying the URL from the address bar into your newsreader. Visit About Feeds to learn more and get started. It&#x27;s free.</tabi:about_feeds>
+        <tabi:visit_the_site>Visit website</tabi:visit_the_site>
+        <tabi:recent_posts>Recent posts</tabi:recent_posts>
+        <tabi:last_updated_on>Updated on $DATE</tabi:last_updated_on>
+        <tabi:default_theme>one-dark-pro</tabi:default_theme>
+        <tabi:post_listing_date>date</tabi:post_listing_date>
+        <tabi:current_section>Vllm</tabi:current_section>
+    </tabi:metadata><link rel="extra-stylesheet" href="https://muthukamalan.github.io/skins/blue.css?h=a4dc1e94d3f5759784d2" /><title>Muthukamalan - Vllm</title>
+        <subtitle>Friendly Neighbour Programmer</subtitle>
+    <link href="https://muthukamalan.github.io/tags/vllm/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://muthukamalan.github.io/tags/vllm/" rel="alternate" type="text/html"/>
+    <generator uri="https://www.getzola.org/">Zola</generator><updated>2026-07-21T01:01:35+00:00</updated><id>https://muthukamalan.github.io/tags/vllm/atom.xml</id><entry xml:lang="en">
+        <title>LLM Inference</title>
+        <published>2026-07-21T01:01:35+00:00</published>
+        <updated>2026-07-21T01:01:35+00:00</updated>
+        <author>
+            <name>Muthukamalan</name>
+        </author>
+        <link rel="alternate" href="https://muthukamalan.github.io/blog/llm-inference/" type="text/html"/>
+        <id>https://muthukamalan.github.io/blog/llm-inference/</id>
+        
+            <content type="html">&lt;details&gt;
+    &lt;summary&gt;Table Of Content&lt;&#x2F;summary&gt;
+    &lt;!-- toc --&gt;
+&lt;&#x2F;details&gt;
+&lt;h1 id=&quot;1-overview&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#1-overview&quot; aria-label=&quot;Anchor link for: 1-overview&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+1. Overview&lt;&#x2F;h1&gt;
+&lt;p&gt;Large LLMs like Llama-3-70b or Falcon 180B may not fit in a single GPU.&lt;&#x2F;p&gt;
+&lt;p&gt;If training&#x2F;serving a model on a single GPU is too slow or if the model’s weights do not fit in a single GPU’s memory, transitioning to a multi-GPU setup may be a viable option.&lt;&#x2F;p&gt;
+&lt;p&gt;But serving large language models (LLMs) with multiple GPUs in a distributed environment might be a challenging task.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;2-checking-the-model-footprint-of-the-model&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#2-checking-the-model-footprint-of-the-model&quot; aria-label=&quot;Anchor link for: 2-checking-the-model-footprint-of-the-model&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+2. Checking the Model Footprint of the Model&lt;&#x2F;h1&gt;
+&lt;p&gt;Before deploying a model in a distributed environment, it is important to check the memory footprint of the model.&lt;&#x2F;p&gt;
+&lt;p&gt;To begin estimating how much vRAM is required to serve your LLM, we can use these tools:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&quot;external&quot; rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;huggingface.co&#x2F;spaces&#x2F;hf-accelerate&#x2F;model-memory-usage&quot;&gt;HF Model Memory Usage&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a class=&quot;external&quot; rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;rahulschand.github.io&#x2F;gpu_poor&#x2F;&quot;&gt;GPU Poor vRAM Calculator&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a class=&quot;external&quot; rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;huggingface.co&#x2F;spaces&#x2F;NyxKrage&#x2F;LLM-Model-VRAM-Calculator&quot;&gt;LLM Model VRAM Calculator&lt;&#x2F;a&gt; only for quantization models&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a class=&quot;external&quot; rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;llm.extractum.io&#x2F;&quot;&gt;LLM Explorer&lt;&#x2F;a&gt; to check raw model vRAM size consumption&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;!-- https:&#x2F;&#x2F;github.com&#x2F;rh-aiservices-bu&#x2F;gpu-partitioning-guide#14-pros-and-cons-of-gpu-partitioning-methods --&gt;
+&lt;!-- https:&#x2F;&#x2F;github.com&#x2F;rh-aiservices-bu&#x2F;multi-gpu-llms#1-overview --&gt;
+&lt;h1 id=&quot;3-gpu-partitioning-overview&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#3-gpu-partitioning-overview&quot; aria-label=&quot;Anchor link for: 3-gpu-partitioning-overview&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+3. GPU Partitioning Overview&lt;&#x2F;h1&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;github.com&#x2F;rh-aiservices-bu&#x2F;gpu-partitioning-guide&#x2F;raw&#x2F;main&#x2F;assets&#x2F;gpu-sharing-overview.png&quot; alt=&quot;Overview&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;time-slicing&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#time-slicing&quot; aria-label=&quot;Anchor link for: time-slicing&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Time-slicing&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;mig&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#mig&quot; aria-label=&quot;Anchor link for: mig&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+MIG&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;mps&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#mps&quot; aria-label=&quot;Anchor link for: mps&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+MPS&lt;&#x2F;h2&gt;
+&lt;h1 id=&quot;pros-and-cons-of-gpu-partitioning-methods&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#pros-and-cons-of-gpu-partitioning-methods&quot; aria-label=&quot;Anchor link for: pros-and-cons-of-gpu-partitioning-methods&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Pros and Cons of GPU Partitioning Methods&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;requirements-gpu-nodes-with-gpus&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#requirements-gpu-nodes-with-gpus&quot; aria-label=&quot;Anchor link for: requirements-gpu-nodes-with-gpus&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Requirements: GPU Nodes with GPUs&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;validate-and-gpu-partioning&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#validate-and-gpu-partioning&quot; aria-label=&quot;Anchor link for: validate-and-gpu-partioning&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Validate and GPU Partioning&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;testing-with-llms&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#testing-with-llms&quot; aria-label=&quot;Anchor link for: testing-with-llms&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Testing with LLMs&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;nvidia-gpu-operator&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#nvidia-gpu-operator&quot; aria-label=&quot;Anchor link for: nvidia-gpu-operator&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Nvidia GPU Operator&lt;&#x2F;h1&gt;
+&lt;h1 id=&quot;links-of-interest&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#links-of-interest&quot; aria-label=&quot;Anchor link for: links-of-interest&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Links of Interest&lt;&#x2F;h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&quot;external&quot; rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;rahulschand.github.io&#x2F;gpu_poor&#x2F;&quot;&gt;VRAM Calculator&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a class=&quot;external&quot; rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;blog.vllm.ai&#x2F;2023&#x2F;06&#x2F;20&#x2F;vllm.html&quot;&gt;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a class=&quot;external&quot; rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;towardsdatascience.com&#x2F;choosing-the-right-gpu-for-deep-learning-on-aws-d69c157d8c86&quot;&gt;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        <summary type="html">Let&#x27;s Serve better with KServe</summary>
+        </entry>
+</feed>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="https://muthukamalan.github.io/feed_style.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
+        <tabi:base_url>https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;</tabi:base_url>
+        <tabi:separator>
+            •
+        </tabi:separator>
+        <tabi:about_feeds>This is a web feed, also known as an Atom feed. Subscribe by copying the URL from the address bar into your newsreader. Visit About Feeds to learn more and get started. It&#x27;s free.</tabi:about_feeds>
+        <tabi:visit_the_site>Visit website</tabi:visit_the_site>
+        <tabi:recent_posts>Recent posts</tabi:recent_posts>
+        <tabi:last_updated_on>Updated on $DATE</tabi:last_updated_on>
+        <tabi:default_theme>one-dark-pro</tabi:default_theme>
+        <tabi:post_listing_date>date</tabi:post_listing_date>
+        <tabi:current_section>Javascript</tabi:current_section>
+    </tabi:metadata><link rel="extra-stylesheet" href="https://muthukamalan.github.io/skins/blue.css?h=a4dc1e94d3f5759784d2" /><title>Muthukamalan - Javascript</title>
+        <subtitle>Friendly Neighbour Programmer</subtitle>
+    <link href="https://muthukamalan.github.io/tags/javascript/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://muthukamalan.github.io/tags/javascript/" rel="alternate" type="text/html"/>
+    <generator uri="https://www.getzola.org/">Zola</generator><updated>2023-03-01T05:20:35+00:00</updated><id>https://muthukamalan.github.io/tags/javascript/atom.xml</id><entry xml:lang="en">
+        <title>UseFul Extensions</title>
+        <published>2023-03-01T05:20:35+00:00</published>
+        <updated>2023-03-01T05:20:35+00:00</updated>
+        <author>
+            <name>Muthukamalan</name>
+        </author>
+        <link rel="alternate" href="https://muthukamalan.github.io/projects/extensions/" type="text/html"/>
+        <id>https://muthukamalan.github.io/projects/extensions/</id>
+        
+            <content type="html">&lt;details&gt;
+    &lt;summary&gt;Table Of Content&lt;&#x2F;summary&gt;
+    &lt;!-- toc --&gt;
+&lt;&#x2F;details&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;installation&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#installation&quot; aria-label=&quot;Anchor link for: installation&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Installation&lt;&#x2F;h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Unzip the downloaded file.&lt;&#x2F;li&gt;
+&lt;li&gt;Open &lt;code&gt;chrome:&#x2F;&#x2F;extensions&lt;&#x2F;code&gt; in Chrome.&lt;&#x2F;li&gt;
+&lt;li&gt;Enable Developer mode (toggle in the top-right).&lt;&#x2F;li&gt;
+&lt;li&gt;Click Load unpacked and select the unzipped folder.&lt;&#x2F;li&gt;
+&lt;li&gt;The extension starts working immediately&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;hr &#x2F;&gt;
+&lt;h2 id=&quot;demo&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#demo&quot; aria-label=&quot;Anchor link for: demo&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Demo&lt;&#x2F;h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&quot;external&quot; rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Muthukamalan&#x2F;ListLinkers&quot;&gt;List Linkers&lt;&#x2F;a&gt;
+&lt;img src=&quot;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Muthukamalan&#x2F;ListLinkers&#x2F;refs&#x2F;heads&#x2F;main&#x2F;list-linker-chrome-ext.png&quot; alt=&quot;image&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a class=&quot;external&quot; rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Muthukamalan&#x2F;TabGroups&quot;&gt;TabGroups&lt;&#x2F;a&gt;
+&lt;img src=&quot;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Muthukamalan&#x2F;TabGroups&#x2F;refs&#x2F;heads&#x2F;main&#x2F;tab-group-ext.png&quot; alt=&quot;image&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</content>
+        <summary type="html">Favorite extension is one that doesn&#x27;t ask for all my permissions</summary>
+        </entry>
+</feed>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="https://muthukamalan.github.io/feed_style.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
+        <tabi:base_url>https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;</tabi:base_url>
+        <tabi:separator>
+            •
+        </tabi:separator>
+        <tabi:about_feeds>This is a web feed, also known as an Atom feed. Subscribe by copying the URL from the address bar into your newsreader. Visit About Feeds to learn more and get started. It&#x27;s free.</tabi:about_feeds>
+        <tabi:visit_the_site>Visit website</tabi:visit_the_site>
+        <tabi:recent_posts>Recent posts</tabi:recent_posts>
+        <tabi:last_updated_on>Updated on $DATE</tabi:last_updated_on>
+        <tabi:default_theme>one-dark-pro</tabi:default_theme>
+        <tabi:post_listing_date>date</tabi:post_listing_date>
+        <tabi:current_section>Embedding</tabi:current_section>
+    </tabi:metadata><link rel="extra-stylesheet" href="https://muthukamalan.github.io/skins/blue.css?h=a4dc1e94d3f5759784d2" /><title>Muthukamalan - Embedding</title>
+        <subtitle>Friendly Neighbour Programmer</subtitle>
+    <link href="https://muthukamalan.github.io/tags/embedding/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://muthukamalan.github.io/tags/embedding/" rel="alternate" type="text/html"/>
+    <generator uri="https://www.getzola.org/">Zola</generator><updated>2024-01-09T05:20:35+00:00</updated><id>https://muthukamalan.github.io/tags/embedding/atom.xml</id><entry xml:lang="en">
+        <title>Tamil Tokenizer</title>
+        <published>2024-01-09T05:20:35+00:00</published>
+        <updated>2024-01-09T05:20:35+00:00</updated>
+        <author>
+            <name>Muthukamalan</name>
+        </author>
+        <link rel="alternate" href="https://muthukamalan.github.io/projects/tamil-tokenizer/" type="text/html"/>
+        <id>https://muthukamalan.github.io/projects/tamil-tokenizer/</id>
+        
+            <content type="html">&lt;p&gt;&lt;h align=&#x27;center&#x27;&gt;&lt;a href=&#x27;https:&#x2F;&#x2F;github.com&#x2F;Muthukamalan&#x2F;TamilTokenizers&#x27;&gt; Project Url&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        </entry>
+</feed>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="https://muthukamalan.github.io/feed_style.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
+        <tabi:base_url>https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;</tabi:base_url>
+        <tabi:separator>
+            •
+        </tabi:separator>
+        <tabi:about_feeds>This is a web feed, also known as an Atom feed. Subscribe by copying the URL from the address bar into your newsreader. Visit About Feeds to learn more and get started. It&#x27;s free.</tabi:about_feeds>
+        <tabi:visit_the_site>Visit website</tabi:visit_the_site>
+        <tabi:recent_posts>Recent posts</tabi:recent_posts>
+        <tabi:last_updated_on>Updated on $DATE</tabi:last_updated_on>
+        <tabi:default_theme>one-dark-pro</tabi:default_theme>
+        <tabi:post_listing_date>date</tabi:post_listing_date>
+        <tabi:current_section>Churn Prediction</tabi:current_section>
+    </tabi:metadata><link rel="extra-stylesheet" href="https://muthukamalan.github.io/skins/blue.css?h=a4dc1e94d3f5759784d2" /><title>Muthukamalan - Churn Prediction</title>
+        <subtitle>Friendly Neighbour Programmer</subtitle>
+    <link href="https://muthukamalan.github.io/tags/churn-prediction/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://muthukamalan.github.io/tags/churn-prediction/" rel="alternate" type="text/html"/>
+    <generator uri="https://www.getzola.org/">Zola</generator><updated>2022-01-09T05:20:35+00:00</updated><id>https://muthukamalan.github.io/tags/churn-prediction/atom.xml</id><entry xml:lang="en">
+        <title>Telecom Churn Prediction MLOps</title>
+        <published>2022-01-09T05:20:35+00:00</published>
+        <updated>2022-01-09T05:20:35+00:00</updated>
+        <author>
+            <name>Muthukamalan</name>
+        </author>
+        <link rel="alternate" href="https://muthukamalan.github.io/projects/mlops-churn-prediction/" type="text/html"/>
+        <id>https://muthukamalan.github.io/projects/mlops-churn-prediction/</id>
+        
+            <content type="html">&lt;details&gt;
+    &lt;summary&gt;Table Of Content&lt;&#x2F;summary&gt;
+    &lt;!-- toc --&gt;
+&lt;&#x2F;details&gt;
+&lt;h1 id=&quot;introduction&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#introduction&quot; aria-label=&quot;Anchor link for: introduction&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Introduction&lt;&#x2F;h1&gt;
+&lt;p&gt;It’s easy to see every problem as an opportunity to use AI. Instead, let’s start with the problem statement and determine whether AI is the right tool.
+&lt;img src=&quot;https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;projects&#x2F;mlops-churn-prediction&#x2F;.&#x2F;nail.gif&quot; alt=&quot;nails&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Let’s Discuss the problem cycle before we jump into tools, solving technology is also good problem.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;churn-prediction-problem&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#churn-prediction-problem&quot; aria-label=&quot;Anchor link for: churn-prediction-problem&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Churn Prediction Problem&lt;&#x2F;h2&gt;
+&lt;p&gt;Every Industrial problems should be evaluated from multiple feasibility perspectives before development begins.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Technical feasibility&lt;&#x2F;strong&gt;  - assesses whether sufficient, high-quality data and appropriate tools are available or what tools needs to be useful.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Economic feasibility&lt;&#x2F;strong&gt; determines whether the expected business benefits, such as reduced customer loss and increased retention.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Operational feasibility&lt;&#x2F;strong&gt; evaluates whether the organization can effectively use &lt;img src=&quot;https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;projects&#x2F;mlops-churn-prediction&#x2F;.&#x2F;scope-change.png&quot; alt=&quot;scope-change.png&quot; &#x2F;&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Auditing &amp;amp; Governance feasibility&lt;&#x2F;strong&gt;  focuses on establishing clear policies for data ownership, data sources, fairness and compliance thoughout it’s lifecycle&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Use Cases of Churn Prediction&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Stop-loss Intervention and Win-back Forensics
+&lt;ul&gt;
+&lt;li&gt;Identify customers who are likely to leave and take actionable items such as sending personalized emails, offering discounts, rewards just to encourage them to stay&lt;&#x2F;li&gt;
+&lt;li&gt;Analyze who already done it and understand why they left how to get them back.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Understanding the Drivers of Churn
+&lt;ul&gt;
+&lt;li&gt;Help the business make improvements based on data rather than assumptions&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;h3 id=&quot;business-phase&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#business-phase&quot; aria-label=&quot;Anchor link for: business-phase&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Business Phase&lt;&#x2F;h3&gt;
+&lt;p&gt;Know your KPI, Know your Data&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;&lt;strong&gt;KPI&lt;&#x2F;strong&gt;&lt;&#x2F;th&gt;&lt;th&gt;&lt;strong&gt;What it Measures&lt;&#x2F;strong&gt;&lt;&#x2F;th&gt;&lt;th&gt;&lt;strong&gt;Why it Matters&lt;&#x2F;strong&gt;&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Gross Customer Churn Rate&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;Percentage of customers who leave during a given period.&lt;&#x2F;td&gt;&lt;td&gt;Measures overall customer loss and retention performance.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Net Customer Churn Rate&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;Difference between new customer acquisitions and customer cancellations.&lt;&#x2F;td&gt;&lt;td&gt;Indicates whether the customer base is growing or shrinking.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Daily Active Users (DAU)&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;Number of customers actively using the product each day.&lt;&#x2F;td&gt;&lt;td&gt;Declining DAU can signal poor customer experience or potential churn.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;strong&gt;Weekly&#x2F;Monthly Active Users (WAU&#x2F;MAU)&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td&gt;Number of customers active each week or month.&lt;&#x2F;td&gt;&lt;td&gt;Measures long-term engagement and product adoption.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h3 id=&quot;data-phase&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#data-phase&quot; aria-label=&quot;Anchor link for: data-phase&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Data Phase&lt;&#x2F;h3&gt;
+&lt;p&gt;Sometime we may loss into complex understanding and data maturity, it may grow as&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;Business Domain and Requirements Discovery&lt;&#x2F;em&gt; – Understanding the business problem, objectives, stakeholders, and success criteria.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;em&gt;ETL Project&lt;&#x2F;em&gt; – Collecting, cleaning, integrating, and preparing data from multiple sources or formulating implementation of the new workflow.(step 6)&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;em&gt;Data Engineering and Data Wrangling Projec&lt;&#x2F;em&gt;t – Building reliable data pipelines, transforming raw data, and ensuring data quality. In many organizations, this effort takes significantly more time than developing the machine learning model itself.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;em&gt;Feature Engineering Project&lt;&#x2F;em&gt; – Creating meaningful features that capture customer behavior and improve model performance.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;em&gt;Machine Learning Project&lt;&#x2F;em&gt; – Selecting algorithms, training models, evaluating performance, and optimizing predictions.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;em&gt;Business Implementation Project&lt;&#x2F;em&gt; – Deploying the model into production and integrating predictions into business workflows, such as CRM systems or marketing campaigns.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;em&gt;Results Assessment Project&lt;&#x2F;em&gt; – Monitoring model performance, measuring business impact, validating assumptions, and continuously improving the solution.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;blockquote class=&quot;markdown-alert-note&quot;&gt;
+&lt;p&gt;Build a standardized Advanced Analytics Data Model that is tailored to your business.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;projects&#x2F;mlops-churn-prediction&#x2F;complex.png&quot; alt=&quot;lost-in-complex-modeling&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;modeling-phase&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#modeling-phase&quot; aria-label=&quot;Anchor link for: modeling-phase&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Modeling Phase&lt;&#x2F;h3&gt;
+&lt;p&gt;Modeling aims to capture the relationship between customer behavior and churn. Most machine learning algorithms are fundamentally curve-fitting method at the EOD by learn relationship from historical data.
+&lt;img src=&quot;https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;projects&#x2F;mlops-churn-prediction&#x2F;curve-fitting.png&quot; alt=&quot;alt text&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;projects&#x2F;mlops-churn-prediction&#x2F;roc-auc.png&quot; alt=&quot;alt text&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;But What matters is the Actionable insights irrespective of ±0.0XX accuracy.
+&lt;img src=&quot;https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;projects&#x2F;mlops-churn-prediction&#x2F;use-ful-info.png&quot; alt=&quot;alt text&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;principles-of-effective-metrics&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#principles-of-effective-metrics&quot; aria-label=&quot;Anchor link for: principles-of-effective-metrics&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Principles of Effective Metrics&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Measure what matters.&lt;&#x2F;strong&gt; Focus on a small set of meaningful metrics that drive decisions rather than tracking everything.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Connect metrics to people.&lt;&#x2F;strong&gt; Metrics should be traceable to individual customers so that quantitative insights can be validated through real customer feedback.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Measure business outcomes.&lt;&#x2F;strong&gt; Prioritize metrics that reflect business success, such as revenue, retention, or customer satisfaction, instead of intermediate metrics like clicks or page views.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;projects&#x2F;mlops-churn-prediction&#x2F;understandable-model.png&quot; alt=&quot;actionale-items&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;evalution-of-model&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#evalution-of-model&quot; aria-label=&quot;Anchor link for: evalution-of-model&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Evalution of Model&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;projects&#x2F;mlops-churn-prediction&#x2F;confusion_matric.png&quot; alt=&quot;confusion matrix&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;principle&lt;&#x2F;th&gt;&lt;th&gt;Strategy&lt;&#x2F;th&gt;&lt;th&gt;Description&lt;&#x2F;th&gt;&lt;th&gt;Example&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Listen continuously&lt;&#x2F;td&gt;&lt;td&gt;Talk to Your Customers&lt;&#x2F;td&gt;&lt;td&gt;Collect regular feedback to understand customer needs and pain points before they leave.&lt;&#x2F;td&gt;&lt;td&gt;Send customer satisfaction surveys, provide in-app feedback forms, or use live chat to gather suggestions.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Fix root causes&lt;&#x2F;td&gt;&lt;td&gt;Know Your Weaknesses&lt;&#x2F;td&gt;&lt;td&gt;Identify product or service shortcomings and continuously improve them.&lt;&#x2F;td&gt;&lt;td&gt;A SaaS company discovers users struggle with onboarding and redesigns the onboarding experience.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Position yourself&lt;&#x2F;td&gt;&lt;td&gt;Focus on Your Competitive Advantage&lt;&#x2F;td&gt;&lt;td&gt;Reinforce the unique value your product offers compared to competitors.&lt;&#x2F;td&gt;&lt;td&gt;An online storage service reminds customers about its secure backup and cross-device synchronization features.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Learn from cancellations&lt;&#x2F;td&gt;&lt;td&gt;Understand Why Customers Cancel&lt;&#x2F;td&gt;&lt;td&gt;Capture cancellation reasons and analyze common patterns to reduce future churn.&lt;&#x2F;td&gt;&lt;td&gt;Add an exit survey asking, “Why are you leaving?” with options like “Too expensive” or “Missing features.”&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Educate customers&lt;&#x2F;td&gt;&lt;td&gt;Improve Customer Education&lt;&#x2F;td&gt;&lt;td&gt;Help customers realize the full value of your product through proactive guidance.&lt;&#x2F;td&gt;&lt;td&gt;Send tutorial emails, onboarding videos, or feature walkthroughs after signup.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Reinforce value&lt;&#x2F;td&gt;&lt;td&gt;Reassure Customers of Your Product’s Value&lt;&#x2F;td&gt;&lt;td&gt;Regularly remind customers about new features and benefits so they don’t overlook your product’s value.&lt;&#x2F;td&gt;&lt;td&gt;Include new feature announcements and success stories in newsletters or support responses.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h3 id=&quot;model-interpretation&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#model-interpretation&quot; aria-label=&quot;Anchor link for: model-interpretation&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+Model Interpretation&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;projects&#x2F;mlops-churn-prediction&#x2F;understandable-model.png&quot; alt=&quot;understandable-model&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h1 id=&quot;mlops-life-cyle&quot;&gt;&lt;a class=&quot;header-anchor no-hover-padding&quot; href=&quot;#mlops-life-cyle&quot; aria-label=&quot;Anchor link for: mlops-life-cyle&quot;&gt;&lt;span class=&quot;link-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;
+MLOps Life Cyle&lt;&#x2F;h1&gt;
+&lt;p&gt;MLOps supports every stage of the ML lifecycle—from data ingestion, feature engineering, model training, deployment, and inferencing to monitoring.&lt;&#x2F;p&gt;
+&lt;p&gt;This project builds an end-to-end Telecom Churn Prediction pipeline using DVC, Hydra, Optuna, MLflow, Docker, PostgreSQL, Prometheus, and Grafana for reproducibility, experiment tracking, deployment, and observability.&lt;&#x2F;p&gt;
+&lt;p&gt;The primary objective is to show how modern MLOps tools work together to create a reproducible, scalable, and maintainable machine learning pipeline on  local setup using Docker compose.&lt;&#x2F;p&gt;
+
+
+&lt;noscript&gt;
+    &lt;strong&gt;⚠️ JavaScript is required to render the diagram.&lt;&#x2F;strong&gt;
+&lt;&#x2F;noscript&gt;
+&lt;pre class=&quot;mermaid invertible-image&quot;&gt;
+    flowchart TD
+
+subgraph group_data[&quot;Data lifecycle&quot;]
+  node_raw[&quot;Raw Excel files&lt;br&#x2F;&gt;source data&lt;br&#x2F;&gt;[.gitkeep]&quot;]
+  node_prep[&quot;Ingestion preparation&lt;br&#x2F;&gt;Python script&quot;]
+  node_postgres_init[&quot;Postgres initialization&lt;br&#x2F;&gt;database bootstrap&lt;br&#x2F;&gt;[init-db.sh]&quot;]
+  node_postgres[(&quot;Customer churn table&lt;br&#x2F;&gt;PostgreSQL&quot;)]
+  node_dvc[&quot;Versioned CSV export&lt;br&#x2F;&gt;DVC artifact&quot;]
+end
+
+subgraph group_ml[&quot;ML workflows&quot;]
+  node_train_config[&quot;Hydra train composition&lt;br&#x2F;&gt;configuration&lt;br&#x2F;&gt;[train.yaml]&quot;]
+  node_model_configs[&quot;Model variants&lt;br&#x2F;&gt;Hydra model configs&lt;br&#x2F;&gt;[default.yaml]&quot;]
+  node_training[&quot;Model training&lt;br&#x2F;&gt;Python entry point&lt;br&#x2F;&gt;[train.py]&quot;]
+  node_hparams_config[&quot;Tuning settings&lt;br&#x2F;&gt;Hydra configuration&lt;br&#x2F;&gt;[hparams.yaml]&quot;]
+  node_search_spaces[&quot;Model search spaces&lt;br&#x2F;&gt;Optuna configs&quot;]
+  node_tuning[&quot;Hyperparameter tuning&lt;br&#x2F;&gt;Python entry point&lt;br&#x2F;&gt;[hparams.py]&quot;]
+end
+
+subgraph group_runtime[&quot;Local runtime&quot;]
+  node_mlflow[(&quot;MLflow tracking&lt;br&#x2F;&gt;experiment tracking&quot;)]
+  node_minio[(&quot;MinIO artifact storage&lt;br&#x2F;&gt;S3-compatible storage&quot;)]
+  node_compose[&quot;Docker Compose&lt;br&#x2F;&gt;local orchestrator&lt;br&#x2F;&gt;[compose.local.yaml]&quot;]
+  node_prometheus[&quot;Prometheus&lt;br&#x2F;&gt;metrics collection&lt;br&#x2F;&gt;[prometheus.yaml]&quot;]
+  node_grafana[&quot;Grafana&lt;br&#x2F;&gt;metrics visualization&quot;]
+  node_app_environment[&quot;Python application environment&lt;br&#x2F;&gt;runtime definition&lt;br&#x2F;&gt;[pyproject.toml]&quot;]
+end
+
+node_raw --&gt;|&quot;prepare&quot;| node_prep
+node_prep --&gt;|&quot;produces ingestion-ready data&quot;| node_postgres_init
+node_postgres_init --&gt;|&quot;loads&quot;| node_postgres
+node_postgres --&gt;|&quot;DVC import&#x2F;export&quot;| node_dvc
+node_train_config --&gt;|&quot;selects&quot;| node_model_configs
+node_train_config --&gt;|&quot;composes runtime config&quot;| node_training
+node_model_configs --&gt;|&quot;configures classifier&quot;| node_training
+node_dvc --&gt;|&quot;dataset input&quot;| node_training
+node_training --&gt;|&quot;logs runs and models&quot;| node_mlflow
+node_hparams_config --&gt;|&quot;controls trials&quot;| node_tuning
+node_search_spaces --&gt;|&quot;defines candidates&quot;| node_tuning
+node_model_configs --&gt;|&quot;tunes model family&quot;| node_tuning
+node_dvc --&gt;|&quot;dataset input&quot;| node_tuning
+node_tuning --&gt;|&quot;logs tuning runs&quot;| node_mlflow
+node_mlflow --&gt;|&quot;stores artifacts&quot;| node_minio
+node_compose --&gt;|&quot;starts service&quot;| node_postgres
+node_compose --&gt;|&quot;starts service&quot;| node_mlflow
+node_compose --&gt;|&quot;starts service&quot;| node_minio
+node_compose --&gt;|&quot;starts service&quot;| node_prometheus
+node_compose --&gt;|&quot;starts service&quot;| node_grafana
+node_prometheus --&gt;|&quot;metrics source&quot;| node_grafana
+node_app_environment -.-&gt;|&quot;provides dependencies&quot;| node_training
+node_app_environment -.-&gt;|&quot;provides dependencies&quot;| node_tuning
+
+click node_raw &quot;https:&#x2F;&#x2F;github.com&#x2F;muthukamalan&#x2F;customer-churn-prediction&#x2F;blob&#x2F;main&#x2F;data&#x2F;raw&#x2F;.gitkeep&quot;
+click node_prep &quot;https:&#x2F;&#x2F;github.com&#x2F;muthukamalan&#x2F;customer-churn-prediction&#x2F;blob&#x2F;main&#x2F;scripts&#x2F;prep_db_ingestion.py&quot;
+click node_postgres_init &quot;https:&#x2F;&#x2F;github.com&#x2F;muthukamalan&#x2F;customer-churn-prediction&#x2F;blob&#x2F;main&#x2F;postgres&#x2F;init-db.sh&quot;
+click node_dvc &quot;https:&#x2F;&#x2F;github.com&#x2F;muthukamalan&#x2F;customer-churn-prediction&#x2F;blob&#x2F;main&#x2F;customer_churn.csv.dvc&quot;
+click node_train_config &quot;https:&#x2F;&#x2F;github.com&#x2F;muthukamalan&#x2F;customer-churn-prediction&#x2F;blob&#x2F;main&#x2F;configs&#x2F;train.yaml&quot;
+click node_model_configs &quot;https:&#x2F;&#x2F;github.com&#x2F;muthukamalan&#x2F;customer-churn-prediction&#x2F;blob&#x2F;main&#x2F;configs&#x2F;model&#x2F;default.yaml&quot;
+click node_training &quot;https:&#x2F;&#x2F;github.com&#x2F;muthukamalan&#x2F;customer-churn-prediction&#x2F;blob&#x2F;main&#x2F;src&#x2F;train&#x2F;train.py&quot;
+click node_hparams_config &quot;https:&#x2F;&#x2F;github.com&#x2F;muthukamalan&#x2F;customer-churn-prediction&#x2F;blob&#x2F;main&#x2F;configs&#x2F;hparams.yaml&quot;
+click node_search_spaces &quot;https:&#x2F;&#x2F;github.com&#x2F;muthukamalan&#x2F;customer-churn-prediction&#x2F;blob&#x2F;main&#x2F;configs&#x2F;hparams&#x2F;random_forest_hparam.yaml&quot;
+click node_tuning &quot;https:&#x2F;&#x2F;github.com&#x2F;muthukamalan&#x2F;customer-churn-prediction&#x2F;blob&#x2F;main&#x2F;src&#x2F;hparams&#x2F;hparams.py&quot;
+click node_compose &quot;https:&#x2F;&#x2F;github.com&#x2F;muthukamalan&#x2F;customer-churn-prediction&#x2F;blob&#x2F;main&#x2F;compose.local.yaml&quot;
+click node_prometheus &quot;https:&#x2F;&#x2F;github.com&#x2F;muthukamalan&#x2F;customer-churn-prediction&#x2F;blob&#x2F;main&#x2F;prometheus&#x2F;prometheus.yaml&quot;
+click node_app_environment &quot;https:&#x2F;&#x2F;github.com&#x2F;muthukamalan&#x2F;customer-churn-prediction&#x2F;blob&#x2F;main&#x2F;pyproject.toml&quot;
+
+classDef toneNeutral fill:#f8fafc,stroke:#334155,stroke-width:1.5px,color:#0f172a
+classDef toneBlue fill:#dbeafe,stroke:#2563eb,stroke-width:1.5px,color:#172554
+classDef toneAmber fill:#fef3c7,stroke:#d97706,stroke-width:1.5px,color:#78350f
+classDef toneMint fill:#dcfce7,stroke:#16a34a,stroke-width:1.5px,color:#14532d
+classDef toneRose fill:#ffe4e6,stroke:#e11d48,stroke-width:1.5px,color:#881337
+classDef toneIndigo fill:#e0e7ff,stroke:#4f46e5,stroke-width:1.5px,color:#312e81
+classDef toneTeal fill:#ccfbf1,stroke:#0f766e,stroke-width:1.5px,color:#134e4a
+class node_raw,node_prep,node_postgres_init,node_postgres,node_dvc toneBlue
+class node_train_config,node_model_configs,node_training,node_hparams_config,node_search_spaces,node_tuning toneAmber
+class node_mlflow,node_minio,node_compose,node_prometheus,node_grafana,node_app_environment toneMint
+&lt;&#x2F;pre&gt;
+</content>
+        <summary type="html">https:&#x2F;&#x2F;github.com&#x2F;Muthukamalan&#x2F;Customer-Churn-Prediction</summary>
+        </entry>
+</feed>

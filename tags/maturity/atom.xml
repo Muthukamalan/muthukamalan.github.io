@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="https://muthukamalan.github.io/feed_style.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
+        <tabi:base_url>https:&#x2F;&#x2F;muthukamalan.github.io&#x2F;</tabi:base_url>
+        <tabi:separator>
+            •
+        </tabi:separator>
+        <tabi:about_feeds>This is a web feed, also known as an Atom feed. Subscribe by copying the URL from the address bar into your newsreader. Visit About Feeds to learn more and get started. It&#x27;s free.</tabi:about_feeds>
+        <tabi:visit_the_site>Visit website</tabi:visit_the_site>
+        <tabi:recent_posts>Recent posts</tabi:recent_posts>
+        <tabi:last_updated_on>Updated on $DATE</tabi:last_updated_on>
+        <tabi:default_theme>one-dark-pro</tabi:default_theme>
+        <tabi:post_listing_date>date</tabi:post_listing_date>
+        <tabi:current_section>Maturity</tabi:current_section>
+    </tabi:metadata><link rel="extra-stylesheet" href="https://muthukamalan.github.io/skins/blue.css?h=a4dc1e94d3f5759784d2" /><title>Muthukamalan - Maturity</title>
+        <subtitle>Friendly Neighbour Programmer</subtitle>
+    <link href="https://muthukamalan.github.io/tags/maturity/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://muthukamalan.github.io/tags/maturity/" rel="alternate" type="text/html"/>
+    <generator uri="https://www.getzola.org/">Zola</generator><updated>2021-11-12T12:01:35+00:00</updated><id>https://muthukamalan.github.io/tags/maturity/atom.xml</id><entry xml:lang="en">
+        <title>Beauty Of Life</title>
+        <published>2021-11-12T12:01:35+00:00</published>
+        <updated>2021-11-12T12:01:35+00:00</updated>
+        <author>
+            <name>Muthukamalan</name>
+        </author>
+        <link rel="alternate" href="https://muthukamalan.github.io/blog/lemons-and-lemonade/" type="text/html"/>
+        <id>https://muthukamalan.github.io/blog/lemons-and-lemonade/</id>
+        
+            <content type="html">&lt;p&gt;காண கண் கோடி இடங்கள் வைத்தாய் &lt;br&gt;
+கண்கள் ஏனோ இரண்டை படைத்தாய்&lt;br&gt;
+இரண்டு 👀 கண்கள் போதாது எனவே முக்காலம்⏳ படைத்தாய்!!&lt;br&gt;
+இருப்பினும் ஏனோ முதுமை படைத்தாய்!! &lt;br&gt;
+எத்தனை கோடி இன்பம் படைத்தாய் &lt;br&gt;
+எனினும் எளிமை என் படைத்தான் - &lt;br&gt;
+அதை என்னுள் வைத்தாய்!! &lt;br&gt;
+இதயம் ஒன்றே 💖 படைத்தாய் எனினும் இன்னல் நூறு படைத்தாய்!! &lt;br&gt;
+இன்னும் எத்தனை ஆண்டு இந்த ஒப்பனை நாடகங்கள் 🎭 &lt;br&gt;
+எந்த இலைகளும் 🍃 காற்றைப் பிடித்து வைத்துக்கொள்ளவில்லை &lt;br&gt;
+ஏந்த காற்றும் இலையில் தங்க போவதுமில்லை &lt;br&gt;
+ஆனாலும் அங்கே காதலுக்கு ஒரு குறைவுமில்லை!! &lt;br&gt;&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;இறுதியில் தனியாக வாடதான் 🍂 போகிறோம் &lt;br&gt;
+இருப்பினும் &lt;br&gt;
+வளராமல்… 🍃 &lt;br&gt;
+தளிராமல்.. 🌾 &lt;br&gt;
+நறுமணம் பரப்பாமல் இருக்க அவசியமில்லை 🌻✨&lt;&#x2F;p&gt;
+</content>
+        <summary type="html">When life gives you lemon, make lemonade</summary>
+        </entry>
+</feed>
