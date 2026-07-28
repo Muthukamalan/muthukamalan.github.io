@@ -91,7 +91,7 @@ categories: blog
 toc: false
 toc_sticky: false
 header:
-    teaser: "/../assets/{asset_dirname}/thumbnail.png"
+    teaser: "/../assets/{asset_dirname}/default-thumbnail.png"
 ---
 <!-- ctrl + alt + v -->
 <!-- cmd + alt + v -->
