@@ -1,8 +1,8 @@
 {
-    "name": "sJeykllImg",
+    "name": "jekyll-container",
     "image": "ruby:3.4.7-slim",
     "runArgs": [
-      "--name", "jekysll","--rm"
+      "--rm"
     ],
-    "postStartCommand": "apt update && apt install git -y"
+    "postStartCommand": "apt update && apt install git ruby-dev build-essential -y"
 }
