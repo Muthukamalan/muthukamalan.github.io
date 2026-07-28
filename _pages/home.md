@@ -15,13 +15,24 @@ header:
   #     align: top
 excerpt: >
   <div class="page__hero--bottom-left">
-    <large><a href="https://github.com/Muthukamalan" class="btn btn--x-large tn-blue"><i class="fa-brands fa-github fa-2xl"></i></a></large>
-    <large><a href="https://www.linkedin.com/in/muthukamalan-m/" class="btn btn--x-large tn-blue"><i class="fa-brands fa-linkedin fa-2xl"></i></a></large>
-    <large><a href="https://wa.me/9486872592" class="btn btn--x-large tn-blue"><i class="fa-brands fa-whatsapp fa-2xl"></i></a></large>
-    
-    Some days I patch bugs in the code, other days I patch feelings with a stanza<br/>
+  <div class="social-icons">
+    <a href="https://github.com/Muthukamalan" class="btn btn--x-large" target="_blank" rel="noopener noreferrer">
+      <i class="fa-brands fa-github fa-2xl"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/in/muthukamalan-m/" class="btn btn--x-large" target="_blank" rel="noopener noreferrer">
+      <i class="fa-brands fa-linkedin fa-2xl"></i>
+    </a>
+
+    <a href="https://wa.me/9486872592" class="btn btn--x-large" target="_blank" rel="noopener noreferrer">
+      <i class="fa-brands fa-whatsapp fa-2xl"></i>
+    </a>
   </div>
 
+  <p>
+    <span style="color: #d4d4d4;">Some days I patch bugs in the code, other days I patch feelings with a stanza.</span>
+  </p>
+  </div>
 
 
 

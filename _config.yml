@@ -62,18 +62,19 @@ plugins:
 author:
   name   : "Muthu Kamalan"
   avatar : "assets/images/muthu.png"
-  bio    : "Machine learning engineer in love with building digital products."
+  bio    : "MLOps Enginer with Automation Mindset"
   location : "Kovilpatti/TamilNadu"
   links:
+    - label: Whatsapp
+      icon: "fa-brands fa-whatsapp"
+      url: "https://wa.me/9486872592"
     - label: "Github"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/Muthukamalan"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin" 
       url: "https://www.linkedin.com/in/muthukamalan-m/"
-    - label: Whatsapp
-      icon: "fa-brands fa-whatsapp"
-      url: "https://wa.me/9486872592"
+    
 
 footer:
   links:
