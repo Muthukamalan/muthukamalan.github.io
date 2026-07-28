@@ -1,0 +1,10 @@
+_site
+.sass-cache
+.jekyll-metadata
+.DS_Store
+
+__pycache__/
+_drafts/
+.DS_Store
+
+.idea

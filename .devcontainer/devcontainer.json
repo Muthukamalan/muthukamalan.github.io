@@ -1,0 +1,8 @@
+{
+    "name": "sJeykllImg",
+    "image": "ruby:3.4.7-slim",
+    "runArgs": [
+      "--name", "jekysll","--rm"
+    ],
+    "postStartCommand": "apt update && apt install git -y"
+}

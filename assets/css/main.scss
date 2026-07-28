@@ -1,0 +1,732 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@charset "utf-8";
+
+// ==========================================================================
+// NOTION × APPLE — warm, spacious, blue-accented, content-first
+// 2026-05-19 v2: pushed further — more air, blue accent throughout
+// ==========================================================================
+
+// ---------------------------------------------------------------------------
+// Design tokens
+// ---------------------------------------------------------------------------
+$text-primary:              #37352f;   // Notion's warm near-black
+$text-secondary:            #787774;   // captions, meta, dates
+$text-tertiary:             #a8a29e;   // placeholders, very light UI text
+$surface:                   #ffffff;   // page background
+$surface-raised:            #f7f6f3;   // code blocks, card hovers
+$surface-hover:             #f1f1ef;   // hover states
+$border-subtle:             #e8e7e4;   // dividers, table borders
+$border-strong:             #d4d3d0;   // when you need more contrast
+
+// Blue accent — your brand blue, used for links & interactive elements
+$accent:                    #0d5884;   // your dark blue
+$accent-light:              #e0f2fe;   // your light blue (backgrounds)
+$accent-hover:              #0a4a72;   // darker on hover
+$accent-focus:              rgba(#0d5884, 0.2);  // focus rings
+
+// Tag pill colors (preserved)
+$lightgreen: #dcfce7;
+$darkgreen: #166534;
+$lightyellow: #fef9c3;
+$darkyellow: #854d0e;
+$lightblue: #e0f2fe;
+$darkblue: #0d5884;
+
+// ---------------------------------------------------------------------------
+// Minimal Mistakes variable overrides (MUST be before @import)
+// ---------------------------------------------------------------------------
+
+$paragraph-indent           : false;
+$indent-var                 : 1.3em;
+
+// Apple's SF stack → Notion's system stack
+$serif                      : Georgia, Times, serif;
+$sans-serif                 : -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+$monospace                  : "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace;
+$sans-serif-narrow          : $sans-serif;
+
+$global-font-family         : $sans-serif;
+$header-font-family         : $sans-serif;
+$caption-font-family        : $sans-serif;
+
+// Feed MM variables with our tokens
+$text-color                 : $text-primary;
+$muted-text-color           : $text-secondary;
+$background-color           : $surface;
+$border-color               : $border-subtle;
+$code-background-color      : $surface-raised;
+$link-color                 : $accent;
+$link-color-hover           : $accent-hover;
+$masthead-link-color        : $text-primary;
+$masthead-link-color-hover  : $accent;
+$footer-background-color    : $surface;
+$primary-color              : $accent;
+$info-color                 : $accent;
+
+// Type scale — tighter, Apple-like clarity
+$type-size-1: 2.25em;
+$type-size-2: 1.75em;
+$type-size-3: 1.375em;
+$type-size-4: 1.125em;
+$type-size-5: 1em;
+$type-size-6: 0.8em;
+$type-size-7: 0.75em;
+$type-size-8: 0.625em;
+
+// Headline scale
+$h-size-1: 1.75em;
+$h-size-2: 1.375em;
+$h-size-3: 1.175em;
+$h-size-4: 1.05em;
+$h-size-5: 1em;
+$h-size-6: 1em;
+
+// *************************************************************
+// !! ALL VARIABLE DECLARATIONS MUST BE BEFORE THIS STATEMENT !!
+// *************************************************************
+
+@import "minimal-mistakes";
+
+// ==========================================================================
+// POST-IMPORT: the actual design
+// ==========================================================================
+
+// ---------------------------------------------------------------------------
+// Global: smooth rendering, selection color, transitions
+// ---------------------------------------------------------------------------
+html {
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+
+  @include breakpoint($medium) { font-size: 15px; }
+  @include breakpoint($large)  { font-size: 16px; }
+  @include breakpoint($x-large){ font-size: 16px; }
+}
+
+body {
+  color: $text-primary;
+  background: $surface;
+}
+
+::selection {
+  background: $accent-light;
+  color: $accent;
+}
+
+// ---------------------------------------------------------------------------
+// Content typography — generous, readable, Notion-level spacing
+// ---------------------------------------------------------------------------
+.page__content {
+  p, li, dl {
+    line-height: 1.6;
+    letter-spacing: -0.003em;
+  }
+
+  p {
+    margin-bottom: 0.9em;
+  }
+
+  // More breathing room between list items (Notion does this)
+  ul, ol {
+    li {
+      margin-bottom: 0.2em;
+    }
+
+    li > ul, li > ol {
+      margin-top: 0.2em;
+    }
+  }
+
+  // Bold text — slightly heavier, like Notion
+  strong, b {
+    font-weight: 650;
+    color: $text-primary;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Headings — bold, tight, spacious above (like opening a new Notion block)
+// ---------------------------------------------------------------------------
+h1, h2, h3, h4, h5, h6 {
+  color: $text-primary;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+h1 { margin-top: 1.8em; margin-bottom: 0.35em; }
+h2 { margin-top: 1.5em; margin-bottom: 0.3em; }
+h3 { margin-top: 1.2em; margin-bottom: 0.25em; }
+h4 { margin-top: 1em; margin-bottom: 0.2em; }
+
+.page__content > h1:first-child,
+.page__content > h2:first-child {
+  margin-top: 0.5em;
+}
+
+// ---------------------------------------------------------------------------
+// Links — BLUE. Apple-blue for inline links, clean and confident
+// ---------------------------------------------------------------------------
+.page__content a:not(.btn):not(.btn-green):not(.btn-blue):not(.btn-yellow) {
+  color: $accent;
+  text-decoration: underline;
+  text-decoration-color: rgba($accent, 0.35);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+
+  &:hover {
+    color: $accent-hover;
+    text-decoration-color: $accent-hover;
+  }
+
+  &:visited {
+    color: $accent;
+  }
+}
+
+// Non-content links: navigation, UI — no underline, subtle
+.masthead a,
+.pagination a,
+.taxonomy__index a,
+.author__urls a,
+.nav__list a,
+.toc a,
+.page__footer a {
+  text-decoration: none;
+  color: $text-primary;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: $accent;
+  }
+}
+
+// Archive/post list links — blue, no underline
+.archive__item-title a {
+  text-decoration: none;
+  color: $accent;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: $accent-hover;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Code blocks — GitHub-style
+// ---------------------------------------------------------------------------
+div.highlighter-rouge,
+figure.highlight {
+  margin: 1em 0;
+  border-radius: 6px;
+  border: 1px solid #d0d7de;
+  background-color: #f6f8fa;
+  overflow: hidden;
+}
+
+.highlight {
+  margin: 0;
+  padding: 16px;
+  font-family: $monospace;
+  font-size: 13.6px;
+  line-height: 1.45;
+  background-color: #f6f8fa !important;
+  border-radius: 6px;
+  overflow-x: auto;
+  color: #24292f !important;
+
+  pre {
+    margin: 0;
+    padding: 0;
+    background: transparent !important;
+    border: none;
+    color: #24292f !important;
+    word-wrap: normal;
+    white-space: pre;
+  }
+
+  code {
+    background: transparent !important;
+    color: #24292f !important;
+    padding: 0;
+    border: none;
+    font-size: inherit;
+  }
+
+  pre.highlight {
+    margin: 0;
+    padding: 0;
+  }
+
+  // GitHub syntax highlighting colors (with !important to beat theme defaults)
+  .c, .cd, .cm, .c1, .cs { color: #6e7781 !important; font-style: italic; }  // comments
+  .k, .kc, .kd, .kn, .kp, .kr, .kt { color: #cf222e !important; }           // keywords
+  .s, .sb, .sc, .sd, .s2, .se, .sh, .si, .sx, .s1, .ss { color: #0a3069 !important; } // strings
+  .nf, .fm { color: #8250df !important; }                                     // function names
+  .nb { color: #953800 !important; }                                           // builtins
+  .nc, .nn { color: #953800 !important; }                                      // class/module names
+  .no { color: #0550ae !important; }                                           // constants
+  .ni { color: #24292f !important; }                                           // entities
+  .na { color: #116329 !important; }                                           // attributes
+  .nt { color: #116329 !important; }                                           // tags (HTML)
+  .nv, .vi, .vg, .vc { color: #953800 !important; }                           // variables
+  .o, .ow { color: #cf222e !important; }                                      // operators
+  .m, .mf, .mh, .mi, .mo, .mb, .mx { color: #0550ae !important; }            // numbers
+  .n { color: #24292f !important; }                                            // names
+  .p { color: #24292f !important; }                                            // punctuation
+  .gi { color: #116329 !important; background-color: #dafbe1 !important; }    // git inserted
+  .gd { color: #82071e !important; background-color: #ffebe9 !important; }    // git deleted
+  .gh { color: #0550ae !important; font-weight: 600; }                        // git header
+  .ge { font-style: italic; }                                                  // emphasis
+  .gs { font-weight: 600; }                                                    // strong
+  .err { color: #cf222e !important; background-color: transparent !important; } // errors
+  .nx { color: #24292f !important; }                                           // other names
+  .nl { color: #0550ae !important; }                                           // label names
+  .bp { color: #953800 !important; }                                           // builtin pseudo
+  .nd { color: #8250df !important; }                                           // decorators
+  .w { color: #24292f !important; }                                            // whitespace
+}
+
+// Inline code — GitHub-style
+code.highlighter-rouge,
+p code,
+li code {
+  background-color: rgba(175, 184, 193, 0.2);
+  border-radius: 6px;
+  padding: 0.2em 0.4em;
+  font-size: 85%;
+  font-family: $monospace;
+  color: #1f2328;
+  border: none;
+}
+
+// ---------------------------------------------------------------------------
+// Blockquotes — Notion-style: black left border, no bg, not italic
+// ---------------------------------------------------------------------------
+blockquote {
+  margin: 1.2em 0;
+  padding: 0.1em 0 0.1em 1.2em;
+  font-style: normal;
+  color: $text-primary;
+  border-left: 3px solid $text-primary;
+  background-color: transparent;
+  border-radius: 0;
+
+  p {
+    margin-bottom: 0.5em;
+  }
+
+  cite {
+    font-style: italic;
+    &::before {
+      content: "\2014";
+      padding-inline-end: 5px;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Masthead — Apple-clean: airy, no visual noise
+// ---------------------------------------------------------------------------
+.masthead {
+  border-bottom: 1px solid $border-subtle;
+  background: $surface;
+}
+
+.greedy-nav {
+  background: $surface;
+
+  a {
+    color: $text-primary;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+
+    &:hover {
+      color: $accent;
+    }
+  }
+
+  .visible-links a:before {
+    background: $accent; // active underline in blue
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Page title — BIG. Notion's unmistakable large bold title
+// ---------------------------------------------------------------------------
+.page__title {
+  font-size: 2.5em;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  margin-bottom: 0.2em;
+  color: $text-primary;
+}
+
+// ---------------------------------------------------------------------------
+// Page meta — light, out of the way
+// ---------------------------------------------------------------------------
+.page__meta {
+  color: $text-secondary;
+  font-size: $type-size-6;
+  letter-spacing: 0;
+}
+
+// ---------------------------------------------------------------------------
+// Archive / post list — title left, date right, like Notion's page list
+// ---------------------------------------------------------------------------
+.archive__item {
+  padding: 0.15em 0;
+  transition: background-color 0.15s ease;
+  border-radius: 6px;
+}
+
+.archive__item-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5em;
+}
+
+.archive__item-title {
+  font-weight: 600;
+  font-size: 1.1em;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  flex: 1;
+  min-width: 0; // allow text to truncate if needed
+}
+
+.archive__item-date {
+  color: $text-secondary;
+  font-size: 0.8em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.archive__item-excerpt {
+  color: $text-secondary;
+  font-size: 0.88em;
+  line-height: 1.55;
+  margin-top: 0.1em;
+}
+
+// ---------------------------------------------------------------------------
+// Images — clean, slightly rounded
+// ---------------------------------------------------------------------------
+.page__content img:not(.author__avatar img) {
+  border-radius: 6px;
+  margin: 0.5em 0;
+}
+
+// ---------------------------------------------------------------------------
+// Horizontal rule — barely there
+// ---------------------------------------------------------------------------
+hr {
+  border: 0;
+  border-top: 1px solid $border-subtle;
+  margin: 2em 0;
+}
+
+// ---------------------------------------------------------------------------
+// Tables — clean Notion grid
+// ---------------------------------------------------------------------------
+table {
+  font-size: 0.9em;
+  border-collapse: collapse;
+  width: 100%;
+
+  th {
+    background-color: $surface-raised;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  th, td {
+    border: 1px solid $border-subtle;
+    padding: 0.6em 0.85em;
+  }
+
+  tr:hover td {
+    background-color: $surface-hover;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Footer — quiet, out of the way
+// ---------------------------------------------------------------------------
+.page__footer {
+  border-top: 1px solid $border-subtle;
+  color: $text-tertiary;
+  background: $surface;
+
+  a {
+    color: $text-secondary;
+    &:hover { color: $accent; }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Sidebar / author — refined
+// ---------------------------------------------------------------------------
+.author__avatar img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 0;
+}
+
+.sidebar {
+  opacity: 1;
+}
+
+.author__name {
+  font-weight: 600;
+  color: $text-primary;
+  font-size: 1.05em;
+}
+
+.author__bio {
+  color: $text-secondary;
+  font-size: 0.88em;
+  line-height: 1.55;
+}
+
+.author__urls {
+  .author__urls-wrapper {
+    a {
+      color: $text-secondary;
+      font-size: 0.88em;
+
+      &:hover {
+        color: $accent;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Pagination — Apple-style rounded buttons
+// ---------------------------------------------------------------------------
+.pagination--pager {
+  border-radius: 8px;
+  border: 1px solid $border-subtle;
+  color: $text-primary;
+  font-weight: 500;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background-color: $accent;
+    color: white;
+    border-color: $accent;
+  }
+
+  &.disabled {
+    color: $text-tertiary;
+    border-color: $border-subtle;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// TOC — cleaner, blue active state
+// ---------------------------------------------------------------------------
+.toc {
+  .nav__title {
+    background: $accent;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+
+  a {
+    font-size: 0.88em;
+
+    &.active {
+      color: $accent;
+      font-weight: 600;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Focus states — Apple-style blue ring for accessibility
+// ---------------------------------------------------------------------------
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid $accent;
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+// ---------------------------------------------------------------------------
+// Numbered/ordered lists — Notion-style: secondary color numbers
+// ---------------------------------------------------------------------------
+.page__content ol > li::marker {
+  color: $text-secondary;
+  font-weight: 600;
+}
+
+// ---------------------------------------------------------------------------
+// Tag buttons (preserved from STYLING.md, refined corners)
+// ---------------------------------------------------------------------------
+.btn-green, .btn-blue, .btn-yellow {
+  display: inline-block;
+  margin-bottom: 0.25em;
+  padding: 0.1em 0.7em;
+  font-family: $sans-serif;
+  font-size: $type-size-7;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none !important;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+
+  &:hover { opacity: 0.85; }
+}
+
+.btn-green {
+  background-color: $lightgreen;
+  color: $darkgreen;
+  &:visited, &:hover { color: $darkgreen; }
+}
+
+.btn-blue {
+  background-color: $lightblue;
+  color: $darkblue;
+  &:visited, &:hover { color: $darkblue; }
+}
+
+.btn-yellow {
+  background-color: $lightyellow;
+  color: $darkyellow;
+  &:visited, &:hover { color: $darkyellow; }
+}
+
+// ---------------------------------------------------------------------------
+// Search — rounded, Apple-style
+// ---------------------------------------------------------------------------
+.search-content .search-input {
+  border-radius: 8px;
+  border: 1px solid $border-subtle;
+
+  &:focus {
+    border-color: $accent;
+    box-shadow: 0 0 0 3px $accent-focus;
+  }
+}
+
+// .page__hero--overlay {
+//   min-height: 700px;      // bump this up for a bigger band
+//   background-size: cover;
+//   background-position: center center;
+// }
+
+.btn-green {
+  /* default */
+  display: inline-block;
+  margin-bottom: 0.25em;
+  padding: 0.1em 0.7em; // top/sides 0.2 0.6 also works
+  font-family: $sans-serif;
+  font-size: $type-size-7;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  background-color: $lightgreen;
+  color: $darkgreen;
+  cursor: pointer;
+  &:visited {
+    color: $darkgreen;
+    };
+}
+
+.btn-blue {
+  /* default */
+  display: inline-block;
+  margin-bottom: 0.25em;
+  padding: 0.1em 0.7em; // top/sides 0.2 0.6 also works
+  font-family: $sans-serif;
+  font-size: $type-size-7;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  background-color: $lightblue;
+  color: $darkblue;
+  cursor: pointer;
+  &:visited {
+    color: $darkblue;
+    };
+}
+
+.btn-yellow {
+  /* default */
+  display: inline-block;
+  margin-bottom: 0.25em;
+  padding: 0.1em 0.7em; // top/sides 0.2 0.6 also works
+  font-family: $sans-serif;
+  font-size: $type-size-7;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  background-color: $lightyellow;
+  color: $darkyellow;
+  cursor: pointer;
+  &:visited {
+    color: $darkyellow;
+    };
+}
+
+.page__hero--overlay {
+  position: relative; // required so absolute children anchor to this box, not the page
+  min-height: 700px;
+  background-size: cover;
+  background-position: center center;
+
+  .page__hero--bottom-left {
+    position: absolute;
+    bottom: 1.5em;
+    left: 1.5em;
+    max-width: 60%;
+    color: #fff;
+    font-size: 0.9em;
+    line-height: 1.4;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6); // keeps text legible over the image
+
+    a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    small {
+      display: block;
+      margin-top: 0.5em;
+      opacity: 0.8;
+    }
+  }
+}
+
+h1#page-title.page__title[itemprop="headline"] {
+  display: none;
+}
+
+.archive {
+  .archive__item-teaser {
+    @include breakpoint($small) {
+      max-height: 200px;
+    }
+
+    @include breakpoint($medium) {
+      max-height: 120px;
+    }
+  }
+}
