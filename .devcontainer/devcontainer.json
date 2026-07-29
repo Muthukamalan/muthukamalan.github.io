@@ -1,8 +1,13 @@
 {
-    "name": "jekyll-container",
-    "image": "ruby:3.4.7-slim",
-    "runArgs": [
-      "--rm"
-    ],
-    "postStartCommand": "apt update && apt install git ruby-dev build-essential -y"
+  "name": "jekyll-container",
+  "runArgs": [
+    "--name","blog.io"
+  ],
+  "build": {
+    "context": "..",
+    "dockerfile": "../Dockerfile"
+  },
+  "mounts": [
+    "source=jekyll-bundle,target=/usr/local/bundle,type=volume"
+  ]
 }
