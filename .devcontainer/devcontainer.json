@@ -9,5 +9,6 @@
   },
   "mounts": [
     "source=jekyll-bundle,target=/usr/local/bundle,type=volume"
-  ]
+  ],
+  "forwwardPorts":[4000]
 }
