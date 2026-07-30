@@ -2,10 +2,8 @@
 title: "Being Human"
 date: 2019-11-05
 tags:
-# Work or personal?
-- personal
-- writing
-
+- Being Human
+- poem
 categories: blog
 toc: false
 toc_sticky: false

@@ -2,14 +2,15 @@
 title: "GPU LLM Inference"
 date: 2026-07-27
 tags:
-# Work or personal?
-- personal
+- GPU
 categories: blog
 toc: true
 toc_sticky: true
 header:
     teaser: "/../assets/2026-07-27-gpu-llm-inference/default-thumbnail.png"
 ---
+
+WIP
 
 
 # 1. Overview

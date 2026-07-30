@@ -18,6 +18,9 @@ header:
 
 # Language Behind Large Language Models
 
+Project URL: [Tamil Tokenizers](https://github.com/Muthukamalan/TamilTokenizers)
+
+
 # Introduction
 
 When we ask ChatGPT or Claude a question, the sentence doesn't go into the model directly. It's first broken down into small units called tokens. The process that does this is called tokenization, and the component responsible is the tokenizer.
@@ -58,6 +61,9 @@ This strikes a balance between the two. Common words stay whole, while rare word
     Doesn't require language-specific pre-processing like whitespace splitting — this matters a lot for languages where word boundaries aren't as clear-cut as in English. Can run on either a Unigram language model or BPE underneath.
 
 # Why build a tokenizer from scratch?
+
+
+![algo](/../assets/project-tamil-tokenizers/tokenizer_algo.png)
 
 Most of us just import a tokenizer and move on. But if you actually want to understand what's happening under the hood — especially for a script like Tamil, where general-purpose tokenizers tend to over-fragment text — the only real way is to build one yourself, watch it merge, and see the vocabulary grow one pair at a time.
 

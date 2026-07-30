@@ -16,6 +16,7 @@ def header(title: str, date, asset_dirname: str) -> str:
     return f"""---
 title: "{title}"
 date: {date.strftime("%Y-%m-%d")}
+published: true
 tags:
 # Work or personal?
 - work

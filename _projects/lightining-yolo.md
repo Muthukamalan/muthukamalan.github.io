@@ -13,3 +13,6 @@ toc_sticky: true
 header:
     teaser: "/../assets/project-lightining-yolo/default-thumbnail.png"  
 ---
+
+WIP
+# Object Detection on Lightning

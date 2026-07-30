@@ -2,12 +2,8 @@
 title: "Git in Practical"
 date: 2023-06-22
 tags:
-# Work or personal?
-- work
 - software
-- learning
-- tools
-
+- Git
 categories: blog
 toc: true
 toc_sticky: true

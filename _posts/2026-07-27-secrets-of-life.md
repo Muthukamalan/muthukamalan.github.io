@@ -3,8 +3,7 @@ title: "Secrets of Life"
 description : "As long as I live, there are infinite chances!"
 date: 2022-12-12
 tags:
-- personal
-- writing
+- essence of life
 categories: blog
 toc: false
 toc_sticky: false

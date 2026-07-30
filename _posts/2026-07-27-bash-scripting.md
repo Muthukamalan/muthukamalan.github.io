@@ -2,8 +2,9 @@
 title: "Bash Scripting"
 date: 2023-05-01
 tags:
-# Work or personal?
-- work
+- Bash
+- Tmux
+- Scripting
 categories: blog
 toc: true
 toc_sticky: true
