@@ -3,10 +3,11 @@
   "runArgs": [
     "--name","blog.io"
   ],
-  "build": {
-    "context": "..",
-    "dockerfile": "../Dockerfile"
-  },
+  // "build": {
+  //   "context": "..",
+  //   "dockerfile": "../Dockerfile"
+  // },
+  "image": "muthukamalan/blog-jekyll:latest",
   "mounts": [
     "source=jekyll-bundle,target=/usr/local/bundle,type=volume"
   ],
