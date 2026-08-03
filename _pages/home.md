@@ -39,23 +39,23 @@ excerpt: >
 list-posts:
   - image_path: /../assets/2026-07-27-git-in-practical/default-thumbnail.png
     alt: "fully responsive"
-    title: "Featured Blogs"
-    excerpt: "Lorem poresum"
-    url: "/posts"
+    title: "Git in Practical"
+    excerpt: "Git is a free and open source distributed version control system"
+    url: "/blog/git-in-practical/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
   - image_path: /../assets/2026-07-27-know-kserve/default-thumbnail.png
     alt: "fully responsive"
-    title: "Featured Blogs"
-    excerpt: "Lorem poresum"
-    url: "/posts"
+    title: "Know Kserve"
+    excerpt: "Distributed Generative and Predictive AI Inference Platform"
+    url: "/blog/know-kserve"
     btn_class: "btn--primary"
     btn_label: "Learn more"
   - image_path: /../assets/2026-07-27-secrets-of-life/default-thumbnail.png
     alt: "fully responsive"
     title: "Featured Blogs"
-    excerpt: "Lorem poresum"
-    url: "/posts"
+    excerpt: "Secrets of Life ( poem )"
+    url: "/blog/secrets-of-life/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
   - image_path: 
@@ -71,16 +71,16 @@ list-projects:
   - image_path: /../assets/project-mlops-churn/churn-prediction.png
     alt: "image1"
     title: "MLOps Churn Prediction"
-    excerpt: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-    url: "/projects/mlops-churn/mlops-chrun-prediction/"
+    excerpt: "it forecast which users are likely to stop using a service. identifies early warning signs so businesses can take action to keep clients"
+    url: "/projects/mlops-chrun-prediction"
     btn_class: "btn--primary"
     btn_label: "Learn more"
 
-  - image_path: /../assets/project-media-2-ascii/default-thumbnail.png
+  - image_path: /../assets/project-media-2-ascii/media2ascii.png
     alt: "image2"
-    title: "Python Package"
-    excerpt: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-    url: "/projects/py-pkg/media-2-ascii/"
+    title: "Ascii Art Python Package"
+    excerpt: "ASCII stands for American Standard Code for Information Interchange. It's a character encoding standard used in computers and other devices to represent text"
+    url: "/projects/media-2-ascii/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
   
