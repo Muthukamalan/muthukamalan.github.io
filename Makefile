@@ -11,7 +11,7 @@ new:
 	python3 new-post.py
 
 serve:
-	rm -rf _site && bundle exec jekyll serve  --incremental
+	rm -rf _site && bundle exec jekyll serve  --incremental &
 
 clean:
 	rm -rf _site && rm .jekyll-metadata
