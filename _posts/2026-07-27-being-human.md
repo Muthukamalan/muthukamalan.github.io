@@ -2,7 +2,6 @@
 title: "Being Human"
 date: 2019-11-05
 tags:
-- Being Human
 - poem
 categories: blog
 toc: false
