@@ -1,7 +1,9 @@
 {
   "name": "jekyll-container",
   "runArgs": [
-    "--name","blog.io"
+    "--name","blog.io",
+    "--cpus", "1",
+    "--memory=0.5g"
   ],
   // "build": {
   //   "context": "..",
@@ -10,6 +12,5 @@
   "image": "muthukamalan/blog-jekyll:latest",
   "mounts": [
     "source=jekyll-bundle,target=/usr/local/bundle,type=volume"
-  ],
-  "forwwardPorts":[4000]
+  ]
 }
