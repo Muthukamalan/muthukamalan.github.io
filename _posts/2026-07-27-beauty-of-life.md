@@ -2,7 +2,6 @@
 title: "Beauty of Life"
 date: 2021-11-12
 tags:
-- Beauty of Life
 - poem
 categories: blog
 toc: false
