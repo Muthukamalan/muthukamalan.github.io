@@ -53,7 +53,7 @@ list-posts:
     btn_label: "Learn more"
   - image_path: /../assets/2026-07-27-secrets-of-life/default-thumbnail.png
     alt: "fully responsive"
-    title: "Featured Blogs"
+    title: "Things Keep Me Moving"
     excerpt: "Secrets of Life ( poem )"
     url: "/blog/secrets-of-life/"
     btn_class: "btn--primary"
@@ -79,16 +79,16 @@ list-projects:
   - image_path: /../assets/project-media-2-ascii/media2ascii.png
     alt: "image2"
     title: "Ascii Art Python Package"
-    excerpt: "ASCII stands for American Standard Code for Information Interchange. It's a character encoding standard used in computers and other devices to represent text"
+    excerpt: "ASCII is a character encoding standard used in computers and other devices to represent text"
     url: "/projects/media-2-ascii/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
   
-  - image_path: "/../assets/project-kserve/Istio.png"
+  - image_path: "/../assets/project-microservices-poc/default-thumbnail.png"
     alt: "image3"
-    title: "Featured Project"
-    excerpt: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-    url: ""
+    title: "Microservice in Reality"
+    excerpt: "microservice are not a silver bullet it's a trade-off. Adopting a microservices trades the complexity of a single monolithic codebase for the immense operational complexity of a distributed system. So justify me?"
+    url: "/projects/project-microservices-poc/"
     btn_class: "btn--primary"
     btn_label: "Learn more"
   - image_path: 
