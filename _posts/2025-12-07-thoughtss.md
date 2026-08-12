@@ -26,3 +26,4 @@ header:
 - People who obsess over code style and linting rules are missing the point. Agree on a consistent style and follow the existing codebase instead of debating formatting.
 - Monoliths are often a great choice. Microservices always need a clear justification.
 - Once you were multiple hats, facing identity crisis is not negligible
+- Blogging helps you to more deeply understand the subject you are writing about. The best way to learn something is to teach it. In addition to teaching, writing about something is also a good way to expand your learning.
