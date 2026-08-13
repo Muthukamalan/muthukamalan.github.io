@@ -510,7 +510,39 @@ A set of pods that work together in deployment and Service helps expose your dep
     - **LoadBalancer**; external IP cloud/provider
     - **Headless** = **ClusterIP:None** DNS returns Pod IPs directly. This is how `StatefulSets` give each Pod a stable name
 
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: string
+  namespace: string
+  labels: {}
+  annotations: {}
+spec:
+  selector: {}                        # Label selector to target Pods;  map[string]string
+  ports:                             # Required: Port configuration
+  - name: string                     # Port name (optional)
+    protocol: string                 # TCP, UDP, or SCTP (default: TCP)
+    port: integer                    # Service port (required)
+    targetPort: string/integer       # Pod port (default: same as port)
+    nodePort: integer               # Node port (NodePort/LoadBalancer only)
+  type: string                       # ClusterIP, NodePort, LoadBalancer, ExternalName
+  clusterIP: string                  # Cluster-internal IP address
+  clusterIPs: []                     # For dual-stack configurations
+  externalIPs: []                    # External IP addresses
+  sessionAffinity: string            # None or ClientIP
+  sessionAffinityConfig: {}          # Session affinity configuration
+  externalName: string               # External DNS name (ExternalName only)
+  externalTrafficPolicy: string      # Cluster or Local
+  internalTrafficPolicy: string      # Cluster or Local
+  ipFamilies: []                     # IPv4, IPv6 (dual-stack)
+  ipFamilyPolicy: string             # SingleStack, PreferDualStack, RequireDualStack
+status:
+  loadBalancer:                      # LoadBalancer status
+    ingress: []                      # External load balancer ingress points
+```
 
+![alt text](/../assets/2025-07-27-kubernetes/nodeport.png)
 ```yaml
 apiVersion: v1
 kind: Service
@@ -526,6 +558,12 @@ spec:
       port: 80          # the Service port — what clients hit
       targetPort: 8080  # the container port (containerPort in the Pod)
 ```
+
+
+Your servie can reach within the Cluster `ClusterIP`. 
+Giving `LoadBalancer` every app its own burns on Cloud IP
+
+One L7 entry point in front of many services `Ingress`
 
 if your image is locally build and deploy, if requirement.txt changes it'll be locally cached
 
@@ -660,7 +698,6 @@ kubectl get jobs
 
 ## Kubernetes Components
 
-https://www.xiaoyeshiyu.com/post/ff15.html
 
 ![k8s](https://www.cncf.io/wp-content/uploads/2022/07/1_EoNdB23tkScc846qfovnog.jpg){: .align-center}
 
