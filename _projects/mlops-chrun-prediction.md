@@ -22,13 +22,17 @@ excerpt: "case study that demonstrates the transition from Jupyter notebooks to 
 
 Project Home: [`Customer-Churn-Prediction`](https://github.com/Muthukamalan/Customer-Churn-Prediction)
 
-# Introduction
+# Churn Prediction
 Most churn prediction tutorials stop at a Jupyter notebook and a confusion matrix. [`Customer-Churn-Prediction`](https://github.com/Muthukamalan/Customer-Churn-Prediction) takes the opposite approach: it treats churn modeling as an excuse to wire up a full MLOps stack — versioned data, reproducible hyperparameter search, experiment tracking, and observability — all orchestrated through Docker Compose. Here's a walkthrough of how the pieces fit together and why each one is there.
 
 ![churn prediction](/../assets/project-mlops-churn/churn-prediction.png)
 
 
-## Problem Statement:: Churn Prediction
+## Problem Statement
+
+Don't use AI without knowing context 📝֎🧠
+{: .notice--danger}
+
 It's easy to see every problem as an opportunity to use AI. Instead, let's start with the problem statement and determine whether AI is the right tool.
 ![nails](/../assets/project-mlops-churn/nail.gif)
 
@@ -40,13 +44,6 @@ Every Industrial problems should be evaluated from multiple feasibility perspect
 - **Operational feasibility** evaluates whether the organization can effectively use ![scope-change.png](/../assets/project-mlops-churn/scope-change.png)
 - **Auditing & Governance feasibility**  focuses on establishing clear policies for data ownership, data sources, fairness and compliance thoughout it's lifecycle
 
-
-Use Cases of Churn Prediction 
-1. Stop-loss Intervention and Win-back Forensics
-    - Identify customers who are likely to leave and take actionable items such as sending personalized emails, offering discounts, rewards just to encourage them to stay
-    - Analyze who already done it and understand why they left how to get them back.
-2. Understanding the Drivers of Churn
-    - Help the business make improvements based on data rather than assumptions
 
 
 ### Business Phase
@@ -123,8 +120,8 @@ Evalution is crucial not only for audit purpose. To understand how it behaves to
 
 
 ## Engineering Specfication
-### Tools
-Inside Customer-Churn-Prediction:
+### Tools used
+Inside [Customer-Churn-Prediction](https://github.com/Muthukamalan/Customer-Churn-Prediction) Project:
 
 <!-- Development -->
 [![Python](https://img.shields.io/badge/Python-3.11_|_3.12_|_3.13-3776AB?logo=python&logoColor=white)](https://www.python.org/)
@@ -381,19 +378,13 @@ For anyone setting up a similar pipeline, the pattern worth copying is the layer
 
 
 ![alt text](/../assets/project-mlops-churn/typical-scenario.png)
-   - ·A product or service is offered and used on a recurring basis.
-   - ·Customers interact with the product.
-   - ·Customers may have subscriptions to receive the product or service. Subscriptions often (but not always) cost money.
-   - ·Subscriptions can be ended or canceled, which is known as churn. If there are no subscriptions, a customer churns when they stop using the product.
-   - ·The timing, prices, and payments for the customers and subscriptions (if any) are captured in a database, typically a transactional database.
-   - ·When customers use or interact with the product or service, these events are often tracked and stored in a data warehouse.
+   - A product or service is offered and used on a recurring basis.
+   - Customers interact with the product.
+   - Customers may have subscriptions to receive the product or service. Subscriptions often (but not always) cost money.
+   - Subscriptions can be ended or canceled, which is known as churn. If there are no subscriptions, a customer churns when they stop using the product.
+   - The timing, prices, and payments for the customers and subscriptions (if any) are captured in a database, typically a transactional database.
+   - When customers use or interact with the product or service, these events are often tracked and stored in a data warehouse.
 
-1.  Churn measurement—Uses subscription data to identify churns and create churn metrics. The churn rate is an example of a churn metric. The subscription database also allows identification of customers who churned and who renewed and exactly when they did; this data is needed for further analysis.
-2.  Behavioral measurement—Uses the event data warehouse to create behavioral metrics that summarize the events pertaining to each subscriber. Creating behavioral metrics is a crucial step that allows the events in the data warehouse to be interpreted.
-3.  Churn analysis—Uses behavioral metrics for identified churns and renewals. The churn analysis identifies which subscriber behaviors are predictive of renewal and which are predictive of churn, and can create a churn risk prediction for every subscriber.
-o   At this stage, sources of information in addition to the subscriber database and event data warehouse can also be brought into the analysis (not shown in figure 1.1). These include demographic information about customers or users who are individual consumers (age, education, etc.) and firmographic information about subscribers that are businesses (industry, number of employees, etc.).
-4.  Segmentation—Based on their characteristics and risks, divides customers into groups or segments that combine aspects of their risk level, their behaviors, and any other significant characteristics. These segments target customers for interventions designed to maximize subscriber lifetime and engagement with the service.
-5.  Intervention—Using the insights and subscriber segmentation rules derived from the churn analysis, plans and executes churn-reducing interventions, including email marketing, call campaigns, and training. Another long-term intervention makes changes to the product or service, and the information from the churn analysis is useful for this too.
 
 Price reduction is a “diamond bullet” against churn: it always works, but you can’t afford it.  If a silver bullet means low cost and a reliable method, there are no silver bullets to reduce churn!
 {:.notice--success}
@@ -404,48 +395,42 @@ A one-size-fits-all churn intervention doesn’t exist, so predicting customers 
 - Focus on understanding the data and designing metrics (aka feature engineering) instead of algorithms
 
 
-Customer:
-- Subscription: a subscriber has a subscription 
-    - Monthly recurring revenue (MRR)—Paid subscriptions have an associated amount of recurring monthly revenue.
-- customer: customer pays
-- users: do neither
-
-**Product with recurring user interaction**
-
-Subscription services can collect three types of payments
-- Recurring payments—Fixed payments of the same amount for each period of service
-- Usage-based payments—Payments for the amount of service used, based on some unit of measure
-- One-time payments—Usually fees for setup but also for temporary (non-recurring) upgrades to service or one-time (in-app) purchases
-
-Products:
-   - B2C
-   - D2C
-   - B2B [SaaS]
-
-Ad-supported media <br>
-Consumer feed subscriptions <br>
-Freemium Business Model <br>
-In-app purchase <br>
-   - Inactivity as churn
-   - Free trial conversion
-   - Upsell/down sell
-   - Other yes/no (binary) customer predictions
-   - Customer activity predictions 
-
-Customer behavior data <br>
-
-great customer metrics
-   - Utilization—Metrics that show how much of the service the customer uses. If the service imposes limits on some types of use, a utilization metric shows what percentage of the allowed amount the customer took advantage of.
-   - Success—Metrics that show how successful a user is in activities that have different outcomes.
-   - Unit cost—Metrics that relate to the price the customer pays for the quantity of the service consumed or used.
-
-
-| klipfolio churn vs active users | Broadly churn vs promotors| versature churn vs local calls|
-|---------------------------------|---------------------------|-------------------------------|
-|![alt text](/../assets/project-mlops-churn/churn_vs_active_users.png)| ![alt text](/../assets/project-mlops-churn/broadly_churn_vs_promotors.png)|![alt text](/../assets/project-mlops-churn/versature_churn_versus_local_calls.png)|
-
-
 ### Measure churn
+People centric
+- Subscriber → has a subscription (tied to MRR)
+- Customer → pays
+- User → neither pays nor subscribes
+MRR (Monthly Recurring Revenue): recurring revenue tied to paid subscriptions.
+
+Payment Types
+- Recurring — fixed amount, fixed period
+- Usage-based — pay per unit consumed
+- One-time — setup fees, temp upgrades, in-app purchases
+
+Product Types
+- B2C
+- D2C
+- B2B (SaaS)
+
+Business/Revenue Models
+- Ad-supported media
+- Consumer feed subscriptions
+- Freemium
+- In-app purchases
+
+Prediction Use Cases (all driven by customer behavior data)
+- Inactivity → churn signal
+- Free trial → conversion
+- Upsell / downsell
+- Binary yes/no customer predictions
+- Customer activity predictions
+
+Metrics
+- Utilization:	% of allowed service usage consumed
+- Success:	how well user achieves desired outcomes
+- Unit cost:	price relative to quantity consumed
+
+
 ### Measure Customers
 ### Observe Renewal and Churn
 ### Understand behaviours with metrics 

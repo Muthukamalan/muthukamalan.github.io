@@ -2,9 +2,9 @@
 title: "Bash Scripting"
 date: 2023-05-01
 tags:
-- Bash
-- Tmux
-- Scripting
+- bash
+- tmux
+- scripting
 categories: blog
 toc: true
 toc_sticky: true

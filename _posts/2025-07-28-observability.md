@@ -2,9 +2,9 @@
 title: "Observability"
 date: 2025-07-28
 tags:
-- Observability
-- Prometheus
-- Grafana
+- observability
+- prometheus
+- grafana
 categories: blog
 toc: false
 toc_sticky: false

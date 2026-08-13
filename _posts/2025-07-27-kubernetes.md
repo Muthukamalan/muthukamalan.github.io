@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes"
-date: 2025-07-27
+date: 2024-07-27
 tags:
 - kubernetes
 categories: blog
@@ -10,13 +10,11 @@ header:
     teaser: "/../assets/2025-07-27-kubernetes/default-thumbnail.png"
 ---
 
-WIP
-
 # Kubernetes
 
 It's orchestration engine and gives basic primitives to orchestrate application deployments on a low level -such as `pods`, `jobs`, `deployments`, `services`, `ingress`, `persisten volumes`, `volume claims`, `secrets`, `configmaps`, `daemon`, and `statefulsets` etc..
 
-![k8s](/../assets/2025-07-27-kubernetes/default-thumbnail.png){: .align-center}
+![k8s](/../assets/2025-07-27-kubernetes/pesudo-thumbnail.png){: .align-center}
 
 ## Basics
 If you like cars, before diving into engine specs and horsepower, you first need to know how to drive. In this blog is no different—so before we get under the hood with intermediate concepts, let's briefly touch on the basics to make sure we're all on the same page. Promise we’ll keep it quick!
@@ -28,8 +26,10 @@ If you like cars, before diving into engine specs and horsepower, you first need
 ```sh
 kubectl config view  # tells which cluster it talks to
 kubectl config view --raw # 
-kubectl config get-contexts $(kubectl config current-context)  # details
-kubectl config use-context # 
+kubectl config view --minify | grep namespace # 
+kubectl config get-contexts $(kubectl config current-context)  # details, list every cluster your kubeconfig knows, * is active
+kubectl config use-context # switch clusters
+kubectl config set-context --current --namespace= # set kubectl context
 
 kubectl api-resources --api-group=apps --namespaced=false
 ```
@@ -54,6 +54,30 @@ users:
     client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJrVENDQVRlZ0F3SUJBZ0lJSGs0NGVNd2lGU013Q2dZSUtvWkl6ajBFQXdJd0l6RWhNQjhHQTFVRUF3d1kKYXpOekxXTnNhV1Z1ZEMxallVQXhOemcwT0RNM01ESTFNQjRYRFRJMk1EY3lNekl3TURNME5Wb1hEVEkzTURjeQpNekl3TURNME5Wb3dNREVYTUJVR0ExVUVDaE1PYzNsemRHVnRPbTFoYzNSbGNuTXhGVEFUQmdOVkJBTVRESE41CmMzUmxiVHBoWkcxcGJqQlpNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJFRHZzNVFOL0cwTHRVVGIKc3p4WW43aXYyeTZSY1drakdmc3lVSjdzaVYrYlVBcXpLNXNKa3RIWWNpcUJDMGRndU5UekwxeDYvNjNsTWVUWQpwYk5pclB1alNEQkdNQTRHQTFVZER3RUIvd1FFQXdJRm9EQVRCZ05WSFNVRUREQUtCZ2dyQmdFRkJRY0RBakFmCkJnTlZIU01FR0RBV2dCU2NhOTk3MWVkMmhBUHJNOUlTMnRsbmtkc1dxVEFLQmdncWhrak9QUVFEQWdOSUFEQkYKQWlCZXBXT2hHSmtvdWk1RVdvbzMxZWFpSDF1MGROYzlrQkdIZmI1ejQ3czlId0loQUtLUTZsM3JWVFhLK1hTdQpuWkUzbUJ6U2Vvd1R1bENQdDBUd0lvY1lmODJnCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0KLS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJlRENDQVIyZ0F3SUJBZ0lCQURBS0JnZ3Foa2pPUFFRREFqQWpNU0V3SHdZRFZRUUREQmhyTTNNdFkyeHAKWlc1MExXTmhRREUzT0RRNE16Y3dNalV3SGhjTk1qWXdOekl6TWpBd016UTFXaGNOTXpZd056SXdNakF3TXpRMQpXakFqTVNFd0h3WURWUVFEREJock0zTXRZMnhwWlc1MExXTmhRREUzT0RRNE16Y3dNalV3V1RBVEJnY3Foa2pPClBRSUJCZ2dxaGtqT1BRTUJCd05DQUFUQnlFd2pKVDF6bVN0OVBuR1MranZGNkN0NklTVkdnTTg0bkNVWGxRZUIKNHVGT3FlZUxheDA4eENRTGozZXpBKzJCNloxaWp2dXpGSkl3QXpoeEJVTm5vMEl3UURBT0JnTlZIUThCQWY4RQpCQU1DQXFRd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBZEJnTlZIUTRFRmdRVW5HdmZlOVhuZG9RRDZ6UFNFdHJaClo1SGJGcWt3Q2dZSUtvWkl6ajBFQXdJRFNRQXdSZ0loQUxvbnhMeWVpWVYzbXd4M2JoY25mVFZnd0RQbkhxOXkKY2pHaU9PVEpTQ3JpQWlFQTduZ0NGNC9CZ3JJQzhTaDJGaEgvd0V2ZHFSTXZ5czdRd3RWQjFCWWdOUFU9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
     client-key-data: LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0tCk1IY0NBUUVFSUlJcWJXd2FiemFwWGxYRVBwMGswa21RditqWjNpYkxVOGNvd09jaTBHUVJvQW9HQ0NxR1NNNDkKQXdFSG9VUURRZ0FFUU8remxBMzhiUXUxUk51elBGaWZ1Sy9iTHBGeGFTTVorekpRbnV5Slg1dFFDck1ybXdtUwowZGh5S29FTFIyQzQxUE12WEhyL3JlVXg1TmlsczJLcyt3PT0KLS0tLS1FTkQgRUMgUFJJVkFURSBLRVktLS0tLQo=
 ```
+
+
+##### Kubectl CMD
+
+| group-verb | action |
+|------------|--------|
+| READ       | get    |
+| READ       | describe|
+| READ       | explain|
+| CHANGE     | apply  |
+| CHANGE     | edit   |
+| CHANGE     | diff   |
+| RUN &DEBUG | logs   |
+| RUN &DEBUG | exec   |
+| RUN &DEBUG | port-forward |
+
+
+```sh
+kubectl apply -f pod.yaml --dry-run=client # does local checks; never contact API server; Good for generate yaml `-o yaml`
+kubectl apply -f pod.yaml --dry-run=server # send the object and does what client can't: quota, webhooks, missing references, 
+kubectl apply -f pod.yaml # validates and writes to etcd
+```
+
+
 
 <details>
 <summary>kubectl api-resources</summary>
@@ -361,6 +385,10 @@ spec:
   type: ClusterIP
 ```
 - Query `App=Nifty`
+```sh
+kubectl get pods -l App=Nifty
+kubectl get pods -l 'App in (Nifty)'
+```
 ![alt text](/../assets/2025-07-27-kubernetes/selector-2.png){: .align-center}
 
 
@@ -424,16 +452,82 @@ while(true) {
 ##### - **Deployment**
 Grp of pods of the same type together to achieve load balancing. Greate for stateless workload, where exact copies of app runs and destory, maintain  desired number of apps.
 
+
+```yaml
+apiVersion: apps/v1        # workloads live in apps/v1, not core v1
+kind: Deployment           # Pod → Deployment
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  replicas: 3              # NEW — how many Pods you want
+  selector:
+    matchLabels:
+      app: web             # NEW — which Pods this Deployment owns; # must match template.metadata.labels below
+  template:                # everything below is the Pod, indented one level
+    metadata:
+      labels:
+        app: web           # the Pod's own labels — must satisfy the selector; # the pod Label
+    spec:
+      containers:
+        - name: web
+          image: ghcr.io/platformrelay/workshop-web:v1
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
+```
+
+If you plans to go for new Image
+```sh
+kubectl set image deployment/web web=ghcr.io/platformrelay/workshop-web:v2 # edit the pod with new template image
+```
+
+
 ##### - **Rollout**
+![rollouts](/../assets/2025-07-27-kubernetes/rollouts.gif)
+
+```sh
+kubectl rollout status deployment/web
+kubectl rollout history deployment/web
+kubectl rollout undo deployment/web
+```
+
 
 ##### - **Service**
 A set of pods that work together in deployment and Service helps expose your deployment. This exposure can be to other deployments `and/or` to the outside world.
 ![alt text](/../assets/2025-07-27-kubernetes/service-overview.png){: .align-center}
 
   - Types of Services ![types](/../assets/2025-07-27-kubernetes/k8s_services.png){: .align-center}
-    - **ClusterIP**
-    - **NodePort**
-    - **LoadBalancer**
+    - **ClusterIP**; Reachable only from within the cluster
+    - **NodePort**; ClusterIP + fixed port on the every Node
+    - **LoadBalancer**; external IP cloud/provider
+    - **Headless** = **ClusterIP:None** DNS returns Pod IPs directly. This is how `StatefulSets` give each Pod a stable name
+
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  selector:
+    app: web            # the SAME label the Deployment stamps on its Pods;            # picks every Pod carrying this label
+  ports:
+    - name: http
+      port: 80          # the Service port — what clients hit
+      targetPort: 8080  # the container port (containerPort in the Pod)
+```
+
+if your image is locally build and deploy, if requirement.txt changes it'll be locally cached
 
 ##### - **ConfigMap**
 
@@ -454,16 +548,180 @@ Similar to deployments but used for applications where copies of same applicatio
 ![alt text](/../assets/2025-07-27-kubernetes/pv-pvc-claim.png){: .align-center}
 - ****
 
-## Kubernets Components
 
+##### **Cronjob**
+```yml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: devops
+spec:
+  jobTemplate:
+    metadata:
+      name: devops
+    spec:
+      template:
+        metadata: {}
+        spec:
+          containers:
+          - image: nginx:latest
+            name: cron-devops
+            resources: {}
+            command:
+            - /bin/sh
+            - -c
+            - echo Welcome to xfusioncorp!
+          restartPolicy: OnFailure
+  schedule: '*/10 * * * *'                      # schedules
+status: {}
+```
+```sh
+kubectl create cronjob devops --image=nginx:latest --schedule='*/10 * * * *' --dry-run=client -o yml # modify it later as above
+kubectl get cronjobs devops
+kubectl describe cronjobs devops
+kubectl get jobs --watch
+pods=$(kubectl get pods --selector=job-name=devops-29764270 --output=jsonpath={.items[*].metadata.name})  # replace `devops-29764270` with actual pod which runs job
+kubectl logs $pods #  Welcome to xfusioncorp!
+```
+```log
+NAME     SCHEDULE       TIMEZONE   SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+devops   */10 * * * *   <none>     False     0        4m6s            5m50s
+------------------------------------------------
+Name:                          devops
+Namespace:                     default
+Labels:                        <none>
+Annotations:                   <none>
+Schedule:                      */10 * * * *
+Concurrency Policy:            Allow
+Suspend:                       False
+Successful Job History Limit:  3
+Failed Job History Limit:      1
+Starting Deadline Seconds:     <unset>
+Selector:                      <unset>
+Parallelism:                   <unset>
+Completions:                   <unset>
+Pod Template:
+  Labels:  <none>
+  Containers:
+   cron-devops:
+    Image:      nginx:latest
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      /bin/sh
+      -c
+      echo Welcome to xfusioncorp!
+    Environment:     <none>
+    Mounts:          <none>
+  Volumes:           <none>
+  Node-Selectors:    <none>
+  Tolerations:       <none>
+Last Schedule Time:  Tue, 04 Aug 2026 15:10:00 +0000
+Active Jobs:         <none>
+Events:
+  Type    Reason            Age    From                Message
+  ----    ------            ----   ----                -------
+  Normal  SuccessfulCreate  4m48s  cronjob-controller  Created job devops-29764270
+  Normal  SawCompletedJob   4m41s  cronjob-controller  Saw completed job: devops-29764270, condition: Complete
+------------------------------------------------
+NAME              STATUS     COMPLETIONS   DURATION   AGE
+devops-29764270   Complete   1/1           7s         5m41s
+```
+
+
+
+##### Job
+A Kubernetes Job is a workload controller that runs finite, short-lived tasks to completion and then stops.
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: countdown-devops
+spec:
+  template:
+    metadata:
+      name: countdown-devops
+    spec:
+      containers:
+      - image: ubuntu:latest
+        name: container-countdown-devops
+        command:
+        - /bin/sh 
+        - sleep 5
+        resources: {}
+      restartPolicy: Never
+status: {}
+```
+```sh
+kubectl get jobs
+```
+
+
+
+## Kubernetes Components
+
+https://www.xiaoyeshiyu.com/post/ff15.html
 
 ![k8s](https://www.cncf.io/wp-content/uploads/2022/07/1_EoNdB23tkScc846qfovnog.jpg){: .align-center}
 
-- **API Server**: responsible for communication with kubelet on the worker nodes. `Authentication` , `Authorization` of the requestor
-- **Etcd**: key-value store of the critical state of system. Distributed Core Logic snapsotting the status of the k8s cluster
-- **Kube Controller Manager**: responsible for monitoring the shared state of cluster through apiserver and making it to desired state
-- **Kube Scheduler**: responsbile for select the worker node for a POD, and provision on target node according to resource specification.
+- **API Server**: responsible for communication with kubelet on the worker nodes. `Authentication` , `Authorization` of the requestor. It is the one who communicate with *Etcd*
+
+The access process for APIServer is `HTTP Router` very similar to that of other services,
+- `AuthN` Authentication
+- `Rate Limiter` 
+- `Auditing` Audit logs record operations
+- `Authz` Authentication, which `RBAC` determines whether the permissions are satisfied
+- `Aggregator` are used when you need to add/modify attributes to a reqest, or when you want to bypass Kubernetes native logic and use your own custom logic `APIServer`. Examples include `kubectl top node` these plugins.
+- `validation` Validators, syntax validators, etc.
+
+
+![alt text](/../assets/2025-07-27-kubernetes/api-server.png)
+
+
+- **Etcd**: key-value store of the critical state of system. Distributed Core Logic snapsotting the status of the k8s cluster developed *CoreOS* used for service discovery, shared configuration, and consistency assurance (such as database leader election, distributed locks ( CAS, CAD ), etc.)
+  - CAS Compare And Swap
+  - CAD Compare And Delete
+
+Store every object's spec and status. Lose etcd, lose the cluster's memory
+{: .notice--danger}
 
 
 
-#### Kube Scheduler
+![alt text](/../assets/2025-07-27-kubernetes/etcd.png)
+ Microservices write their IP addresses and ports into etcd.
+b
+- **Kube Controller Manager**: responsible for monitoring the shared state of cluster through apiserver and making it to desired state **Reconcillation Loops**
+
+![alt text](/../assets/2025-07-27-kubernetes/controller-workflow.png)
+
+
+- **Kube Scheduler**: responsbile for select the worker node for a POD, and provision on target node according to resource specification (affinity, taints,resources) . **Kubelet** does the running
+
+
+- **Kubelet** The node's Agent watches the API server for pods assign to the ndoe reports their status back.
+
+- **Kube-proxy** Programs the node's networking as a `Service IP` reaches the right pod
+
+- **Container Runtime** **Kubelet** calls over the CRI to pull image and start containers
+
+#### API Server
+#### Etcd
+#### Kube Controller Manager
+#### Kube Scheduler:
+
+
+
+```yaml
+# desired state
+apiVersion:
+kind:
+metadata:
+spec:
+  ...
+
+# observed state
+status:
+  phase: 
+  conditions: [...]
+```
+

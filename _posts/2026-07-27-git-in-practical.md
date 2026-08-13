@@ -3,7 +3,7 @@ title: "Git in Practical"
 date: 2023-06-22
 tags:
 - software
-- Git
+- git
 categories: blog
 toc: true
 toc_sticky: true

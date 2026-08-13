@@ -2,7 +2,7 @@
 title: "GPU LLM Inference"
 date: 2026-07-27
 tags:
-- GPU
+- gpu
 categories: blog
 toc: true
 toc_sticky: true

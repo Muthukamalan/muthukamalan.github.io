@@ -10,6 +10,9 @@ author_profile: true
 layout: single
 classes:
 - landing_page
+tags:
+- chrome extension
+- javascript
 toc: true
 toc_sticky: true
 categories:  projects
