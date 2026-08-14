@@ -43,3 +43,6 @@ Implemented by a number of Linux APIs:
     - kill,
     - chown,...
 - **chroots:** Determines what parts of the filesystem a users can see
+
+docker images -a --format='{{.ID}} {{.CreatedAt}} {{.Repository}}:{{.Tag}}'
+docker images --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}"
