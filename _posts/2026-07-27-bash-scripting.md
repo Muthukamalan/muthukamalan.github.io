@@ -990,6 +990,7 @@ lshw                    # List Hardware
 du -lsh filename        # size of the file
 du -sh /var/*  # disk usage
 ```
+![top command](/../assets/2026-07-27-bash-scripting/top-command.png)
 
 ## File compression
 
