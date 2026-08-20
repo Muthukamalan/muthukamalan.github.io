@@ -341,9 +341,11 @@ docker tag my-app:latest ://my-registry.com
 # Embed non-reusable structural metadata (labels) directly during the build phase
 docker build --label "maintainer=devops@company.com" --label "build_version=v1.2.4" --label "environment=production" -t my-app:latest .
 ```
+
 ### ARG vs ENV
 - *ARG* (Build-time): Only available while the image is building. It is completely absent once the container starts running.
 - *ENV* (Runtime): Available during the build AND persists inside the running container as an environment variable.
+
 ```bash
 # Dockerfile snippet showcasing the differences:
 # ARG VERSION=16
@@ -356,6 +358,7 @@ docker build --build-arg VERSION=18 -t my-node-app .
 # 1. This WILL override the internal ENV (NODE_ENV will now be 'development' inside)
 docker container run -d -e NODE_ENV=development my-node-app
 ```
+
 ### ADD vs COPY
 - *COPY* (Recommended): Explicitly copies local files or folders from the host machine context straight into the container.
 - *ADD*: Copies files but includes advanced logic. It automatically extracts local tar archives into directories and downloads files directly from remote URLs
