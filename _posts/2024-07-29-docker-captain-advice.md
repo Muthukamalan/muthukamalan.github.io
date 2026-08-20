@@ -6,8 +6,8 @@ tags:
 - docker
 
 categories: blog
-toc: false
-toc_sticky: false
+toc: true
+toc_sticky: true
 header:
     teaser: "/../assets/2024-07-29-docker-captain-advice/default-thumbnail.png"
 ---
@@ -297,6 +297,55 @@ mental model
 
 
 
+# Docker commands
+
+## Build 
+### Specific file & .dockerignore & Logs 
+### build by platform
+### organize by tag labels
+### ARG vs ENV
+### ADD vs COPY
+### ENTRYPOINT vs RUN
+### MultiStage Build
+
+## Image
+### query by label
+### Image layers & History
+### Inspect & Metadata
+### Push & Pull registry
+### Prune & Clean up
+
+## Container
+### Lifecycle & States
+### Port mapping & Publish
+### Logs & Monitoring
+### Environment variables
+### Exec & Interactive terminal
+### Restart policies
+### Capabilities & Privileges
+### Resource limits (CPU & Memory)
+### Healthchecks & Init processes
+
+## Volume
+### Named volumes
+### Bind mounts
+### Anonymous volumes
+### Volume drivers
+### Backup & Restore
+
+
+## Secrets
+### Build-time secrets
+### Compose secrets
+### Vault integration
+
+
+## Network
+### Bridge network
+### Host network
+### Overlay network
+### Custom networks
+### DNS & Service discovery
 
 
 docker images -a --format='{{.ID}} {{.CreatedAt}} {{.Repository}}:{{.Tag}}'
