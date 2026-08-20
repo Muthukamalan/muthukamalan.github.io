@@ -300,38 +300,370 @@ mental model
 # Docker commands
 
 ## Build 
+```bash
+# Standard image build using the current directory as context
+docker build -t my-app:latest .
+
+# Modern BuildKit build (default in modern Docker versions) with faster caching
+DOCKER_BUILDKIT=1 docker build -t my-app:latest .
+
+```
 ### Specific file & .dockerignore & Logs 
+```bash
+# Build using a custom named Dockerfile instead of the default 'Dockerfile'
+docker build -f Dockerfile.dev -t my-app:dev .
+
+# Build with raw logs streamed completely without terminal formatting or wrapping
+docker build --progress=plain -t my-app:latest .
+
+# Example of a `.dockerignore` file concept to skip node_modules and git metadata:
+# Prevents large, unnecessary local files from bloating the build context.
+# Contents of .dockerignore:
+# .git
+# node_modules/
+# *.log
+```
 ### build by platform
+```bash
+# Build an image targeted for a specific platform architecture
+docker build --platform linux/amd64 -t my-app:amd64 .
+
+# Build for multiple target architectures simultaneously using Docker Buildx (requires a builder instance)
+docker buildx create --name mybuilder --use
+docker buildx build --platform linux/amd64,linux/arm64 -t username/my-app:v1.0 --push .
+```
 ### organize by tag labels
+```bash
+# Tag an existing image with a precise semantic version and a moving 'latest' alias
+docker tag my-app:latest ://my-registry.com
+docker tag my-app:latest ://my-registry.com
+
+# Embed non-reusable structural metadata (labels) directly during the build phase
+docker build --label "maintainer=devops@company.com" --label "build_version=v1.2.4" --label "environment=production" -t my-app:latest .
+```
 ### ARG vs ENV
+- *ARG* (Build-time): Only available while the image is building. It is completely absent once the container starts running.
+- *ENV* (Runtime): Available during the build AND persists inside the running container as an environment variable.
+```bash
+# Dockerfile snippet showcasing the differences:
+# ARG VERSION=16
+# FROM node:${VERSION}                  <- ARG used to pick base image
+# ENV NODE_ENV=production               <- ENV set for the final container application
+
+# Override a build-time argument from the command line interface
+docker build --build-arg VERSION=18 -t my-node-app .
+
+# 1. This WILL override the internal ENV (NODE_ENV will now be 'development' inside)
+docker container run -d -e NODE_ENV=development my-node-app
+```
 ### ADD vs COPY
+- *COPY* (Recommended): Explicitly copies local files or folders from the host machine context straight into the container.
+- *ADD*: Copies files but includes advanced logic. It automatically extracts local tar archives into directories and downloads files directly from remote URLs
+```bash
+# Dockerfile snippet showcasing the behavior:
+# COPY package.json /app/              <- Safest, default practice for standard assets
+# ADD sourcecode.tar.gz /app/          <- Automatically extracts the tarball into /app/
+# ADD https://example.com /   <- Downloads file directly into container root
+```
 ### ENTRYPOINT vs RUN
+- *RUN* (Build-time): Executes commands inside a temporary layer to modify the file system (e.g., installing packages) during the build process.
+- *ENTRYPOINT* (Runtime): Configures the concrete executable command that fires up by default the moment the container transitions to a running state.
+
+```bash
+# Dockerfile snippet showcasing the mechanics:
+# RUN apt-get update && apt-get install -y curl  <- Executed during 'docker build'
+# ENTRYPOINT ["curl", "-s"]                      <- Executed during 'docker run'
+
+# Usage mapping at runtime:
+# Passing an argument appends seamlessly to the ENTRYPOINT executable
+docker run --rm my-curl-image https://github.com
+```
+
+### INIT
+Basically, primary application executable that fires up by default `ENTRYPOINT` the moment the container transitions to a running state. It defines the core purpose of the container.
+
+`INIT` Injects a lightweight init system (like `tini`) into the container to run as PID 1, moving your ENTRYPOINT application to PID 2+.Containers running complex apps (like Node.js, Java, or multiple background processes) often fail to respond to docker stop or clean up dead child processes. The `--init` flag resolves this completely.
+
+```
+Without --init:  [PID 1: Your App]      <-- Frequently ignores SIGTERM / leaves zombie processes
+With --init:     [PID 1: Tini Init] -> [PID 2: Your App]  <-- Properly reaps zombies & handles signals
+
+# Force Docker to use an init process to safely reap zombie processes
+docker container run -d --init --name safe-app my-node-image
+
+# Stop the container instantly (Init forwards SIGTERM properly, avoiding the 10-second timeout)
+docker container stop safe-app
+```
+
 ### MultiStage Build
+
+```bash
+# --- Stage 1: The Builder Environment ---
+FROM golang:1.21 AS builder
+WORKDIR /src
+COPY . .
+# Compile a single static binary file
+RUN CGO_ENABLED=0 GOOS=linux go build -o myapp .
+
+# --- Stage 2: The Production Runtime ---
+FROM alpine:latest  
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+# Securely extract only the compiled binary file from the previous stage
+COPY --from=builder /src/myapp .
+# Define final container initialization executable
+ENTRYPOINT ["./myapp"]
+```
+```bash
+# Build the multi-stage pipeline (Docker naturally discards Stage 1 bulk layers)
+docker build -t production-app:latest .
+
+# Stop the build execution early at a specific targeting layer for debugging
+docker build --target builder -t debug-builder:latest .
+```
+
+
 
 ## Image
 ### query by label
+```bash
+# Filter and list images matching a specific maintainer label
+docker image ls --filter "label=maintainer=devops@company.com"
+
+# Filter and list images containing a specific build stage metadata label
+docker image ls --filter "label=stage=builder"
+
+# Remove all images that have a specific deployment label applied
+docker image rm $(docker image ls -q --filter "label=environment=staging")
+
+# Custom output format showing IDs, creation timestamps, and repository tags for all images
+docker images -a --format='{{.ID}} {{.CreatedAt}} {{.Repository}}:{{.Tag}}'
+```
 ### Image layers & History
+```bash
+# View the linear build history and structural layers of an image
+docker image history nginx
+
+# View build history with full-length command descriptions instead of truncated text
+docker image history --no-trunc nginx
+
+# View only the specific text layer sizes of an image to find storage bottlenecks
+docker image history --format "{{.CreatedBy}}: {{.Size}}" nginx
+```
 ### Inspect & Metadata
+```bash
+# Extract and view the complete raw metadata configuration JSON schema
+docker image inspect nginx
+
+# Extract specific structural details using Go template formatting syntax
+docker image inspect -f '{{.Architecture}}' nginx                 # View CPU architecture (amd64/arm64)
+docker image inspect -f '{{.Config.Env}}' nginx                 # List default internal environment variables
+docker image inspect -f '{{.Config.Cmd}}' nginx         -        # View default startup execution command
+
+
+# Format standard image listing into a clean, customized data table showing tags and file sizes
+docker images --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}"
+```
+
+```bash
+docker image inspect nginx
+```
 ### Push & Pull registry
+```bash
+# Authenticate securely with a target image registry provider
+docker login ://example.com -u your_username
+
+# Tag an existing local image structure to match target registry paths
+docker image tag nginx:latest ://example.com/production/nginx:v1.0
+
+# Push the newly tagged local architecture up to the secure remote repository
+docker image push ://example.com/production/nginx:v1.0
+
+# Pull down an update package without launching a container runtime interface
+docker image pull ://example.com/production/nginx:v1.0
+```
 ### Prune & Clean up
+```bash
+# Remove a specific targeted image variant completely from host disks
+docker image rm nginx:latest
+
+# Remove all dangling images (images that are untagged and not used by any container)
+docker image prune
+
+# Deep clean: remove ALL images not currently associated with an active running container
+docker image prune -a
+
+# Automatically clean up images based on age conditions (e.g., older than 48 hours)
+docker image prune -a --filter "until=48h"
+```
 
 ## Container
 ### Lifecycle & States
+```sh
+docker container run nginx -d # detached; run in background
+docker container run --name webserver nginx   # with custom-name 
+docker container ls -a
+docker ps -a
+
+docker container stop webserver         # stop the container
+docker container start  webserver       # start the container
+docker container stats webserver        # statistics
+docker container inspect webserver      # inspect
+
+docker container rm  webserver          # only stopped container can be removed
+docker container rm CONTAINER_NAME --force  # May the Force be with you 
+```
 ### Port mapping & Publish
+```bash
+docker container run -d --name nginx nginx  # create nginx container
+docker container run -d --name my-app alpine/curl  # curl container
+
+# test the container from curl -> nginx
+docker container exec -it my-app sh
+curl <IP-OF-NGINX-CONTAINER>:80       # docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx
+
+# remove the nginx container and publish new container with published port
+docker container rm nginx --force  
+docker container run -d --name nginx -p 8080:80 nginx
+```
+```
+     -p   8080     :        80
+            │                │
+    ┌───────┴──────┐ ┌───────┴──────────┐
+    │  Host Port   │ │  Container Port  │
+    │ (Your Laptop)│ │ (Inside Nginx)  │
+    └──────────────┘ └──────────────────┘
+```
+
+
 ### Logs & Monitoring
+```bash
+docker container logs nginx             # view all logs
+docker container logs -f nginx          # follow/stream logs in real-time
+docker container logs --tail 10 nginx   # view only the last 10 lines
+docker container top nginx              # list running processes inside container
+docker container stats nginx            # live stream of CPU, memory, and network usage
+```
 ### Environment variables
+```bash
+# pass a single environment variable
+docker container run -d --name my-db -e MYSQL_ROOT_PASSWORD=secret mysql
+
+# pass multiple variables using an env file
+echo "DB_USER=admin\nDB_PASS=password" > .env
+docker container run -d --name app --env-file .env alpine
+```
 ### Exec & Interactive terminal
+```bash
+docker container exec nginx ls -l
+docker container exec -it nginx bash
+```
 ### Restart policies
+```bash
+docker container run -d --restart no nginx             # default; do not restart
+docker container run -d --restart on-failure nginx    # restart only if container exits with error
+docker container run -d --restart always nginx        # always restart, even if stopped manually
+docker container run -d --restart unless-stopped nginx # restart unless explicitly stopped by user
+```
 ### Capabilities & Privileges
+```bash
+# grant full root privileges to the host system (use with caution)
+docker container run -d --privileged --name secure-app nginx
+
+# add specific Linux kernel capabilities (e.g., allow system clock modifications)
+docker container run -d --cap-add=SYS_TIME --name time-app alpine
+
+# drop specific Linux kernel capabilities for hardened security
+docker container run -d --cap-drop=CHOWN --name hardened-app alpine
+```
+
 ### Resource limits (CPU & Memory)
+```bash
+# limit maximum memory allocation to 512 Megabytes
+docker container run -d --memory="512m" nginx
+
+# limit maximum CPU usage to 1.5 cores
+docker container run -d --cpus="1.5" nginx
+
+# set memory limit along with swap memory allocation
+docker container run -d --memory="512m" --memory-swap="1g" nginx
+```
 ### Healthchecks & Init processes
+```bash
+# configure internal healthcheck intervals and rules
+docker container run -d  --name health-web  --health-cmd="curl -f http://localhost/ || exit 1"   --health-interval=5s   --health-timeout=3s   --health-retries=3 nginx
+
+# run with pid 1 init process to forward signals and reap zombie processes
+docker container run -d --init --name init-app alpine
+```
+
 
 ## Volume
+
 ### Named volumes
+Managed entirely by Docker, isolated from host machine file structures, and persistent across container lifecycles
+```bash
+docker volume create my-data            # create a named volume explicitly
+docker volume ls                        # list all available volumes
+docker volume inspect my-data           # view storage location on host system
+
+# mount the named volume to the container target directory
+docker container run -d --name web -v my-data:/usr/share/nginx/html nginx
+```
+
+```
+     -p   my-data   :     /usr/share/nginx/html
+            │                │
+    ┌───────┴──────┐ ┌───────┴──────────┐
+    │      Host    │ │  Container       │
+    │ (Your Laptop)│ │ (Inside Nginx)   │
+    └──────────────┘ └──────────────────┘
+```
+
 ### Bind mounts
+Maps an exact, absolute path on your host machine directly to a path inside the running container.
+```bash
+# mount local development directory to nginx server using modern --mount flag
+docker container run -d --name dev-web \
+  --mount type=bind,source="$(pwd)"/html,target=/usr/share/nginx/html \
+  nginx
+
+# short syntax alternate version using absolute path variable
+docker container run -d --name dev-web-alt -v "$(pwd)"/html:/usr/share/nginx/html nginx
+```
 ### Anonymous volumes
+Created dynamically without an explicit name when a container is run; automatically deleted if the container is removed with the `-v` flag
+```bash
+# generate a dynamic hash-named volume for temporary, high-performance storage
+docker container run -d --name temp-app -v /data alpine
+
+# cleanup container and its associated anonymous volumes at the same time
+docker container rm -v temp-app
+```
 ### Volume drivers
+Allows Docker to bypass local storage and mount external storage systems like AWS S3, Azure Files, DigitalOcean block storage, or SSH/NFS shares directly
+```bash
+# install a cloud storage volume driver (example using local NFS share setup)
+docker volume create --driver local --opt type=nfs --opt o=addr=192.168.1.50,rw --opt device=: /path/to/nfs/share  nfs-volume
+```
+
+```bash
+# 1. Install the official managed Rclone volume plugin
+docker plugin install rclone/docker-volume-plugin:latest --grant-all-permissions
+
+# 2. Create the volume passing S3 parameters via driver options (--opt)
+docker volume create --driver rclone/docker-volume-plugin --opt type=s3 --opt s3-provider=AWS --opt s3-access-key-id=YOUR_ACCESS_KEY --opt s3-secret-access-key=YOUR_SECRET_KEY --opt s3-region=us-east-1 --opt vfs-cache-mode=full s3-volume:your-bucket-name
+```
+
 ### Backup & Restore
+Uses a temporary intermediary container to archive or extract volumes back onto your system
+```bash
+# Backup: archive 'my-data' contents into a compressed tar file on the host machine
+docker container run --rm -v my-data:/volume -v "$(pwd)":/backup alpine tar cvf /backup/backup.tar /volume
+
+# Restore: extract the backup tar file contents back into a new volume
+docker container run --rm -v new-data:/volume -v "$(pwd)":/backup alpine tar xvf /backup/backup.tar -C /volume --strip-components=1
+```
 
 
 ## Secrets
@@ -348,5 +680,3 @@ mental model
 ### DNS & Service discovery
 
 
-docker images -a --format='{{.ID}} {{.CreatedAt}} {{.Repository}}:{{.Tag}}'
-docker images --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}"
