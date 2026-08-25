@@ -13,15 +13,20 @@ categories:  projects
 related: false
 header:
     teaser: "/../assets/project-microservices-poc/default-thumbnail.png"
+excerpt: WIP
 ---
 
 
-talked about:
-- [project1](votingapp)
-- [project2](wordwizards)
-
-
 ![alt text](/../assets/project-kserve/image.png)
+
+In this Spae, I yap about three project:
+- [votingapp](https://github.com/Muthukamalan/VotingApp)
+- [wordwizards](https://github.com/Muthukamalan/WordWizards)
+- [](https://github.com/googlecloudplatform/microservices-demo)
+- [ML On Orchestr]()
+
+
+
 # Learning Microservices the Hands-On Way: A Distributed Voting App
 
 *A detailed look at [VotingApp](https://github.com/Muthukamalan/VotingApp) — a multi-language, multi-container distributed system built to make microservices concepts concrete, complete with observability baked in from day one.*

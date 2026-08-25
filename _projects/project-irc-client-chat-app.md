@@ -1,6 +1,6 @@
 ---
 title: "IRC Chat APP"
-date: 2026-07-31
+date: 2020-07-31
 published: true
 tags:
 - work
@@ -14,7 +14,8 @@ toc: true
 toc_sticky: true
 categories:  projects
 related: false
+excerpt: "Yet to Update"
 ---
 
 
-inspired from: [project](https://github.com/olivi-eh/kaero)
+<!-- inspired from: [project](https://github.com/olivi-eh/kaero) -->

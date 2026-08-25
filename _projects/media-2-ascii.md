@@ -13,14 +13,13 @@ date: 2022-04-31
 related: false
 header:
     teaser: "/../assets/project-media-2-ascii/default-thumbnail.png"
+excerpt: "Turning Images and Video into Terminal ASCII Art"
 ---
-
-# Turning Images and Video into Terminal ASCII Art
-
 
 ![Ascii image](/../assets/project-media-2-ascii/media2ascii.png)
 
-*A look at [media2ascii](https://github.com/Muthukamalan/media2ascii) — a Python package (with a Rust core underneath) that converts images and video into ASCII art, right in your terminal.*
+
+<!-- *A look at [media2ascii](https://github.com/Muthukamalan/media2ascii) — a Python package (with a Rust core underneath) that converts images and video into ASCII art, right in your terminal.*
 
 ## What it does
 
@@ -94,4 +93,63 @@ There's something satisfying about a tool that takes something as "high-fidelity
 
 ---
 
-*Repo: [github.com/Muthukamalan/media2ascii](https://github.com/Muthukamalan/media2ascii)*
+*Repo: [github.com/Muthukamalan/media2ascii](https://github.com/Muthukamalan/media2ascii)* -->
+
+
+Project Home: [Media2Ascii](https://github.com/Muthukamalan/media2ascii)
+
+
+# img2ascii: Turning Pixels into Ascii 🖼 → 🔤
+ 
+There's something satisfying about watching a photo dissolve into a wall of `@`, `#`, and `.` characters in your terminal. It's a small trick, but it sits at a fun intersection of image processing, character density mapping, and good old-fashioned CLI design. That's exactly the itch [`media2ascii`](https://github.com/Muthukamalan/media2ascii) scratches — a Python package (packaged and used as `img2ascii`) that converts images into ASCII art, right from the command line or as a library import.
+ 
+## What it does
+ 
+At its core, the idea is simple: every pixel has a brightness value, and every brightness value can be mapped to a character whose visual "density" approximates it. Bright pixels become sparse characters like spaces or dots; dark pixels become dense characters like `@` or `#`. Stack enough of these characters in a grid and you get a recognizable image made entirely of text.
+ 
+The project builds on **Pillow** for image loading, so it handles the usual suspects — JPEG, PNG, BMP, GIF, WEBP — out of the box. From there it offers a few thoughtful knobs:
+ 
+- **Two grayscale palettes** — a detailed 70-character set for high-fidelity output, or a simple 10-character set when you want something cleaner and faster to render
+- **Configurable width** via `--size`, so the output fits whatever terminal (or file) you're targeting
+- **Brightness inversion** (`-inv`) for images that read better with the mapping flipped — handy for dark-mode terminals or inverted source images
+- **Save-to-file support** (`--save`) if you want to keep the ASCII art around instead of just printing it
+- **Structured logging with loguru** and **rich terminal output**, which is a nice touch — a lot of CLI-art tools skip polish like this, but it makes debugging and everyday use noticeably more pleasant
+## Using it
+ 
+The CLI is where most people will start:
+ 
+```bash
+img2ascii --imagepath photo.jpg
+img2ascii --imagepath photo.jpg --size 80
+img2ascii --imagepath photo.jpg --size 60 --output_path output.txt
+img2ascii --imagepath photo.jpg --invert
+img2ascii --imagepath photo.jpg --palette 10
+```
+ 
+But it's just as usable as a library, which is arguably the more interesting design choice — it means the conversion logic isn't locked behind a CLI wrapper:
+ 
+```python
+from img2ascii import ImageToAscii
+ 
+converter = ImageToAscii(width=80, palette='10', invert=False)
+ascii_art = converter.convert('photo.jpg')
+print(ascii_art)
+converter.save(ascii_art, 'output.txt')
+```
+ 
+That `ImageToAscii` class is a clean seam — you could drop it into a larger pipeline, a Discord bot, a build step for READMEs, or a terminal-based image previewer without touching any argument-parsing code.
+ 
+## The project setup
+ 
+A few details in the repo are worth calling out for anyone browsing the source rather than just installing the package. It's structured as a proper installable package with a `pyproject.toml`, uses `uv` for dependency management (`uv sync --all-groups`), and ships a `Makefile` with development tasks — a good sign for anyone who wants to contribute or extend it. There's also a `.devcontainer` setup and GitHub Actions workflows, suggesting the project is set up for a reproducible dev environment and at least some CI automation, not just a one-off script someone uploaded.
+ 
+## Why this kind of project is worth building
+ 
+Image-to-ASCII converters are a classic "learn by building" project, but they're deceptively rich for their size. Getting good results forces you to think about:
+ 
+- **Perceptual brightness** vs. raw RGB averages — naive luminance mapping can produce muddy results
+- **Aspect ratio correction** — terminal characters are taller than they are wide, so a naive pixel-to-character mapping distorts the image unless you compensate
+- **Palette design** — the order and density of characters in your ramp directly determines how much visual detail survives the conversion
+Whether or not `media2ascii` tackles all of these under the hood, the fact that it exposes a `palette` option and a `width` option shows the author was thinking about the actual visual quality of the output, not just "does it run."
+ 
+If you want to poke around the code, try it on your own images, or contribute, the repo. 

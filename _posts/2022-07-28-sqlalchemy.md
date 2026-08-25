@@ -11,6 +11,7 @@ published: true
 toc_sticky: true
 header:
     teaser: "/../assets/2022-07-28-sqlalchemy/default-thumbnail.png"
+excerpt: "SQLAlchemy is Python's most popular SQL toolkit and Object-Relational Mapper (ORM). **DBAPI** - PEP-0249, Python Database API"
 ---
 
 # SQLAlchemy

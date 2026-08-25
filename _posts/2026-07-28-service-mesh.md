@@ -1,6 +1,6 @@
 ---
 title: "Service Mesh"
-date: 2026-07-28
+date: 2025-07-28
 tags:
 - service mesh
 - kubernetes
@@ -10,6 +10,7 @@ toc: true
 toc_sticky: true
 header:
     teaser: "/../assets/2026-07-28-service-mesh/default-thumbnail.png"
+excerpt: 
 ---
 WIP
 

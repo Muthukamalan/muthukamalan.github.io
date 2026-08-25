@@ -8,8 +8,10 @@ tags:
 categories: blog
 toc: false
 toc_sticky: false
+published: false
 header:
     teaser: "/../assets/2025-07-28-observability/default-thumbnail.png"
+excerpt: ""
 ---
 
 WIP

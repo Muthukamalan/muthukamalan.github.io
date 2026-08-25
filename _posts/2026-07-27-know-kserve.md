@@ -9,6 +9,8 @@ toc: true
 toc_sticky: true
 header:
     teaser: "/../assets/2026-07-27-know-kserve/default-thumbnail.png"
+related: true
+excerpt: "KServe brings your messy AI models to life on Kubernetes."
 ---
 
 # KSERVE

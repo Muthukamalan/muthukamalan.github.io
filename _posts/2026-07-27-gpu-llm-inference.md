@@ -8,6 +8,7 @@ toc: true
 toc_sticky: true
 header:
     teaser: "/../assets/2026-07-27-gpu-llm-inference/default-thumbnail.png"
+excerpt: 
 ---
 
 WIP

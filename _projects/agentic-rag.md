@@ -1,7 +1,7 @@
 ---
-title: "Agentic Rag"
+title: "Agentic RAG"
 published: true
-date: 2025-12-31
+date: 2026-1-31
 categories:  projects
 author_profile: true
 layout: single
@@ -13,8 +13,5 @@ categories:  projects
 related: false
 header:
     teaser: "/../assets/project-agentic-rag/default-thumbnail.png"
+excerpt: WIP
 ---
-
-WIP
-
-# Agentic RAG

@@ -10,6 +10,7 @@ toc: true
 toc_sticky: true
 header:
     teaser: "/../assets/2024-07-29-docker-captain-advice/default-thumbnail.png"
+excerpt: "No, more `It worked on my Machine!! :)`"
 ---
     
 
@@ -19,11 +20,10 @@ header:
 ## VM Workload
 We need to isolate the app components from the host environment
 
-![alt text](/../assets/2024-07-27-kubernetes/vm-workload.png)
+![alt text](/../assets/2024-07-29-docker-captain-advice/vm-workload.png)
 
 ## Docker Workload
-![alt text](/../assets/2024-07-27-kubernetes/docker-workload.png)
-
+![alt text](/../assets/2024-07-29-docker-captain-advice/docker-workload.png)
 
 
 A practical set of notes covering Docker internals, Linux containers, runtimes, networking, storage, security, OCI, and interview concepts.
@@ -516,6 +516,13 @@ docker container inspect webserver      # inspect
 docker container rm  webserver          # only stopped container can be removed
 docker container rm CONTAINER_NAME --force  # May the Force be with you 
 ```
+- **from tar file**
+```bash
+docker save dog_breeds > dog_breeds.tar
+docker load --input dog_breeds.tar
+```
+
+
 ### Port mapping & Publish
 ```bash
 docker container run -d --name nginx nginx  # create nginx container
@@ -546,6 +553,16 @@ docker container logs -f nginx          # follow/stream logs in real-time
 docker container logs --tail 10 nginx   # view only the last 10 lines
 docker container top nginx              # list running processes inside container
 docker container stats nginx            # live stream of CPU, memory, and network usage
+
+docker logs --tail 1000 -f --timestamps container_id
+docker logs --tail 1000 -f --details container_id
+docker logs --tail 1000 -f --since UTC container_id
+docker logs --tail 1000 -f --until 60 container_id
+
+# --tail
+# -f continue straming new output from the container
+# --details extra information
+# --since since when utc/min
 ```
 ### Environment variables
 ```bash
@@ -683,3 +700,79 @@ docker container run --rm -v new-data:/volume -v "$(pwd)":/backup alpine tar xvf
 ### DNS & Service discovery
 
 
+
+# Installation
+## Local
+```sh
+# docker
+## stackoverflow
+sudo systemctl status docker
+sudo usermod -a -G docker $(whoami)
+sudo apt install -y ca-certificates curl gnupg lsb-release
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null  #  echo "$(dpkg --print-architecture)" amd64
+docker version --format '{{json .}}'
+```
+
+## EC2
+```sh
+# login
+chmod 400 path_to_pem_file.pem
+ssh -i path_to_pem_file.pem ubuntu@IPv4Address
+sudo apt update -y 
+
+# installation
+sudo apt install docker.io
+docker --version
+sudo usermod -aG docker $USER   # add $USER to docker group 
+sudo chmod 666 /var/run/docker.sock   # trying to connect Docker daemon socket @ unix:///var/run/docker.sock
+```
+
+# Checkup
+```sh
+docker version
+docker info
+docker info --format '{{json .}}'
+
+ls -l /run | grep -Ei docker
+```
+```log
+srw-rw----  1 root              docker    0 Jun 21 14:02 docker.sock
+s:: socker
+```
+
+```bash
+# stop service 
+service docker stop
+
+# listen docker to remote rather than local machine
+docker -H IP_ADDRESS:2375 -d & # standard port for non-ssl DOCKER
+netstat tlp   # to verify PID showing or not
+
+# make docker client to talk to docker deamon
+export DOCKER_HOST="tcp://IP_ADDRESS:2375"
+```
+
+
+
+settings in Docker Desktop to see intermediate container
+```json
+{
+	"features":{
+		"buildkit": false         // true
+	}
+}
+```
+```bash
+# once the intermediate container id
+docker comit container_id container_name
+docker run --rm -it container_id bash+
+```
+
+
+```Dockerfile
+FROM pytorch/pytorch:latest
+RUN pip3 install --upgrade pip && pip install jupyterlab
+CMD ["jupyter","lab","--ip=0.0.0.0","--port=9999","--NotebookApp.token=''","--NotebookApp.password=''","--allow-root"]
+```

@@ -13,7 +13,7 @@ categories:  projects
 related: false
 header:
     teaser: "/../assets/project-pixels-2-prediction/default-thumbnail.png"
+excerpt: "Yet to Update"
 ---
 
-WIP
 # Pixels To Prediction

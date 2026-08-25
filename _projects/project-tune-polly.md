@@ -14,6 +14,7 @@ toc: true
 toc_sticky: true
 categories:  projects
 related: false
+excerpt: WIP
 ---
 
-project url: [papermusic](https://github.com/meganokeefe/papermusic)
+<!-- project url: [papermusic](https://github.com/meganokeefe/papermusic) -->

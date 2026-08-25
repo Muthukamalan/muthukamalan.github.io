@@ -24,6 +24,8 @@ twitter_username:
 github_username: Muthukamalan
 minimal_mistakes_skin: default
 search: true
+future: false
+highlighter: rouge
 
 # Build settings
 markdown: kramdown
@@ -34,6 +36,21 @@ paginate: 15 # amount of posts to show
 paginate_path: /page:num/
 timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 repository: Muthukamalan/muthukamalan.github.io
+
+kramdown:
+  auto_ids: true
+  hard_wrap: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  syntax_highlighter: coderay
+
+  syntax_highlighter_opts:
+    line_numbers:
+    line_numbers_start: 1
+    tab_width: 4
+    bold_every: 10
+    css: class
 
 include:
   - _pages
@@ -62,7 +79,7 @@ plugins:
 author:
   name   : "Muthu Kamalan"
   avatar : "assets/images/muthu.png"
-  bio    : "MLOps Enginer with Automation Mindset"
+  bio    : "MLOps Enginer"
   location : "Tamil Nadu/India"
   links:
     - label: Whatsapp
@@ -71,9 +88,18 @@ author:
     - label: "Github"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/Muthukamalan"
+    - label: Resume
+      icon: "fas fa-fw fa-file-pdf"
+      url: "#"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin" 
       url: "https://www.linkedin.com/in/muthukamalan-m/"
+    - label: "Slack"   
+      icon: "fab fa-fw fa-slack" 
+      url: "https://slack.com/"
+    - label: "Discord" 
+      icon: "fab fa-fw fa-discord" 
+      url: "https://discord.com/"
     
 
 footer:

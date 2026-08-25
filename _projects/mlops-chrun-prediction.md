@@ -1,7 +1,7 @@
 ---
 title: "MLOps Case Study"
 published: true
-date: 2022-03-20
+date: 2023-03-20
 categories:  projects
 author_profile: true
 layout: single
@@ -124,34 +124,18 @@ Evalution is crucial not only for audit purpose. To understand how it behaves to
 Inside [Customer-Churn-Prediction](https://github.com/Muthukamalan/Customer-Churn-Prediction) Project:
 
 <!-- Development -->
-[![Python](https://img.shields.io/badge/Python-3.11_|_3.12_|_3.13-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Anaconda](https://img.shields.io/badge/Anaconda-44A833?logo=anaconda&logoColor=white)](https://www.anaconda.com/)
-[![Docker Compose](https://img.shields.io/badge/Docker_Compose-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/compose/)
+[![Python](https://img.shields.io/badge/Python-3.11_|_3.12_|_3.13-3776AB?logo=python&logoColor=white)](https://www.python.org/) [![Anaconda](https://img.shields.io/badge/Anaconda-44A833?logo=anaconda&logoColor=white)](https://www.anaconda.com/) [![Docker Compose](https://img.shields.io/badge/Docker_Compose-2496ED?logo=docker&logoColor=white)](https://docs.docker.com/compose/)
 
-[![black](https://img.shields.io/badge/Code%20Style-Black-black.svg?labelColor=gray)](https://black.readthedocs.io/en/stable/)
-[![isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/) 
-[![ruff](https://img.shields.io/badge/Ruff-D7FF64?logo=ruff&logoColor=black)](https://docs.astral.sh/ruff/)
-[![Precommit](https://img.shields.io/badge/pre--commit-FAB040?logo=precommit&logoColor=black)](https://pre-commit.com/)<br>
+[![black](https://img.shields.io/badge/Code%20Style-Black-black.svg?labelColor=gray)](https://black.readthedocs.io/en/stable/)  [![isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)  [![ruff](https://img.shields.io/badge/Ruff-D7FF64?logo=ruff&logoColor=black)](https://docs.astral.sh/ruff/) [![Precommit](https://img.shields.io/badge/pre--commit-FAB040?logo=precommit&logoColor=black)](https://pre-commit.com/)<br>
 
 <!-- Machine Learning -->
-[![Scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
-[![Optuna](https://img.shields.io/badge/Optuna-6863FF?logo=optuna&logoColor=white)](https://optuna.org/)
-[![Hydra](https://img.shields.io/badge/Hydra-89B8CD?logoColor=white)](https://hydra.cc/)
-[![MLflow](https://img.shields.io/badge/MLflow-0194E2?logo=mlflow&logoColor=white)](https://mlflow.org/)
-[![numpy](https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=white)](https://numpy.org/)
-[![pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![Scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)  [![Optuna](https://img.shields.io/badge/Optuna-6863FF?logo=optuna&logoColor=white)](https://optuna.org/)  [![Hydra](https://img.shields.io/badge/Hydra-89B8CD?logoColor=white)](https://hydra.cc/)  [![MLflow](https://img.shields.io/badge/MLflow-0194E2?logo=mlflow&logoColor=white)](https://mlflow.org/)  [![numpy](https://img.shields.io/badge/NumPy-013243?logo=numpy&logoColor=white)](https://numpy.org/)  [![pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas&logoColor=white)](https://pandas.pydata.org/) 
 
 <!-- Data & Storage -->
-[![DVC](https://img.shields.io/badge/DVC-945DD6?logo=dvc&logoColor=white)](https://dvc.org/)
-[![MinIO](https://img.shields.io/badge/MinIO-C72E49?logo=minio&logoColor=white)](https://min.io/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![pgAdmin](https://img.shields.io/badge/pgAdmin-336791?logo=postgresql&logoColor=white)](https://www.pgadmin.org/)
-[![S3](https://img.shields.io/badge/Amazon_S3-569A31?logo=amazons3&logoColor=white)](https://aws.amazon.com/s3/)
+[![DVC](https://img.shields.io/badge/DVC-945DD6?logo=dvc&logoColor=white)](https://dvc.org/)  [![MinIO](https://img.shields.io/badge/MinIO-C72E49?logo=minio&logoColor=white)](https://min.io/)  [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)  [![pgAdmin](https://img.shields.io/badge/pgAdmin-336791?logo=postgresql&logoColor=white)](https://www.pgadmin.org/)  [![S3](https://img.shields.io/badge/Amazon_S3-569A31?logo=amazons3&logoColor=white)](https://aws.amazon.com/s3/)
 
 <!-- Serving & Monitoring -->
-[![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?logo=prometheus&logoColor=white)](https://prometheus.io/)
-[![Grafana](https://img.shields.io/badge/Grafana-F46800?logo=grafana&logoColor=white)](https://grafana.com/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/) [![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?logo=prometheus&logoColor=white)](https://prometheus.io/) [![Grafana](https://img.shields.io/badge/Grafana-F46800?logo=grafana&logoColor=white)](https://grafana.com/)
 
 
 [![Makefile](https://img.shields.io/badge/Makefile-6D00CC?logo=gnu&logoColor=white)](https://www.gnu.org/software/make/)
@@ -367,77 +351,168 @@ For anyone setting up a similar pipeline, the pattern worth copying is the layer
 -  If you keenly following your problem then get to know how to do things like run email and call campaigns, create churn save playbooks and designing pricing and packaging in your org. Don't think SILOS<br>
 ![elephant and blind](/../assets/project-mlops-churn/elephant-blind-man.png)
 
-- *Churn* — When a customer quits using a service or cancels their subscription.$\text{churn_rate} = \frac{\text{churned_customers}}{\text{start_customers}}$
-![churn](/../assets/project-mlops-churn/chrun.png)
+# Gist
 
+## 1. Core Definitions
 
+**Churn** — when a customer quits using a service or cancels their subscription.
 
--  *Customer retention* — Keeping customers using a service and renewing their subscriptions (if there are subscriptions). Customer retention is the opposite of churn. $\text{retention_rate} = \frac{\text{retained_customers}}{\text{start_customers}}$
-![alt text](/../assets/project-mlops-churn/net_retention.png)
+$$
+\text{churn_rate} = \frac{\text{churned_customers}}{\text{start_customers}}
+$$
 
+**Customer retention** — the opposite of churn: keeping customers active and renewing.
 
+$$
+\text{retention_rate} = \frac{\text{retained_customers}}{\text{start_customers}}
+$$
 
-![alt text](/../assets/project-mlops-churn/typical-scenario.png)
-   - A product or service is offered and used on a recurring basis.
-   - Customers interact with the product.
-   - Customers may have subscriptions to receive the product or service. Subscriptions often (but not always) cost money.
-   - Subscriptions can be ended or canceled, which is known as churn. If there are no subscriptions, a customer churns when they stop using the product.
-   - The timing, prices, and payments for the customers and subscriptions (if any) are captured in a database, typically a transactional database.
-   - When customers use or interact with the product or service, these events are often tracked and stored in a data warehouse.
+> 💡 **Price reduction is a "diamond bullet" against churn** — it always works, but you can't afford it. There is no cheap, reliable "silver bullet" to reduce churn.
 
+> 💡 A one-size-fits-all churn intervention doesn't exist, so *predicting* who will churn is only marginally useful for *reducing* churn on its own. Focus effort on understanding the data and designing good metrics (feature engineering) rather than obsessing over algorithms.
 
-Price reduction is a “diamond bullet” against churn: it always works, but you can’t afford it.  If a silver bullet means low cost and a reliable method, there are no silver bullets to reduce churn!
-{:.notice--success}
+### The typical subscription scenario
+- A product/service is used on a recurring basis.
+- Customers interact with the product; subscriptions may cost money.
+- Ending a subscription (or, without subscriptions, ceasing to use the product) = churn.
+- Transactional DB → timing/prices/payments. Data warehouse → usage/interaction events.
 
-A one-size-fits-all churn intervention doesn’t exist, so predicting customers at risk of churn is only a little helpful for reducing churn.
-{:.notice--success}
+---
 
-- Focus on understanding the data and designing metrics (aka feature engineering) instead of algorithms
+## 2. Measuring Churn
 
+**People-centric roles:**
 
-### Measure churn
-People centric
-- Subscriber → has a subscription (tied to MRR)
-- Customer → pays
-- User → neither pays nor subscribes
-MRR (Monthly Recurring Revenue): recurring revenue tied to paid subscriptions.
+| Role | Meaning |
+|:-----|:--------|
+| Subscriber | Has a subscription (tied to MRR) |
+| Customer | Pays |
+| User | Neither pays nor subscribes |
 
-Payment Types
+**MRR** (Monthly Recurring Revenue) — recurring revenue tied to paid subscriptions.
+
+**Payment types:**
 - Recurring — fixed amount, fixed period
 - Usage-based — pay per unit consumed
-- One-time — setup fees, temp upgrades, in-app purchases
+- One-time — setup fees, temporary upgrades, in-app purchases
 
-Product Types
-- B2C
-- D2C
-- B2B (SaaS)
+**Product types:** B2C, D2C, B2B (SaaS)
 
-Business/Revenue Models
-- Ad-supported media
-- Consumer feed subscriptions
-- Freemium
-- In-app purchases
+**Business/Revenue models:** ad-supported media, consumer feed subscriptions, freemium, in-app purchases
 
-Prediction Use Cases (all driven by customer behavior data)
+**Common prediction use cases** (all driven by customer behavior data):
 - Inactivity → churn signal
 - Free trial → conversion
 - Upsell / downsell
-- Binary yes/no customer predictions
-- Customer activity predictions
+- Binary yes/no churn prediction
+- General customer activity prediction
 
-Metrics
-- Utilization:	% of allowed service usage consumed
-- Success:	how well user achieves desired outcomes
-- Unit cost:	price relative to quantity consumed
+**Key metric types:**
+- **Utilization** — % of allowed service usage consumed
+- **Success** — how well the user achieves their desired outcome
+- **Unit cost** — price relative to quantity consumed
 
+---
 
-### Measure Customers
-### Observe Renewal and Churn
-### Understand behaviours with metrics 
-### Relationship between customer metrics
-### Segmenting customer with advanced metrics
-### Forecasting metrics
-### Forecasting accuracy
-### Churn demographics and firmographics
-### Moral
+## 3. Measuring Customers
+
+- **Event** — a fact about user behavior, stored with a timestamp in the data warehouse.
+- **Metric** — a summary measurement of behavior over time (also timestamped).
+- **Active period** — if an account isn't in an active period, the end of its last active period marks a churn.
+
+Behavioral metrics summarize each customer's events at one point in time or across many (weekly/monthly rollups are common).
+
+---
+
+## 4. Observing Renewal & Churn
+
+- **Dataset** — a concise table of facts + outcomes for the situations you want to analyze (one row per situation, consistent columns, complete info).
+- **Churn analysis dataset** — a table of behavioral snapshots covering both churned and non-churned customers.
+
+> 💡 It's easier to convince customers to stay *before* they churn than to win them back *after*.
+
+> 💡 The goal of analysis is to find customers still "making up their minds" about churning — that's when you have the best chance to influence them.
+
+---
+
+## 5. Understanding Behavior via Metrics — Cohort Analysis
+
+Look for behavioral metrics with a strong relationship to churn — a good one is usually obvious once you see the results (no heavy stats needed).
+
+- **Cohort** — a group of individuals similar on a particular metric (within a small range).
+- **Metric cohort** — cohort defined by similar values on one metric.
+- **Cohort analysis** — comparing different cohorts on another measurement/metric.
+- **Churn cohort analysis** — comparing churn rates across metric cohorts.
+
+⚠️ Correlation vs. causation: use business knowledge to judge whether a metric *causes* churn/retention or is merely *associated* with it. A metric is more likely causal if it's closely tied to the customer's actual usefulness/enjoyment of the product.
+
+**Customer profiling** — clustering algorithms automatically group similar customers based on data.
+
+---
+
+## 6. Advanced Metrics
+
+**Customer Lifetime Value (CLV)** — total expected worth of a customer (revenue minus costs) over their full lifetime; a forward-looking forecast.
+
+**Customer Acquisition Cost (CAC)** — total marketing/sales spend per customer acquired (varies by channel/campaign).
+
+**Cost of Goods Sold (COGS)** — ongoing cost to serve existing customers (cloud infra, support, etc.), can vary by customer type.
+
+$$
+\text{CLV}_{\text{acquisition}} = -CAC + \sum_{t=1}^{T} (RR_t - COGS_t)
+$$
+
+> 💡 Regression works best with uncorrelated or moderately correlated metrics — avoid feeding highly correlated metrics into a regression model.
+
+---
+
+## 7. Evaluating Model Accuracy
+
+### AUC (Area Under Curve)
+Pairwise test: pick one churned + one non-churned customer. Success = model scores the churner higher. AUC = % of all such pairwise comparisons where the model got it right.
+
+| AUC | Diagnosis |
+|---|---|
+| < 0.45 | Something's wrong — model predicting backwards (check predict_proba column / data) |
+| 0.45 – 0.55 | Random guessing — check your data |
+| 0.55 – 0.6 | Slightly better than random — improve data/metrics |
+| 0.6 – 0.7 | Healthy: weakly predictable churn |
+| 0.7 – 0.8 | Healthy: highly predictable churn |
+| 0.8 – 0.85 | Extremely predictable — suspicious for consumer products; more plausible for B2B |
+| > 0.85 | Probably a bug — churn is rarely this predictable |
+
+### Lift (specifically: Top Decile Lift)
+**Lift** — relative increase in response rate due to some "treatment" vs. baseline (lift of 1.0 = no improvement). Best suited for measuring improvement on rare events.
+
+**Top decile lift** — ratio of churn rate in the top 10% riskiest-predicted customers to the overall churn rate. Baseline = overall churn rate (what you'd get by guessing randomly). When people say "lift" in churn contexts, they usually mean this.
+
+| Low Churn (<10%) | High Churn (>10%) | Diagnosis |
+|---|---|---|
+| < 0.8 | < 0.8 | Something's wrong — predicting backwards |
+| 0.8 – 1.5 | 0.8 – 1.2 | Random guessing |
+| 1.5 – 2.0 | 1.2 – 1.5 | Better than random, but not good |
+| 2.0 – 3.5 | 1.5 – 2.25 | Healthy: weakly predictable |
+| 3.5 – 5.0 | 2.25 – 3.0 | Healthy: highly predictable |
+| 5.0 – 6.0 | 3.0 – 3.5 | Extremely predictable — suspicious unless B2B |
+| > 6.0 | > 3.5 | Probably a bug |
+
+---
+
+## 8. Modeling Notes
+
+- **Machine learning model** — fit from data (not hand-programmed), distinct from a plain regression model.
+- **Decision tree** — simple model, forecasts via a tree of metric comparison rules.
+- **XGBoost** — ensemble of decision trees with weighted predictions; generally beats regression on accuracy.
+- Both XGBoost and regression benefit from **advanced metrics** (CLV, CAC, etc.) in addition to basic ones — tune XGBoost params via cross-validation.
+- ⚠️ **XGBoost churn probabilities are not calibrated** to true churn rates — don't use raw XGBoost outputs for CLV or anything requiring actual probability values.
+
+---
+
+## 9. Confidence Intervals on Churn Rate
+
+- **Expected value** — the measured churn rate on past customers; treated as the most likely value for the true (universe) churn rate.
+- **Upper confidence interval** — range from expected churn to worst-case estimate (size = worst case − expected).
+- **Lower confidence interval** — range from best-case estimate to expected churn (size = expected − best case).
+
+---
 

@@ -1,6 +1,6 @@
 ---
 title: "Build Linux Tools"
-date: 2026-07-31
+date: 2022-07-31
 published: true
 tags:
 - linux
@@ -14,7 +14,8 @@ toc: true
 toc_sticky: true
 categories:  projects
 related: false
+excerpt: "Yet to Update"
 ---
 
-inspired [proj](https://github.com/RichardHoa/Network-Latency-Visualizer)
+<!-- inspired [proj](https://github.com/RichardHoa/Network-Latency-Visualizer) -->
 

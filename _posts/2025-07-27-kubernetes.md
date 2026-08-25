@@ -8,6 +8,7 @@ toc: true
 toc_sticky: true
 header:
     teaser: "/../assets/2025-07-27-kubernetes/default-thumbnail.png"
+excerpt: "Kubernetes has a reputation for being terrifyingly complex, but it doesn't have to be."
 ---
 
 # Kubernetes
@@ -38,7 +39,7 @@ kubectl api-resources --api-group=apps --namespaced=false
 apiVersion: v1
 clusters:
 - cluster:
-    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJkekNDQVIyZ0F3SUJBZ0lCQURBS0JnZ3Foa2pPUFFRREFqQWpNU0V3SHdZRFZRUUREQmhyTTNNdGMyVnkKZG1WeUxXTmhRREUzT0RRNE16Y3dNalV3SGhjTk1qWXdOekl6TWpBd016UTFXaGNOTXpZd056SXdNakF3TXpRMQpXakFqTVNFd0h3WURWUVFEREJock0zTXRjMlZ5ZG1WeUxXTmhRREUzT0RRNE16Y3dNalV3V1RBVEJnY3Foa2pPClBRSUJCZ2dxaGtqT1BRTUJCd05DQUFRZGxhNnpjaFljbklkVHN3M2U2NmNocG1kL2dEdWdJMkx5UEY3L1BTOXcKWDNsUVRyWnNmaCtsNDZ0eHdiekxyQmVyR3pLL3lDak5tS05PWXFQMlhHK1FvMEl3UURBT0JnTlZIUThCQWY4RQpCQU1DQXFRd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBZEJnTlZIUTRFRmdRVUo3LzlwZmE1NStkS1ZxZXZTdjRaCm9GaURyZmt3Q2dZSUtvWkl6ajBFQXdJRFNBQXdSUUloQUpjWkRzUzJuUzdOcG9XWHNPUkN0RGdUSER6YS9FdkEKVm1vTG5HSlA0MjhkQWlBcVlNajUyNXhiUFlNVE90WmlsVnZrd1U4bUI4OUtJVkF2VSthZUhBSERlUT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+    certificate-authority-data: XXXX
     server: https://127.0.0.1:6443
   name: default
 contexts:
@@ -51,8 +52,8 @@ kind: Config
 users:
 - name: default
   user:
-    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJrVENDQVRlZ0F3SUJBZ0lJSGs0NGVNd2lGU013Q2dZSUtvWkl6ajBFQXdJd0l6RWhNQjhHQTFVRUF3d1kKYXpOekxXTnNhV1Z1ZEMxallVQXhOemcwT0RNM01ESTFNQjRYRFRJMk1EY3lNekl3TURNME5Wb1hEVEkzTURjeQpNekl3TURNME5Wb3dNREVYTUJVR0ExVUVDaE1PYzNsemRHVnRPbTFoYzNSbGNuTXhGVEFUQmdOVkJBTVRESE41CmMzUmxiVHBoWkcxcGJqQlpNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VIQTBJQUJFRHZzNVFOL0cwTHRVVGIKc3p4WW43aXYyeTZSY1drakdmc3lVSjdzaVYrYlVBcXpLNXNKa3RIWWNpcUJDMGRndU5UekwxeDYvNjNsTWVUWQpwYk5pclB1alNEQkdNQTRHQTFVZER3RUIvd1FFQXdJRm9EQVRCZ05WSFNVRUREQUtCZ2dyQmdFRkJRY0RBakFmCkJnTlZIU01FR0RBV2dCU2NhOTk3MWVkMmhBUHJNOUlTMnRsbmtkc1dxVEFLQmdncWhrak9QUVFEQWdOSUFEQkYKQWlCZXBXT2hHSmtvdWk1RVdvbzMxZWFpSDF1MGROYzlrQkdIZmI1ejQ3czlId0loQUtLUTZsM3JWVFhLK1hTdQpuWkUzbUJ6U2Vvd1R1bENQdDBUd0lvY1lmODJnCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0KLS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJlRENDQVIyZ0F3SUJBZ0lCQURBS0JnZ3Foa2pPUFFRREFqQWpNU0V3SHdZRFZRUUREQmhyTTNNdFkyeHAKWlc1MExXTmhRREUzT0RRNE16Y3dNalV3SGhjTk1qWXdOekl6TWpBd016UTFXaGNOTXpZd056SXdNakF3TXpRMQpXakFqTVNFd0h3WURWUVFEREJock0zTXRZMnhwWlc1MExXTmhRREUzT0RRNE16Y3dNalV3V1RBVEJnY3Foa2pPClBRSUJCZ2dxaGtqT1BRTUJCd05DQUFUQnlFd2pKVDF6bVN0OVBuR1MranZGNkN0NklTVkdnTTg0bkNVWGxRZUIKNHVGT3FlZUxheDA4eENRTGozZXpBKzJCNloxaWp2dXpGSkl3QXpoeEJVTm5vMEl3UURBT0JnTlZIUThCQWY4RQpCQU1DQXFRd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBZEJnTlZIUTRFRmdRVW5HdmZlOVhuZG9RRDZ6UFNFdHJaClo1SGJGcWt3Q2dZSUtvWkl6ajBFQXdJRFNRQXdSZ0loQUxvbnhMeWVpWVYzbXd4M2JoY25mVFZnd0RQbkhxOXkKY2pHaU9PVEpTQ3JpQWlFQTduZ0NGNC9CZ3JJQzhTaDJGaEgvd0V2ZHFSTXZ5czdRd3RWQjFCWWdOUFU9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
-    client-key-data: LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0tCk1IY0NBUUVFSUlJcWJXd2FiemFwWGxYRVBwMGswa21RditqWjNpYkxVOGNvd09jaTBHUVJvQW9HQ0NxR1NNNDkKQXdFSG9VUURRZ0FFUU8remxBMzhiUXUxUk51elBGaWZ1Sy9iTHBGeGFTTVorekpRbnV5Slg1dFFDck1ybXdtUwowZGh5S29FTFIyQzQxUE12WEhyL3JlVXg1TmlsczJLcyt3PT0KLS0tLS1FTkQgRUMgUFJJVkFURSBLRVktLS0tLQo=
+    client-certificate-data: XXXX
+    client-key-data: XXXX
 ```
 
 
@@ -507,8 +508,9 @@ A set of pods that work together in deployment and Service helps expose your dep
   - Types of Services ![types](/../assets/2025-07-27-kubernetes/k8s_services.png){: .align-center}
     - **ClusterIP**; Reachable only from within the cluster
     - **NodePort**; ClusterIP + fixed port on the every Node
-    - **LoadBalancer**; external IP cloud/provider
-    - **Headless** = **ClusterIP:None** DNS returns Pod IPs directly. This is how `StatefulSets` give each Pod a stable name
+    - **LoadBalancer**; NodePort+ external IP cloud/provider
+    - **Headless** = **ClusterIP:None**; DNS returns Pod IPs directly. This is how `StatefulSets` give each Pod a stable name
+    - **ExternalName**; Maps Service to DNS name, returns CNAME record
 
 ```yaml
 apiVersion: v1
@@ -520,7 +522,7 @@ metadata:
   annotations: {}
 spec:
   selector: {}                        # Label selector to target Pods;  map[string]string
-  ports:                             # Required: Port configuration
+  ports:                             # Required: Port configuration;   []ServicePort  name,protocol, port, targetPort
   - name: string                     # Port name (optional)
     protocol: string                 # TCP, UDP, or SCTP (default: TCP)
     port: integer                    # Service port (required)
@@ -530,10 +532,12 @@ spec:
   clusterIP: string                  # Cluster-internal IP address
   clusterIPs: []                     # For dual-stack configurations
   externalIPs: []                    # External IP addresses
-  sessionAffinity: string            # None or ClientIP
+  sessionAffinity: string            # None or ClientIP; Distribute requests randomly across Pods ClientIP: Route requests from same client IP to same Pod
   sessionAffinityConfig: {}          # Session affinity configuration
+    # clientIP:
+    #   timeoutSeconds: 3600           # 1 hr
   externalName: string               # External DNS name (ExternalName only)
-  externalTrafficPolicy: string      # Cluster or Local
+  externalTrafficPolicy: string      # Cluster or Local; `LoadBalancer`, `NodePort`
   internalTrafficPolicy: string      # Cluster or Local
   ipFamilies: []                     # IPv4, IPv6 (dual-stack)
   ipFamilyPolicy: string             # SingleStack, PreferDualStack, RequireDualStack
@@ -541,6 +545,8 @@ status:
   loadBalancer:                      # LoadBalancer status
     ingress: []                      # External load balancer ingress points
 ```
+
+###### NodePort
 
 ![alt text](/../assets/2025-07-27-kubernetes/nodeport.png)
 ```yaml
@@ -558,7 +564,7 @@ spec:
       port: 80          # the Service port — what clients hit
       targetPort: 8080  # the container port (containerPort in the Pod)
 ```
-
+![alt text](/../assets/2025-07-27-kubernetes/node-port-on-every-node.png)
 
 Your servie can reach within the Cluster `ClusterIP`. 
 Giving `LoadBalancer` every app its own burns on Cloud IP
@@ -566,6 +572,38 @@ Giving `LoadBalancer` every app its own burns on Cloud IP
 One L7 entry point in front of many services `Ingress`
 
 if your image is locally build and deploy, if requirement.txt changes it'll be locally cached
+###### ClusterIP
+![alt text](/../assets/2025-07-27-kubernetes/clusterIP-service.png)
+```yaml
+# POD
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: Nifty
+    role: fe
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+---
+# SVC
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-end
+spec:
+  selector:
+    app: Nifty
+    role: fe
+  type: ClusterIP
+  ports:
+  - targetPort: 80
+    port: 80
+```
+###### HEADLESS <ClusterIP:None>
+###### LoadBalancer
 
 ##### - **ConfigMap**
 
@@ -585,7 +623,7 @@ Similar to deployments but used for applications where copies of same applicatio
 ##### - **Volumes**
 ![alt text](/../assets/2025-07-27-kubernetes/pv-pvc-claim.png){: .align-center}
 - ****
-
+https://github.com/hvalfangst/kubernetes-encyclopedia/blob/main/service/REFERENCE.md
 
 ##### **Cronjob**
 ```yml
@@ -695,8 +733,10 @@ kubectl get jobs
 ```
 
 
+### Kubernetes Components
 
-## Kubernetes Components
+
+https://www.xiaoyeshiyu.com/post/ff15.html
 
 
 ![k8s](https://www.cncf.io/wp-content/uploads/2022/07/1_EoNdB23tkScc846qfovnog.jpg){: .align-center}
@@ -762,3 +802,38 @@ status:
   conditions: [...]
 ```
 
+
+
+### Helm
+
+It's a kubernets **package manager**
+similar,
+- *pip* to python3
+- *apt* to debian
+
+```sh
+sudo apt-get install curl gpg apt-transport-https --yes  
+curl -fsSL https://packages.buildkite.com/helm-linux/helm-debian/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null  
+echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list  
+sudo apt-get update  
+sudo apt-get install helm
+```
+
+#### chart packagin
+```
+my-chart/
+.
+├── templates         # k8s yaml tempaltes manifests
+│__ ├── deployment.yaml
+│__ ├── ingress.yaml
+│__ └── service.yaml
+├── chart.yaml           # metadata like, name, version, deps
+└── values.yaml          # default config 
+```
+#### Templating
+#### Versioning & Rollbacks
+
+### Kustomize
+
+
+### Operator

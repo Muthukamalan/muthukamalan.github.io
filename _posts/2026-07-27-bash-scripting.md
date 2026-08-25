@@ -10,6 +10,7 @@ toc: true
 toc_sticky: true
 header:
     teaser: "/../assets/2026-07-27-bash-scripting/default-thumbnail.png"
+excerpt: "Learning Bash early acts like a superpower, turning you into a developer who naturally commands their computer"
 ---
 
 
@@ -1233,4 +1234,159 @@ getent group    # Group all members  `getent group devlops` -> developers group
 
 
 sudo cp .bashrc /etc/skel/.bashrc  # customize new user home dir
+```
+
+
+# TMUX
+```sh
+# --------------- prefix key ----------------------------------------------------------------------
+unbind C-b
+set -g prefix C-Space
+bind C-Space send-prefix
+
+# -------------- mouse ----------------------------------------------------------------------------
+set -g mouse on
+
+# --------------------------------------------------------------------------------------------------
+set -g default-terminal "tmux-256color" 
+set -as terminal-features ",xterm-256color:RGB"
+set -g status-bg green
+
+set -q -g status-utf8 on
+set -g history-limit 5000 
+set -g status-position top
+
+# -----------display---------------------------------------------------------------------------------
+set -g base-index 1           # start windows numbering at 1
+setw -g pane-base-index 1     # make pane numbering consistent with windows
+
+setw -g automatic-rename on   # rename window to reflect current program
+setw -g renumber-windows on
+set -g renumber-windows on    # renumber windows when a window is closed
+
+set -g set-titles on          # set terminal title
+set -g set-titles-string "#I:#W"
+
+set -g display-panes-time 800 # slightly longer pane indicators display time
+set -g display-time 1000      # slightly longer status messages display time
+
+set -g status-justify left
+set -g status-right "#(uname -n) #(date '+%d-%m-%Y %I:%M %p')"
+
+# ------------------ clock ---------------------------------------------------------------------------
+set-window-option -g clock-mode-colour colour64 #green
+
+
+# ------------------------ Monitor window activity to display in the status bar ----------------------
+setw -g monitor-activity on
+
+# ----------------------- A bell in another window should cause a bell in the current window ---------
+set -g bell-action any
+
+# -------------------------- Don't show distracting notifications ------------------------------------
+set -g visual-bell off
+set -g visual-activity off
+
+# -------------------------- panes -------------------------------------------------------------------
+bind-key | split-window -h -c "#{pane_current_path}"         # let's open pane with current directory with -c option
+bind-key _ split-window -v -c "#{pane_current_path}"
+
+# Toggle status bar. Useful for fullscreen focus
+bind t set-option status
+
+# -------------------------- Pane divider ------------------------------------------------------------
+set-window-option -g pane-border-style fg=colour11,bg=colour234
+set-window-option -g pane-active-border-style fg=colour118,bg=colour234
+set-window-option -g monitor-activity on   # highlights the window name in the status line
+
+# -------------------------- Cool trick: Let's dim out any pane that's not active. -------------------
+# set-window-option -g window-style fg=white,bg=colour236
+# set-window-option -g window-active-style fg=white,bg=colour235
+
+# -------------------------- Command / Message line --------------------------------------------------
+set-window-option -g message-style fg=black,bold,bg=colour11
+
+# -------------------------- Default statusbar color ------------------------------------------------
+# set-option -g status-style bg=colour237,fg=colour223 
+
+# -------------------------- Default window title colors ------------------------------------------------
+set-window-option -g window-status-style bg=colour214,fg=colour237 # bg=yellow, fg=bg1
+```
+
+
+# Nano Editor
+```sh
+# Show line numbers
+set linenumbers
+
+# Auto-indent new lines (great for code)
+set autoindent
+
+# Highlight syntax for common file types (e.g., Python, JSON)
+include "/usr/share/nano/*.nanorc"
+
+# Make the cursor visible in all modes
+set showcursor
+
+# Enable mouse support (click to move cursor)
+set mouse
+
+# Set tab size to 4 spaces (for code)
+set tabsize 4
+set tabstospaces  # Replace tabs with spaces
+```
+
+# Alias
+```sh
+alias venv='conda activate venv'
+alias cdeactivate='conda deactivate'
+
+alias k='kubectl'
+alias kg='kubectl get'
+alias kga='kubectl get all'
+alias kgpo='kubectl get pods'
+alias kgpoojson='kubectl get pods -o=json'
+alias kgpon='kubectl get pods --namespace'
+alias ksysgpooyamll='kubectl --namespace=kube-system get pods -o=yaml -l'
+
+alias krm='kubectl delete'
+alias krmf='kubectl delete -f'
+alias krming='kubectl delete ingress'
+alias krmingl='kubectl delete ingress -l'
+alias krmingall='kubectl delete ingress --all-namespaces'
+
+
+alias ka='kubectl apply -f'
+alias klo='kubectl logs -f'
+alias kex='kubectl exec -i -t'
+
+# alias gl="git --no-pager log --oneline --pretty=format:'%Cred%h%Creset -%Cred%p%Creset  -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --parents --graph --all;echo"
+alias gl='git --no-pager log --oneline --decorate --graph --parents --all'
+alias gs='git status -bsv'
+```
+
+# Bashrc
+```sh
+# SHOW GIT BRANCH NAME in Terminal
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
+
+# GIT ALias
+if [ -x /usr/bin/git ]; then
+   alias gl='git --no-pager log --oneline --decorate --graph --parents --all'
+   alias gs='git status -bsv'
+ fi
+
+# Instead of rm command: (move to trash instead os.remove)
+if [ -x /usr/bin/gio ]; then
+    alias del='gio trash'
+fi
+
+# TMUX
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+    tmux attach-session -t default || tmux new-session -s default
+fi
 ```

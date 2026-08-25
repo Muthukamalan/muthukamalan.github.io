@@ -1,6 +1,6 @@
 ---
 title: "FemtoGPT"
-date: 2025-08-28
+date: 2024-08-28
 tags:
 - gpt
 header:
@@ -13,13 +13,5 @@ toc: true
 toc_sticky: true
 categories:  projects
 related: false
+excerpt: "Yet to Update"
 ---
-<!-- ctrl + alt + v -->
-<!-- cmd + alt + v -->
-
-checklist:
-- thumbnail
-- tags
-- content
-
-
