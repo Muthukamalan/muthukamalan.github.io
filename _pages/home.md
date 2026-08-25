@@ -30,7 +30,10 @@ excerpt: >
   </div>
 
   <p>
-    <span style="color: #d4d4d4;">Some days I patch bugs in the code, other days I patch feelings with a stanza.</span>
+    <span style="color: #58485f;">Some days I patch bugs in the code, other days I patch feelings with a stanza.</span>
+  </p>
+  <p style="bottom: 0; right: 0; margin: 0;">
+    <span style="color: #000000;">Blog crafted by 100% human</span>
   </p>
   </div>
 

@@ -9,4 +9,5 @@ classes:
     - wide
     - landing
 sort: date
+sort_order: reverse
 ---
