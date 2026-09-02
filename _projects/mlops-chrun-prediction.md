@@ -103,6 +103,9 @@ Evalution is crucial not only for audit purpose. To understand how it behaves to
 
 ![alt text](/../assets/project-mlops-churn/roc-auc.png)
 
+
+![alt](/../assets/project-mlops-churn/churn-auc.png)
+
 | principle| Strategy | Description  | Example    |
 |----------| ---------| -------------|----------- | 
 | Listen continuously| Talk to Your Customers                     | Collect regular feedback to understand customer needs and pain points before they leave.                | Send customer satisfaction surveys, provide in-app feedback forms, or use live chat to gather suggestions.      |
@@ -144,6 +147,7 @@ Inside [Customer-Churn-Prediction](https://github.com/Muthukamalan/Customer-Chur
 ### Dataset Scope
 The project uses a telecommunications churn dataset assembled from several IBM-provided extracts — demographics, location, population, services, and account status — merged into a single `customer_churn` table. Rather than working off flat CSVs sitting in a repo, the data is loaded into PostgreSQL and versioned from there, which sets the tone for the rest of the project: nothing is treated as a one-off script.
 
+![pgadmin](/../assets/project-mlops-churn/pgadmin.png)
 
 
 ### MLOps Life Cyle
@@ -286,6 +290,9 @@ params:
 
 ![hparams](https://github.com/Muthukamalan/Customer-Churn-Prediction/raw/main/assets/hparams_search.png)
 
+![mlfow](/../assets/project-mlops-churn/mlflow.png)
+
+
 and launched as a Hydra multirun:
 
 ```bash
@@ -312,6 +319,10 @@ Swapping `hparams=decision_tree_hparam` for another config file is enough to poi
 with broader scikit-learn model coverage listed as a TODO.
 
 ### Training and artifact tracking
+
+![minio](/../assets/project-mlops-churn/minio.png)
+![minio-artifacts](/../assets/project-mlops-churn/minio_artifact_path.png)
+
 
 Once a search has identified good hyperparameters, a full training run is a single Hydra-composed command:
 
@@ -342,9 +353,22 @@ What makes this repo worth reading isn't the model choice — decision trees and
 - **MLflow + MinIO** for tracking and artifact storage that survive container restarts.
 - **Prometheus + Grafana** wired in from the start, not bolted on after a production incident.
 
+
+![grafana-psql](/../assets/project-mlops-churn/grafana-pgsql.png)
+![grafana-prometheus](/../assets/project-mlops-churn/grafana-prometheus.png)
+
+
+![prometheus-metrics](/../assets/project-mlops-churn/prometheus-metrics.png)
+![prometheus](/../assets/project-mlops-churn/prometheus.png)
+
+
+
+
 For anyone setting up a similar pipeline, the pattern worth copying is the layering: data versioning, config-driven search, experiment tracking, and monitoring are each handled by a purpose-built tool, glued together with Hydra configs and a single Compose file rather than custom orchestration code.
 
 
+![inference-health](/../assets/project-mlops-churn/Inference-health.png)
+![inference-endpoint](/../assets/project-mlops-churn/Inference.png)
 
 
 ## Gist from experiences:
@@ -436,6 +460,8 @@ Behavioral metrics summarize each customer's events at one point in time or acro
 ---
 
 ## 5. Understanding Behavior via Metrics — Cohort Analysis
+
+![alt](/../assets/project-mlops-churn/cohort analaysis.png)
 
 Look for behavioral metrics with a strong relationship to churn — a good one is usually obvious once you see the results (no heavy stats needed).
 
