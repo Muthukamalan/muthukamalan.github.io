@@ -14,7 +14,7 @@ related: false
 mermaid: true
 header:
     teaser: "/../assets/project-tamil-tokenizers/tamil_tokenizer.png"
-excerpt: "Yet to Update"
+excerpt: "Mother tongue is more than a tool for communication—it’s a tool for connection, expression, and making memories."
 --- 
 
 # Language Behind Large Language Models
