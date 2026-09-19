@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Container With Most Water</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0e14;
+    --panel: #10151d;
+    --panel-2: #141b26;
+    --border: #232c3a;
+    --text: #d7dde6;
+    --text-dim: #6d7889;
+    --left-c: #4fa8ff;
+    --left-dim: #1c3a56;
+    --right-c: #ff9d4f;
+    --right-dim: #4a3320;
+    --water: #46d68c;
+    --water-dim: #16332a;
+    --warn: #ff6b81;
+    --warn-dim: #4a1c26;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --display: 'Space Grotesk', sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    padding: 32px 20px 80px;
+    line-height: 1.5;
+  }
+
+  .wrap{ max-width: 980px; margin: 0 auto; }
+
+  .eyebrow{
+    font-size: 12px; letter-spacing: .18em; color: var(--text-dim);
+    text-transform: uppercase; display:flex; align-items:center; gap:10px;
+    margin-bottom: 14px;
+  }
+  .eyebrow .dot{ width:6px;height:6px;border-radius:50%; background: var(--water); box-shadow: 0 0 8px var(--water); }
+
+  h1{
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(28px, 5vw, 44px); line-height: 1.05;
+    margin: 0 0 14px; letter-spacing: -0.01em;
+  }
+  h1 span{ color: var(--water); }
+
+  .lede{ color: var(--text-dim); max-width: 660px; font-size: 15px; margin-bottom: 8px; }
+
+  .constraints{ display:flex; gap:10px; flex-wrap:wrap; margin: 20px 0 36px; }
+  .chip{ border:1px solid var(--border); background: var(--panel); padding: 6px 12px; border-radius: 6px; font-size: 12px; color: var(--text-dim); }
+  .chip b{ color: var(--text); font-weight: 600; }
+
+  .panel{ background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 22px; margin-bottom: 22px; }
+  .panel-title{
+    font-family: var(--display); font-weight: 600; font-size: 13px;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim);
+    margin: 0 0 18px; display:flex; align-items:center; justify-content:space-between; gap: 10px; flex-wrap: wrap;
+  }
+
+  .phase-banner{
+    display:flex; align-items:center; gap:12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--panel-2); font-size: 13px; margin-bottom: 24px; min-height: 20px;
+  }
+  .phase-banner.compute{ border-color: var(--water-dim); color: var(--water); }
+  .phase-banner.update{ border-color: var(--water-dim); color: var(--water); }
+  .phase-banner.decide{ border-color: var(--warn-dim); color: var(--warn); }
+  .phase-banner.move{ border-color: var(--border); color: var(--text); }
+  .phase-banner.init, .phase-banner.done{ color: var(--text-dim); }
+
+  /* ---- bar chart ---- */
+  .chart-shell{
+    position: relative;
+    padding: 0 4px;
+  }
+  #barsWrap{
+    position: relative;
+    display:flex; align-items:flex-end; gap: 10px;
+    height: 210px;
+    border-bottom: 2px solid var(--border);
+  }
+  .bar{
+    position: relative;
+    flex: 1;
+    min-width: 26px;
+    max-width: 58px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    display:flex; align-items:flex-start; justify-content:center;
+    transition: box-shadow .2s ease, border-color .2s ease;
+    font-size: 12px;
+    color: var(--text-dim);
+    padding-top: 4px;
+  }
+  .bar .val{ position:relative; top:-20px; font-weight:600; color: var(--text); font-size: 12px;}
+  .bar .idx{ position:absolute; bottom:-20px; left:0; right:0; text-align:center; font-size: 10px; color: var(--text-dim); }
+
+  .bar.ptr-left{ border-color: var(--left-c); box-shadow: 0 0 0 1px var(--left-c), 0 0 14px -2px var(--left-c); }
+  .bar.ptr-right{ border-color: var(--right-c); box-shadow: 0 0 0 1px var(--right-c), 0 0 14px -2px var(--right-c); }
+  .bar.short{ border-color: var(--warn) !important; box-shadow: 0 0 0 1px var(--warn), 0 0 16px -2px var(--warn) !important; }
+  .bar.best{ border-color: var(--water); }
+
+  .ptr-label{
+    position:absolute; bottom: -38px;
+    font-size: 10px; letter-spacing:.08em; text-transform:uppercase; font-weight:700;
+    padding: 2px 6px; border-radius: 4px;
+  }
+  .ptr-label.left-label{ color: var(--left-c); background: var(--left-dim); }
+  .ptr-label.right-label{ color: var(--right-c); background: var(--right-dim); }
+
+  #waterOverlay{
+    position:absolute;
+    bottom: 0;
+    background: rgba(70, 214, 140, 0.14);
+    border: 1px dashed var(--water);
+    border-bottom: none;
+    display:flex; align-items:flex-start; justify-content:center;
+    pointer-events:none;
+    transition: all .3s ease;
+  }
+  #waterOverlay.hidden{ opacity: 0; }
+  #waterOverlay.best-overlay{ background: rgba(70, 214, 140, 0.22); border-color: var(--water); border-style: solid; }
+  #waterOverlay .area-label{
+    margin-top: -26px;
+    background: var(--panel);
+    border: 1px solid var(--water);
+    color: var(--water);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  /* ---- registers ---- */
+  .registers{ display:flex; gap: 12px; margin: 46px 0 6px; flex-wrap: wrap; }
+  .reg{ flex: 1; min-width: 130px; border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; background: var(--panel-2); }
+  .reg .reg-label{ font-size: 10px; letter-spacing:.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px;}
+  .reg .reg-value{ font-size: 20px; font-weight: 700; font-family: var(--mono); }
+  .reg.left .reg-value{ color: var(--left-c); }
+  .reg.right .reg-value{ color: var(--right-c); }
+  .reg.area .reg-value{ color: var(--water); }
+  .reg.max .reg-value{ color: var(--water); }
+  .reg.note .reg-value{ color: var(--text); font-size: 14px; font-weight:500; }
+  .reg.max.flash{ animation: flash 0.5s ease; }
+  @keyframes flash{ 0%{ background: var(--water-dim);} 100%{ background: var(--panel-2);} }
+
+  .controls{ display:flex; align-items:center; gap: 10px; flex-wrap: wrap; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border); }
+  button{
+    font-family: var(--mono); background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
+    padding: 9px 14px; border-radius: 7px; font-size: 13px; cursor: pointer;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  button:hover{ border-color: var(--water); color: var(--water); }
+  button:focus-visible{ outline: 2px solid var(--water); outline-offset: 2px; }
+  button.primary{ background: var(--water-dim); border-color: var(--water); color: var(--water); }
+  button:disabled{ opacity: .35; cursor: not-allowed; }
+  button:disabled:hover{ border-color: var(--border); color: var(--text); }
+  .spacer{ flex: 1; }
+  .progress-label{ font-size: 12px; color: var(--text-dim); }
+  input[type="range"]{ accent-color: var(--water); }
+
+  .code{ font-size: 13px; overflow-x: auto; }
+  .code-line{ display: flex; padding: 2px 8px; border-radius: 4px; white-space: pre; color: var(--text-dim); }
+  .code-line .ln{ width: 26px; flex-shrink:0; text-align:right; margin-right: 14px; color: #3a4454; user-select:none; }
+  .code-line.active{ background: var(--water-dim); color: var(--text); }
+  .code-line.active .ln{ color: var(--water); }
+  .code-line .kw{ color: var(--left-c); }
+  .code-line .num{ color: var(--right-c); }
+  .code-line .cm{ color: #4b5666; font-style: italic; }
+
+  .explain-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 720px){ .explain-grid{ grid-template-columns: 1fr; } }
+  .formula{
+    font-family: var(--mono); font-size: 15px; background: var(--panel-2);
+    border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin: 14px 0;
+  }
+  .formula .l{ color: var(--left-c); }
+  .formula .r{ color: var(--right-c); }
+  .formula .a{ color: var(--water); }
+
+  p{ color: var(--text-dim); font-size: 14px; margin: 0 0 10px;}
+  p b{ color: var(--text); font-weight: 600; }
+
+  .footer-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 720px){ .footer-grid{ grid-template-columns: 1fr; } }
+  .stat{ border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; background: var(--panel-2); }
+  .stat .stat-label{ font-size: 10px; color: var(--text-dim); letter-spacing:.1em; text-transform: uppercase; margin-bottom: 6px;}
+  .stat .stat-value{ font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--water); }
+  .stat .stat-sub{ font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition: none !important; animation: none !important; } }
+
+  @media (max-width: 560px){
+    #barsWrap{ height: 160px; gap: 6px; }
+    .bar{ min-width: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow"><span class="dot"></span>ARRAYS · TWO-POINTER TECHNIQUE · O(N) TIME, O(1) SPACE</div>
+  <h1>Container With <span>Most Water</span></h1>
+  <p class="lede"><b>height[i]</b> is the height of a vertical line at position i. Pick two lines that, together with the x-axis, form a container holding the most water. The area is capped by the <b>shorter</b> of the two lines.</p>
+
+  <div class="constraints">
+    <div class="chip">Area = <b>min(h[left], h[right])</b> × <b>(right - left)</b></div>
+    <div class="chip"><b>O(n)</b> time</div>
+    <div class="chip"><b>O(1)</b> extra space</div>
+  </div>
+
+  <!-- SIGNATURE VISUALIZER -->
+  <div class="panel">
+    <div class="panel-title">
+      <span>Two Pointers Closing In</span>
+      <span id="stepCounter" class="progress-label">step 0 / 0</span>
+    </div>
+
+    <div id="phaseBanner" class="phase-banner init">Ready. Press Play or Step to begin.</div>
+
+    <div class="chart-shell">
+      <div id="barsWrap"></div>
+    </div>
+
+    <div class="registers">
+      <div class="reg left">
+        <div class="reg-label">Left height</div>
+        <div class="reg-value" id="leftReg">—</div>
+      </div>
+      <div class="reg right">
+        <div class="reg-label">Right height</div>
+        <div class="reg-value" id="rightReg">—</div>
+      </div>
+      <div class="reg area">
+        <div class="reg-label">Current area</div>
+        <div class="reg-value" id="areaReg">—</div>
+      </div>
+      <div class="reg max">
+        <div class="reg-label">Best so far</div>
+        <div class="reg-value" id="maxReg">0</div>
+      </div>
+    </div>
+    <div class="registers">
+      <div class="reg note" style="flex-basis:100%;">
+        <div class="reg-label">What's happening</div>
+        <div class="reg-value" id="noteReg">Idle</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="btnReset">↺ Reset</button>
+      <button id="btnPrev">‹ Prev</button>
+      <button id="btnPlay" class="primary">▶ Play</button>
+      <button id="btnNext">Next ›</button>
+      <span class="spacer"></span>
+      <label class="progress-label" for="speed">Speed</label>
+      <input type="range" id="speed" min="200" max="1400" value="700" step="100">
+      <button id="btnRandom">🎲 New heights</button>
+    </div>
+  </div>
+
+  <!-- CODE PANEL -->
+  <div class="panel">
+    <div class="panel-title"><span>Synced Source</span></div>
+    <div class="code" id="codeBlock"></div>
+  </div>
+
+  <!-- EXPLANATION -->
+  <div class="panel">
+    <div class="panel-title"><span>The Core Idea</span></div>
+    <div class="explain-grid">
+      <div>
+        <p>Start with the <b>widest possible container</b> — one pointer at each end. Any container is bottlenecked by its <b>shorter</b> wall, so the width is the only thing working in your favor at first.</p>
+        <div class="formula">area = <span class="l">min(h[left], h[right])</span> × (right − left)</div>
+        <p>Checking every pair is O(n²). The two-pointer trick gets it down to O(n) with one key insight.</p>
+      </div>
+      <div>
+        <p><b>Always move the shorter pointer.</b> Moving the taller one can only shrink the width while the height stays capped by the same short wall — that move can never beat the current area. Moving the shorter wall at least gives a chance at a taller line.</p>
+        <p>So at each step: compute the area, update the best seen, then step the shorter pointer inward. Repeat until the pointers meet.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title"><span>Complexity</span></div>
+    <div class="footer-grid">
+      <div class="stat">
+        <div class="stat-label">Time</div>
+        <div class="stat-value">O(n)</div>
+        <div class="stat-sub">Pointers close in, each visited once</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Space</div>
+        <div class="stat-value">O(1)</div>
+        <div class="stat-sub">Just a few running variables</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Why not brute force?</div>
+        <div class="stat-value">O(n²)</div>
+        <div class="stat-sub">Checking every pair scales quadratically</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  const codeLines = [
+    {t:'<span class="kw">def</span> maxArea(height: list[int]) -> int:'},
+    {t:'    left, right = <span class="num">0</span>, len(height) - <span class="num">1</span>'},
+    {t:'    max_area = <span class="num">0</span>'},
+    {t:'    <span class="kw">while</span> left &lt; right:'},
+    {t:'        h = min(height[left], height[right])'},
+    {t:'        width = right - left'},
+    {t:'        area = h * width'},
+    {t:'        max_area = max(max_area, area)'},
+    {t:'        <span class="kw">if</span> height[left] &lt; height[right]:'},
+    {t:'            left += <span class="num">1</span>'},
+    {t:'        <span class="kw">else</span>:'},
+    {t:'            right -= <span class="num">1</span>'},
+    {t:'    <span class="kw">return</span> max_area'},
+  ];
+  const codeEl = document.getElementById('codeBlock');
+  codeEl.innerHTML = codeLines.map((l,idx)=>
+    `<div class="code-line" data-ln="${idx}"><span class="ln">${idx+1}</span>${l.t}</div>`
+  ).join('');
+
+  let heights = [1,8,6,2,5,4,8,3,7];
+  let steps = [];
+  let cur = 0;
+  let playing = false;
+  let timer = null;
+
+  function generateSteps(arr){
+    const n = arr.length;
+    const s = [];
+    let left = 0, right = n-1, maxArea = 0;
+    let bestPair = {left, right};
+
+    s.push({line:1, phase:'init', left, right, area:null, maxArea, note:'Initialize left = 0, right = n-1, max_area = 0', decideShort:null, bestPair:{...bestPair}});
+
+    while(left < right){
+      const h = Math.min(arr[left], arr[right]);
+      const width = right - left;
+      const area = h * width;
+      s.push({line:6, phase:'compute', left, right, area, maxArea, note:`h = min(${arr[left]}, ${arr[right]}) = ${h}, width = ${width} → area = ${area}`, decideShort:null, bestPair:{...bestPair}});
+
+      const improved = area > maxArea;
+      if(improved){ maxArea = area; bestPair = {left, right}; }
+      s.push({line:8, phase:'update', left, right, area, maxArea, note: improved ? `New best! max_area = ${maxArea}` : `${area} ≤ ${maxArea}, best stays the same`, decideShort:null, bestPair:{...bestPair}, improved});
+
+      const shortIsLeft = arr[left] < arr[right];
+      s.push({line:9, phase:'decide', left, right, area, maxArea, note: shortIsLeft ? `height[left] (${arr[left]}) < height[right] (${arr[right]}) → left is the bottleneck` : `height[right] (${arr[right]}) ≤ height[left] (${arr[left]}) → right is the bottleneck`, decideShort: shortIsLeft ? 'left' : 'right', bestPair:{...bestPair}});
+
+      if(shortIsLeft){ left++; s.push({line:10, phase:'move', left, right, area:null, maxArea, note:`left += 1 → left is now ${left}`, decideShort:null, bestPair:{...bestPair}}); }
+      else{ right--; s.push({line:12, phase:'move', left, right, area:null, maxArea, note:`right -= 1 → right is now ${right}`, decideShort:null, bestPair:{...bestPair}}); }
+    }
+
+    s.push({line:13, phase:'done', left, right, area:null, maxArea, note:`Pointers met. Return max_area = ${maxArea}`, decideShort:null, bestPair:{...bestPair}});
+    return s;
+  }
+
+  function buildBars(){
+    const wrap = document.getElementById('barsWrap');
+    const maxVal = Math.max(...heights, 1);
+    const maxPx = 190;
+    wrap.innerHTML = heights.map((v,i)=>{
+      const px = Math.max(4, Math.round((v/maxVal)*maxPx));
+      return `<div class="bar" id="bar-${i}" style="height:${px}px;"><span class="val">${v}</span><span class="idx">${i}</span></div>`;
+    }).join('') + '<div id="waterOverlay" class="hidden"><span class="area-label" id="areaLabel"></span></div>';
+  }
+
+  function positionOverlay(pair, area, isBest){
+    const overlay = document.getElementById('waterOverlay');
+    const wrap = document.getElementById('barsWrap');
+    const barL = document.getElementById('bar-'+pair.left);
+    const barR = document.getElementById('bar-'+pair.right);
+    if(!barL || !barR){ overlay.classList.add('hidden'); return; }
+
+    const wrapRect = wrap.getBoundingClientRect();
+    const rectL = barL.getBoundingClientRect();
+    const rectR = barR.getBoundingClientRect();
+    const left = rectL.left - wrapRect.left;
+    const right = rectR.right - wrapRect.left;
+    const h = Math.min(heights[pair.left], heights[pair.right]);
+    const maxVal = Math.max(...heights, 1);
+    const maxPx = 190;
+    const heightPx = Math.max(4, Math.round((h/maxVal)*maxPx));
+
+    overlay.style.left = left + 'px';
+    overlay.style.width = (right-left) + 'px';
+    overlay.style.height = heightPx + 'px';
+    overlay.classList.remove('hidden');
+    overlay.classList.toggle('best-overlay', !!isBest);
+    document.getElementById('areaLabel').textContent = area===null ? '' : `${pair.right-pair.left} × ${h} = ${area}`;
+  }
+
+  function render(){
+    const st = steps[cur];
+    document.getElementById('stepCounter').textContent = `step ${cur} / ${steps.length-1}`;
+
+    document.querySelectorAll('.code-line').forEach(el=>{
+      el.classList.toggle('active', Number(el.dataset.ln) === st.line);
+    });
+
+    const banner = document.getElementById('phaseBanner');
+    banner.className = 'phase-banner ' + st.phase;
+    const bannerText = {
+      init: 'Setup — pointers start at both ends, the widest possible container.',
+      compute: 'Computing the area of the current container.',
+      update: 'Comparing against the best area found so far.',
+      decide: 'Deciding which pointer is the bottleneck.',
+      move: 'Moving the shorter pointer inward.',
+      done: 'Done — pointers met, best container found.'
+    };
+    banner.textContent = bannerText[st.phase];
+
+    heights.forEach((_,i)=>{
+      const el = document.getElementById('bar-'+i);
+      el.classList.remove('ptr-left','ptr-right','short','best');
+    });
+    const lEl = document.getElementById('bar-'+st.left);
+    const rEl = document.getElementById('bar-'+st.right);
+    if(lEl) lEl.classList.add('ptr-left');
+    if(rEl) rEl.classList.add('ptr-right');
+    if(st.decideShort==='left' && lEl) lEl.classList.add('short');
+    if(st.decideShort==='right' && rEl) rEl.classList.add('short');
+    if(st.phase==='done'){
+      const bl = document.getElementById('bar-'+st.bestPair.left);
+      const br = document.getElementById('bar-'+st.bestPair.right);
+      if(bl) bl.classList.add('best');
+      if(br) br.classList.add('best');
+    }
+
+    requestAnimationFrame(()=>{
+      if(st.phase==='init'){
+        document.getElementById('waterOverlay').classList.add('hidden');
+      } else if(st.phase==='done'){
+        positionOverlay(st.bestPair, st.maxArea, true);
+      } else {
+        positionOverlay({left:st.left, right:st.right}, st.area, false);
+      }
+    });
+
+    document.getElementById('leftReg').textContent = (st.left>=0 && st.left<heights.length) ? heights[st.left] : '—';
+    document.getElementById('rightReg').textContent = (st.right>=0 && st.right<heights.length) ? heights[st.right] : '—';
+    document.getElementById('areaReg').textContent = st.area===null ? '—' : st.area;
+    const maxRegEl = document.getElementById('maxReg');
+    maxRegEl.textContent = st.maxArea;
+    if(st.improved){ maxRegEl.parentElement.classList.remove('flash'); void maxRegEl.offsetWidth; maxRegEl.parentElement.classList.add('flash'); }
+    document.getElementById('noteReg').textContent = st.note;
+
+    document.getElementById('btnPrev').disabled = cur===0;
+    document.getElementById('btnNext').disabled = cur===steps.length-1;
+  }
+
+  function next(){ if(cur < steps.length-1){ cur++; render(); } else { pause(); } }
+  function prev(){ if(cur>0){ cur--; render(); } }
+  function reset(){ cur = 0; render(); }
+  function play(){
+    playing = true;
+    document.getElementById('btnPlay').textContent = '⏸ Pause';
+    const speed = Number(document.getElementById('speed').value);
+    timer = setInterval(()=>{
+      if(cur>=steps.length-1){ pause(); return; }
+      next();
+    }, speed);
+  }
+  function pause(){
+    playing = false;
+    document.getElementById('btnPlay').textContent = '▶ Play';
+    clearInterval(timer);
+  }
+
+  document.getElementById('btnNext').addEventListener('click', ()=>{ pause(); next(); });
+  document.getElementById('btnPrev').addEventListener('click', ()=>{ pause(); prev(); });
+  document.getElementById('btnReset').addEventListener('click', ()=>{ pause(); reset(); });
+  document.getElementById('btnPlay').addEventListener('click', ()=>{ playing ? pause() : play(); });
+  document.getElementById('speed').addEventListener('input', ()=>{ if(playing){ pause(); play(); } });
+  document.getElementById('btnRandom').addEventListener('click', ()=>{
+    pause();
+    const len = 7 + Math.floor(Math.random()*4); // 7-10 bars
+    heights = Array.from({length:len}, ()=> 1 + Math.floor(Math.random()*9));
+    buildBars();
+    steps = generateSteps(heights);
+    cur = 0;
+    render();
+  });
+  window.addEventListener('resize', ()=>{
+    const st = steps[cur];
+    if(!st) return;
+    requestAnimationFrame(()=>{
+      if(st.phase==='init'){ document.getElementById('waterOverlay').classList.add('hidden'); }
+      else if(st.phase==='done'){ positionOverlay(st.bestPair, st.maxArea, true); }
+      else { positionOverlay({left:st.left, right:st.right}, st.area, false); }
+    });
+  });
+
+  buildBars();
+  steps = generateSteps(heights);
+  render();
+})();
+</script>
+</body>
+</html>

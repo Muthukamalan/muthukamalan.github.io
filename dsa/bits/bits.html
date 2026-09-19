@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bit Masking Visualizer</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface-1: #f4f3ef;
+    --text-primary: #1a1a18;
+    --text-secondary: #6b6a63;
+    --text-muted: #9a9890;
+    --border: #ddddd6;
+    --accent-bg: #e6f1fb;
+    --accent-text: #0c447c;
+    --mono: "SFMono-Regular", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #171715;
+      --surface-1: #232320;
+      --text-primary: #f0efe9;
+      --text-secondary: #b4b2a9;
+      --text-muted: #7d7c76;
+      --border: #3a3a36;
+      --accent-bg: #0c447c;
+      --accent-text: #b5d4f4;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 3rem;
+    line-height: 1.6;
+  }
+  h1 { font-size: 20px; font-weight: 600; margin: 0 0 1.5rem; }
+  .row-label {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 6px; font-size: 13px; color: var(--text-secondary);
+  }
+  .row-label b { color: var(--text-primary); font-weight: 600; }
+  .bits { display: flex; gap: 6px; margin-bottom: 1.5rem; }
+  .bit {
+    width: 36px; height: 40px; display: flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 600; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--border); user-select: none;
+    background: var(--surface-1); color: var(--text-muted);
+    transition: background 0.15s, color 0.15s;
+  }
+  .bit.on { background: var(--accent-bg); color: var(--accent-text); border-color: var(--accent-text); }
+  .bit.readonly { cursor: default; }
+  .ops { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  button {
+    background: var(--bg); color: var(--text-primary);
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 8px 14px; font-size: 14px; cursor: pointer;
+  }
+  button:hover { background: var(--surface-1); }
+  button:active { transform: scale(0.98); }
+  .result-box {
+    background: var(--surface-1); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;
+  }
+  .op-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; min-height: 18px; }
+  .r-dec { font-size: 14px; font-weight: 600; margin-top: 8px; }
+  .section {
+    border-top: 1px solid var(--border); padding-top: 1rem;
+  }
+  .section-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 10px; }
+  .slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .slider-row label { font-size: 14px; color: var(--text-secondary); }
+  input[type=range] { flex: 1; }
+  #idx-out { font-size: 14px; font-weight: 600; min-width: 16px; }
+  .expr { font-size: 13px; color: var(--text-secondary); margin-top: 10px; font-family: var(--mono); min-height: 18px; }
+  .notes { margin-top: 2.5rem; font-size: 14px; color: var(--text-secondary); }
+  .notes h2 { font-size: 16px; font-weight: 600; color: var(--text-primary); margin: 1.5rem 0 0.5rem; }
+  .notes code { font-family: var(--mono); background: var(--surface-1); padding: 2px 5px; border-radius: 4px; color: var(--text-primary); }
+  .notes ul { padding-left: 1.2rem; }
+  .notes li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+
+<h1>Bit masking visualizer</h1>
+
+<div class="row-label"><span>A</span><span>decimal: <b id="a-dec">0</b></span></div>
+<div class="bits" id="bits-a"></div>
+
+<div class="row-label"><span>B</span><span>decimal: <b id="b-dec">0</b></span></div>
+<div class="bits" id="bits-b"></div>
+
+<div class="ops">
+  <button onclick="setOp('AND')">A &amp; B</button>
+  <button onclick="setOp('OR')">A | B</button>
+  <button onclick="setOp('XOR')">A ^ B</button>
+  <button onclick="setOp('NOT')">~A</button>
+  <button onclick="setOp('SHL')">A &lt;&lt; 1</button>
+  <button onclick="setOp('SHR')">A &gt;&gt; 1</button>
+</div>
+
+<div class="result-box">
+  <div class="op-label" id="op-label">Result — click an operation above</div>
+  <div class="bits" id="bits-r" style="margin-bottom:0"></div>
+  <div class="r-dec" id="r-dec">decimal: —</div>
+</div>
+
+<div class="section">
+  <div class="section-label">Common bitmask operations on A, using bit index i</div>
+  <div class="slider-row">
+    <label>i</label>
+    <input type="range" min="0" max="7" value="0" step="1" id="idx" oninput="updateIdx(this.value)">
+    <span id="idx-out">0</span>
+  </div>
+  <div class="ops">
+    <button onclick="bitOp('set')">Set bit i</button>
+    <button onclick="bitOp('clear')">Clear bit i</button>
+    <button onclick="bitOp('toggle')">Toggle bit i</button>
+    <button onclick="bitOp('check')">Check bit i</button>
+  </div>
+  <div class="expr" id="expr">—</div>
+</div>
+
+<div class="notes">
+  <h2>Why this matters in DSA</h2>
+  <ul>
+    <li><b>Check bit</b>: <code>(n >> i) & 1</code> — shift the bit of interest to position 0, mask off everything else with <code>& 1</code>.</li>
+    <li><b>Set bit</b>: <code>n | (1 << i)</code> — OR with a 1 in that position forces it on, leaves the rest untouched.</li>
+    <li><b>Clear bit</b>: <code>n & ~(1 << i)</code> — AND with all 1s except a 0 at position i forces it off.</li>
+    <li><b>Toggle bit</b>: <code>n ^ (1 << i)</code> — XOR flips exactly that bit, leaves the rest alone.</li>
+  </ul>
+  <h2>Where it shows up</h2>
+  <ul>
+    <li><b>Subset enumeration</b>: loop <code>mask</code> from <code>0</code> to <code>2^n - 1</code>; each mask's bits mark which elements of an n-item set are included. Standard for bitmask DP.</li>
+    <li><b>Single number problems</b>: XOR-ing all elements cancels pairs (<code>a ^ a = 0</code>), leaving the unpaired element.</li>
+    <li><b>Power of two check</b>: <code>n & (n - 1) == 0</code> clears the lowest set bit; a power of two has only one bit set, so this becomes 0.</li>
+    <li><b>Counting set bits</b>: repeat <code>n = n & (n - 1)</code> and count iterations until n hits 0 — each step clears exactly one set bit.</li>
+  </ul>
+</div>
+
+<script>
+let A = 0;
+let B = 0;
+
+function render() {
+  renderRow('bits-a', A, i => toggleBit('A', i), false);
+  renderRow('bits-b', B, i => toggleBit('B', i), false);
+  document.getElementById('a-dec').textContent = A;
+  document.getElementById('b-dec').textContent = B;
+}
+
+function renderRow(id, val, onClick, readonly) {
+  const el = document.getElementById(id);
+  el.innerHTML = '';
+  for (let i = 7; i >= 0; i--) {
+    const bit = (val >> i) & 1;
+    const div = document.createElement('div');
+    div.textContent = bit;
+    div.className = 'bit' + (bit ? ' on' : '') + (readonly ? ' readonly' : '');
+    if (onClick) div.onclick = () => onClick(i);
+    el.appendChild(div);
+  }
+}
+
+function toggleBit(which, i) {
+  if (which === 'A') A ^= (1 << i);
+  else B ^= (1 << i);
+  render();
+}
+
+function setOp(op) {
+  let result, label;
+  if (op === 'AND') { result = A & B; label = 'A & B (AND) — bit set only where both A and B have 1'; }
+  else if (op === 'OR') { result = A | B; label = 'A | B (OR) — bit set where either A or B has 1'; }
+  else if (op === 'XOR') { result = A ^ B; label = 'A ^ B (XOR) — bit set where A and B differ'; }
+  else if (op === 'NOT') { result = (~A) & 0xFF; label = '~A (NOT) — every bit flipped, masked to 8 bits'; }
+  else if (op === 'SHL') { result = (A << 1) & 0xFF; label = 'A << 1 — shift left, multiplies by 2'; }
+  else if (op === 'SHR') { result = A >> 1; label = 'A >> 1 — shift right, divides by 2'; }
+  document.getElementById('op-label').textContent = label;
+  renderRow('bits-r', result, null, true);
+  document.getElementById('r-dec').textContent = 'decimal: ' + result;
+}
+
+let idx = 0;
+function updateIdx(v) {
+  idx = parseInt(v);
+  document.getElementById('idx-out').textContent = idx;
+}
+
+function bitOp(kind) {
+  const exprEl = document.getElementById('expr');
+  if (kind === 'set') { A = A | (1 << idx); exprEl.textContent = 'A = A | (1 << ' + idx + ')'; }
+  else if (kind === 'clear') { A = A & ~(1 << idx); exprEl.textContent = 'A = A & ~(1 << ' + idx + ')'; }
+  else if (kind === 'toggle') { A = A ^ (1 << idx); exprEl.textContent = 'A = A ^ (1 << ' + idx + ')'; }
+  else if (kind === 'check') {
+    const val = (A >> idx) & 1;
+    exprEl.textContent = '(A >> ' + idx + ') & 1  =  ' + val + (val ? '  (bit is set)' : '  (bit is not set)');
+  }
+  render();
+}
+
+render();
+</script>
+</body>
+</html> 

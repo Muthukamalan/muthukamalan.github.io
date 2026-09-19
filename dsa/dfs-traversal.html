@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Depth-First Traversal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0e0f;
+    --panel:#111516;
+    --panel-2:#14181a;
+    --border:#232a2c;
+    --text:#e7ecec;
+    --dim:#7c8a8c;
+    --accent:#5eead4;      /* teal - active / visiting */
+    --accent-dim:#1f4f47;
+    --stack:#f4b860;       /* amber - call stack */
+    --visited:#4b5a5c;     /* muted - visited/settled */
+    --edge:#2a3234;
+    --danger:#ef7a7a;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:28px 16px 40px;
+  }
+  .wrap{width:100%;max-width:1180px;}
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:18px;
+    flex-wrap:wrap;
+    gap:12px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:14px;
+  }
+  h1{
+    font-size:20px;
+    font-weight:600;
+    margin:0 0 4px;
+    letter-spacing:0.2px;
+  }
+  h1 span{color:var(--accent);}
+  .sub{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--dim);
+  }
+  .mode-toggle{
+    display:flex;
+    gap:6px;
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:4px;
+  }
+  .mode-toggle button{
+    font-family:var(--mono);
+    font-size:11.5px;
+    background:transparent;
+    border:none;
+    color:var(--dim);
+    padding:6px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .mode-toggle button.active{
+    background:var(--accent-dim);
+    color:var(--accent);
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:16px;
+  }
+  @media (max-width:880px){ .grid{grid-template-columns:1fr;} }
+
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .panel-head{
+    font-family:var(--mono);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--dim);
+    padding:10px 14px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  /* Tree canvas */
+  #treeSvg{width:100%;height:auto;display:block;background:
+    radial-gradient(circle at 20% 10%, #101617 0%, var(--panel) 60%);}
+  .node-circle{
+    fill:var(--panel-2);
+    stroke:var(--edge);
+    stroke-width:1.6;
+    transition:all .25s ease;
+  }
+  .node-label{
+    fill:var(--dim);
+    font-family:var(--mono);
+    font-size:15px;
+    font-weight:600;
+    text-anchor:middle;
+    dominant-baseline:central;
+    pointer-events:none;
+    transition:fill .25s ease;
+  }
+  .edge{
+    stroke:var(--edge);
+    stroke-width:1.6;
+    transition:stroke .25s ease, stroke-width .25s ease;
+  }
+  .node-circle.on-stack{ stroke:var(--stack); stroke-width:2.4; fill:#231a0c;}
+  .node-circle.on-stack .node-label{ fill:var(--stack);}
+  .node-circle.active{ stroke:var(--accent); stroke-width:3; fill:#0e2622; filter:drop-shadow(0 0 6px rgba(94,234,212,.45));}
+  .node-label.active{ fill:var(--accent);}
+  .node-label.on-stack{ fill:var(--stack);}
+  .node-circle.visited{ stroke:var(--visited); fill:#161b1c;}
+  .node-label.visited{ fill:#a9b4b4;}
+  .edge.traversed{ stroke:var(--visited); stroke-width:2;}
+  .edge.active-edge{ stroke:var(--accent); stroke-width:2.6;}
+
+  /* Code panel */
+  .code{
+    font-family:var(--mono);
+    font-size:13px;
+    line-height:1.9;
+    padding:14px 0;
+  }
+  .code-line{
+    padding:2px 16px;
+    white-space:pre;
+    color:#8a9698;
+    border-left:3px solid transparent;
+  }
+  .code-line .kw{color:#f0a9d0;}
+  .code-line .fn{color:#93c5fd;}
+  .code-line .cm{color:#5c6a6c; font-style:italic;}
+  .code-line.current{
+    background:var(--accent-dim);
+    color:var(--accent);
+    border-left:3px solid var(--accent);
+  }
+
+  /* Stack panel */
+  #stackBody{
+    padding:14px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    min-height:120px;
+    display:flex;
+    flex-direction:column-reverse;
+    gap:6px;
+  }
+  .stack-frame{
+    background:var(--panel-2);
+    border:1px solid var(--edge);
+    border-left:3px solid var(--stack);
+    padding:8px 10px;
+    border-radius:6px;
+    color:var(--stack);
+    animation:pop .18s ease;
+  }
+  @keyframes pop{ from{ transform:translateY(6px); opacity:0;} to{transform:translateY(0); opacity:1;} }
+  .stack-empty{ color:var(--dim); font-style:italic; padding:8px 10px;}
+
+  /* Order trail */
+  #trail{
+    padding:12px 14px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    min-height:20px;
+  }
+  .trail-chip{
+    background:var(--accent-dim);
+    color:var(--accent);
+    border:1px solid #2a5a52;
+    border-radius:5px;
+    padding:3px 8px;
+  }
+
+  /* Controls */
+  .controls{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:14px;
+    border-top:1px solid var(--border);
+    flex-wrap:wrap;
+  }
+  .controls .spacer{flex:1;}
+  button.ctrl{
+    font-family:var(--mono);
+    font-size:12.5px;
+    background:var(--panel-2);
+    color:var(--text);
+    border:1px solid var(--border);
+    padding:8px 14px;
+    border-radius:7px;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  button.ctrl:hover{ border-color:var(--accent); color:var(--accent);}
+  button.ctrl:disabled{ opacity:.35; cursor:not-allowed;}
+  button.ctrl.primary{ background:var(--accent-dim); color:var(--accent); border-color:#2a5a52;}
+  .step-count{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--dim);
+    min-width:78px;
+    text-align:center;
+  }
+  input[type=range]{
+    flex:1;
+    accent-color:var(--accent);
+    min-width:100px;
+  }
+
+  .desc-bar{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--text);
+    padding:12px 14px;
+    border-top:1px solid var(--border);
+    background:var(--panel-2);
+    min-height:18px;
+  }
+  .desc-bar .tag{ color:var(--accent); margin-right:8px;}
+
+  .legend{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--dim);
+    padding:10px 14px;
+    border-top:1px solid var(--border);
+  }
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Depth-First <span>Traversal</span></h1>
+      <div class="sub">binary tree · recursive DFS · step-through</div>
+    </div>
+    <div class="mode-toggle" id="modeToggle">
+      <button data-mode="pre" class="active">preorder</button>
+      <button data-mode="in">inorder</button>
+      <button data-mode="post">postorder</button>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="panel">
+      <div class="panel-head">
+        <span>tree</span>
+        <span id="orderLabel" style="color:var(--accent)">visit → left → right</span>
+      </div>
+      <svg id="treeSvg" viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="panel-head" style="border-top:1px solid var(--border); border-bottom:none;">traversal order</div>
+      <div id="trail"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">dfs(node)</div>
+      <div class="code" id="codeBlock"></div>
+      <div class="panel-head" style="border-top:1px solid var(--border);">call stack</div>
+      <div id="stackBody"></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <div class="desc-bar"><span class="tag">▸</span><span id="descText">Ready. Press play or step forward to begin.</span></div>
+    <div class="controls">
+      <button class="ctrl" id="btnReset">⟲ reset</button>
+      <button class="ctrl" id="btnPrev">◂ step</button>
+      <button class="ctrl primary" id="btnPlay">▶ play</button>
+      <button class="ctrl" id="btnNext">step ▸</button>
+      <div class="step-count" id="stepCount">0 / 0</div>
+      <div class="spacer"></div>
+      <span style="font-family:var(--mono); font-size:11px; color:var(--dim);">speed</span>
+      <input type="range" id="speed" min="200" max="1600" value="750" step="50">
+    </div>
+    <div class="legend">
+      <span><span class="dot" style="background:var(--stack);"></span> on call stack</span>
+      <span><span class="dot" style="background:var(--accent);"></span> currently visiting</span>
+      <span><span class="dot" style="background:var(--visited);"></span> settled / returned</span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- Tree definition ---------- */
+const tree = {
+  id:1, x:450, y:50,
+  left:{ id:2, x:250, y:150,
+    left:{ id:4, x:150, y:250 },
+    right:{ id:5, x:350, y:250,
+      left:{ id:7, x:350, y:350 }
+    }
+  },
+  right:{ id:3, x:650, y:150,
+    right:{ id:6, x:750, y:250,
+      right:{ id:8, x:750, y:350 }
+    }
+  }
+};
+
+const nodes = [];
+const edges = [];
+(function collect(n, parent){
+  if(!n) return;
+  nodes.push(n);
+  if(parent) edges.push({from:parent, to:n});
+  collect(n.left, n);
+  collect(n.right, n);
+})(tree, null);
+
+/* ---------- Pseudocode per mode ---------- */
+const codeByMode = {
+  pre:[
+    {t:'function <span class="fn">dfs</span>(node):', cm:false},
+    {t:'  if node is <span class="kw">null</span>: return', cm:false},
+    {t:'  visit(node)              <span class="cm">// process here first</span>', cm:false},
+    {t:'  dfs(node.left)', cm:false},
+    {t:'  dfs(node.right)', cm:false},
+  ],
+  in:[
+    {t:'function <span class="fn">dfs</span>(node):', cm:false},
+    {t:'  if node is <span class="kw">null</span>: return', cm:false},
+    {t:'  dfs(node.left)', cm:false},
+    {t:'  visit(node)              <span class="cm">// process in the middle</span>', cm:false},
+    {t:'  dfs(node.right)', cm:false},
+  ],
+  post:[
+    {t:'function <span class="fn">dfs</span>(node):', cm:false},
+    {t:'  if node is <span class="kw">null</span>: return', cm:false},
+    {t:'  dfs(node.left)', cm:false},
+    {t:'  dfs(node.right)', cm:false},
+    {t:'  visit(node)              <span class="cm">// process after both</span>', cm:false},
+  ]
+};
+const orderLabels = {
+  pre:'visit → left → right',
+  in:'left → visit → right',
+  post:'left → right → visit'
+};
+
+/* ---------- Trace generation ---------- */
+// line indices (0-based) refer to codeByMode arrays above
+function buildTrace(mode){
+  const events = [];
+  const stack = [];
+
+  function enter(node){
+    stack.push(node.id);
+    events.push({line:0, stack:[...stack], active:node.id, action:'call', text:`call dfs(${node.id})`});
+  }
+  function nullCheck(node){
+    events.push({line:1, stack:[...stack], active: stack[stack.length-1] ?? null, action:'check', text:`node ${node.id} is not null, continue`});
+  }
+  function visit(node){
+    events.push({line: mode==='pre'?2 : mode==='in'?3 : 4, stack:[...stack], active:node.id, action:'visit', text:`visit(${node.id}) → add to traversal order`, visitId:node.id});
+  }
+  function recurseLeft(node){
+    const line = mode==='pre'?3 : mode==='in'?2 : 2;
+    events.push({line, stack:[...stack], active:node.id, action:'goLeft', text:`dfs(${node.id}.left)`});
+  }
+  function recurseRight(node){
+    const line = mode==='pre'?4 : mode==='in'?4 : 3;
+    events.push({line, stack:[...stack], active:node.id, action:'goRight', text:`dfs(${node.id}.right)`});
+  }
+  function ret(node){
+    events.push({line:1, stack:[...stack], active:node.id, action:'return', text:`dfs(${node.id}) returns, pop stack`, returnId:node.id});
+    stack.pop();
+  }
+
+  function dfs(node, parent){
+    if(!node){
+      events.push({line:1, stack:[...stack], active: stack[stack.length-1] ?? null, action:'null', text:'node is null → return'});
+      return;
+    }
+    enter(node);
+    nullCheck(node);
+    if(mode==='pre') visit(node);
+    recurseLeft(node);
+    dfs(node.left, node);
+    if(mode==='in') visit(node);
+    recurseRight(node);
+    dfs(node.right, node);
+    if(mode==='post') visit(node);
+    ret(node);
+  }
+  dfs(tree, null);
+  events.push({line:-1, stack:[], active:null, action:'done', text:'traversal complete'});
+  return events;
+}
+
+let mode = 'pre';
+let trace = buildTrace(mode);
+let idx = -1; // current event index (-1 = before start)
+let playTimer = null;
+
+/* ---------- SVG render (static structure) ---------- */
+const svg = document.getElementById('treeSvg');
+function edgeId(e){ return `edge-${e.from.id}-${e.to.id}`; }
+function drawStatic(){
+  svg.innerHTML = '';
+  edges.forEach(e=>{
+    const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1', e.from.x); line.setAttribute('y1', e.from.y+18);
+    line.setAttribute('x2', e.to.x); line.setAttribute('y2', e.to.y-18);
+    line.setAttribute('class','edge');
+    line.setAttribute('id', edgeId(e));
+    svg.appendChild(line);
+  });
+  nodes.forEach(n=>{
+    const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx', n.x); c.setAttribute('cy', n.y); c.setAttribute('r', 20);
+    c.setAttribute('class','node-circle');
+    c.setAttribute('id', `circ-${n.id}`);
+    svg.appendChild(c);
+    const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('x', n.x); t.setAttribute('y', n.y);
+    t.setAttribute('class','node-label');
+    t.setAttribute('id', `label-${n.id}`);
+    t.textContent = n.id;
+    svg.appendChild(t);
+  });
+}
+drawStatic();
+
+/* ---------- Code panel render ---------- */
+const codeBlock = document.getElementById('codeBlock');
+function renderCode(){
+  codeBlock.innerHTML = codeByMode[mode].map((l,i)=>
+    `<div class="code-line" data-line="${i}">${l.t}</div>`).join('');
+}
+renderCode();
+
+/* ---------- Apply a given event index to the UI ---------- */
+function findNode(id){ return nodes.find(n=>n.id===id); }
+
+function render(){
+  // reset all node/edge classes
+  nodes.forEach(n=>{
+    document.getElementById(`circ-${n.id}`).setAttribute('class','node-circle');
+    document.getElementById(`label-${n.id}`).setAttribute('class','node-label');
+  });
+  edges.forEach(e=>{
+    document.getElementById(edgeId(e)).setAttribute('class','edge');
+  });
+  document.querySelectorAll('.code-line').forEach(el=>el.classList.remove('current'));
+
+  const visitedSet = new Set();
+  const stackNow = idx>=0 ? trace[idx].stack : [];
+  let activeNode = idx>=0 ? trace[idx].active : null;
+
+  // accumulate visited nodes and trail up to idx
+  const trailIds = [];
+  for(let i=0;i<=idx;i++){
+    if(trace[i].visitId!==undefined){
+      visitedSet.add(trace[i].visitId);
+      trailIds.push(trace[i].visitId);
+    }
+  }
+
+  // node styling
+  nodes.forEach(n=>{
+    const circ = document.getElementById(`circ-${n.id}`);
+    const label = document.getElementById(`label-${n.id}`);
+    if(visitedSet.has(n.id) && n.id!==activeNode){
+      circ.classList.add('visited'); label.classList.add('visited');
+    }
+    if(stackNow.includes(n.id) && n.id!==activeNode){
+      circ.classList.add('on-stack'); label.classList.add('on-stack');
+    }
+    if(n.id===activeNode){
+      circ.classList.add('active'); label.classList.add('active');
+    }
+  });
+
+  // edge styling: traversed if both endpoints have been on stack together in history, active if currently connecting active node to its parent-call
+  edges.forEach(e=>{
+    const el = document.getElementById(edgeId(e));
+    const fromSeen = stackNow.includes(e.from.id) || visitedSet.has(e.from.id);
+    const toSeen = stackNow.includes(e.to.id) || visitedSet.has(e.to.id) || e.to.id===activeNode;
+    if(fromSeen && toSeen){
+      el.classList.add('traversed');
+    }
+    if(stackNow.includes(e.from.id) && e.to.id===activeNode){
+      el.classList.add('active-edge');
+    }
+  });
+
+  // code highlight
+  if(idx>=0 && trace[idx].line>=0){
+    const el = document.querySelector(`.code-line[data-line="${trace[idx].line}"]`);
+    if(el) el.classList.add('current');
+  }
+
+  // stack panel
+  const stackBody = document.getElementById('stackBody');
+  if(stackNow.length===0){
+    stackBody.innerHTML = '<div class="stack-empty">— empty —</div>';
+  }else{
+    stackBody.innerHTML = stackNow.map(id=>`<div class="stack-frame">dfs(${id})</div>`).join('');
+  }
+
+  // trail
+  document.getElementById('trail').innerHTML = trailIds.map(id=>`<span class="trail-chip">${id}</span>`).join('') || '<span style="color:var(--dim); font-style:italic;">—</span>';
+
+  // desc bar
+  document.getElementById('descText').textContent = idx>=0 ? trace[idx].text : 'Ready. Press play or step forward to begin.';
+
+  // step counter + button states
+  document.getElementById('stepCount').textContent = `${Math.max(idx+1,0)} / ${trace.length}`;
+  document.getElementById('btnPrev').disabled = idx<0;
+  document.getElementById('btnNext').disabled = idx>=trace.length-1;
+}
+render();
+
+/* ---------- Controls ---------- */
+document.getElementById('btnNext').addEventListener('click', ()=>{ stepForward(); });
+document.getElementById('btnPrev').addEventListener('click', ()=>{ stepBack(); });
+document.getElementById('btnReset').addEventListener('click', ()=>{ pause(); idx=-1; render(); });
+
+function stepForward(){
+  if(idx < trace.length-1){ idx++; render(); }
+  else pause();
+}
+function stepBack(){
+  if(idx > -1){ idx--; render(); }
+}
+
+const btnPlay = document.getElementById('btnPlay');
+let playing = false;
+function play(){
+  playing = true;
+  btnPlay.textContent = '⏸ pause';
+  const speedEl = document.getElementById('speed');
+  const tick = ()=>{
+    if(idx>=trace.length-1){ pause(); return; }
+    stepForward();
+    playTimer = setTimeout(tick, parseInt(speedEl.value,10));
+  };
+  tick();
+}
+function pause(){
+  playing = false;
+  btnPlay.textContent = '▶ play';
+  clearTimeout(playTimer);
+}
+btnPlay.addEventListener('click', ()=>{ playing ? pause() : play(); });
+
+/* ---------- Mode toggle ---------- */
+document.getElementById('modeToggle').addEventListener('click', (e)=>{
+  const btn = e.target.closest('button[data-mode]');
+  if(!btn) return;
+  pause();
+  mode = btn.dataset.mode;
+  document.querySelectorAll('#modeToggle button').forEach(b=>b.classList.toggle('active', b===btn));
+  document.getElementById('orderLabel').textContent = orderLabels[mode];
+  trace = buildTrace(mode);
+  idx = -1;
+  renderCode();
+  render();
+});
+</script>
+</body>
+</html>

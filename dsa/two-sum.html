@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Two Sum </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0e0f;
+    --panel:#111516;
+    --panel-2:#14181a;
+    --border:#232a2c;
+    --text:#e7ecec;
+    --dim:#7c8a8c;
+    --accent:#a8e063;      /* lime - current pointer */
+    --accent-dim:#2c3d1a;
+    --comp:#f4b860;        /* amber - complement being searched for */
+    --comp-dim:#3d2f14;
+    --found:#7cc4f4;       /* blue - success */
+    --found-dim:#1c3b4d;
+    --settled:#4b5a5c;
+    --edge:#2a3234;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:28px 16px 40px;
+  }
+  .wrap{width:100%;max-width:1180px;}
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:18px;
+    flex-wrap:wrap;
+    gap:12px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:14px;
+  }
+  h1{ font-size:20px; font-weight:600; margin:0 0 4px; letter-spacing:0.2px; }
+  h1 span{color:var(--accent);}
+  .sub{ font-family:var(--mono); font-size:12px; color:var(--dim); }
+  .target-box{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--dim);
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:8px 14px;
+  }
+  .target-box b{ color:var(--comp); font-size:15px; }
+
+  .grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:16px; }
+  @media (max-width:880px){ .grid{grid-template-columns:1fr;} }
+
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .panel-head{
+    font-family:var(--mono);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--dim);
+    padding:10px 14px;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  /* Array display */
+  #arrayRow{
+    display:flex;
+    gap:10px;
+    padding:36px 20px 16px;
+    overflow-x:auto;
+  }
+  .cell{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    min-width:56px;
+    position:relative;
+  }
+  .cell .box{
+    width:56px;
+    height:56px;
+    border-radius:9px;
+    background:var(--panel-2);
+    border:1.6px solid var(--edge);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--mono);
+    font-size:17px;
+    font-weight:600;
+    color:var(--text);
+    transition:all .22s ease;
+  }
+  .cell .idx{ font-family:var(--mono); font-size:10.5px; color:var(--dim); }
+  .cell.current .box{ border-color:var(--accent); background:#1a2a10; color:var(--accent); box-shadow:0 0 8px rgba(168,224,99,.35);}
+  .cell.settled .box{ border-color:var(--settled); color:#a9b4b4; }
+  .cell.match .box{ border-color:var(--found); background:#0e2130; color:var(--found); box-shadow:0 0 10px rgba(124,196,244,.4);}
+  .cell .ptr{
+    position:absolute; top:-24px; left:50%; transform:translateX(-50%);
+    font-family:var(--mono); font-size:11px; color:var(--accent);
+    opacity:0; transition:opacity .2s ease;
+  }
+  .cell.current .ptr{ opacity:1; }
+
+  /* Code panel */
+  .code{ font-family:var(--mono); font-size:13px; line-height:1.9; padding:14px 0; }
+  .code-line{ padding:2px 16px; white-space:pre; color:#8a9698; border-left:3px solid transparent; }
+  .code-line .kw{color:#f0a9d0;}
+  .code-line .fn{color:#93c5fd;}
+  .code-line .cm{color:#5c6a6c; font-style:italic;}
+  .code-line.current{ background:var(--accent-dim); color:var(--accent); border-left:3px solid var(--accent); }
+  .code-line.current.hit{ background:var(--found-dim); color:var(--found); border-left:3px solid var(--found); }
+
+  /* Hash map panel */
+  #mapBody{
+    padding:14px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    min-height:70px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-content:flex-start;
+  }
+  .map-entry{
+    background:var(--panel-2);
+    border:1px solid var(--edge);
+    border-bottom:3px solid var(--settled);
+    padding:7px 11px;
+    border-radius:6px;
+    color:#c7d0d1;
+    animation:pop .18s ease;
+  }
+  .map-entry b{ color:var(--text); }
+  .map-entry.lookup-hit{ border-bottom-color:var(--found); color:var(--found); box-shadow:0 0 8px rgba(124,196,244,.3); }
+  @keyframes pop{ from{ transform:translateY(4px); opacity:0;} to{transform:translateY(0); opacity:1;} }
+  .map-empty{ color:var(--dim); font-style:italic; padding:8px 10px;}
+
+  .complement-box{
+    padding:10px 14px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    border-top:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:var(--dim);
+  }
+  .complement-box .val{
+    color:var(--comp);
+    font-weight:700;
+    background:var(--comp-dim);
+    border:1px solid #4d3a14;
+    border-radius:6px;
+    padding:3px 9px;
+  }
+
+  .controls{
+    display:flex; align-items:center; gap:10px; padding:14px;
+    border-top:1px solid var(--border); flex-wrap:wrap;
+  }
+  .controls .spacer{flex:1;}
+  button.ctrl{
+    font-family:var(--mono); font-size:12.5px;
+    background:var(--panel-2); color:var(--text);
+    border:1px solid var(--border); padding:8px 14px;
+    border-radius:7px; cursor:pointer; transition:all .15s ease;
+  }
+  button.ctrl:hover{ border-color:var(--accent); color:var(--accent);}
+  button.ctrl:disabled{ opacity:.35; cursor:not-allowed;}
+  button.ctrl.primary{ background:var(--accent-dim); color:var(--accent); border-color:#3a5322;}
+  .step-count{ font-family:var(--mono); font-size:12px; color:var(--dim); min-width:78px; text-align:center; }
+  input[type=range]{ flex:1; accent-color:var(--accent); min-width:100px; }
+
+  .desc-bar{
+    font-family:var(--mono); font-size:12.5px; color:var(--text);
+    padding:12px 14px; border-top:1px solid var(--border);
+    background:var(--panel-2); min-height:18px;
+  }
+  .desc-bar .tag{ color:var(--accent); margin-right:8px;}
+  .desc-bar.hit .tag{ color:var(--found); }
+
+  .legend{
+    display:flex; gap:16px; flex-wrap:wrap;
+    font-family:var(--mono); font-size:11px; color:var(--dim);
+    padding:10px 14px; border-top:1px solid var(--border);
+  }
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Two <span>Sum</span></h1>
+      <div class="sub">one-pass hash map · O(n) time · step-through</div>
+    </div>
+    <div class="target-box">target sum = <b id="targetLabel">9</b></div>
+  </header>
+
+  <div class="grid">
+    <div class="panel">
+      <div class="panel-head">
+        <span>nums</span>
+        <span id="statusLabel" style="color:var(--accent)">scanning…</span>
+      </div>
+      <div id="arrayRow"></div>
+      <div class="complement-box">
+        looking for complement <span class="val" id="compVal">—</span>
+        <span id="compHint" style="color:var(--dim)"></span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">twoSum(nums, target)</div>
+      <div class="code" id="codeBlock"></div>
+      <div class="panel-head" style="border-top:1px solid var(--border);">hash map — value → index</div>
+      <div id="mapBody"></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:16px;">
+    <div class="desc-bar" id="descBar"><span class="tag">▸</span><span id="descText">Ready. Press play or step forward to begin.</span></div>
+    <div class="controls">
+      <button class="ctrl" id="btnReset">⟲ reset</button>
+      <button class="ctrl" id="btnPrev">◂ step</button>
+      <button class="ctrl primary" id="btnPlay">▶ play</button>
+      <button class="ctrl" id="btnNext">step ▸</button>
+      <div class="step-count" id="stepCount">0 / 0</div>
+      <div class="spacer"></div>
+      <span style="font-family:var(--mono); font-size:11px; color:var(--dim);">speed</span>
+      <input type="range" id="speed" min="200" max="1600" value="750" step="50">
+    </div>
+    <div class="legend">
+      <span><span class="dot" style="background:var(--accent);"></span> current index</span>
+      <span><span class="dot" style="background:var(--settled);"></span> stored in map</span>
+      <span><span class="dot" style="background:var(--found);"></span> match found</span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- Problem instance ---------- */
+const nums = [3, 2, 4, 7, 11, 15];
+const target = 9;
+document.getElementById('targetLabel').textContent = target;
+
+/* ---------- Pseudocode ---------- */
+const code = [
+  {t:'function <span class="fn">twoSum</span>(nums, target):'},
+  {t:'  map ← {}                     <span class="cm">// value → index</span>'},
+  {t:'  <span class="kw">for</span> i, num <span class="kw">in</span> enumerate(nums):'},
+  {t:'    complement ← target − num'},
+  {t:'    <span class="kw">if</span> complement <span class="kw">in</span> map:'},
+  {t:'      <span class="kw">return</span> [map[complement], i]'},
+  {t:'    map[num] ← i'},
+];
+const codeBlock = document.getElementById('codeBlock');
+codeBlock.innerHTML = code.map((l,i)=>`<div class="code-line" data-line="${i}">${l.t}</div>`).join('');
+
+/* ---------- Trace generation ---------- */
+function buildTrace(){
+  const events = [];
+  const map = {}; // value -> index
+
+  events.push({line:1, i:null, map:{...map}, complement:null, text:`initialize empty map`});
+
+  for(let i=0;i<nums.length;i++){
+    const num = nums[i];
+    events.push({line:2, i, map:{...map}, complement:null, text:`i = ${i}, num = ${num}`});
+
+    const complement = target - num;
+    events.push({line:3, i, map:{...map}, complement, text:`complement = ${target} − ${num} = ${complement}`});
+
+    if(Object.prototype.hasOwnProperty.call(map, complement)){
+      events.push({line:4, i, map:{...map}, complement, text:`${complement} is in map → found!`, lookupHit:true});
+      events.push({line:5, i, map:{...map}, complement, text:`return [${map[complement]}, ${i}]`, matchIdx:[map[complement], i], done:true});
+      return events;
+    } else {
+      events.push({line:4, i, map:{...map}, complement, text:`${complement} not in map yet`});
+    }
+
+    map[num] = i;
+    events.push({line:6, i, map:{...map}, complement:null, text:`map[${num}] ← ${i}  (store for later)`, storeVal:num, storeIdx:i});
+  }
+  events.push({line:2, i:null, map:{...map}, complement:null, text:`loop finished, no match`, done:true});
+  return events;
+}
+
+const trace = buildTrace();
+let idx = -1;
+let playTimer = null;
+
+/* ---------- Array render (static cells) ---------- */
+const arrayRow = document.getElementById('arrayRow');
+nums.forEach((n,i)=>{
+  const cell = document.createElement('div');
+  cell.className = 'cell';
+  cell.id = `cell-${i}`;
+  cell.innerHTML = `<div class="ptr">i</div><div class="box">${n}</div><div class="idx">${i}</div>`;
+  arrayRow.appendChild(cell);
+});
+
+/* ---------- Render current step ---------- */
+function render(){
+  // reset cells
+  nums.forEach((n,i)=>{
+    document.getElementById(`cell-${i}`).className = 'cell';
+  });
+  document.querySelectorAll('.code-line').forEach(el=>el.classList.remove('current','hit'));
+
+  const state = idx>=0 ? trace[idx] : null;
+
+  // settled = every index that has been stored in map so far (by iterating trace up to idx)
+  const storedIdx = new Set();
+  for(let k=0;k<=idx;k++){
+    if(trace[k].storeIdx!==undefined) storedIdx.add(trace[k].storeIdx);
+  }
+  storedIdx.forEach(i=>{
+    const c = document.getElementById(`cell-${i}`);
+    if(c) c.classList.add('settled');
+  });
+
+  if(state && state.i!==null && state.i!==undefined && !state.matchIdx){
+    const c = document.getElementById(`cell-${state.i}`);
+    if(c){ c.classList.remove('settled'); c.classList.add('current'); }
+  }
+
+  if(state && state.matchIdx){
+    state.matchIdx.forEach(i=>{
+      const c = document.getElementById(`cell-${i}`);
+      if(c){ c.classList.remove('settled','current'); c.classList.add('match'); }
+    });
+  }
+
+  // code highlight
+  if(state && state.line>=0){
+    const el = document.querySelector(`.code-line[data-line="${state.line}"]`);
+    if(el){
+      el.classList.add('current');
+      if(state.lookupHit || state.matchIdx) el.classList.add('hit');
+    }
+  }
+
+  // map panel
+  const mapBody = document.getElementById('mapBody');
+  const mapNow = state ? state.map : {};
+  const entries = Object.entries(mapNow);
+  if(entries.length===0){
+    mapBody.innerHTML = '<div class="map-empty">— empty —</div>';
+  } else {
+    mapBody.innerHTML = entries.map(([val,i])=>{
+      const isHit = state && state.lookupHit && Number(val)===state.complement;
+      return `<div class="map-entry${isHit?' lookup-hit':''}"><b>${val}</b> → ${i}</div>`;
+    }).join('');
+  }
+
+  // complement box
+  document.getElementById('compVal').textContent = state && state.complement!==null && state.complement!==undefined ? state.complement : '—';
+  document.getElementById('compHint').textContent = state && state.lookupHit ? '✓ found in map' : '';
+
+  // desc bar
+  const descBar = document.getElementById('descBar');
+  descBar.classList.toggle('hit', !!(state && (state.lookupHit || state.matchIdx)));
+  document.getElementById('descText').textContent = state ? state.text : 'Ready. Press play or step forward to begin.';
+
+  // status label
+  const statusLabel = document.getElementById('statusLabel');
+  if(!state){ statusLabel.textContent = 'scanning…'; statusLabel.style.color = 'var(--accent)'; }
+  else if(state.matchIdx){ statusLabel.textContent = 'match found'; statusLabel.style.color = 'var(--found)'; }
+  else if(state.done){ statusLabel.textContent = 'done'; statusLabel.style.color = 'var(--dim)'; }
+  else { statusLabel.textContent = 'scanning…'; statusLabel.style.color = 'var(--accent)'; }
+
+  document.getElementById('stepCount').textContent = `${Math.max(idx+1,0)} / ${trace.length}`;
+  document.getElementById('btnPrev').disabled = idx<0;
+  document.getElementById('btnNext').disabled = idx>=trace.length-1;
+}
+render();
+
+/* ---------- Controls ---------- */
+document.getElementById('btnNext').addEventListener('click', ()=>stepForward());
+document.getElementById('btnPrev').addEventListener('click', ()=>stepBack());
+document.getElementById('btnReset').addEventListener('click', ()=>{ pause(); idx=-1; render(); });
+
+function stepForward(){
+  if(idx < trace.length-1){ idx++; render(); } else pause();
+}
+function stepBack(){
+  if(idx > -1){ idx--; render(); }
+}
+
+const btnPlay = document.getElementById('btnPlay');
+let playing = false;
+function play(){
+  playing = true;
+  btnPlay.textContent = '⏸ pause';
+  const speedEl = document.getElementById('speed');
+  const tick = ()=>{
+    if(idx>=trace.length-1){ pause(); return; }
+    stepForward();
+    playTimer = setTimeout(tick, parseInt(speedEl.value,10));
+  };
+  tick();
+}
+function pause(){
+  playing = false;
+  btnPlay.textContent = '▶ play';
+  clearTimeout(playTimer);
+}
+btnPlay.addEventListener('click', ()=>{ playing ? pause() : play(); });
+</script>
+</body>
+</html>

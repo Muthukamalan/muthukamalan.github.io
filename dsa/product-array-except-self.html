@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product of Array Except Self</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0e14;
+    --panel: #10151d;
+    --panel-2: #141b26;
+    --border: #232c3a;
+    --text: #d7dde6;
+    --text-dim: #6d7889;
+    --prefix: #4fa8ff;
+    --prefix-dim: #1c3a56;
+    --suffix: #ff9d4f;
+    --suffix-dim: #4a3320;
+    --output: #46d68c;
+    --output-dim: #16332a;
+    --warn: #ff6b81;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --display: 'Space Grotesk', sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    padding: 32px 20px 80px;
+    line-height: 1.5;
+  }
+
+  .wrap{ max-width: 980px; margin: 0 auto; }
+
+  /* ---------- Hero ---------- */
+  .eyebrow{
+    font-size: 12px;
+    letter-spacing: .18em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    display:flex; align-items:center; gap:10px;
+    margin-bottom: 14px;
+  }
+  .eyebrow .dot{ width:6px;height:6px;border-radius:50%; background: var(--output); box-shadow: 0 0 8px var(--output); }
+
+  h1{
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(28px, 5vw, 44px);
+    line-height: 1.05;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+  h1 span{ color: var(--output); }
+
+  .lede{
+    color: var(--text-dim);
+    max-width: 640px;
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .constraints{
+    display:flex; gap:10px; flex-wrap:wrap;
+    margin: 20px 0 36px;
+  }
+  .chip{
+    border:1px solid var(--border);
+    background: var(--panel);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .chip b{ color: var(--text); font-weight: 600; }
+
+  /* ---------- Panel shell ---------- */
+  .panel{
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+    margin-bottom: 22px;
+  }
+  .panel-title{
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin: 0 0 18px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Phase banner ---------- */
+  .phase-banner{
+    display:flex; align-items:center; gap:12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--panel-2);
+    font-size: 13px;
+    margin-bottom: 20px;
+    min-height: 20px;
+  }
+  .phase-banner .arrow{ font-size: 16px; }
+  .phase-banner.prefix{ border-color: var(--prefix-dim); color: var(--prefix); }
+  .phase-banner.suffix{ border-color: var(--suffix-dim); color: var(--suffix); }
+  .phase-banner.init, .phase-banner.done{ color: var(--text-dim); }
+
+  /* ---------- Tape rows ---------- */
+  .row{ display:flex; align-items:flex-end; gap: 10px; margin-bottom: 10px; }
+  .row-label{
+    width: 70px; flex-shrink:0;
+    font-size: 11px; color: var(--text-dim);
+    letter-spacing: .08em; text-transform: uppercase;
+    padding-bottom: 14px;
+  }
+  .cells{ display:flex; gap: 8px; flex: 1; flex-wrap: wrap; }
+
+  .cell{
+    position: relative;
+    width: 58px;
+    height: 58px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel-2);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 18px; font-weight: 600;
+    color: var(--text);
+    transition: all .25s ease;
+  }
+  .cell .idx{
+    position:absolute; bottom: -19px; left:0; right:0;
+    text-align:center; font-size: 10px; color: var(--text-dim); font-weight: 400;
+  }
+  .cell.empty{ color: var(--border); }
+  .cell.ptr-prefix{ border-color: var(--prefix); box-shadow: 0 0 0 1px var(--prefix), 0 0 14px -2px var(--prefix); color: var(--prefix); }
+  .cell.ptr-suffix{ border-color: var(--suffix); box-shadow: 0 0 0 1px var(--suffix), 0 0 14px -2px var(--suffix); color: var(--suffix); }
+  .cell.written{ background: var(--output-dim); border-color: var(--output); color: var(--output); }
+  .cell.done-final{ background: var(--output-dim); border-color: var(--output); color: var(--output); }
+
+  .tape-block{ margin-bottom: 8px; }
+
+  /* ---------- Register readout ---------- */
+  .registers{
+    display:flex; gap: 12px; margin: 22px 0 6px;
+    flex-wrap: wrap;
+  }
+  .reg{
+    flex: 1; min-width: 150px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    background: var(--panel-2);
+  }
+  .reg .reg-label{ font-size: 10px; letter-spacing:.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px;}
+  .reg .reg-value{ font-size: 22px; font-weight: 700; font-family: var(--mono); }
+  .reg.prefix .reg-value{ color: var(--prefix); }
+  .reg.suffix .reg-value{ color: var(--suffix); }
+  .reg.step .reg-value{ color: var(--text); font-size: 16px; }
+
+  /* ---------- Controls ---------- */
+  .controls{
+    display:flex; align-items:center; gap: 10px; flex-wrap: wrap;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+  }
+  button{
+    font-family: var(--mono);
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 9px 14px;
+    border-radius: 7px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  button:hover{ border-color: var(--output); color: var(--output); }
+  button:focus-visible{ outline: 2px solid var(--output); outline-offset: 2px; }
+  button.primary{ background: var(--output-dim); border-color: var(--output); color: var(--output); }
+  button:disabled{ opacity: .35; cursor: not-allowed; }
+  button:disabled:hover{ border-color: var(--border); color: var(--text); }
+
+  .spacer{ flex: 1; }
+  .progress-label{ font-size: 12px; color: var(--text-dim); }
+  input[type="range"]{ accent-color: var(--output); }
+
+  /* ---------- Code panel ---------- */
+  .code{
+    font-size: 13px;
+    overflow-x: auto;
+  }
+  .code-line{
+    display: flex;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: pre;
+    color: var(--text-dim);
+  }
+  .code-line .ln{
+    width: 26px; flex-shrink:0; text-align:right; margin-right: 14px;
+    color: #3a4454; user-select:none;
+  }
+  .code-line.active{
+    background: var(--output-dim);
+    color: var(--text);
+  }
+  .code-line.active .ln{ color: var(--output); }
+  .code-line .kw{ color: var(--prefix); }
+  .code-line .num{ color: var(--suffix); }
+  .code-line .cm{ color: #4b5666; font-style: italic; }
+
+  /* ---------- Explainer grid ---------- */
+  .explain-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 720px){ .explain-grid{ grid-template-columns: 1fr; } }
+
+  .formula{
+    font-family: var(--mono);
+    font-size: 15px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 14px 0;
+  }
+  .formula .p{ color: var(--prefix); }
+  .formula .s{ color: var(--suffix); }
+  .formula .o{ color: var(--output); }
+
+  p{ color: var(--text-dim); font-size: 14px; margin: 0 0 10px;}
+  p b{ color: var(--text); font-weight: 600; }
+
+  .footer-grid{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  }
+  @media (max-width: 720px){ .footer-grid{ grid-template-columns: 1fr; } }
+  .stat{
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    background: var(--panel-2);
+  }
+  .stat .stat-label{ font-size: 10px; color: var(--text-dim); letter-spacing:.1em; text-transform: uppercase; margin-bottom: 6px;}
+  .stat .stat-value{ font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--output); }
+  .stat .stat-sub{ font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; animation: none !important; }
+  }
+
+  @media (max-width: 560px){
+    .cell{ width: 44px; height: 44px; font-size: 15px; }
+    .row-label{ width: 54px; font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow"><span class="dot"></span>ARRAYS · TWO-PASS TECHNIQUE · O(N) TIME, O(1) EXTRA SPACE</div>
+  <h1>Product of Array <span>Except Self</span></h1>
+  <p class="lede">Given <b>nums</b>, return <b>output</b> where <b>output[i]</b> equals the product of every element except <b>nums[i]</b> — without using division, in linear time.</p>
+
+  <div class="constraints">
+    <div class="chip"><b>No division</b> allowed</div>
+    <div class="chip"><b>O(n)</b> time</div>
+    <div class="chip"><b>O(1)</b> extra space (output array doesn't count)</div>
+  </div>
+
+  <!-- SIGNATURE VISUALIZER -->
+  <div class="panel">
+    <div class="panel-title">
+      <span>Register Tape — Step Through Both Passes</span>
+      <span id="stepCounter" class="progress-label">step 0 / 0</span>
+    </div>
+
+    <div id="phaseBanner" class="phase-banner init">Ready. Press Play or Step to begin.</div>
+
+    <div class="tape-block">
+      <div class="row">
+        <div class="row-label">nums</div>
+        <div class="cells" id="inputRow"></div>
+      </div>
+    </div>
+
+    <div class="tape-block" style="margin-top:26px;">
+      <div class="row">
+        <div class="row-label">output</div>
+        <div class="cells" id="outputRow"></div>
+      </div>
+    </div>
+
+    <div class="registers">
+      <div class="reg prefix">
+        <div class="reg-label">Prefix Accumulator</div>
+        <div class="reg-value" id="prefixReg">—</div>
+      </div>
+      <div class="reg suffix">
+        <div class="reg-label">Suffix Accumulator</div>
+        <div class="reg-value" id="suffixReg">—</div>
+      </div>
+      <div class="reg step">
+        <div class="reg-label">What's happening</div>
+        <div class="reg-value" id="noteReg">Idle</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="btnReset">↺ Reset</button>
+      <button id="btnPrev">‹ Prev</button>
+      <button id="btnPlay" class="primary">▶ Play</button>
+      <button id="btnNext">Next ›</button>
+      <span class="spacer"></span>
+      <label class="progress-label" for="speed">Speed</label>
+      <input type="range" id="speed" min="200" max="1400" value="700" step="100">
+      <button id="btnRandom">🎲 New array</button>
+    </div>
+  </div>
+
+  <!-- CODE PANEL -->
+  <div class="panel">
+    <div class="panel-title"><span>Synced Source</span></div>
+    <div class="code" id="codeBlock"></div>
+  </div>
+
+  <!-- EXPLANATION -->
+  <div class="panel">
+    <div class="panel-title"><span>The Core Idea</span></div>
+    <div class="explain-grid">
+      <div>
+        <p><b>Every output[i]</b> is just two halves multiplied together: everything to the <b>left</b> of i, and everything to the <b>right</b> of i. Division would compute this in one step (total product ÷ nums[i]) — but that breaks on zeros and is off-limits here.</p>
+        <div class="formula">output[i] = <span class="p">prefix(0..i-1)</span> × <span class="s">suffix(i+1..n-1)</span></div>
+        <p>So the trick is to build both halves separately, without ever needing the full product.</p>
+      </div>
+      <div>
+        <p><b>Pass 1 — Prefix (left → right):</b> walk forward, and before multiplying nums[i] into the running product, <b>store the running product first</b>. That's everything strictly before i.</p>
+        <p><b>Pass 2 — Suffix (right → left):</b> walk backward with a fresh accumulator, multiplying it directly into the output cell already holding the prefix. Same trick, mirrored.</p>
+        <p>One array, reused as both scratch space and the answer — that's the O(1) extra space.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title"><span>Complexity</span></div>
+    <div class="footer-grid">
+      <div class="stat">
+        <div class="stat-label">Time</div>
+        <div class="stat-value">O(n)</div>
+        <div class="stat-sub">Two linear passes, no nested loops</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Space</div>
+        <div class="stat-value">O(1)</div>
+        <div class="stat-sub">Excludes the output array itself</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Handles zeros?</div>
+        <div class="stat-value">Yes</div>
+        <div class="stat-sub">No division means no divide-by-zero risk</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  const codeLines = [
+    {t:'def <span class="kw">productExceptSelf</span>(nums: list[int]) -> list[int]:'},
+    {t:'    length = len(nums)'},
+    {t:'    output = [<span class="num">1</span>] * length'},
+    {t:'    <span class="cm"># Step 1: build prefix products into output</span>'},
+    {t:'    prefix = <span class="num">1</span>'},
+    {t:'    <span class="kw">for</span> i in range(length):'},
+    {t:'        output[i] = prefix'},
+    {t:'        prefix *= nums[i]'},
+    {t:'    <span class="cm"># Step 2: fold suffix products on the way back</span>'},
+    {t:'    suffix = <span class="num">1</span>'},
+    {t:'    <span class="kw">for</span> i in range(length - <span class="num">1</span>, -<span class="num">1</span>, -<span class="num">1</span>):'},
+    {t:'        output[i] *= suffix'},
+    {t:'        suffix *= nums[i]'},
+    {t:'    <span class="kw">return</span> output'},
+  ];
+  const codeEl = document.getElementById('codeBlock');
+  codeEl.innerHTML = codeLines.map((l,idx)=>
+    `<div class="code-line" data-ln="${idx}"><span class="ln">${idx+1}</span>${l.t}</div>`
+  ).join('');
+
+  let nums = [1,2,3,4];
+  let steps = [];
+  let cur = 0;
+  let playing = false;
+  let timer = null;
+
+  function generateSteps(arr){
+    const n = arr.length;
+    const output = new Array(n).fill(1);
+    const s = [];
+
+    s.push({line:1, phase:'init', i:-1, output:[...output], prefix:null, suffix:null,
+             note:'Allocate output, filled with 1s', ptr:-1});
+
+    let prefix = 1;
+    for(let i=0;i<n;i++){
+      output[i] = prefix;
+      s.push({line:6, phase:'prefix', i, output:[...output], prefix, suffix:null,
+               note:`output[${i}] = prefix (${prefix})`, ptr:i});
+      prefix *= arr[i];
+      s.push({line:7, phase:'prefix', i, output:[...output], prefix, suffix:null,
+               note:`prefix *= nums[${i}] → ${prefix}`, ptr:i});
+    }
+
+    let suffix = 1;
+    s.push({line:9, phase:'prefix', i:-1, output:[...output], prefix:null, suffix:1,
+             note:'Reset suffix accumulator to 1', ptr:-1});
+    for(let i=n-1;i>=0;i--){
+      output[i] *= suffix;
+      s.push({line:11, phase:'suffix', i, output:[...output], prefix:null, suffix,
+               note:`output[${i}] *= suffix (${suffix})`, ptr:i});
+      suffix *= arr[i];
+      s.push({line:12, phase:'suffix', i, output:[...output], prefix:null, suffix,
+               note:`suffix *= nums[${i}] → ${suffix}`, ptr:i});
+    }
+
+    s.push({line:13, phase:'done', i:-1, output:[...output], prefix:null, suffix:null,
+             note:'Return output', ptr:-1});
+    return s;
+  }
+
+  function buildRows(){
+    const inputRow = document.getElementById('inputRow');
+    const outputRow = document.getElementById('outputRow');
+    inputRow.innerHTML = nums.map((v,i)=>
+      `<div class="cell" id="in-${i}">${v}<span class="idx">${i}</span></div>`
+    ).join('');
+    outputRow.innerHTML = nums.map((_,i)=>
+      `<div class="cell empty" id="out-${i}">·<span class="idx">${i}</span></div>`
+    ).join('');
+  }
+
+  function render(){
+    const st = steps[cur];
+    document.getElementById('stepCounter').textContent = `step ${cur} / ${steps.length-1}`;
+
+    // code highlight
+    document.querySelectorAll('.code-line').forEach(el=>{
+      el.classList.toggle('active', Number(el.dataset.ln) === st.line);
+    });
+
+    // phase banner
+    const banner = document.getElementById('phaseBanner');
+    banner.className = 'phase-banner ' + st.phase;
+    if(st.phase==='init') banner.innerHTML = 'Setup — allocating the output array.';
+    else if(st.phase==='prefix') banner.innerHTML = '<span class="arrow">→</span> Pass 1: PREFIX (walking left to right)';
+    else if(st.phase==='suffix') banner.innerHTML = '<span class="arrow">←</span> Pass 2: SUFFIX (walking right to left)';
+    else banner.innerHTML = 'Done — output fully assembled.';
+
+    // input cells pointer
+    nums.forEach((_,i)=>{
+      const el = document.getElementById('in-'+i);
+      el.classList.remove('ptr-prefix','ptr-suffix');
+      if(i===st.ptr && st.phase==='prefix') el.classList.add('ptr-prefix');
+      if(i===st.ptr && st.phase==='suffix') el.classList.add('ptr-suffix');
+    });
+
+    // output cells
+    st.output.forEach((v,i)=>{
+      const el = document.getElementById('out-'+i);
+      el.innerHTML = v + `<span class="idx">${i}</span>`;
+      el.classList.remove('empty','written','done-final','ptr-prefix','ptr-suffix');
+      if(st.phase==='done'){ el.classList.add('done-final'); }
+      else if(i===st.ptr){ el.classList.add('written'); }
+    });
+
+    // registers
+    document.getElementById('prefixReg').textContent = st.prefix===null ? '—' : st.prefix;
+    document.getElementById('suffixReg').textContent = st.suffix===null ? '—' : st.suffix;
+    document.getElementById('noteReg').textContent = st.note;
+
+    document.getElementById('btnPrev').disabled = cur===0;
+    document.getElementById('btnNext').disabled = cur===steps.length-1;
+  }
+
+  function next(){
+    if(cur < steps.length-1){ cur++; render(); }
+    else { pause(); }
+  }
+  function prev(){
+    if(cur>0){ cur--; render(); }
+  }
+  function reset(){
+    cur = 0; render();
+  }
+  function play(){
+    playing = true;
+    document.getElementById('btnPlay').textContent = '⏸ Pause';
+    const speed = Number(document.getElementById('speed').value);
+    timer = setInterval(()=>{
+      if(cur>=steps.length-1){ pause(); return; }
+      next();
+    }, speed);
+  }
+  function pause(){
+    playing = false;
+    document.getElementById('btnPlay').textContent = '▶ Play';
+    clearInterval(timer);
+  }
+
+  document.getElementById('btnNext').addEventListener('click', ()=>{ pause(); next(); });
+  document.getElementById('btnPrev').addEventListener('click', ()=>{ pause(); prev(); });
+  document.getElementById('btnReset').addEventListener('click', ()=>{ pause(); reset(); });
+  document.getElementById('btnPlay').addEventListener('click', ()=>{ playing ? pause() : play(); });
+  document.getElementById('speed').addEventListener('input', ()=>{
+    if(playing){ pause(); play(); }
+  });
+  document.getElementById('btnRandom').addEventListener('click', ()=>{
+    pause();
+    const len = 4 + Math.floor(Math.random()*2); // 4-5 elements
+    nums = Array.from({length:len}, ()=> {
+      const v = Math.floor(Math.random()*7) - 2; // -2..4, allow zero/negatives
+      return v===0 && Math.random()<0.5 ? 0 : (v===0? 1 : v);
+    });
+    // ensure at least one interesting negative or zero occasionally, and no huge numbers
+    buildRows();
+    steps = generateSteps(nums);
+    cur = 0;
+    render();
+  });
+
+  buildRows();
+  steps = generateSteps(nums);
+  render();
+})();
+</script>
+</body>
+</html>
