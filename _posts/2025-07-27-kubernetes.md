@@ -57,7 +57,7 @@ users:
 ```
 
 
-##### Kubectl CMD
+#### Kubectl CMD
 
 | group-verb | action |
 |------------|--------|
@@ -190,10 +190,10 @@ kubectl apply -f pod.yaml # validates and writes to etcd
 
 ![alt text](/../assets/2025-07-27-kubernetes/overview-primitives.png){: .align-center}
 
-##### - **Container**
+#### - **Container**
 A sealed application package (Docker)
 
-##### - **Pod**
+#### - **Pod**
 The smallest and simplest Kubernetes object. It represents a single instance of a running process in your cluster. pods are one or more containers
 ```sh
 kubectl run web-pod --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --dry-run=client -o yml > pod.yml
@@ -289,7 +289,7 @@ spec:
 
 
 
-##### - **Labels** 
+#### - **Labels** 
 Identify metadata attached to objects.  use to determin which objects to apply an operation to primitive objects
 
 
@@ -370,7 +370,7 @@ spec:
 
 ![alt text](/../assets/2025-07-27-kubernetes/labels.png){: .align-center}
 
-##### - **Selector**
+#### - **Selector**
 Query against labels, producing a set result
 ```yaml
 apiVersion: v1
@@ -434,7 +434,7 @@ kubectl port-forward service/SERVICE_NAME 8080:80
 ```
 
 
-##### - **Controller**
+#### - **Controller**
 A reconcilation loop that drives current state towards desired state
 
 ```go
@@ -448,9 +448,9 @@ while(true) {
 }
 ```
 
-##### - **Replica Set**
+#### - **Replica Set**
 
-##### - **Deployment**
+#### - **Deployment**
 Grp of pods of the same type together to achieve load balancing. Greate for stateless workload, where exact copies of app runs and destory, maintain  desired number of apps.
 
 
@@ -491,7 +491,7 @@ kubectl set image deployment/web web=ghcr.io/platformrelay/workshop-web:v2 # edi
 ```
 
 
-##### - **Rollout**
+#### - **Rollout**
 ![rollouts](/../assets/2025-07-27-kubernetes/rollouts.gif)
 
 ```sh
@@ -501,7 +501,7 @@ kubectl rollout undo deployment/web
 ```
 
 
-##### - **Service**
+#### - **Service**
 A set of pods that work together in deployment and Service helps expose your deployment. This exposure can be to other deployments `and/or` to the outside world.
 ![alt text](/../assets/2025-07-27-kubernetes/service-overview.png){: .align-center}
 
@@ -546,7 +546,7 @@ status:
     ingress: []                      # External load balancer ingress points
 ```
 
-###### NodePort
+##### NodePort
 
 ![alt text](/../assets/2025-07-27-kubernetes/nodeport.png)
 ```yaml
@@ -572,7 +572,7 @@ Giving `LoadBalancer` every app its own burns on Cloud IP
 One L7 entry point in front of many services `Ingress`
 
 if your image is locally build and deploy, if requirement.txt changes it'll be locally cached
-###### ClusterIP
+##### ClusterIP
 ![alt text](/../assets/2025-07-27-kubernetes/clusterIP-service.png)
 ```yaml
 # POD
@@ -602,14 +602,14 @@ spec:
   - targetPort: 80
     port: 80
 ```
-###### HEADLESS <ClusterIP:None>
-###### LoadBalancer
+##### HEADLESS <ClusterIP:None>
+##### LoadBalancer
 
-##### - **ConfigMap**
+#### - **ConfigMap**
 
-##### - **Secrets**
+#### - **Secrets**
 
-##### - **Namespace**
+#### - **Namespace**
 It provide a mechanism for isolating groups of resources within a single cluster.
 ![ns](/../assets/2025-07-27-kubernetes/namespace.png)
 ```sh
@@ -617,15 +617,15 @@ kubectl create ns NAMESPACE
 kubectl config set-context --current --namespace=NAMESPACE
 ```
 
-##### - **StatefulSets**
+#### - **StatefulSets**
 Similar to deployments but used for applications where copies of same application must coordianate with each other to maintain state. It manage the lifecycle of unique copies of pods. make sure networking & storage are reused if unhealthy pod need to be replaced. 
 
-##### - **Volumes**
+#### - **Volumes**
 ![alt text](/../assets/2025-07-27-kubernetes/pv-pvc-claim.png){: .align-center}
 - ****
 https://github.com/hvalfangst/kubernetes-encyclopedia/blob/main/service/REFERENCE.md
 
-##### **Cronjob**
+#### **Cronjob**
 ```yml
 apiVersion: batch/v1
 kind: CronJob
@@ -706,7 +706,7 @@ devops-29764270   Complete   1/1           7s         5m41s
 
 
 
-##### Job
+#### Job
 A Kubernetes Job is a workload controller that runs finite, short-lived tasks to completion and then stops.
 ```yaml
 apiVersion: batch/v1
@@ -733,7 +733,7 @@ kubectl get jobs
 ```
 
 
-### Kubernetes Components
+## Kubernetes Components
 
 
 https://www.xiaoyeshiyu.com/post/ff15.html
@@ -781,10 +781,10 @@ b
 
 - **Container Runtime** **Kubelet** calls over the CRI to pull image and start containers
 
-#### API Server
-#### Etcd
-#### Kube Controller Manager
-#### Kube Scheduler:
+### API Server
+### Etcd
+### Kube Controller Manager
+### Kube Scheduler:
 
 
 
@@ -804,12 +804,15 @@ status:
 
 
 
-### Helm
+## Helm
 
-It's a kubernets **package manager**
+It's a kubernetes **package manager**
 similar,
 - *pip* to python3
 - *apt* to debian
+
+![alt text](/../assets/2025-07-27-kubernetes/helm-overcome.png)
+
 
 ```sh
 sudo apt-get install curl gpg apt-transport-https --yes  
@@ -818,22 +821,296 @@ echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.co
 sudo apt-get update  
 sudo apt-get install helm
 ```
+Terminologies:
+- Architecture
+- Charts
+- Functions
+- Pipelines
+- Conditionals
+- With Blocks
+- Range
+- Chart Hooks
+- Packaging & Signing
+- Uploading
 
-#### chart packagin
-```
+### Components
+![alt text](/../assets/2025-07-27-kubernetes/helm-components.png)
+
+### chart packaging
+```sh
 my-chart/
 .
-├── templates         # k8s yaml tempaltes manifests
-│__ ├── deployment.yaml
-│__ ├── ingress.yaml
-│__ └── service.yaml
-├── chart.yaml           # metadata like, name, version, deps
-└── values.yaml          # default config 
+├── 📁 charts # Dependency Charts
+├── 📁 templates         # k8s yaml tempaltes manifests
+│   ├── 📄 deployment.yaml
+│   ├── 📄 ingress.yaml
+│   └── 📄 service.yaml
+├── 📄 README.md
+├── 📄 LICENSE
+├── 📄 chart.yaml           # metadata like, name, version, deps
+└── 📄 values.yaml          # default config 
+
 ```
-#### Templating
-#### Versioning & Rollbacks
 
-### Kustomize
+```sh
+helm --help
+helm repo list
+
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install my-release bitnami/wordpress
+helm uninstall my-release
+
+helm list
+```
 
 
-### Operator
+### Templating
+### Versioning & Rollbacks
+
+## Kustomize
+
+
+## Operator
+
+
+A `Kubernetes operator` is an application-specific controller that extends the functionality of the Kubernetes API to create, configure, and manage instances of complex applications on behalf of a Kubernetes user.
+
+![alt text](/../assets/2025-07-27-kubernetes/crd+contollers.png)
+
+
+All operators are Contollers but not all Contollers are Operators. 
+
+![alt text](/../assets/2025-07-27-kubernetes/contollers-operators.png)
+
+Operator = Controllers (reconcile loop) + Application Knowledge <CRD>
+
+
+
+|components| vending Machine | postgres Operator|
+|----------|-----------------|--------------|
+|CRD       |Buttons          |  postgres-crd|
+|Controller|machine inside   |  watches (statefulset,backups,failover,upgrades)  |
+|Child Objects|what comes out|  pod,sts     |
+|status    |shown back on the display|   status   |
+
+
+
+when to use what
+
+| Helm | Operator |
+|------|----------|
+| templating+release packge | reacts drift changes, failures and watches you all the time| 
+
+
+### Capabilities
+- I. ![L1](/../assets/2025-07-27-kubernetes/L1.png)
+- II. ![L2](/../assets/2025-07-27-kubernetes/L2.png)
+- III. ![L3](/../assets/2025-07-27-kubernetes/L3.png)
+- IV. ![L4](/../assets/2025-07-27-kubernetes/L4.png)
+- V. ![L5](/../assets/2025-07-27-kubernetes/L5.png)
+
+
+#### CRDs ( Interface )
+Its the First Class API Object to interact with Operators 
+
+![alt text](/../assets/2025-07-27-kubernetes/crd-api_server.png)
+
+
+```yaml
+apiVersion: apiextensions.k8s.io/v1           # API version for CRD
+kind: CustomResourceDefinition
+metadata:
+  name: widgets.example.understood.com        # Name of the CRD  `widgets`
+spec:
+  # k8s will expose as `/apis/example.understood.com/v1/namespaces/<namespace>/widgets`
+  # CR will be 
+  # apiVersion: example.understood.com
+  # kind: Widget  
+  group:                # API group for  CRDS; part of full API group
+  scope: Namespaced
+  names:
+    plural: widgets                          
+    singular: widget
+    kind: Widget                              # Kind
+    shortNames: [wg]
+  versions:
+  - name: v1                                  # version; can be served different versions
+    served: true                              # Reacheable over API
+    storage: true                             # name be multiple atlease on `served:true`; Written in etcd
+    schema:
+      openAPIV3Schema:
+        type: object
+        required: [spec]                      # mandatory spec field
+        properties:
+          spec:
+            type: object
+            required: [size, color]
+            properties:
+              size:
+                type: string
+                enum: [small, medium, large]  # choice 
+              color:
+                type: string
+                pattern: '^#[0-9a-fA-F]{6}$'  # must be satisfied
+              replicas:
+                type: integer
+                minimum: 1
+                maximum: 10
+                default: 2
+                x-kubernetes-validations:
+                  - rule: "self % 2 == 0"
+                    message: "replicas must be an even number"
+              unknowns:
+                type: object
+                x-kubernetes-preserve-unknown-fields: true  # pruning off - This subtree only
+              holo:
+                x-kubernetes-int-or-string: true      # accept int or string
+              product:
+                type: array
+                minItems: 1
+                maxItems: 5
+                uniqueItems: false
+                items:
+                    type: string
+                x-kubernetes-validations:
+                    - rule: "self.all(x, self.filter(y, y == x).size() == 1)"
+                      message: "product items must be unique"
+    additionalPrinterColumns:
+    - name: Size
+      type: string
+      jsonPath: .spec.size
+    - name: Color
+      type: string
+      jsonPath: .spec.color
+    - name: Replicas
+      type: integer
+      jsonPath: .spec.replicas
+    - name: Holo
+      type: string
+      jsonPath: .spec.holo
+    - name: Product
+      type: string
+      jsonPath: .spec.product
+```
+
+#### CR
+Application that interacts by users
+
+```yaml
+apiVersion: example.understood.com/v1
+kind: Widget
+metadata:
+  name: blue-widget
+spec:
+  size: medium
+  color: "#ff5733"
+  replicas: 2
+  holo: "10#"
+  product:
+  - apple
+  - iphone
+```
+
+```sh
+kubectl get wg
+kubectl explain widget.spec
+```
+
+![alt text](/../assets/2025-07-27-kubernetes/heartbeat-operator.png)
+
+
+#### Reconcile Loop
+```go
+// 2 input;   ctx-Cancellation req-Namespace
+// 2 output;
+func (r *Reconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Request, error){}  
+```
+
+Body of Every concile
+```go
+r.Get(ctx, req.NamespacedName, app)  // fetch CRD from the cache
+// compute desired childers
+// match the desired state
+// calculate the diff or update.status
+```
+
+
+
+##### Using Kubebuilder
+![alt text](/../assets/2025-07-27-kubernetes/kubebuilder-overview.png)
+
+
+supporting pillers when building Operators
+
+![alt text](/../assets/2025-07-27-kubernetes/supporting-pillars.png)
+
+
+```sh
+curl -L -o kubebuilder "https://go.kubebuilder.io/latest"
+chmod +x kubebuilder
+kubebuilder version
+kubebuilder init \
+    --domain example.com \                      # api group name
+    --repo github.com/muthu/webapp-operator \   # project lives `go.mod` 
+    --project-name webapp-operator              # project Name
+make build
+```
+
+```sh
+operator-project/
+├── 📄 Makefile       
+├── 📄 PROJECT              # Remembers what you've scaffolded
+├── 📄 go.mod               # Go module- project identity
+├── 📄 Dockerfile   
+├── 📁 config/
+│   └── 📄 web_app_types.yaml
+├── 📁 internal/
+│   └── 📁 controller/
+│       └── 📄 web_app_controller.go     # Starter Controller code; reconcile loop
+├── 📁 cmd/
+│   └── 📄 main.go         # Wired to the manager; Manager owns the shared k8s client, cache, metrics, health probes, leader election and controller registration
+└── 📁 config/
+    ├── 📁 manager/
+    ├── 📁 network-policy/
+    └── 📁 rbac/         # Permission to talk to k8s
+```
+
+
+
+```sh
+kubebuilder create api --group webapp --version v1 --kind Webapp --resource --controller
+
+operator-project/
+├── 📁 api/
+│   └── 📁 v1/
+│       └── 📄 file.go    # schema; 
+└── 📁 config/
+    └── 📁 internal/
+        └── 📁 controller/
+            └── 📄 file.go    # behaviour
+
+```
+
+
+```sh
+make manifests # turn kubebuilder makers into CRD yaml
+
+operator-project/
+└── 📁 config/
+    └── 📁 crd/
+        └── 📁 bases/
+            └── 📄 webapp.kodekloud.com_webapps.yaml    # yaml
+```
+
+
+```sh
+make build
+```
+
+![operators](/../assets/2025-07-27-kubernetes/crds-operators.gif)
+
+
+
+
+
+##### Using Operator SDK
