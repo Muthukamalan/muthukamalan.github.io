@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two Sum II (Sorted) – Two Pointer Visualization</title>
+<style>
+  :root {
+    --bg: #0f1420;
+    --panel: #171e2e;
+    --text: #e6e9f2;
+    --muted: #8a93a8;
+    --accent: #5b8cff;
+    --start: #36c49a;
+    --end: #ff7a59;
+    --match: #ffd166;
+    --discard: #3a4256;
+    --border: #262f45;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 32px 16px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 880px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    margin: 4px 0 0;
+    font-size: 0.95rem;
+  }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 180px;
+  }
+
+  .field label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  input[type="text"], input[type="number"] {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.15s, transform 0.05s;
+  }
+
+  button:hover:not(:disabled) { opacity: 0.9; }
+  button:active:not(:disabled) { transform: translateY(1px); }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  button.secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .array-wrap {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 36px 8px 36px;
+    justify-content: center;
+  }
+
+  .cell {
+    position: relative;
+    min-width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s, opacity 0.3s;
+  }
+
+  .cell .idx {
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .cell.start { border-color: var(--start); }
+  .cell.end { border-color: var(--end); }
+  .cell.in-range { background: rgba(91, 140, 255, 0.08); }
+  .cell.discarded { opacity: 0.35; background: var(--discard); }
+  .cell.match {
+    border-color: var(--match);
+    background: rgba(255, 209, 102, 0.15);
+    animation: pulse 0.9s ease-in-out 2;
+  }
+
+  .pointer {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .pointer.start-ptr { background: var(--start); color: #0b1a14; }
+  .pointer.end-ptr { background: var(--end); color: #1d0d07; }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  .stat {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+
+  .stat .label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .stat .value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  .explain {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    min-height: 72px;
+  }
+
+  .explain .hl-start { color: var(--start); font-weight: 600; }
+  .explain .hl-end { color: var(--end); font-weight: 600; }
+  .explain .hl-match { color: var(--match); font-weight: 600; }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .spacer { flex: 1; }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .legend span::before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .legend .l-start::before { background: var(--start); }
+  .legend .l-end::before { background: var(--end); }
+  .legend .l-range::before { background: rgba(91,140,255,0.25); border: 1px solid var(--accent); }
+  .legend .l-discard::before { background: var(--discard); }
+  .legend .l-match::before { background: var(--match); }
+
+  .result {
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    min-height: 24px;
+  }
+  .result.found { color: var(--match); }
+  .result.notfound { color: var(--end); }
+
+  .speed-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  input[type="range"] { accent-color: var(--accent); }
+
+  @media (max-width: 560px) {
+    .cell { min-width: 48px; height: 48px; font-size: 0.95rem; }
+    .array-wrap { gap: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>Two Sum II — Sorted Array</h1>
+    <p class="subtitle">Two-pointer technique: <code>start</code> moves right to grow the sum, <code>end</code> moves left to shrink it.</p>
+  </header>
+
+  <section class="panel controls">
+    <div class="field">
+      <label for="arr">Sorted array (comma-separated)</label>
+      <input type="text" id="arr" value="-3, 1, 2, 4, 7, 11, 15, 20" />
+    </div>
+    <div class="field" style="max-width: 160px; min-width: 120px;">
+      <label for="target">Target</label>
+      <input type="number" id="target" value="18" />
+    </div>
+    <button id="applyBtn">Apply</button>
+  </section>
+
+  <section class="panel">
+    <div class="array-wrap" id="array"></div>
+    <div class="legend" style="margin-top: 14px; justify-content: center;">
+      <span class="l-start">start</span>
+      <span class="l-end">end</span>
+      <span class="l-range">in range</span>
+      <span class="l-discard">discarded</span>
+      <span class="l-match">match</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="stats">
+      <div class="stat"><div class="label">start</div><div class="value" id="sVal">—</div></div>
+      <div class="stat"><div class="label">end</div><div class="value" id="eVal">—</div></div>
+      <div class="stat"><div class="label">current sum</div><div class="value" id="sumVal">—</div></div>
+      <div class="stat"><div class="label">step</div><div class="value" id="stepVal">0</div></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="explain" id="explain">Press <strong>Start</strong> or <strong>Step</strong> to begin.</div>
+  </section>
+
+  <section class="panel">
+    <div class="buttons">
+      <button id="resetBtn" class="secondary">Reset</button>
+      <button id="stepBtn">Step ▶</button>
+      <button id="playBtn">Play ▶▶</button>
+      <div class="spacer"></div>
+      <label class="speed-label">
+        Speed
+        <input type="range" id="speed" min="200" max="1500" step="100" value="700" />
+      </label>
+    </div>
+    <div class="result" id="result" style="margin-top: 16px;"></div>
+  </section>
+
+</div>
+
+<script>
+  const arrInput = document.getElementById('arr');
+  const targetInput = document.getElementById('target');
+  const arrayEl = document.getElementById('array');
+  const explainEl = document.getElementById('explain');
+  const resultEl = document.getElementById('result');
+  const sVal = document.getElementById('sVal');
+  const eVal = document.getElementById('eVal');
+  const sumVal = document.getElementById('sumVal');
+  const stepVal = document.getElementById('stepVal');
+  const stepBtn = document.getElementById('stepBtn');
+  const playBtn = document.getElementById('playBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const applyBtn = document.getElementById('applyBtn');
+  const speedInput = document.getElementById('speed');
+
+  let numbers = [];
+  let target = 0;
+  let start = 0;
+  let end = 0;
+  let stepCount = 0;
+  let done = false;
+  let result = [-1, -1];
+  let timer = null;
+  let lastState = null;
+
+  function parseInputs() {
+    numbers = arrInput.value
+      .split(',')
+      .map(s => s.trim())
+      .filter(s => s.length)
+      .map(Number);
+    target = Number(targetInput.value);
+    if (numbers.some(Number.isNaN) || Number.isNaN(target)) {
+      explainEl.textContent = 'Please enter valid numbers.';
+      return false;
+    }
+    if (numbers.length < 2) {
+      explainEl.textContent = 'Please enter at least two numbers.';
+      return false;
+    }
+    return true;
+  }
+
+  function reset() {
+    stopPlay();
+    start = 0;
+    end = numbers.length - 1;
+    stepCount = 0;
+    done = false;
+    result = [-1, -1];
+    lastState = null;
+    resultEl.textContent = '';
+    resultEl.className = 'result';
+    render();
+    explainEl.innerHTML = `Sorted array of length <strong>${numbers.length}</strong>, target <strong>${target}</strong>. ` +
+      `Set <span class="hl-start">start = 0</span> and <span class="hl-end">end = ${end}</span>.`;
+    stepBtn.disabled = false;
+    playBtn.disabled = false;
+  }
+
+  function step() {
+    if (done) return;
+
+    if (start >= end) {
+      finish(false);
+      return;
+    }
+
+    stepCount++;
+    const a = numbers[start];
+    const b = numbers[end];
+    const sum = a + b;
+    lastState = { start, end, sum };
+
+    if (sum === target) {
+      result = [start, end];
+      finish(true, a, b, sum);
+      return;
+    }
+
+    if (sum < target) {
+      explainEl.innerHTML =
+        `Sum = <span class="hl-start">${a}</span> + <span class="hl-end">${b}</span> = ${sum} &lt; ${target}. ` +
+        `Sum is too small, so move <span class="hl-start">start</span> right: start → ${start + 1}.`;
+      start++;
+    } else {
+      explainEl.innerHTML =
+        `Sum = <span class="hl-start">${a}</span> + <span class="hl-end">${b}</span> = ${sum} &gt; ${target}. ` +
+        `Sum is too large, so move <span class="hl-end">end</span> left: end → ${end - 1}.`;
+      end--;
+    }
+
+    render();
+    updateStats(sum);
+  }
+
+  function finish(found, a, b, sum) {
+    done = true;
+    stopPlay();
+    stepBtn.disabled = true;
+    playBtn.disabled = true;
+
+    if (found) {
+      explainEl.innerHTML =
+        `Sum = <span class="hl-start">${a}</span> + <span class="hl-end">${b}</span> = ${sum} = target. ` +
+        `Found a pair at indices <span class="hl-match">[${result[0]}, ${result[1]}]</span>.`;
+      resultEl.textContent = `✓ Found: indices [${result[0]}, ${result[1]}]`;
+      resultEl.className = 'result found';
+      render(true);
+      updateStats(sum);
+    } else {
+      explainEl.innerHTML =
+        `Pointers met (start = ${start}, end = ${end}) without finding a pair. Returning <code>[-1, -1]</code>.`;
+      resultEl.textContent = '✗ No pair found: [-1, -1]';
+      resultEl.className = 'result notfound';
+      render();
+    }
+    stepVal.textContent = stepCount;
+  }
+
+  function updateStats(sum) {
+    sVal.textContent = start <= end ? numbers[start] : '—';
+    eVal.textContent = end >= 0 ? numbers[end] : '—';
+    sumVal.textContent = sum !== undefined ? sum : '—';
+    stepVal.textContent = stepCount;
+  }
+
+  function render(matchFound = false) {
+    arrayEl.innerHTML = '';
+    numbers.forEach((n, i) => {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+
+      if (done && matchFound && (i === result[0] || i === result[1])) {
+        cell.classList.add('match');
+      } else if (i < start || i > end) {
+        cell.classList.add('discarded');
+      } else {
+        cell.classList.add('in-range');
+      }
+
+      if (!done || !matchFound) {
+        if (i === start && start <= end) cell.classList.add('start');
+        if (i === end && start <= end) cell.classList.add('end');
+      } else {
+        if (i === result[0]) cell.classList.add('start');
+        if (i === result[1]) cell.classList.add('end');
+      }
+
+      cell.textContent = n;
+
+      if (!done || matchFound) {
+        if ((i === start && (!done || matchFound)) || (matchFound && i === result[0])) {
+          const p = document.createElement('div');
+          p.className = 'pointer start-ptr';
+          p.textContent = 'start';
+          cell.appendChild(p);
+        }
+        if ((i === end && (!done || matchFound)) || (matchFound && i === result[1])) {
+          const p = document.createElement('div');
+          p.className = 'pointer end-ptr';
+          p.textContent = 'end';
+          cell.appendChild(p);
+        }
+      } else if (!matchFound) {
+        if (i === start) {
+          const p = document.createElement('div');
+          p.className = 'pointer start-ptr';
+          p.textContent = 'start';
+          cell.appendChild(p);
+        }
+        if (i === end) {
+          const p = document.createElement('div');
+          p.className = 'pointer end-ptr';
+          p.textContent = 'end';
+          cell.appendChild(p);
+        }
+      }
+
+      const idx = document.createElement('span');
+      idx.className = 'idx';
+      idx.textContent = i;
+      cell.appendChild(idx);
+
+      arrayEl.appendChild(cell);
+    });
+
+    if (!done) {
+      sVal.textContent = start <= end ? numbers[start] : '—';
+      eVal.textContent = end >= 0 ? numbers[end] : '—';
+    }
+  }
+
+  function play() {
+    if (done) return;
+    playBtn.textContent = 'Pause ❚❚';
+    timer = setInterval(() => {
+      if (done) { stopPlay(); return; }
+      step();
+    }, Number(speedInput.value));
+  }
+
+  function stopPlay() {
+    if (timer) clearInterval(timer);
+    timer = null;
+    playBtn.textContent = 'Play ▶▶';
+  }
+
+  applyBtn.addEventListener('click', () => {
+    if (parseInputs()) reset();
+  });
+
+  stepBtn.addEventListener('click', () => {
+    if (!numbers.length) parseInputs();
+    if (stepCount === 0 && !done && start === 0 && end === 0) reset();
+    step();
+  });
+
+  playBtn.addEventListener('click', () => {
+    if (timer) { stopPlay(); return; }
+    if (!numbers.length || stepCount === 0 && !done && start === 0 && end === 0) {
+      if (!parseInputs()) return;
+      reset();
+    }
+    play();
+  });
+
+  resetBtn.addEventListener('click', () => {
+    if (parseInputs()) reset();
+  });
+
+  speedInput.addEventListener('input', () => {
+    if (timer) { stopPlay(); play(); }
+  });
+
+  if (parseInputs()) reset();
+</script>
+</body>
+</html>

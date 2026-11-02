@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two Sum Visualizer</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --panel: #1e293b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --current: #f59e0b;
+    --match: #22c55e;
+    --seen: #6366f1;
+    --border: #334155;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px;
+  }
+  h1 { margin: 0 0 4px; font-size: 1.6rem; }
+  .subtitle { color: var(--muted); margin: 0 0 20px; font-size: 0.95rem; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: end;
+  }
+  label { display: flex; flex-direction: column; font-size: 0.8rem; color: var(--muted); gap: 4px; }
+  input[type="text"], input[type="number"] {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 0.95rem;
+    width: 220px;
+  }
+  input[type="number"] { width: 110px; }
+  button {
+    background: var(--accent);
+    color: #0f172a;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  button.secondary { background: var(--border); color: var(--text); }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  button:hover:not(:disabled) { filter: brightness(1.1); }
+  .error { color: #f87171; font-size: 0.85rem; margin-top: 8px; min-height: 1.2em; }
+
+  .section-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+
+  /* Array cells */
+  .array {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .cell {
+    position: relative;
+    width: 64px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px 0 8px;
+    background: var(--bg);
+    transition: all 0.35s ease;
+  }
+  .cell .val { font-size: 1.2rem; font-weight: 700; }
+  .cell .idx { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+  .cell.seen { border-color: var(--seen); background: rgba(99,102,241,0.15); }
+  .cell.current { border-color: var(--current); box-shadow: 0 0 0 3px rgba(245,158,11,0.3); transform: translateY(-4px); }
+  .cell.comp { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(56,189,248,0.3); }
+  .cell.match { border-color: var(--match); background: rgba(34,197,94,0.2); box-shadow: 0 0 0 3px rgba(34,197,94,0.35); }
+  .pointer {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--current);
+    white-space: nowrap;
+  }
+
+  /* Hash map */
+  .hashmap {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+    min-height: 56px;
+  }
+  .entry {
+    border: 2px solid var(--seen);
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+    background: rgba(99,102,241,0.12);
+    animation: pop 0.4s ease;
+  }
+  .entry.hit { border-color: var(--match); background: rgba(34,197,94,0.2); }
+  .entry .k { font-weight: 700; }
+  .entry .v { font-size: 0.8rem; color: var(--muted); }
+  .empty { color: var(--muted); font-style: italic; font-size: 0.9rem; }
+  @keyframes pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  /* Explanation */
+  .step-info { font-size: 1rem; line-height: 1.5; min-height: 3em; }
+  .equation {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--bg);
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 0.95rem;
+    border: 1px solid var(--border);
+  }
+  .result {
+    margin-top: 12px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--match);
+    min-height: 1.3em;
+  }
+  .progress {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .progress > div {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  .nav { display: flex; gap: 8px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+  .step-count { color: var(--muted); font-size: 0.85rem; margin-left: auto; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
+  .legend span::before {
+    content: "";
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .legend .l-cur::before { background: var(--current); }
+  .legend .l-comp::before { background: var(--accent); }
+  .legend .l-seen::before { background: var(--seen); }
+  .legend .l-match::before { background: var(--match); }
+
+  .code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .code .line { display: block; padding: 0 6px; border-radius: 4px; color: var(--muted); }
+  .code .line.active { background: rgba(245,158,11,0.18); color: var(--text); }
+
+  .complexity { display: flex; gap: 12px; flex-wrap: wrap; }
+  .badge {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+  .badge b { color: var(--accent); }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 760px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    input[type="text"] { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Two Sum Visualizer</h1>
+<p class="subtitle">Find two numbers in an array that add up to a target, using a one-pass hash map.</p>
+
+<div class="card">
+  <div class="controls">
+    <label>
+      Array (comma-separated)
+      <input type="text" id="arrInput" value="2, 7, 11, 15, 4" />
+    </label>
+    <label>
+      Target
+      <input type="number" id="targetInput" value="9" />
+    </label>
+    <button id="startBtn">Start</button>
+    <button id="randomBtn" class="secondary">Random</button>
+  </div>
+  <div class="error" id="errorMsg"></div>
+</div>
+
+<div class="card">
+  <p class="section-title">Array</p>
+  <div class="array" id="array"></div>
+  <div class="legend">
+    <span class="l-cur">Current</span>
+    <span class="l-comp">Complement (target − current)</span>
+    <span class="l-seen">Already seen</span>
+    <span class="l-match">Match found</span>
+  </div>
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <p class="section-title">Hash Map (value → index)</p>
+    <div class="hashmap" id="hashmap"></div>
+  </div>
+
+  <div class="card">
+    <p class="section-title">Algorithm</p>
+    <div class="code" id="code">
+<span class="line" data-line="0">function twoSum(nums, target) {</span>
+<span class="line" data-line="1">  const seen = new Map();</span>
+<span class="line" data-line="2">  for (let i = 0; i &lt; nums.length; i++) {</span>
+<span class="line" data-line="3">    const complement = target - nums[i];</span>
+<span class="line" data-line="4">    if (seen.has(complement))</span>
+<span class="line" data-line="5">      return [seen.get(complement), i];</span>
+<span class="line" data-line="6">    seen.set(nums[i], i);</span>
+<span class="line" data-line="7">  }</span>
+<span class="line" data-line="8">  return [];</span>
+<span class="line" data-line="9">}</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <p class="section-title">Step</p>
+  <div class="progress"><div id="progressBar"></div></div>
+  <div class="step-info" id="stepInfo">Enter an array and target, then press Start.</div>
+  <div class="equation" id="equation">&nbsp;</div>
+  <div class="result" id="result">&nbsp;</div>
+  <div class="nav">
+    <button id="prevBtn" class="secondary" disabled>← Prev</button>
+    <button id="playBtn" class="secondary" disabled>▶ Play</button>
+    <button id="nextBtn" disabled>Next →</button>
+    <button id="resetBtn" class="secondary" disabled>Reset</button>
+    <span class="step-count" id="stepCount"></span>
+  </div>
+</div>
+
+<div class="card">
+  <p class="section-title">Complexity</p>
+  <div class="complexity">
+    <div class="badge">Time: <b>O(n)</b> — one pass through the array</div>
+    <div class="badge">Space: <b>O(n)</b> — the hash map may hold every element</div>
+    <div class="badge">Brute force would be <b>O(n²)</b></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const arrEl = document.getElementById('array');
+  const hmEl = document.getElementById('hashmap');
+  const arrInput = document.getElementById('arrInput');
+  const targetInput = document.getElementById('targetInput');
+  const errorMsg = document.getElementById('errorMsg');
+  const stepInfo = document.getElementById('stepInfo');
+  const equation = document.getElementById('equation');
+  const resultEl = document.getElementById('result');
+  const stepCount = document.getElementById('stepCount');
+  const progressBar = document.getElementById('progressBar');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const playBtn = document.getElementById('playBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const codeLines = document.querySelectorAll('#code .line');
+
+  let nums = [], target = 0, steps = [], stepIdx = -1, timer = null;
+
+  function buildSteps(nums, target) {
+    const out = [];
+    const seen = new Map();
+    out.push({
+      i: -1, comp: null, map: [], line: 1, matchPair: null,
+      info: `Start with an empty hash map. We need two numbers that sum to ${target}.`,
+      eq: `target = ${target}`
+    });
+    for (let i = 0; i < nums.length; i++) {
+      const comp = target - nums[i];
+      out.push({
+        i, comp, map: [...seen.entries()], line: 3, matchPair: null,
+        info: `Look at nums[${i}] = ${nums[i]}. Its complement is what we still need.`,
+        eq: `${target} − ${nums[i]} = ${comp}`
+      });
+      if (seen.has(comp)) {
+        const j = seen.get(comp);
+        out.push({
+          i, comp, map: [...seen.entries()], line: 5, matchPair: [j, i],
+          info: `${comp} is already in the map at index ${j}. Found the pair!`,
+          eq: `nums[${j}] + nums[${i}] = ${nums[j]} + ${nums[i]} = ${target}`,
+          found: true
+        });
+        return out;
+      }
+      out.push({
+        i, comp, map: [...seen.entries()], line: 4, matchPair: null,
+        info: `${comp} is not in the map yet, so store ${nums[i]} → index ${i} for later.`,
+        eq: `seen.set(${nums[i]}, ${i})`
+      });
+      seen.set(nums[i], i);
+      out.push({
+        i, comp, map: [...seen.entries()], line: 6, matchPair: null,
+        info: `Map updated. Move on to the next element.`,
+        eq: `seen = { ${[...seen.entries()].map(([k, v]) => k + ':' + v).join(', ')} }`
+      });
+    }
+    out.push({
+      i: -1, comp: null, map: [...seen.entries()], line: 8, matchPair: null,
+      info: `Reached the end without finding a pair.`,
+      eq: `return []`, none: true
+    });
+    return out;
+  }
+
+  function parse() {
+    const raw = arrInput.value.split(',').map(s => s.trim()).filter(s => s.length);
+    const parsed = raw.map(Number);
+    if (raw.length < 2) return { error: 'Please enter at least two numbers.' };
+    if (parsed.some(n => Number.isNaN(n))) return { error: 'All array values must be numbers.' };
+    const t = Number(targetInput.value);
+    if (targetInput.value.trim() === '' || Number.isNaN(t)) return { error: 'Target must be a number.' };
+    if (parsed.length > 20) return { error: 'Please use 20 numbers or fewer.' };
+    return { nums: parsed, target: t };
+  }
+
+  function start() {
+    const p = parse();
+    if (p.error) { errorMsg.textContent = p.error; return; }
+    errorMsg.textContent = '';
+    nums = p.nums; target = p.target;
+    steps = buildSteps(nums, target);
+    stepIdx = 0;
+    stop();
+    render();
+    [prevBtn, nextBtn, playBtn, resetBtn].forEach(b => b.disabled = false);
+  }
+
+  function stop() {
+    if (timer) { clearInterval(timer); timer = null; }
+    playBtn.textContent = '▶ Play';
+  }
+
+  function render() {
+    const s = steps[stepIdx];
+    const isFound = !!s.found;
+    const isNone = !!s.none;
+
+    arrEl.innerHTML = '';
+    nums.forEach((v, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      const seenBefore = s.map.some(([k, vi]) => vi === idx);
+      if (seenBefore) cell.classList.add('seen');
+      if (s.i === idx) cell.classList.add('current');
+      if (s.comp !== null && s.i !== idx && v === s.comp && !seenBefore) cell.classList.add('comp');
+      if (isFound && s.matchPair && s.matchPair.includes(idx)) cell.classList.add('match');
+      if (s.i === idx) {
+        const p = document.createElement('div');
+        p.className = 'pointer';
+        p.textContent = 'i';
+        cell.appendChild(p);
+      }
+      cell.innerHTML += `<div class="val">${v}</div><div class="idx">[${idx}]</div>`;
+      arrEl.appendChild(cell);
+    });
+
+    hmEl.innerHTML = '';
+    if (s.map.length === 0) {
+      hmEl.innerHTML = '<div class="empty">empty</div>';
+    } else {
+      s.map.forEach(([k, vi]) => {
+        const e = document.createElement('div');
+        e.className = 'entry' + (isFound && s.matchPair && s.matchPair[0] === vi ? ' hit' : '');
+        e.innerHTML = `<div class="k">${k}</div><div class="v">→ index ${vi}</div>`;
+        hmEl.appendChild(e);
+      });
+    }
+
+    stepInfo.textContent = s.info;
+    equation.textContent = s.eq;
+    resultEl.textContent = isFound
+      ? `Answer: [${s.matchPair[0]}, ${s.matchPair[1]}]`
+      : (isNone ? 'No pair found.' : '\u00a0');
+    resultEl.style.color = isNone ? 'var(--muted)' : 'var(--match)';
+
+    codeLines.forEach(l => l.classList.toggle('active', Number(l.dataset.line) === s.line));
+
+    stepCount.textContent = `Step ${stepIdx + 1} / ${steps.length}`;
+    progressBar.style.width = ((stepIdx + 1) / steps.length * 100) + '%';
+
+    prevBtn.disabled = stepIdx === 0;
+    const atEnd = stepIdx === steps.length - 1;
+    nextBtn.disabled = atEnd;
+    playBtn.disabled = atEnd;
+    if (atEnd) stop();
+  }
+
+  function next() { if (stepIdx < steps.length - 1) { stepIdx++; render(); } }
+  function prev() { if (stepIdx > 0) { stepIdx--; render(); } }
+  function togglePlay() {
+    if (timer) { stop(); return; }
+    playBtn.textContent = '❚❚ Pause';
+    timer = setInterval(() => {
+      if (stepIdx >= steps.length - 1) { stop(); return; }
+      next();
+    }, 900);
+  }
+  function reset() { stop(); stepIdx = 0; render(); }
+
+  function randomize() {
+    const n = 5 + Math.floor(Math.random() * 4);
+    const arr = Array.from({ length: n }, () => 1 + Math.floor(Math.random() * 20));
+    const a = Math.floor(Math.random() * n);
+    let b = Math.floor(Math.random() * n);
+    while (b === a) b = Math.floor(Math.random() * n);
+    arrInput.value = arr.join(', ');
+    targetInput.value = arr[a] + arr[b];
+    start();
+  }
+
+  document.getElementById('startBtn').addEventListener('click', start);
+  document.getElementById('randomBtn').addEventListener('click', randomize);
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+  playBtn.addEventListener('click', togglePlay);
+  resetBtn.addEventListener('click', reset);
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'INPUT') return;
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+
+  start();
+})();
+</script>
+</body>
+</html>
