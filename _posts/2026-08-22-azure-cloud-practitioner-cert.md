@@ -239,7 +239,7 @@ Connectivity Options:
 
 1. VM Creation & Configuration
 
-```sh
+```bash
 az login
 az account list --output table
 az account set --subscription "<SUBSCRIPTION_ID_OR_NAME>"
@@ -275,7 +275,9 @@ az vm boot-diagnostics enable --resource-group rg-vm-demo --name vm-linux-01
 az vm boot-diagnostics disable --resource-group rg-vm-demo --name vm-linux-01    
 az vm boot-diagnostics get-boot-log --resource-group rg-vm-demo --name vm-linux-01
 ```
+
 2. VM Mangement Activities
+
 ```bash
 az vm start --resource-group rg-vm-demo --name vm-linux-01   # START the VM
 az vm restart  -g rg-vm-demo --name vm-linux-01              # RESTART the VM
@@ -283,7 +285,6 @@ az vm stop --resource-group rg-vm-demo --name vm-linux-01    # STOP  the VM
 az vm deallocate --resource-group rg-vm-demo --name vm-linux-01 # STOP the VM and Release the Hardware ( stop the Billing )     
 az vm delete -g rg-vm-demo --name vm-linux-01  --yes         # Delete only the VM (leaves disks, NIC, and public IP intact):
 # Order must be followed, bcz Azure enforce strict parent-child resource locks.  DELETE::::  VM -> NIC -> OS Disk and Data Disks -> Public IP -> NSG
-
 
 ## Capture 
 NIC_IDS=$(az vm show -g $RG -n $VM --query "networkProfile.networkInterfaces[].id" -o tsv)
@@ -303,8 +304,7 @@ az vm delete -g $RG --name $VM --yes
 [ -n "$NSG_IDS" ] && az network nsg delete --ids $NSG_IDS
 
 
-
-# az group delete --name $RG --yes --no-wait                 
+az group delete --name $RG --yes --no-wait                 
 
 
 # Resize
@@ -316,12 +316,40 @@ az vm update --resource-group $RG --name $VM_NAME   --set tags.Environment=Dev t
 
 ```
 3. Disk MAanagemnt 
+
+```bash
+```
+
 4. Network configuration
+
+```bash
+```
+
 5. Security Management
+
+```bash
+```
+
 6. Backup & Disaster Recovery
+
+```bash
+```
+
 7. Monitoring & Troubleshoot
+
+```bash
+```
+
 8. OS Administraiton
+
+```bash
+```
+
 9. Cost Managment 
+
+```bash
+```
+
 
 
 
