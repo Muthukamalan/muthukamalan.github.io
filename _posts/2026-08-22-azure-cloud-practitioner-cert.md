@@ -236,7 +236,9 @@ Connectivity Options:
 
 **[AZ VM CMDs](https://learn.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest)**
 
+
 1. VM Creation & Configuration
+
 ```sh
 az login
 az account list --output table
