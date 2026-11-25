@@ -177,13 +177,13 @@ cloud based simulation which includes GUI+ OS.  It acts like a physical computer
 
 
 When you deploy a VM, Azure provisions several interconnected components:
-• Compute: Virtual CPUs (vCPUs) and RAM based on the chosen VM size.
-• Storage (Azure Managed Disks): Typically an OS Disk (for the operating system), optional Data Disks (for application data), and a Temporary Disk (on certain sizes for short-term swap/page files).
-• Networking: A Network Interface Card (NIC) attached to a Virtual Network (VNet) subnet, optionally paired with a Public IP (IPv4 / IPv6 ) and a Network Security Group (NSG) firewall.
+• **Compute**: Virtual CPUs (vCPUs) and RAM based on the chosen VM size.
+• **Storage (Azure Managed Disks)**: Typically an OS Disk (for the operating system), optional Data Disks (for application data), and a Temporary Disk (on certain sizes for short-term swap/page files).
+• **Networking**: A Network Interface Card (NIC) attached to a Virtual Network (VNet) subnet, optionally paired with a Public IP (IPv4 / IPv6 ) and a Network Security Group (NSG) firewall.
 
 
 ##### [Azure VM Size (SKU) Naming Convention](https://learn.microsoft.com/en-us/azure/virtual-machines/vm-naming-conventions#naming-convention-explanation)
-> Standard_ + [Family] + [Sub-family]* + [# of vCPUs] + [Additive Features] + _v[Version]
+> Standard_ + [Family] + [Sub-family]* + [# of vCPUs] + [Additive Features]* + _v[Version]
 
 | Series       | Category                 | Key Characteristics                     |
 | :----------- | :----------------------- | :--- ---------------------------------- |
@@ -209,8 +209,8 @@ When you deploy a VM, Azure provisions several interconnected components:
 | **X** | Extra memory | High-memory configurations |
 
 
-Old Convention: Standard_DS2_v2 
-New Convention: Standard_D2s_v5 
+Old Convention: **Standard_DS2_v2** 
+New Convention: **Standard_D2s_v5**
 
 | Part | Value | Meaning |
 |:-----|:-----:|:-------:|
@@ -232,6 +232,96 @@ Connectivity Options:
 - public endpoints
 - private endpoints
 - virtual network peering
+
+
+**[AZ VM CMDs](https://learn.microsoft.com/en-us/cli/azure/vm?view=azure-cli-latest)**
+
+1. VM Creation & Configuration
+```sh
+az login
+az account list --output table
+az account set --subscription "<SUBSCRIPTION_ID_OR_NAME>"
+
+# List available locations (e.g., centralindia, southindia)
+az account list-locations --output table
+
+# Create Resource Group
+az group create --name rg-vm-demo --location centralindia
+
+# List VMs in the centralindia
+az vm list-sizes --location centralindia --output table
+
+# Find Ubuntu images
+az vm image list --location centralindia --publisher Canonical --offer ubuntu-24_04-lts --all --output table
+# REDHAT:::    --publisher RedHat --offer RHEL 
+# MICROSOFT::: --publisher MicrosoftWindowsServer --offer WindowsServer
+
+az vm create -g rg-vm-demo --name vm-linux-01 --location centralindia --zone 1 --size Standard_B2s --image Canonical:ubuntu-24_04-lts:server:latest --admin-username azureuser --authentication-type ssh --generate-ssh-keys --public-ip-sku Standard   --boot-diagnostics-storage ""
+# ADMIN:::: --admin-username azureadmin  --admin-password "<StrongPassword123!>"    
+# BOOT DIAGNOSTICS:::::  --boot-diagnostics-storage "" enables Azure-managed boot diagnostics , --boot-diagnostics-storage <STORAGE_ACCOUNT_NAME_OR_ID>
+# Enable it after creation via az vm boot-diagnostics enable
+
+
+# Details of the VM in the resource group
+az vm show -g rg-vm-demo --name vm-linux-01 --show-details --query publicIps   --output tsv
+
+# Open Port
+az vm open-port --resource-group rg-vm-demo --name vm-win-01 --port 3389
+
+# View boot log / serial output
+az vm boot-diagnostics enable --resource-group rg-vm-demo --name vm-linux-01    
+az vm boot-diagnostics disable --resource-group rg-vm-demo --name vm-linux-01    
+az vm boot-diagnostics get-boot-log --resource-group rg-vm-demo --name vm-linux-01
+```
+2. VM Mangement Activities
+```bash
+az vm start --resource-group rg-vm-demo --name vm-linux-01   # START the VM
+az vm restart  -g rg-vm-demo --name vm-linux-01              # RESTART the VM
+az vm stop --resource-group rg-vm-demo --name vm-linux-01    # STOP  the VM
+az vm deallocate --resource-group rg-vm-demo --name vm-linux-01 # STOP the VM and Release the Hardware ( stop the Billing )     
+az vm delete -g rg-vm-demo --name vm-linux-01  --yes         # Delete only the VM (leaves disks, NIC, and public IP intact):
+# Order must be followed, bcz Azure enforce strict parent-child resource locks.  DELETE::::  VM -> NIC -> OS Disk and Data Disks -> Public IP -> NSG
+
+
+## Capture 
+NIC_IDS=$(az vm show -g $RG -n $VM --query "networkProfile.networkInterfaces[].id" -o tsv)
+OS_DISK=$(az vm show -g $RG -n $VM --query "storageProfile.osDisk.managedDisk.id" -o tsv)
+DATA_DISKS=$(az vm show -g $RG -n $VM --query "storageProfile.dataDisks[].managedDisk.id" -o tsv)
+PIP_IDS=$(az network nic show --ids $NIC_IDS --query "ipConfigurations[].publicIPAddress.id" -o tsv 2>/dev/null)
+NSG_IDS=$(az network nic show --ids $NIC_IDS --query "networkSecurityGroup.id" -o tsv 2>/dev/null)
+# 2. Delete the VM first
+az vm delete -g $RG --name $VM --yes
+# 3. Delete NIC (must happen before Public IP and NSG)
+[ -n "$NIC_IDS" ] && az network nic delete --ids $NIC_IDS
+# 4. Delete OS Disk, Data Disks, Public IP, and NSG
+[ -n "$OS_DISK" ] && az disk delete --ids $OS_DISK --yes
+[ -n "$DATA_DISKS" ] && az disk delete --ids $DATA_DISKS --yes
+# Delete Public IP and Network Security Rules
+[ -n "$PIP_IDS" ] && az network public-ip delete --ids $PIP_IDS
+[ -n "$NSG_IDS" ] && az network nsg delete --ids $NSG_IDS
+
+
+
+# az group delete --name $RG --yes --no-wait                 
+
+
+# Resize
+az vm list-vm-resize-options --resource-group $RG --name $VM_NAME --output table 
+az vm resize --resource-group $RG --name $VM_NAME   --size Standard_B4ms   # Deallocate First ( notice uptime changes )
+
+# Tags
+az vm update --resource-group $RG --name $VM_NAME   --set tags.Environment=Dev tags.Owner=Admin
+
+```
+3. Disk MAanagemnt 
+4. Network configuration
+5. Security Management
+6. Backup & Disaster Recovery
+7. Monitoring & Troubleshoot
+8. OS Administraiton
+9. Cost Managment 
+
+
 
 #### - Virtual Machine Scale sets
 - Automatic Scaling
