@@ -101,6 +101,8 @@ On top of it,
 - Total Cost of Ownership ( TCO ) ( $/token ) = compute + Electricity + Storage + Networking + Monitoring + Engineering Support
 - Carbon Foot Print: tonnes CO₂e  (1 tonne CO₂e = 1,000 kg CO₂e)
 
+Roofline Model
+
 
 # 1. Overview
 Large LLMs like Llama-3-70b or Falcon 180B may not fit in a single GPU.
