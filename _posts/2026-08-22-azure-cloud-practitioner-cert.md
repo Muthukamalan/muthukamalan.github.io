@@ -175,6 +175,7 @@ A physically separate group of datacenters within an Azure region, equipped with
 #### - Virtual Machines
 cloud based simulation which includes GUI+ OS.  It acts like a physical computer with virtualized CPU, memory, storage, and networking, while giving you full control over the operating system and software.
 
+![Azure VM](/../assets/2024-08-22-azure-cloud-practitioner-cert/az_vm.png)
 
 When you deploy a VM, Azure provisions several interconnected components:
 • **Compute**: Virtual CPUs (vCPUs) and RAM based on the chosen VM size.
@@ -187,14 +188,14 @@ When you deploy a VM, Azure provisions several interconnected components:
 
 | Series       | Category                 | Key Characteristics                     |
 | :----------- | :----------------------- | :--- ---------------------------------- |
-| **B-series** | Burstable                | low baseline usage with periodic spikes |
-| **D-series** | General Purpose          | Balanced CPU-to-memory ratio across (web app, general DB)     |
-| **E-series** | Memory Optimized         | High memory-to-vCPU ratio (~8 GiB RAM per vCPU), Large relational/NoSQL databases, analytics, in-memory caches |
-| **F-series** | Compute Optimized        | High vCPU-to-memory ratio for CPU-heavy tasks | Batch processing, gaming, high-traffic web servers |
-| **L-series** | Storage Optimized        | High disk throughput and low latency with local NVMe storage. NoSQL databases, data warehousing, big data |
-| **M-series** | Ultra Memory Optimized   | Massive memory footprints (up to terabytes of RAM).  Large in-memory databases (e.g., SAP HANA) |
-| **H-series** | High Performance Computing | Built for tightly coupled, compute-intensive HPC workloads. Weather modeling, fluid dynamics, scientific simulations |
-| **N-series** | GPU Accelerated          | Equipped with NVIDIA or AMD GPUs.  AI/ML training, inference, graphics rendering |
+| **B** | Burstable                | low baseline usage with periodic spikes |
+| **D** | General Purpose          | Balanced CPU-to-memory ratio across (web app, general DB)     |
+| **E** | Memory Optimized         | High memory-to-vCPU ratio (~8 GiB RAM per vCPU), Large relational/NoSQL databases, analytics, in-memory caches |
+| **F** | Compute Optimized        | High vCPU-to-memory ratio for CPU-heavy tasks like Batch processing, gaming, high-traffic web servers |
+| **L** | Storage Optimized        | High disk throughput and low latency with local NVMe storage. NoSQL databases, data warehousing, big data |
+| **M** | Ultra Memory Optimized   | Massive memory footprints (up to terabytes of RAM).  Large in-memory databases (e.g., SAP HANA) |
+| **H** | High Performance Computing | Built for tightly coupled, compute-intensive HPC workloads. Weather modeling, fluid dynamics, scientific simulations |
+| **N** | GPU Accelerated          | Equipped with NVIDIA or AMD GPUs.  AI/ML training, inference, graphics rendering |
 
 
 | Subfamily Letter | Differentiation / Purpose | Applicable Series / Notes |
@@ -274,6 +275,8 @@ az vm open-port --resource-group rg-vm-demo --name vm-win-01 --port 3389
 az vm boot-diagnostics enable --resource-group rg-vm-demo --name vm-linux-01    
 az vm boot-diagnostics disable --resource-group rg-vm-demo --name vm-linux-01    
 az vm boot-diagnostics get-boot-log --resource-group rg-vm-demo --name vm-linux-01
+
+az vm host #  manages Azure Dedicated Hosts—single-tenant physical servers in Azure data centers dedicated exclusively to your virtual machines. 
 ```
 
 2. VM Mangement Activities
@@ -306,7 +309,6 @@ az vm delete -g $RG --name $VM --yes
 
 az group delete --name $RG --yes --no-wait                 
 
-
 # Resize
 az vm list-vm-resize-options --resource-group $RG --name $VM_NAME --output table 
 az vm resize --resource-group $RG --name $VM_NAME   --size Standard_B4ms   # Deallocate First ( notice uptime changes )
@@ -318,11 +320,65 @@ az vm update --resource-group $RG --name $VM_NAME   --set tags.Environment=Dev t
 3. Disk MAanagemnt 
 
 ```bash
+# Create a standalone OS disk 
+az disk create --resource-group $RG --name "${VM}-osdisk-new" --location $LOCATION --size-gb 64 --sku Premium_LRS --os-type Linux
+# Swap an existing VM's OS disk (VM must be deallocated first):
+az vm deallocate -g $RG -n $VM
+az vm update -g $RG -n $VM --os-disk "${VM}-osdisk-new"
+az vm start -g $RG -n $VM
+
+# Create and attach New Data Disk
+az vm disk attach --resource-group $RG --vm-name $VM --name "${VM}-datadisk-01" --size-gb 128 --sku Premium_LRS --new
+
+# Attach existing Disk
+az vm disk attach --resource-group $RG --vm-name $VM --name "${VM}-datadisk-01"
+
+# Detach the Disk
+az vm disk detach --resource-group $RG --vm-name $VM --name "${VM}-datadisk-01"
+
+# Resize the Disk ( VM must be deallocated first )
+az disk update --resource-group $RG --name "${VM}-datadisk-01" --size-gb 256
+
+# Get the OS disk name
+OS_DISK=$(az vm show -g myResourceGroup -n myVM --query "storageProfile.osDisk.name" -o tsv)
+DISK_ID=$(az disk show -g myResourceGroup -n myDataDisk --query 'id' -o tsv)
+SNAP_ID=$(az snapshot show -g myResourceGroup -n myDiskSnapshot --query 'id' -o tsv)
+
+az disk update --resource-group myResourceGroup --name myDataDisk --sku StandardSSD_LRS
+# Create the snapshot
+az snapshot create --resource-group myResourceGroup --name myDiskSnapshot --source $DISK_ID
+
+
+### Expand Partitions Inside Linux
+lsblk -o NAME,SIZE,TYPE,TRAN,MODEL,SERIAL
+sudo growpart /dev/sda 1  # Grow the partition (install cloud-guest-utils if growpart is missing)
+sudo resize2fs /dev/sda1  #  # For ext4 ::: Resize the filesystem (choose the command matching your filesystem)
+sudo xfs_growfs /         #  # For XFS
+
+### Expand Partitions Inside Windows
+Update-HostStorageCache
+$MaxSize = (Get-PartitionSupportedSize -DriveLetter D).SizeMax
+Resize-Partition -DriveLetter D -Size $MaxSize
+
+
+az disk list --query "[?managedBy==\`null\`].[name,resourceGroup,diskSizeGb,sku.name]" -o table
+
 ```
 
 4. Network configuration
 
 ```bash
+# Vnet & Subnet
+az network vnet create -g myRG -n myVNet --address-prefix 10.0.0.0/16 --subnet-name mySubnet --subnet-prefix 10.0.1.0/24
+az network vnet subnet create -g myRG --vnet-name myVNet -n mySubnet2 --address-prefixes 10.0.2.0/24
+
+# Network Security Group
+## NSG uses the following five pieces of information to allow or deny traffic 
+# An Azure Network Security Group (NSG) filters inbound and outbound network traffic at Layer 3 and Layer 4 for resources in an Azure virtual network
+az network nsg create -g myRG -n myNSG
+# Create Inbound Rule (Allow SSH/RDP)
+az network nsg rule create -g myRG --nsg-name myNSG -n AllowSSH --priority 100  --direction Inbound --access Allow --protocol Tcp --destination-port-ranges 22
+
 ```
 
 5. Security Management
